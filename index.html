@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ezzat Boukhary</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="stars-back"></canvas>
+  <canvas id="stars-front"></canvas>
+
+  <div id="floating-star">
+    <i class="fa-solid fa-star"></i>
+  </div>
+
+  <audio id="bg-music" src="https://www.fesliyanstudios.com/royalty-free-music/downloads-c/dark-ambient-music/76" loop preload="auto"></audio>
+
+  <audio id="click-sound" src="https://example.com/click-sound.mp3" preload="auto"></audio>
+
+  <!-- Header with Social Links -->
+  <header class="site-header">
+    <div class="header-top">
+      <h1 class="site-title">Ezzat's Cosmic Archive</h1>
+      <div class="social-links">
+        <a href="https://drive.google.com/file/d/1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14/view?usp=sharing" target="_blank"><i class="fa-solid fa-file"></i> Resume</a>
+        <a href="https://github.com/ezzatBoukhary" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/ezzatboukhary" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <span id="toggle-sound">
+          <i class="fa-solid fa-satellite-dish"></i>
+        </span>
+      </div>
+    </div>
+    
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero fade-in hidden">
+    <div class="hero-content">
+      <h2>Embark on a Celestial Journey</h2>
+      <p>
+        I'm <strong>Ezzat Boukhary</strong>, a Computer Science student with a 
+        passion for coding, gaming, and exploring the cosmic unknown. Explore 
+        my stellar projects and professional experience among the stars!
+      </p>
+      <a href="#projects" class="btn">View My Projects</a>
+    </div>
+    <img 
+      class="hero-image"
+      src="https://avatars.githubusercontent.com/u/50555851?v=4" 
+      alt="Cosmic-themed portrait of Ezzat"
+    />
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section about-section fade-in hidden">
+    <h2>About Me</h2>
+    <p>
+      Greetings, traveler! I'm Ezzat, a Florida-based developer constantly 
+      pushing boundaries in web and mobile development. Whether I'm 
+      experimenting with cutting-edge frameworks or tinkering with 
+      performance optimizations, I strive to make digital experiences 
+      that are truly out of this world.
+    </p>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="section experience-section fade-in hidden">
+    <h2>Experience</h2>
+    <div class="exp-item">
+      <h3>Frontend Developer Intern @ BudgetWise</h3>
+      <span class="date">Mar 2025 – Present</span>
+      <ul>
+        <li>Craft responsive UI with <strong>Vue.js</strong>, <strong>TypeScript</strong>, and <strong>Figma</strong>.</li>
+        <li>Agile sprints to boost performance, cutting load times by 25%.</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <h3>Android Developer Intern @ Reel Talk</h3>
+      <span class="date">Jan 2024 – Jul 2024</span>
+      <ul>
+        <li>Engineered an Android app using <strong>Kotlin</strong>, <strong>Jetpack Compose</strong>, and <strong>Firebase</strong>.</li>
+        <li>Reduced crashes and boosted speed by 15% using thorough profiling.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+<section id="projects" class="section projects-section fade-in hidden">
+    <h2>Projects</h2>
+    <div class="projects-gallery">
+
+      <!-- Project Card 1: Gesture-Based Puppetry -->
+      <article class="project-card" data-project="p1">
+        <img
+          class="project-thumbnail"
+          src="https://www.ucf.edu/wp-content/blogs.dir/4/files/2017/02/StoryHeader_Avatars-1600x900.jpg"
+          alt="Gesture-Based Puppetry"
+        />
+        <h3>Gesture-Based Puppetry</h3>
+        <p>Jan 2025 - Present</p>
+        <p>A real-time 3D animation system for character control.</p>
+      </article>
+
+      <!-- Project Card 2: Campus Critters -->
+      <article class="project-card" data-project="p2">
+        <img
+          class="project-thumbnail"
+          src="https://github.com/EzzatBoukhary/animal-tracker/raw/main/web_app_post.png"
+          alt="Campus Critters"
+        />
+        <h3>Campus Critters</h3>
+        <p>Nov 2024 - Dec 2024</p>
+        <p>A MERN-stack platform & Flutter app for campus wildlife reporting.</p>
+      </article>
+
+      <!-- Project Card 3: Bubble Buddy Book -->
+      <article class="project-card" data-project="p3">
+        <img
+          class="project-thumbnail"
+          src="https://media.licdn.com/dms/image/sync/v2/D4E27AQF7fvXYERXY-w/articleshare-shrink_160/articleshare-shrink_160/0/1739293847403?e=1742187600&v=beta&t=6RU1JoJwE1qIOcaavipvFzs-nUts2GWgx35Ns-kbnKY"
+          alt="Bubble Buddy Book"
+        />
+        <h3>Bubble Buddy Book</h3>
+        <p>Aug 2024 - Sept 2024</p>
+        <p>A LAMP-based contact manager with secure authentication.</p>
+      </article>
+
+      <!-- Project Card 4: Dragonotchi -->
+      <article class="project-card" data-project="p4">
+        <img
+          class="project-thumbnail"
+          src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/002/613/881/datas/gallery.jpg"
+          alt="Dragonotchi"
+        />
+        <h3>Dragonotchi</h3>
+        <p>Oct 2023</p>
+        <p>An award-winning virtual pet with real-time sync & playful design.</p>
+      </article>
+
+      <!-- Project Card 5: KillerBot -->
+      <article class="project-card" data-project="p5">
+        <img
+          class="project-thumbnail"
+          src="https://camo.githubusercontent.com/6127858b5690ceb2ea2b1e7f7b0532f57f72e23c3ce79de86797acec22b4dd94/68747470733a2f2f7974332e676f6f676c6575736572636f6e74656e742e636f6d2f7974632f414966387a5a546146766f483556424b7658304a6e417a6c78464c6368635f6d4f4e36615f674c79534639753d733137362d632d6b2d63307830306666666666662d6e6f2d726a"
+          alt="KillerBot"
+        />
+        <h3>KillerBot</h3>
+        <p>Apr 2019 - Aug 2022</p>
+        <p>A versatile Discord bot for enhanced server functionality.</p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- Skills Section -->
+  <section id="skills" class="section skills-section fade-in hidden">
+    <h2>Skills</h2>
+    <p>
+      Languages, frameworks, and tools that propel me across the digital galaxy:
+    </p>
+    <ul class="skills-list">
+      <li><strong>Languages:</strong> Java, Kotlin, TypeScript, JavaScript, Python, C#, C/C++, Dart, PHP, Haskell, HTML/CSS, SQL, GLSL</li>
+      <li><strong>Frameworks &amp; Libraries:</strong> React, Vue.js, Jetpack Compose, Flutter, Express, TensorFlow, ModernGL, React Native</li>
+      <li><strong>Tools:</strong> Firebase, MongoDB, AWS, SQLite, MySQL, Jira, Postman, Figma, SwaggerHub, Git</li>
+      <li><strong>Methodologies:</strong> Agile/Scrum, TDD, CI/CD, Git Flow</li>
+    </ul>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section contact-section fade-in hidden">
+    <h2>Contact</h2>
+    <p>
+      Ready to launch the next big project? Feel free to beam me a message!
+    </p>
+    <p><strong>Email:</strong> <a href="mailto:ezzatboukhary03@gmail.com">ezzatboukhary03@gmail.com</a></p>
+    <p><strong>GitHub:</strong> <a href="https://github.com/ezzatBoukhary" target="_blank">github.com/ezzatBoukhary</a></p>
+    <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/ezzatboukhary" target="_blank">linkedin.com/in/ezzatboukhary</a></p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>© 2025 Ezzat Boukhary. All rights reserved. Keep reaching for the stars!</p>
+  </footer>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
