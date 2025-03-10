@@ -183,7 +183,7 @@ const projectDetails = {
       <a href="https://devpost.com/software/dragonotchi" target="_blank">
         <i class="fa-solid fa-gamepad"></i> <span>Devpost Page</span>
       </a>
-      <a href="https://github.com/EzzatBoukhary/dragonotchi" target="_blank">
+      <a href="https://github.com/Caitlin-Fabian/dragonotchi" target="_blank">
         <i class="fa-brands fa-github"></i> <span>GitHub Repo</span>
       </a>
     </div>
