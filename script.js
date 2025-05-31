@@ -393,18 +393,17 @@ function triggerAlienEncounter() {
 ****************************************************************************/
 const ufoHints = [
   "👀 Did you see that? A UFO just flew by! Try clicking on one when you see it... You might learn something interesting about me!",
-  "🚀 Did you know? I developed an Android app for Reel Talk almost entirely from scratch, using Kotlin, Jetpack Compose, and Firebase!",
-  "💡 Fun fact: My 'Campus Critters' project, built with React, Node.js, and Flutter, helps students track and report wildlife on campus.",
+  "📱 I fully built the Reel Talk Android app from scratch with Jetpack Compose and Kotlin. It was a fun kind of chaos.",
   "🎮 I created 'Dragonotchi,' an award-winning virtual pet game that won Best Design at KnightHacks VI!",
-  "🛠️ I specialize in Vue.js, TypeScript, and UI/UX design, making front-end interfaces fast, responsive, and intuitive!",
   "🔧 I built and optimized a budgeting platform at BudgetWise, improving load times by 25 percent while refining the user experience.",
   "🖥️ My full-stack expertise spans React, Node.js, MongoDB, and AWS, powering scalable, high-performance web apps.",
-  "📊 My work on TeachLivE involved real-time 3D rendering, using WebGL and Three.js to create lifelike character animations.",
-  "📌 My Discord bot, KillerBot, reached over 250,000 users and was actively used in more than 600 servers!",
+  "⚙️ I like turning blank repos into full working systems.",
+  "📊 My Discord bot, KillerBot, served over 250,000 users across 600+ servers. It escalated fast.",
   "🛰️ In my internship at BudgetWise, I helped ship high-impact Vue.js features that improved accessibility and performance!",
-  "🔬 I have a passion for machine learning and vision-based applications, explored in my coursework in Robot Vision and ML Algorithms.",
+  "🚀 If you're reading this, you probably just clicked a UFO. You're my kind of curious.",
   "🎯 Every project I build focuses on real-world impact, helping users solve problems efficiently and intuitively!"
 ];
+
 
 let firstHintShown = false;
 
