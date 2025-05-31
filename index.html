@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ezzat Boukhary</title>
@@ -22,8 +24,7 @@
     <i class="fa-solid fa-star"></i>
   </div>
 
-  <audio id="bg-music" src="music.mp3" loop
-    preload="auto"></audio>
+  <audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
   <audio id="click-sound" src="https://example.com/click-sound.mp3" preload="auto"></audio>
 
   <!-- Header with Social Links -->
@@ -58,59 +59,168 @@
     <div class="hero-content">
       <h2 id="hero-heading">Innovating Experiences That Matter</h2>
       <p>
-        I’m <strong>Ezzat Boukhary</strong>, a developer with a passion for building applications that create a tangible
-        impact. I design user-focused solutions that power everyday experiences—sometimes reaching millions.
+        I'm Ezzat, a developer who enjoys building complete systems from the ground up. Whether it's a full-stack
+        platform, a mobile app, or internal tools that simplify real problems, I like figuring out everything it takes
+        to turn an idea into something real. Seeing something that started as an empty folder become a working product
+        is what makes it so rewarding.
       </p>
       <p>
-        I blend creativity with technical excellence to deliver products that are both elegant and effective. Explore my
-        work to see how I turn ideas into reality.
+        What drives me most is seeing people actually use what I built. Knowing it’s solving problems and making
+        someone's life easier is what keeps me excited to keep building.
       </p>
-      <a href="#projects" class="btn">Explore My Projects</a>
+      <a href="#experience" class="btn">See My Work</a>
     </div>
     <img class="hero-image" src="https://avatars.githubusercontent.com/u/50555851?v=4"
       alt="Professional portrait of Ezzat Boukhary" />
   </section>
 
+
   <!-- About Section -->
   <section id="about" class="section about-section fade-in hidden">
     <h2>About Me</h2>
-    <p>
-      Based in Florida, I specialize in building digital solutions that users rely on every day. My passion lies in
-      developing applications—web and mobile—that have a real, measurable impact on people’s lives. I thrive on the
-      challenge of turning complex requirements into seamless user experiences.
-    </p>
-    <p>
-      With a focus on innovation, efficiency, and usability, I bring ideas to life using a blend of modern technologies
-      and creative problem-solving. I’m always eager to collaborate on projects that push boundaries and make a
-      difference.
-    </p>
+
+    <div class="about-wrapper">
+
+      <p class="intro-line">
+        I like building things that work and feel good to use.
+      </p>
+
+      <div class="about-block">
+        <h3>Where I’m Based</h3>
+        <p>Florida, though a lot of what I build lives in the cloud.</p>
+      </div>
+
+      <div class="about-block">
+        <h3>What I Build</h3>
+        <p>Full applications from the ground up. Mobile apps, full-stack platforms, backend APIs, and tools that make
+          complex problems easier to deal with. I like taking ownership, digging into the details, and finding ways to
+          make things better even when nobody's asking for it.</p>
+      </div>
+
+      <div class="about-block">
+        <h3>Outside of Code</h3>
+        <p>Usually playing games, getting pulled into TV shows, or going down one of those late-night rabbit holes that
+          somehow turn into the next side project idea. I like learning how things work, whether it's a system I'm
+          building or just something completely random.</p>
+      </div>
+
+    </div>
   </section>
+
 
   <!-- Experience Section -->
   <section id="experience" class="section experience-section fade-in hidden">
     <h2>Experience</h2>
-    <div class="exp-item">
-      <h3>Frontend Developer Intern @ BudgetWise</h3>
-      <span class="date">Mar 2025 – Present</span>
-      <ul>
-        <li>Oversees frontend development using Vue.js, TypeScript, and Figma, driving key features to enhance UI,
-          responsiveness, and user experience for BudgetWise’s platform.</li>
-        <li>Collaborates with design and backend teams in Agile sprints to efficiently implement user-centered features.
-        </li>
-        <li>Refines frontend performance, aiming for a 25% boost in responsiveness and load times.</li>
-      </ul>
-    </div>
-    <div class="exp-item">
-      <h3>Android Developer Intern @ Reel Talk</h3>
-      <span class="date">Jan 2024 – Jul 2024</span>
-      <ul>
-        <li>Spearheaded Android development as the sole Android developer, building nearly the entire app from partial
-          work and advancing it toward beta leveraging Kotlin, Jetpack Compose, Firebase, XML, and MVVM.</li>
-        <li>Integrated backend APIs and collaborated in Agile sprints, refining features through 8 iterative builds.
-        </li>
-        <li>Optimized performance, boosting speed by 15% and cutting crash rates by 20% via Firebase & Android Profiler.
-        </li>
-      </ul>
+
+    <div class="experience-gallery">
+
+      <!-- JAS -->
+      <div class="exp-card">
+        <img
+          src="https://media.licdn.com/dms/image/v2/D4E0BAQGjQwELeswYKw/company-logo_200_200/B4EZY6_CEGG0AM-/0/1744746325187/jasatucf_logo?e=1753920000&v=beta&t=DlkipSM3lJ0dw2VL9tIxk9QVL66AoP-N8jDOsTQy5Wo"
+          alt="JAS Logo" class="exp-logo">
+        <h3>Web Systems Developer</h3>
+        <p class="company-name">Jets and Aeronautics Society @ UCF</p>
+        <span class="date">May 2025 – Present</span>
+        <p>Redesigning a 100+ member club’s website using SvelteKit, Prisma, and AWS while improving tooling and CI/CD
+          pipelines.</p>
+        <div class="tech-icons">
+          <i class="devicon-svelte-plain colored" title="SvelteKit"></i>
+          <i class="devicon-prisma-original colored" title="Prisma"></i>
+          <i class="devicon-amazonwebservices-plain-wordmark colored" title="AWS"></i>
+          <i class="devicon-github-original colored" title="GitHub"></i>
+        </div>
+        <a href="https://jas-ucf.com" target="_blank" class="exp-link">View Site</a>
+      </div>
+
+      <!-- BudgetWise -->
+      <div class="exp-card">
+        <img
+          src="https://media.licdn.com/dms/image/v2/D560BAQHbT3rZELDFjw/company-logo_200_200/company-logo_200_200/0/1703265927965/budget_wise_logo?e=1753920000&v=beta&t=cIFRCvmvb3ahT3FSesM9M3mhRwSgujCK_hlm72LQfDQ"
+          alt="BudgetWise Logo" class="exp-logo">
+        <h3>Frontend Developer Intern</h3>
+        <p class="company-name">BudgetWise</p>
+        <span class="date">Mar 2025 – May 2025</span>
+        <p>Shipped optimized Vue.js features, mentored a new developer, revamped GitHub flows and added CI/CD pipelines.
+        </p>
+        <div class="tech-icons">
+          <i class="devicon-vuejs-plain colored" title="Vue.js"></i>
+          <i class="devicon-typescript-plain colored" title="TypeScript"></i>
+          <i class="devicon-firebase-plain colored" title="Firebase"></i>
+          <i class="devicon-github-original colored" title="GitHub"></i>
+        </div>
+        <a href="https://budgetwise.co" target="_blank" class="exp-link">View Site</a>
+      </div>
+
+      <!-- Reel Talk -->
+      <div class="exp-card">
+        <img
+          src="https://media.licdn.com/dms/image/v2/D560BAQHaTWpI5-nBtg/company-logo_100_100/company-logo_100_100/0/1692729991685/the_reel_talk_logo?e=1753920000&v=beta&t=pYqO43pO4lqKa3BohGujAJ2A7ouwXC68lEo_Vm7ji8s"
+          alt="Android Icon" class="exp-logo">
+        <h3>Android Developer Intern</h3>
+        <p class="company-name">Reel Talk</p>
+        <span class="date">Jan 2024 – Jul 2024</span>
+        <p>Owned Android rebuild using Kotlin, Jetpack Compose, and MVVM. Published internal beta, improved speed by 15%
+          and cut crash rates 20%.</p>
+        <div class="tech-icons">
+          <i class="devicon-kotlin-plain colored" title="Kotlin"></i>
+          <i class="devicon-android-plain colored" title="Jetpack Compose"></i>
+          <i class="devicon-firebase-plain colored" title="Firebase"></i>
+          <i class="devicon-github-original colored" title="GitHub"></i>
+        </div>
+        <a href="path/to/reel-talk-video.mp4" target="_blank" class="exp-link">Watch Demo</a> <!-- Optional -->
+      </div>
+
+      <!-- FSEC -->
+      <div class="exp-card">
+        <img
+          src="https://media.licdn.com/dms/image/v2/D4E0BAQHTfusDmDiP2Q/company-logo_100_100/B4EZVty.7rHcAQ-/0/1741303836752/fsec_center_logo?e=1753920000&v=beta&t=ZVJ93PCyI01zg1AtYrVXCrbALcxTfqXI11GYficFyTM"
+          alt="FSEC Logo" class="exp-logo">
+        <h3>Undergraduate Researcher</h3>
+        <p class="company-name">Florida Solar Energy Center</p>
+        <span class="date">May 2025 – Present</span>
+        <p>Building image pipelines for analyzing solar panel degradation using Python, OpenCV, and Pandas.</p>
+        <div class="tech-icons">
+          <i class="devicon-python-plain colored" title="Python"></i>
+          <i class="devicon-opencv-plain colored" title="OpenCV"></i>
+          <i class="devicon-pandas-plain colored" title="Pandas"></i>
+        </div>
+        <a href="https://github.com/ucf-photovoltaics" target="_blank" class="exp-link">Research GitHub</a>
+      </div>
+
+      <!-- UNARY -->
+      <div class="exp-card">
+        <img
+          src="https://media.licdn.com/dms/image/v2/D5622AQHPl00HPSPU2A/feedshare-shrink_800/feedshare-shrink_800/0/1707709223552?e=2147483647&v=beta&t=dDhi_MHGZKu1NwopILE9WNQqg8LqMFQo3y-sBPczdAA"
+          alt="UNARY Logo" class="exp-logo">
+        <h3>Undergraduate Researcher</h3>
+        <p class="company-name">UNARY Lab</p>
+        <span class="date">May 2025 – Present</span>
+        <p>Developing Python tools with graph-tool to restructure compiler graphs, enabling 5x faster graph
+          transformations.</p>
+        <div class="tech-icons">
+          <i class="devicon-python-plain colored" title="Python"></i>
+          <i class="devicon-linux-plain colored" title="Linux"></i>
+        </div>
+        <a href="https://www.unarylab.com/" target="_blank" class="exp-link">Lab Website</a>
+        <a href="https://github.com/UNARY-Lab" target="_blank" class="exp-link">GitHub</a>
+      </div>
+
+      <!-- ULA -->
+      <div class="exp-card">
+        <img
+          src="https://media.licdn.com/dms/image/v2/D4E0BAQFs9qKChB4mcQ/company-logo_100_100/company-logo_100_100/0/1711458546656/ucfcomputersci_logo?e=1753920000&v=beta&t=yQluR5KMpLKndEB9wqumK-lX6b2t5dOWDcaqeCakINw"
+          alt="UCF Logo" class="exp-logo">
+        <h3>Undergraduate Learning Assistant</h3>
+        <p class="company-name">University of Central Florida</p>
+        <span class="date">May 2025 – Present</span>
+        <p>Mentoring 300+ students in Java OOP concepts through live sessions, reviews, and debugging support.</p>
+        <div class="tech-icons">
+          <i class="devicon-java-plain colored" title="Java"></i>
+          <i class="devicon-github-original colored" title="GitHub"></i>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -172,22 +282,93 @@
   <!-- Skills Section -->
   <section id="skills" class="section skills-section fade-in hidden">
     <h2>Skills & Expertise</h2>
-    <p>I leverage a broad set of technologies to build applications that have a tangible impact on users at scale.</p>
-    <ul class="skills-list">
-      <li><strong>Languages:</strong> Java, Kotlin, TypeScript, JavaScript, Python, C#, C/C++, Dart, PHP, Haskell,
-        HTML/CSS, SQL, GLSL</li>
-      <li><strong>Frameworks &amp; Libraries:</strong> React, Vue.js, Jetpack Compose, Flutter, Express, TensorFlow,
-        ModernGL, React Native</li>
-      <li><strong>Tools:</strong> Firebase, MongoDB, AWS, SQLite, MySQL, Jira, Postman, Figma, SwaggerHub, Git</li>
-      <li><strong>Methodologies:</strong> Agile/Scrum, TDD, CI/CD, Git Flow</li>
-    </ul>
+    <p>I build across platforms using a broad stack of languages, frameworks, and tools to create polished, real-world
+      applications.</p>
+
+    <!-- Languages -->
+    <div class="skills-category">
+      <h3><i class="fa-solid fa-code"></i> Languages</h3>
+      <div class="skills-icons">
+        <i class="devicon-typescript-plain colored" title="TypeScript"></i>
+        <i class="devicon-javascript-plain colored" title="JavaScript"></i>
+        <i class="devicon-kotlin-plain colored" title="Kotlin"></i>
+        <i class="devicon-java-plain colored" title="Java"></i>
+        <i class="devicon-python-plain colored" title="Python"></i>
+        <i class="devicon-csharp-plain colored" title="C#"></i>
+        <i class="devicon-cplusplus-plain colored" title="C++"></i>
+        <i class="devicon-c-plain colored" title="C"></i>
+        <i class="devicon-swift-plain colored" title="Swift"></i>
+        <i class="devicon-dart-plain colored" title="Dart"></i>
+        <i class="devicon-php-plain colored" title="PHP"></i>
+        <i class="devicon-haskell-plain colored" title="Haskell"></i>
+        <i class="devicon-sqlite-plain colored" title="SQL"></i>
+        <i class="devicon-html5-plain colored" title="HTML5"></i>
+        <i class="devicon-css3-plain colored" title="CSS3"></i>
+      </div>
+    </div>
+
+    <!-- Frameworks & Libraries -->
+    <div class="skills-category">
+      <h3><i class="fa-solid fa-laptop-code"></i> Frameworks & Libraries</h3>
+      <div class="skills-icons">
+        <i class="devicon-react-original colored" title="React.js"></i>
+        <i class="devicon-vuejs-plain colored" title="Vue.js"></i>
+        <i class="devicon-svelte-plain colored" title="SvelteKit"></i>
+        <i class="devicon-nodejs-plain colored" title="Node.js"></i>
+        <i class="devicon-express-original colored" title="Express.js"></i>
+        <i class="devicon-flask-original colored" title="Flask"></i>
+        <i class="devicon-threejs-original colored" title="Three.js"></i>
+        <i class="devicon-opencv-plain colored" title="OpenCV"></i>
+        <i class="devicon-tensorflow-original colored" title="TensorFlow"></i>
+        <i class="devicon-android-plain colored" title="Jetpack Compose (Android)"></i>
+        <i class="devicon-flutter-plain colored" title="Flutter"></i>
+        <i class="devicon-reactoriginal colored" title="React Native"></i>
+      </div>
+    </div>
+
+    <!-- Tools -->
+    <div class="skills-category">
+      <h3><i class="fa-solid fa-wrench"></i> Tools & Platforms</h3>
+      <div class="skills-icons">
+        <i class="devicon-amazonwebservices-plain-wordmark colored" title="AWS"></i>
+        <i class="devicon-firebase-plain colored" title="Firebase"></i>
+        <i class="devicon-mysql-plain colored" title="MySQL"></i>
+        <i class="devicon-mongodb-plain colored" title="MongoDB"></i>
+        <i class="devicon-sqlite-plain colored" title="SQLite"></i>
+        <i class="devicon-docker-plain colored" title="Docker"></i>
+        <i class="devicon-git-plain colored" title="Git"></i>
+        <i class="devicon-linux-plain colored" title="Linux"></i>
+        <i class="devicon-jira-plain colored" title="Jira"></i>
+        <i class="devicon-figma-plain colored" title="Figma"></i>
+        <i class="devicon-androidstudio-plain colored" title="Android Studio"></i>
+        <i class="devicon-xcode-plain colored" title="Xcode"></i>
+        <i class="devicon-visualstudio-plain colored" title="Visual Studio"></i>
+        <i class="devicon-postman-plain colored" title="Postman"></i>
+        <i class="devicon-prisma-original colored" title="Prisma"></i>
+      </div>
+    </div>
+
+    <!-- Methodologies -->
+    <div class="skills-category">
+      <h3><i class="fa-solid fa-diagram-project"></i> Methodologies</h3>
+      <div class="skills-icons">
+        <span class="badge">Agile</span>
+        <span class="badge">Scrum</span>
+        <span class="badge">TDD</span>
+        <span class="badge">CI/CD</span>
+        <span class="badge">Git Flow</span>
+      </div>
+    </div>
   </section>
+
 
   <!-- Contact Section -->
   <section id="contact" class="section contact-section fade-in hidden">
     <h2>Get In Touch</h2>
-    <p>If you're looking for a developer who builds impactful applications used by thousands—or even millions—let's
-      connect. I’m always excited to discuss innovative projects and new opportunities.</p>
+
+    <p>If you're looking for someone who enjoys building complete systems, solving real problems, and taking projects
+      from idea to reality, feel free to reach out. I'm always open to new opportunities and conversations.</p>
+
     <p><strong>Email:</strong> <a href="mailto:ezzatboukhary03@gmail.com">ezzatboukhary03@gmail.com</a></p>
     <p><strong>GitHub:</strong> <a href="https://github.com/ezzatBoukhary" target="_blank">github.com/ezzatBoukhary</a>
     </p>
@@ -195,18 +376,19 @@
         target="_blank">linkedin.com/in/ezzatboukhary</a></p>
   </section>
 
+
   <!-- Footer -->
   <footer class="site-footer">
-    <p>© 2025 Ezzat Boukhary. All rights reserved.</p>
+    <p>© 2025 Ezzat Boukhary.</p>
   </footer>
 
   <!-- Modal for Full Project Details -->
-<div id="modal" class="modal hidden">
-  <div class="modal-content">
-    <span class="modal-close">&times;</span>
-    <div id="modal-body" class="modal-inner"></div>
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div id="modal-body" class="modal-inner"></div>
+    </div>
   </div>
-</div>
 
 
   <script src="script.js"></script>
