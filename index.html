@@ -15,6 +15,8 @@
 </head>
 
 <body>
+  <div id="page-transition"></div>
+
   <div id="scroll-progress"></div>
 
   <canvas id="stars-back"></canvas>
@@ -116,9 +118,7 @@
 
       <!-- JAS -->
       <div class="exp-card">
-        <img
-          src="https://media.licdn.com/dms/image/v2/D4E0BAQGjQwELeswYKw/company-logo_200_200/B4EZY6_CEGG0AM-/0/1744746325187/jasatucf_logo?e=1753920000&v=beta&t=DlkipSM3lJ0dw2VL9tIxk9QVL66AoP-N8jDOsTQy5Wo"
-          alt="JAS Logo" class="exp-logo">
+        <img src="../assets/logo_jas.png" alt="JAS Logo" class="exp-logo">
         <h3>Web Systems Developer</h3>
         <p class="company-name">Jets and Aeronautics Society @ UCF</p>
         <span class="date">May 2025 – Present</span>
@@ -156,7 +156,7 @@
       <div class="exp-card">
         <img
           src="https://media.licdn.com/dms/image/v2/D560BAQHaTWpI5-nBtg/company-logo_100_100/company-logo_100_100/0/1692729991685/the_reel_talk_logo?e=1753920000&v=beta&t=pYqO43pO4lqKa3BohGujAJ2A7ouwXC68lEo_Vm7ji8s"
-          alt="Android Icon" class="exp-logo">
+          alt="Reel Talk Logo" class="exp-logo">
         <h3>Android Developer Intern</h3>
         <p class="company-name">Reel Talk</p>
         <span class="date">Jan 2024 – Jul 2024</span>
@@ -172,9 +172,7 @@
 
       <!-- FSEC -->
       <div class="exp-card">
-        <img
-          src="https://media.licdn.com/dms/image/v2/D4E0BAQHTfusDmDiP2Q/company-logo_100_100/B4EZVty.7rHcAQ-/0/1741303836752/fsec_center_logo?e=1753920000&v=beta&t=ZVJ93PCyI01zg1AtYrVXCrbALcxTfqXI11GYficFyTM"
-          alt="FSEC Logo" class="exp-logo">
+        <img src="../assets/logo_fsec.jpg" alt="FSEC Logo" class="exp-logo">
         <h3>Undergraduate Researcher</h3>
         <p class="company-name">Florida Solar Energy Center</p>
         <span class="date">May 2025 – Present</span>
@@ -226,8 +224,9 @@
   <section id="projects" class="section projects-section fade-in hidden">
     <h2>Projects</h2>
     <div class="projects-gallery">
+
       <!-- Project Card 1: Gesture-Based Puppetry -->
-      <article class="project-card" data-project="p1">
+      <article class="project-card" onclick="window.location.href='projects/puppetry.html'">
         <img class="project-thumbnail"
           src="https://www.ucf.edu/wp-content/blogs.dir/4/files/2017/02/StoryHeader_Avatars-1600x900.jpg"
           alt="Gesture-Based Puppetry" />
@@ -236,27 +235,18 @@
         <p>A real-time 3D rendering system for gesture-based puppetry.</p>
       </article>
 
-      <!-- Project Card 2: Campus Critters -->
-      <article class="project-card" data-project="p2">
-        <img class="project-thumbnail" src="https://github.com/EzzatBoukhary/animal-tracker/raw/main/web_app_post.png"
-          alt="Campus Critters" />
-        <h3>Campus Critters</h3>
-        <p>Nov 2024 - Dec 2024</p>
-        <p>A MERN-stack platform & Flutter app for campus wildlife reporting.</p>
-      </article>
 
-      <!-- Project Card 3: Bubble Buddy Book -->
-      <article class="project-card" data-project="p3">
-        <img class="project-thumbnail"
-          src="https://media.licdn.com/dms/image/sync/v2/D4E27AQF7fvXYERXY-w/articleshare-shrink_160/articleshare-shrink_160/0/1739293847403?e=1742187600&v=beta&t=6RU1JoJwE1qIOcaavipvFzs-nUts2GWgx35Ns-kbnKY"
-          alt="Bubble Buddy Book" />
-        <h3>Bubble Buddy Book</h3>
-        <p>Aug 2024 - Sept 2024</p>
-        <p>A LAMP-based contact manager with secure authentication.</p>
+
+      <!-- Project Card 3: College Event Platform  -->
+      <article class="project-card" onclick="window.location.href='projects/cew.html'">
+        <img class="project-thumbnail" src="../assets/cew2.png" alt="College Event Platform" />
+        <h3>College Event Platform</h3>
+        <p>March 2025 - April 2025</p>
+        <p>A full-stack event system with MySQL triggers & constraint-based event approvals.</p>
       </article>
 
       <!-- Project Card 4: Dragonotchi -->
-      <article class="project-card" data-project="p4">
+      <article class="project-card" onclick="window.location.href='projects/dragonotchi.html'">
         <img class="project-thumbnail"
           src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/002/613/881/datas/gallery.jpg"
           alt="Dragonotchi" />
@@ -265,8 +255,17 @@
         <p>An award-winning virtual pet with real-time sync & playful design.</p>
       </article>
 
+      <!-- Project Card 2: Campus Critters -->
+      <article class="project-card" onclick="window.location.href='projects/campus-critters.html'">
+        <img class="project-thumbnail" src="https://github.com/EzzatBoukhary/animal-tracker/raw/main/web_app_post.png"
+          alt="Campus Critters" />
+        <h3>Campus Critters</h3>
+        <p>Nov 2024 - Dec 2024</p>
+        <p>A MERN-stack platform & Flutter app for campus wildlife reporting.</p>
+      </article>
+
       <!-- Project Card 5: KillerBot -->
-      <article class="project-card" data-project="p5">
+      <article class="project-card" onclick="window.location.href='projects/killerbot.html'">
         <img class="project-thumbnail"
           src="https://camo.githubusercontent.com/6127858b5690ceb2ea2b1e7f7b0532f57f72e23c3ce79de86797acec22b4dd94/68747470733a2f2f7974332e676f6f676c6575736572636f6e74656e742e636f6d2f7974632f414966387a5a546146766f483556424b7658304a6e417a6c78464c6368635f6d4f4e36615f674c79534639753d733137362d632d6b2d63307830306666666666662d6e6f2d726a"
           alt="KillerBot" />
@@ -274,8 +273,11 @@
         <p>Apr 2019 - Aug 2022</p>
         <p>A feature-rich Discord bot serving 250K+ users.</p>
       </article>
+
     </div>
   </section>
+
+
 
   <!-- Skills Section -->
   <section id="skills" class="section skills-section fade-in hidden">
@@ -379,14 +381,6 @@
   <footer class="site-footer">
     <p>© 2025 Ezzat Boukhary.</p>
   </footer>
-
-  <!-- Modal for Full Project Details -->
-  <div id="modal" class="modal hidden">
-    <div class="modal-content">
-      <span class="modal-close">&times;</span>
-      <div id="modal-body" class="modal-inner"></div>
-    </div>
-  </div>
 
 
   <script src="script.js"></script>

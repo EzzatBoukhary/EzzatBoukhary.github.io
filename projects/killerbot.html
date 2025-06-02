@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>KillerBot - Ezzat Boukhary</title>
+  <link rel="icon"
+    href="https://yt3.googleusercontent.com/ytc/AIf8zZTaFvoH5VBKvX0JnAzlxFLchc_mON6a_gLySF9u=s176-c-k-c0x00ffffff-no-rj"
+    type="image/png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      background: #121212;
+      overflow-x: hidden;
+    }
+
+    canvas.killerbot-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+    }
+
+    .project-page {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 1.2rem;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .back-button {
+      display: inline-block;
+      margin: 2rem auto;
+      padding: 0.6rem 1.8rem;
+      background-color: #9be64e;
+      color: #121212;
+      font-weight: bold;
+      border-radius: 30px;
+      box-shadow: 0 0 15px rgba(155, 230, 78, 0.6);
+      text-decoration: none;
+      transition: transform 0.3s ease, background 0.3s ease;
+      text-align: center;
+    }
+
+    .back-button:hover {
+      transform: translateY(-5px);
+      background-color: #7abc38;
+    }
+
+    .project-header h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      color: #9be64e;
+      text-shadow: 0 0 10px rgba(155, 230, 78, 0.7);
+      margin-bottom: 0.5rem;
+      animation: headerPulse 4s infinite alternate ease-in-out;
+    }
+
+    @keyframes headerPulse {
+      0% {
+        text-shadow: 0 0 10px rgba(155, 230, 78, 0.5);
+      }
+
+      100% {
+        text-shadow: 0 0 18px rgba(155, 230, 78, 1);
+      }
+    }
+
+    .project-date {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      border: 1px solid #9be64e;
+      border-radius: 20px;
+      color: #9be64e;
+      font-weight: bold;
+      margin-bottom: 2rem;
+    }
+
+    .project-links {
+      margin-bottom: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .project-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #9be64e;
+      color: #121212;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(155, 230, 78, 0.4);
+    }
+
+    .project-links a:hover {
+      background: #7abc38;
+      color: #121212;
+    }
+
+    .image-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .image-gallery img {
+      width: 450px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid #9be64e;
+      transition: transform 0.3s ease;
+    }
+
+    .image-gallery img:hover {
+      transform: scale(1.03);
+    }
+
+    .project-content h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      color: #9be64e;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .project-content p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #e0e0e0;
+    }
+
+    .custom-section {
+      list-style: none;
+      padding: 0;
+      margin-top: 1rem;
+    }
+
+    .custom-section li {
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 3px solid #9be64e;
+      padding: 0.7rem 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(155, 230, 78, 0.1);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .custom-section li:hover {
+      background: rgba(155, 230, 78, 0.1);
+      transform: scale(1.02);
+    }
+
+    .tech-icons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .tech-icons i {
+      font-size: 3.2rem;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.15));
+    }
+
+    .tech-icons i:hover {
+      transform: translateY(-8px) scale(1.1);
+      filter: brightness(1.4);
+    }
+
+    @media (max-width: 768px) {
+      .tech-icons i {
+        font-size: 2.5rem;
+      }
+
+      .project-content h3 {
+        font-size: 1.4rem;
+      }
+
+      .image-gallery img {
+        width: 90vw;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="killerbot-canvas" class="killerbot-bg"></canvas>
+
+  <header class="site-header">
+    <a class="back-button" href="../index.html">← Back to Portfolio</a>
+  </header>
+
+  <section class="project-page">
+
+    <div class="project-header">
+      <h2>KillerBot</h2>
+      <p class="project-date">2019 - 2022</p>
+
+      <div class="project-links">
+        <a href="https://github.com/EzzatBoukhary/KillerBot" target="_blank"><i class="fa-brands fa-github"></i> GitHub
+          Repo</a>
+        <a href="https://www.youtube.com/watch?v=1D4B9EFbSGk" target="_blank"><i class="fa-brands fa-youtube"></i>
+          Trailer</a>
+        <a href="https://top.gg/bot/263753726324375572" target="_blank"><i class="fa-solid fa-star"></i> Top.gg Page</a>
+      </div>
+    </div>
+
+    <div class="image-gallery">
+      <img src="../assets/killerbot1.png" alt="KillerBot Screenshot 1">
+      <img src="../assets/killerbot2.png" alt="KillerBot Screenshot 2">
+    </div>
+
+    <div class="project-content">
+
+      <h3><i class="fa-solid fa-lightbulb"></i> The Idea</h3>
+      <p>
+        A full-featured Discord bot designed from scratch to handle everything from server management to fun minigames —
+        and eventually scaled to over 250,000 users across 600+ servers.
+      </p>
+
+      <h3><i class="fa-solid fa-gears"></i> What I Built</h3>
+
+      <ul class="custom-section">
+        <li>Wrote the entire backend in C# using Discord.NET from scratch</li>
+        <li>Implemented full economy system with currency, shops, balances and transactions</li>
+        <li>Created advanced moderation suite, auto-moderation filters, and admin tools</li>
+        <li>Built entertainment features including trivia, games, weather and YouTube APIs</li>
+        <li>Handled high-volume data storage using JSON-based custom persistence layers</li>
+      </ul>
+
+      <h3><i class="fa-solid fa-screwdriver-wrench"></i> Achievements</h3>
+
+      <ul class="custom-section">
+        <li>Organically grew to serve over 250,000 Discord users across 600+ servers</li>
+        <li>Maintained 5-star Top.gg rating and highly positive user reviews</li>
+        <li>Integrated multiple public APIs to extend real-world data interaction</li>
+        <li>Delivered fully stable 24/7 uptime for years with constant updates & feature additions</li>
+      </ul>
+
+      <h3><i class="fa-solid fa-flask"></i> Why This Was Fun</h3>
+      <p>
+        Every feature I added instantly touched thousands of users — watching people engage live with something I built
+        was addictive.
+      </p>
+
+      <h3><i class="fa-solid fa-users"></i> Collaboration</h3>
+      <p>
+        Sole developer and maintainer. Designed, coded, maintained, and grew KillerBot entirely independently.
+      </p>
+
+      <h3><i class="fa-solid fa-tools"></i> Technologies</h3>
+      <div class="tech-icons">
+        <i class="devicon-csharp-plain colored" title="C#"></i>
+        <i class="devicon-dotnetcore-plain colored" title=".NET Core"></i>
+        <i class="devicon-json-plain" title="JSON"></i>
+        <i class="devicon-git-plain colored" title="GitHub"></i>
+        <i class="devicon-github-original" title="GitHub"></i>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <script>
+    // Packet Burst Background
+    const canvas = document.getElementById('killerbot-canvas');
+    const ctx = canvas.getContext('2d');
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const packets = Array.from({ length: 120 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 3 + 1,
+      vx: (Math.random() - 0.5) * 1.5,
+      vy: (Math.random() - 0.5) * 1.5
+    }));
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const p of packets) {
+        ctx.fillStyle = 'rgba(155,230,78,0.4)';
+        ctx.fillRect(p.x, p.y, p.size, p.size);
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+
+</body>
+
+</html>

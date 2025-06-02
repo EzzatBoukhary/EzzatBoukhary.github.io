@@ -570,57 +570,142 @@ body {
   transform: translateY(0);
 }
 
-/* Fullscreen Modal */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(18, 18, 18, 0.95);
+.project-page {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.project-header h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  color: #9be64e;
+  text-shadow: 0 0 10px rgba(155, 230, 78, 0.7);
+  margin-bottom: 0.5rem;
+}
+
+.project-date {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border: 1px solid #9be64e;
+  border-radius: 20px;
+  color: #9be64e;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 5px rgba(155, 230, 78, 0.5);
+}
+
+.project-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.project-content h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  color: #9be64e;
+  margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 200;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-  visibility: hidden;
+  gap: 0.5rem;
+  text-shadow: 0 0 5px rgba(155, 230, 78, 0.5);
 }
 
-.modal.show {
-  opacity: 1;
-  pointer-events: all;
-  visibility: visible;
+.project-content p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #e0e0e0;
 }
 
-/* Modal Content */
-.modal-content {
-  background: #1d1d1d;
-  padding: 2rem;
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.image-gallery img {
+  width: 100%;
   border-radius: 8px;
-  width: 95%;
-  max-width: 850px;
-  max-height: 95vh;
-  overflow-y: auto;
-  position: relative;
-  margin: auto;
-  text-align: center;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  transform: scale(0.9);
+  border: 2px solid #9be64e;
+  transition: transform 0.3s ease;
 }
 
-.modal.show .modal-content {
-  transform: scale(1);
-  opacity: 1;
+.image-gallery img:hover {
+  transform: scale(1.03);
 }
 
-/* Project Title */
-.modal-content h2 {
-  margin-bottom: 0.5rem;
-  color: #9be64e;
-  font-family: 'Orbitron', sans-serif;
+.custom-section {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
 }
+
+.custom-section li {
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid #9be64e;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(155, 230, 78, 0.1);
+  transition: background 0.3s ease;
+}
+
+.custom-section li:hover {
+  background: rgba(155, 230, 78, 0.1);
+}
+
+
+
+.project-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.project-links a {
+  background: #9be64e;
+  color: #121212;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(155, 230, 78, 0.4);
+}
+
+.project-links a:hover {
+  background: #7abc38;
+  transform: translateY(-4px);
+}
+
+@media (max-width: 768px) {
+  .tech-icons i {
+    font-size: 2.5rem;
+  }
+
+  .project-content h3 {
+    font-size: 1.4rem;
+  }
+}
+
 
 /* Project Links */
 .project-links {
@@ -638,7 +723,6 @@ body {
   text-decoration: underline;
 }
 
-/* Prevent underline on the icon */
 .project-links a i {
   text-decoration: none;
   font-size: 1.2rem;
@@ -666,33 +750,6 @@ body {
   object-fit: cover;
   border: none;
   border-radius: 4px;
-}
-
-
-/* Left-Aligned Content */
-.modal-content h3,
-.modal-content p,
-.modal-content ul {
-  text-align: left;
-  width: 100%;
-  max-width: 700px;
-  margin: 1.5rem auto;
-}
-
-.modal-content h3 {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  color: #9be64e;
-}
-
-/* Modal Close Button */
-.modal-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 2rem;
-  color: #9be64e;
-  cursor: pointer;
 }
 
 

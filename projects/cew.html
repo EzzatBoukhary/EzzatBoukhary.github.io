@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>College Event Platform - Ezzat Boukhary</title>
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/50555851?v=4" type="image/png">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+  <link rel="stylesheet" href="../styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* Cosmic Starfield Background */
+    body {
+      background: #121212;
+      overflow-x: hidden;
+    }
+
+    canvas.stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+    }
+
+    .project-page {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 1.2rem;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .back-button {
+      display: inline-block;
+      margin: 2rem auto;
+      padding: 0.6rem 1.8rem;
+      background-color: #9be64e;
+      color: #121212;
+      font-weight: bold;
+      border-radius: 30px;
+      box-shadow: 0 0 15px rgba(155, 230, 78, 0.6);
+      text-decoration: none;
+      transition: transform 0.3s ease, background 0.3s ease;
+      text-align: center;
+    }
+
+    .back-button:hover {
+      transform: translateY(-5px);
+      background-color: #7abc38;
+    }
+
+    .project-header h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      color: #9be64e;
+      text-shadow: 0 0 10px rgba(155, 230, 78, 0.7);
+      margin-bottom: 0.5rem;
+      animation: headerPulse 4s infinite alternate ease-in-out;
+    }
+
+    @keyframes headerPulse {
+      0% {
+        text-shadow: 0 0 10px rgba(155, 230, 78, 0.5);
+      }
+
+      100% {
+        text-shadow: 0 0 18px rgba(155, 230, 78, 1);
+      }
+    }
+
+    .project-date {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      border: 1px solid #9be64e;
+      border-radius: 20px;
+      color: #9be64e;
+      font-weight: bold;
+      margin-bottom: 2rem;
+    }
+
+    .project-links {
+      margin-bottom: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .project-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #9be64e;
+      color: #121212;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(155, 230, 78, 0.4);
+    }
+
+    .project-links a:hover {
+      background: #7abc38;
+      color: #121212;
+    }
+
+    .image-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .image-gallery img {
+      width: 450px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid #9be64e;
+      transition: transform 0.3s ease;
+    }
+
+    .image-gallery img:hover {
+      transform: scale(1.03);
+    }
+
+    .project-content h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      color: #9be64e;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .project-content p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #e0e0e0;
+    }
+
+    .custom-section {
+      list-style: none;
+      padding: 0;
+      margin-top: 1rem;
+    }
+
+    .custom-section li {
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 3px solid #9be64e;
+      padding: 0.7rem 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(155, 230, 78, 0.1);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .custom-section li:hover {
+      background: rgba(155, 230, 78, 0.1);
+      transform: scale(1.02);
+    }
+
+    .tech-icons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .tech-icons i {
+      font-size: 3.2rem;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.15));
+    }
+
+    .tech-icons i:hover {
+      transform: translateY(-8px) scale(1.1);
+      filter: brightness(1.4);
+    }
+
+    @media (max-width: 768px) {
+      .tech-icons i {
+        font-size: 2.5rem;
+      }
+
+      .project-content h3 {
+        font-size: 1.4rem;
+      }
+
+      .image-gallery img {
+        width: 90vw;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="stars-canvas" class="stars"></canvas>
+
+  <header class="site-header">
+    <a class="back-button" href="../index.html">← Back to Portfolio</a>
+  </header>
+
+  <section class="project-page">
+
+    <div class="project-header">
+      <h2>College Event Platform</h2>
+      <p class="project-date">March 2025 - April 2025</p>
+
+      <div class="project-links">
+        <a href="https://github.com/EzzatBoukhary/college-event-platform" target="_blank"><i
+            class="fa-brands fa-github"></i> GitHub Repo</a>
+        <a href="https://drive.google.com/file/d/1qpgSiqR47lKek5zrIISIGX-3Nq6m-g6D/view?usp=sharing" target="_blank"><i
+            class="fa-solid fa-video"></i> Demo Video</a>
+        <a href="https://docs.google.com/document/d/1BHoFnWYCV6CdFsr2HLNBQ_cU1JYbW8JbvAkqsT4AO3k" target="_blank"><i
+            class="fa-solid fa-file"></i> Final Report</a>
+      </div>
+    </div>
+
+    <div class="image-gallery">
+      <img src="../assets/cew1.png" alt="CEW Screenshot 1">
+      <img src="../assets/cew2.png" alt="CEW Screenshot 2">
+    </div>
+
+    <div class="project-content">
+
+      <h3><i class="fa-solid fa-lightbulb"></i> The Idea</h3>
+      <p>
+        A full-stack platform that lets universities easily organize public, private, and RSO events — while enforcing
+        real-world constraints like role-based permissions, approvals, and non-overlapping scheduling.
+      </p>
+
+      <h3><i class="fa-solid fa-gears"></i> What I Built</h3>
+
+      <ul class="custom-section">
+        <li>Engineered full backend API from scratch with Node.js, Express and MySQL</li>
+        <li>Designed complete 3NF database schema with foreign keys, triggers, stored procedures and relational
+          integrity</li>
+        <li>Built secure role-based access control for students, admins, super-admins</li>
+        <li>Implemented event approval pipelines, time conflict validation, and RSO member count triggers directly at
+          the database layer</li>
+        <li>Developed frontend features in React with TypeScript for event creation, search, filtering, and commenting
+        </li>
+      </ul>
+
+      <h3><i class="fa-solid fa-screwdriver-wrench"></i> Achievements</h3>
+
+      <ul class="custom-section">
+        <li>Led full-stack system architecture from broken initial state into production-ready design</li>
+        <li>Implemented complex constraint logic entirely at database level for maximum integrity</li>
+        <li>Built fully functional search, filtering and lookup endpoints for admin dashboards</li>
+        <li>Handled end-to-end API refactoring, routing, security, and error handling</li>
+        <li>Delivered polished final report, demo and functional application as lead backend developer</li>
+      </ul>
+
+      <h3><i class="fa-solid fa-flask"></i> Why This Was Fun</h3>
+      <p>
+        There's something satisfying about translating real-world business rules into actual system constraints — and
+        seeing everything work together like clockwork was incredibly rewarding.
+      </p>
+
+      <h3><i class="fa-solid fa-users"></i> Collaboration</h3>
+      <p>
+        Team of 3. I led backend design, data modeling, API architecture, complex triggers, and core frontend features
+        while collaborating on integration and final delivery.
+      </p>
+
+      <h3><i class="fa-solid fa-tools"></i> Technologies</h3>
+      <div class="tech-icons">
+        <i class="devicon-react-original colored" title="React.js"></i>
+        <i class="devicon-typescript-plain colored" title="TypeScript"></i>
+        <i class="devicon-nodejs-plain colored" title="Node.js"></i>
+        <i class="devicon-express-original" title="Express.js"></i>
+        <i class="devicon-mysql-plain colored" title="MySQL"></i>
+        <i class="devicon-git-plain colored" title="Git"></i>
+        <i class="devicon-linux-plain" title="Linux"></i>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <script>
+    // Data grid background
+    const canvas = document.getElementById('stars-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function drawGrid() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const spacing = 80;
+      const offset = Date.now() * 0.0004;
+
+      ctx.strokeStyle = 'rgba(155,230,78,0.08)';
+      ctx.lineWidth = 1;
+
+      for (let x = -spacing; x < canvas.width + spacing; x += spacing) {
+        for (let y = -spacing; y < canvas.height + spacing; y += spacing) {
+          const dx = x + Math.sin((y + offset * 200) * 0.01) * 10;
+          const dy = y + Math.cos((x + offset * 200) * 0.01) * 10;
+          ctx.beginPath();
+          ctx.arc(dx, dy, 1.5, 0, 2 * Math.PI);
+          ctx.fillStyle = 'rgba(155,230,78,0.5)';
+          ctx.fill();
+        }
+      }
+      requestAnimationFrame(drawGrid);
+    }
+    drawGrid();
+
+  </script>
+
+</body>
+
+</html>
