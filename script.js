@@ -103,201 +103,6 @@ const appearOnScroll = new IntersectionObserver((entries, observer) => {
 }, appearOptions);
 faders.forEach(fader => { appearOnScroll.observe(fader); });
 
-/****************************************************************************
-  Modal for Full Project Details
-****************************************************************************/
-const projectDetails = {
-  p1: `
-    <h2>Gesture-Based Puppetry</h2>
-    <div class="project-links">
-      <a href="https://sites.google.com/view/teachlive/home" target="_blank">
-        <i class="fa-solid fa-globe"></i> <span>Learn More</span>
-      </a>
-    </div>
-    <div class="image-gallery">
-      <img src="https://www.ucf.edu/wp-content/blogs.dir/4/files/2017/02/StoryHeader_Avatars-1600x900.jpg" alt="Gesture-Based Puppetry Screenshot">
-    </div>
-    <h3>Overview</h3>
-    <p>
-      Gesture-Based Puppetry is an interactive animation system for TeachLivE that enables real-time character control through gestures.
-    </p>
-    <h3>Key Contributions</h3>
-    <ul>
-      <li>Developed lifelike facial expressions, procedural blinking, and head movement.</li>
-      <li>Implemented real-time WebSocket communication for seamless interactions.</li>
-      <li>Optimized performance using IndexedDB caching, reducing load times by 40%.</li>
-    </ul>
-    <h3>Technologies Used</h3>
-    <p>Three.js, WebGL, TypeScript, React.js, WebSocket, IndexedDB</p>
-  `,
-
-  p2: `
-    <h2>Campus Critters</h2>
-    <div class="project-links">
-      <a href="https://github.com/EzzatBoukhary/animal-tracker" target="_blank">
-        <i class="fa-brands fa-github"></i> <span>GitHub Repo</span>
-      </a>
-    </div>
-    <div class="image-gallery">
-      <img src="https://github.com/EzzatBoukhary/animal-tracker/raw/main/web_app_post.png" alt="Campus Critters - Post Screen">
-      <img src="https://github.com/EzzatBoukhary/animal-tracker/raw/main/web_app_auth.png" alt="Campus Critters - Authentication Screen">
-    </div>
-    <h3>Overview</h3>
-    <p>
-      Campus Critters is a web and mobile application designed for the UCF community to report, explore, and interact with real-time wildlife sightings on campus.
-    </p>
-    <h3>Key Features</h3>
-    <ul>
-      <li>User Authentication with secure login and email verification.</li>
-      <li>Wildlife Reporting: Upload images, provide descriptions, and tag locations.</li>
-      <li>Interactive Maps: Visualize sightings with real-time tracking using Leaflet and mobile map libraries.</li>
-      <li>Filtering by animal type and seamless mobile app integration.</li>
-    </ul>
-    <h3>Technologies & Tools</h3>
-    <p>React (TypeScript) with Chakra UI, Node.js with Express, MongoDB, Flutter (Dart), Firebase, DigitalOcean, Leaflet, SwaggerHub</p>
-  `,
-
-  p3: `
-    <h2>Bubble Buddy Book</h2>
-    <div class="project-links">
-      <a href="https://github.com/SloanKeller/COP4331-G19" target="_blank">
-        <i class="fa-brands fa-github"></i> <span>GitHub Repo</span>
-      </a>
-    </div>
-    <h3>Overview</h3>
-    <p>
-      Bubble Buddy Book is a secure contact management system that allows users to efficiently store and organize personal and professional contacts.
-    </p>
-    <h3>Key Contributions</h3>
-    <ul>
-      <li>Led backend development for a LAMP-based solution.</li>
-      <li>Designed and rigorously tested RESTful APIs using Postman and SwaggerHub.</li>
-    </ul>
-    <h3>Technologies Used</h3>
-    <p>PHP, MySQL, LAMP Stack, DigitalOcean, SwaggerHub, Postman</p>
-  `,
-
-  p4: `
-    <h2>Dragonotchi</h2>
-    <div class="project-links">
-      <a href="https://devpost.com/software/dragonotchi" target="_blank">
-        <i class="fa-solid fa-gamepad"></i> <span>Devpost Page</span>
-      </a>
-      <a href="https://github.com/Caitlin-Fabian/dragonotchi" target="_blank">
-        <i class="fa-brands fa-github"></i> <span>GitHub Repo</span>
-      </a>
-    </div>
-    <div class="image-gallery">
-      <img src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/002/613/881/datas/gallery.jpg" alt="Dragonotchi - Screenshot 1">
-      <img src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/002/613/842/datas/gallery.jpg" alt="Dragonotchi - Screenshot 2">
-    </div>
-    <h3>Inspiration</h3>
-    <p>
-      We wanted to create a virtual pet that you can interact with as it sits at your desk. With an Arduino and an LCD panel at our disposal, we envisioned a digital companion that adds a spark of joy to everyday life.
-    </p>
-    <h3>What It Does</h3>
-    <p>
-      Dragonotchi is a virtual pet that you can play with, feed, and care for. It reacts to your interactions—swipe an item to it, and it will respond. But take care: neglecting it means it might just fade away!
-    </p>
-    <h3>How It Was Built</h3>
-    <ul>
-      <li>Designed a mobile app using Kotlin and Jetpack Compose for an intuitive interface.</li>
-      <li>Connected an ESP8266 to a 16x16 LED panel to create the physical display for the dragon.</li>
-      <li>Utilized Firebase Realtime Database to sync the dragon's state, ensuring it operates independently of the app.</li>
-    </ul>
-    <h3>Challenges We Ran Into</h3>
-    <p>
-      We fried our first ESP8266—a real scare—but managed to continue with a backup. Initially, we attempted to connect the ESP8266 and the mobile app via WebSockets; however, that approach failed, so we switched to Firebase's Realtime Database, which worked perfectly and stores the dragon's data even when the app is not running.
-    </p>
-    <h3>Accomplishments</h3>
-    <p>
-      We are incredibly proud that Dragonotchi works. Users can interact with and care for their pet, and every asset in the project was handmade.
-    </p>
-    <h3>What We Learned</h3>
-    <p>
-      We learned the importance of hardware compatibility and careful handling after our initial mishap with the ESP8266. The experience underscored the need for flexibility when facing technical challenges, as we successfully switched from WebSockets to Firebase. Teamwork and perseverance were key to overcoming obstacles.
-    </p>
-    <h3>What's Next for Dragonotchi</h3>
-    <p>
-      Our stretch goals include adding more dragons, integrating a light sensor to allow the pet to "sleep" at night, introducing additional interactive items, and even enabling multiplayer functionality so that multiple Dragonotchis can operate independently.
-    </p>
-    <h3>Built With</h3>
-    <p>Android Studio, Arduino, Jetpack Compose, ESP8266, Firebase, Kotlin, WebSockets</p>
-  `,
-
-  p5: `
-    <h2>KillerBot</h2>
-    <div class="project-links">
-      <a href="https://github.com/EzzatBoukhary/KillerBot" target="_blank">
-        <i class="fa-brands fa-github"></i> <span>GitHub Repo</span>
-      </a>
-      <a href="https://www.youtube.com/watch?v=1D4B9EFbSGk" target="_blank">
-        <i class="fa-brands fa-youtube"></i> <span>Watch Trailer</span>
-      </a>
-      <a href="https://top.gg/bot/263753726324375572" target="_blank">
-        <i class="fa-solid fa-star"></i> <span>Top.gg Listing Page</span>
-      </a>
-    </div>
-    <div class="image-gallery">
-      <img src="https://github.com/EzzatBoukhary/KillerBot/raw/master/Discord_WctbanG82J.png" alt="KillerBot - Screenshot 1">
-      <img src="https://github.com/EzzatBoukhary/KillerBot/raw/master/Discord_O1jBmRCiJq.png" alt="KillerBot - Screenshot 2">
-    </div>
-    <h3>Overview</h3>
-    <p>
-      KillerBot is a versatile Discord bot designed to enhance server functionality and user experience. Developed from April 2019 to August 2022, it gained significant traction in the Discord community, serving over 250,000 users across more than 600 servers.
-    </p>
-    <h3>Key Features</h3>
-    <ul>
-      <li><strong>Economy System:</strong> Engage users with a dynamic virtual economy featuring a built-in shop.</li>
-      <li><strong>Moderation Tools:</strong> Robust commands for maintaining server order and safety.</li>
-      <li><strong>Join-Leave Announcements:</strong> Customizable notifications to foster community engagement.</li>
-      <li><strong>Minigames & Fun Commands:</strong> Interactive features that add entertainment and engagement.</li>
-      <li><strong>Utility Commands:</strong> Streamlined commands for efficient server management.</li>
-      <li><strong>Regular Updates & Support:</strong> Continuous improvements and dedicated maintenance.</li>
-    </ul>
-    <h3>Technologies Used</h3>
-    <p>C#, Discord.NET, JSON, APIs, Webhooks</p>
-    <h3>Ratings & Reviews</h3>
-    <p>
-      KillerBot has received positive feedback from its users, maintaining a 5-star rating on Top.gg. Users have praised its unique commands, including its moderation, fun, and utility commands that enhance server functionality as well as its regular updates and responsive developer who actively addresses user feedback.
-    </p>
-  `
-};
-
-
-
-
-const modal = document.getElementById('modal');
-const modalBody = document.getElementById('modal-body');
-const modalClose = document.querySelector('.modal-close');
-
-// Listen for clicks on each project card to open the modal with expanded details
-document.querySelectorAll('.project-card').forEach(card => {
-  card.addEventListener('click', () => {
-    const projId = card.getAttribute('data-project');
-    modalBody.innerHTML = projectDetails[projId] || "<p>No details available.</p>";
-    modal.classList.add("show");
-  });
-});
-
-modalClose.addEventListener('click', () => {
-  modal.classList.remove("show");
-});
-
-window.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    modal.classList.remove("show");
-  }
-});
-
-// close modal with Esc
-window.addEventListener('keydown', (e) => {
-  if (e.key === "Escape") {
-    modal.classList.remove("show");
-  }
-});
-
-
 
 /****************************************************************************
   Audio Controls: Background Music & Click Sound
@@ -308,13 +113,19 @@ const toggleSoundBtn = document.getElementById('toggle-sound');
 let musicEnabled = false;
 toggleSoundBtn.addEventListener('click', () => {
   musicEnabled = !musicEnabled;
+  console.log(`Music enabled: ${musicEnabled}`);
   if (musicEnabled) {
     bgMusic.volume = 0.2;
-    bgMusic.play();
+
+    // Try to resume playback safely
+    bgMusic.play().catch((err) => {
+      console.log('Playback failed:', err);
+    });
   } else {
     bgMusic.pause();
   }
 });
+
 function playClickSound() {
   clickSound.currentTime = 0;
   clickSound.play().catch(() => { });
