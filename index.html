@@ -81,19 +81,18 @@
           <i class="fa-brands fa-github"></i> GitHub</a>
         <a href="https://linkedin.com/in/ezzatboukhary" target="_blank" rel="noopener">
           <i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-        <span id="toggle-sound">
+        <span id="toggle-sound" aria-label="Toggle background sound" role="button" tabindex="0">
           <i class="fa-solid fa-satellite-dish"></i>
-          </button>
+        </span>
       </div>
     </div>
     <nav aria-label="Primary">
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
+        <li><a href="#recommendations">Recommendations</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="#recommendations">Recommendations</a></li>
-
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -104,9 +103,8 @@
     Portfolio PDF
   </a>
 
-
   <!-- Hero -->
-  <section class="hero fade-in hidden" aria-labelledby="hero-heading">
+  <section class="hero fade-in hidden">
     <div class="hero-content">
       <p class="eyebrow">Software Engineer · Mobile & Web</p>
       <h2 id="hero-heading">Innovating Experiences That Matter</h2>
@@ -120,11 +118,13 @@
         What drives me most is seeing people actually use what I built. Knowing it’s solving problems and making
         someone's life easier is what keeps me excited to keep building.
       </p>
-      <a href="#experience" class="btn">See My Work</a>
+      <div style="display:flex; gap:.75rem; flex-wrap:wrap;">
+        <a href="#experience" class="btn">See My Work</a>
+        <a href="#recommendations" class="btn btn-ghost">What people say</a>
+      </div>
     </div>
-
-    <img class="hero-image" loading="lazy" src="https://avatars.githubusercontent.com/u/50555851?v=4" width="256"
-      height="256" alt="Portrait of Ezzat Boukhary" />
+    <img class="hero-image" src="https://avatars.githubusercontent.com/u/50555851?v=4"
+      alt="Portrait of Ezzat Boukhary" />
   </section>
 
   <!-- About -->
@@ -134,7 +134,7 @@
       <p class="intro-line">I build things that work and feel great to use.</p>
 
       <div class="about-block">
-        <h3>Where I’m Based</h3>
+        <h3>Where I'm Based</h3>
         <p>Florida, though a lot of what I build lives in the cloud.</p>
       </div>
 
@@ -153,7 +153,7 @@
     </div>
   </section>
 
-  <!-- Experience (already updated previously) -->
+  <!-- Experience -->
   <section id="experience" class="section experience-section fade-in hidden">
     <h2>Experience</h2>
     <div class="experience-gallery">
@@ -260,12 +260,70 @@
     </div>
   </section>
 
+  <!-- Recommendations -->
+  <section id="recommendations" class="section recs-section fade-in hidden" aria-labelledby="recs-heading">
+    <h2 id="recs-heading">Recommendations</h2>
+
+    <div class="recs-grid">
+      <!-- Chuka -->
+      <article class="rec-card">
+        <header class="rec-header">
+          <img src="../assets/chuka.jpeg" alt="" class="rec-avatar" loading="lazy" />
+          <div>
+            <h3 class="rec-author">Chuka Ikokwu</h3>
+            <p class="rec-meta">Data Science & Analytics Leader · Managed me directly · Jul 29, 2024</p>
+          </div>
+        </header>
+
+        <blockquote class="rec-quote">
+          “Ezzat consistently demonstrated exceptional technical skills, creativity, and dedication.
+          His ability to solve complex problems and keen attention to detail significantly contributed
+          to our app’s success… He truly left no stone unturned.”
+        </blockquote>
+
+        <div class="rec-actions">
+          <!-- Host your PDF at this path or update the link -->
+          <a class="btn ghost" href="../assets/recommendation-letter-chuka.pdf" target="_blank" rel="noopener">
+            Read full letter (PDF)
+          </a>
+          <a class="exp-link" href="https://www.linkedin.com/in/ezzatboukhary/details/recommendations" target="_blank"
+            rel="noopener">
+            View on LinkedIn
+          </a>
+        </div>
+      </article>
+
+      <!-- Luna -->
+      <article class="rec-card">
+        <header class="rec-header">
+          <img src="../assets/luna.jpeg" alt="" class="rec-avatar" loading="lazy" />
+          <div>
+            <h3 class="rec-author">Luna Lu</h3>
+            <p class="rec-meta">Backend Developer @ BudgetWise · May 6, 2025</p>
+          </div>
+        </header>
+
+        <blockquote class="rec-quote">
+          “He was extremely eager to learn and very diligent, always asking thoughtful questions and
+          picking things up quickly… He gained a solid understanding of our workflows and API endpoints
+          in a short time, and was always easy to communicate and collaborate with.”
+        </blockquote>
+
+        <div class="rec-actions">
+          <a class="exp-link" href="https://www.linkedin.com/in/ezzatboukhary/details/recommendations" target="_blank"
+            rel="noopener">
+            See on LinkedIn
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
   <!-- Projects -->
   <section id="projects" class="section projects-section fade-in hidden">
     <h2>Projects</h2>
     <div class="projects-gallery">
 
-      <!-- Gesture-Based Puppetry -->
       <article class="project-card" onclick="window.location.href='projects/puppetry.html'">
         <img class="project-thumbnail" loading="lazy"
           src="https://www.ucf.edu/wp-content/blogs.dir/4/files/2017/02/StoryHeader_Avatars-1600x900.jpg"
@@ -275,7 +333,6 @@
         <p>A real-time 3D rendering system for gesture-based puppetry.</p>
       </article>
 
-      <!-- College Event Platform -->
       <article class="project-card" onclick="window.location.href='projects/cew.html'">
         <img class="project-thumbnail" loading="lazy" src="../assets/cew2.png" alt="College Event Platform" />
         <h3>College Event Platform</h3>
@@ -283,7 +340,6 @@
         <p>A full-stack event system with MySQL triggers & constraint-based event approvals.</p>
       </article>
 
-      <!-- Dragonotchi -->
       <article class="project-card" onclick="window.location.href='projects/dragonotchi.html'">
         <img class="project-thumbnail" loading="lazy"
           src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/002/613/881/datas/gallery.jpg"
@@ -293,7 +349,6 @@
         <p>An award-winning virtual pet with real-time sync & playful design.</p>
       </article>
 
-      <!-- KillerBot -->
       <article class="project-card" onclick="window.location.href='projects/killerbot.html'">
         <img class="project-thumbnail" loading="lazy"
           src="https://camo.githubusercontent.com/6127858b5690ceb2ea2b1e7f7b0532f57f72e23c3ce79de86797acec22b4dd94/68747470733a2f2f7974332e676f6f676c6575736572636f6e74656e742e636f6d2f7974632f414966387a5a546146766f483556424b7658304a6e417a6c78464c6368635f6d4f4e36615f674c79534639753d733137362d632d6b2d63307830306666666666662d6e6f2d726a"
@@ -309,8 +364,7 @@
   <!-- Skills -->
   <section id="skills" class="section skills-section fade-in hidden">
     <h2>Skills & Expertise</h2>
-    <p>I build across platforms using a broad stack of languages, frameworks, and tools to create polished, real-world
-      applications.</p>
+    <p>Here's the tech I use most.</p>
 
     <div class="skills-category">
       <h3><i class="fa-solid fa-code"></i> Languages</h3>
@@ -381,66 +435,6 @@
         <span class="badge">CI/CD</span>
         <span class="badge">Git Flow</span>
       </div>
-    </div>
-  </section>
-
-  <!-- Recommendations -->
-  <section id="recommendations" class="section recs-section fade-in hidden" aria-labelledby="recs-heading">
-    <h2 id="recs-heading">Recommendations</h2>
-
-    <div class="recs-grid">
-
-      <!-- Chuka -->
-      <article class="rec-card">
-        <header class="rec-header">
-          <img src="https://media.licdn.com/dms/image/C4E03AQH3/profile-displayphoto-shrink_200_200/0?e=placeholder"
-            alt="" class="rec-avatar" loading="lazy" />
-          <div>
-            <h3 class="rec-author">Chuka Ikokwu</h3>
-            <p class="rec-meta">CEO @ Reel Talk · Formerly at WB, Riot, Ubisoft, Unity · July 29, 2024</p>
-          </div>
-        </header>
-
-        <blockquote class="rec-quote">
-          “Ezzat consistently demonstrated exceptional technical skills, creativity, and dedication.
-          His ability to solve complex problems and keen attention to detail significantly contributed
-          to our app's success… He truly left no stone unturned.”
-        </blockquote>
-
-        <div class="rec-actions">
-          <a class="btn ghost" href="../assets/recommendation_chuka.pdf" target="_blank" rel="noopener">
-            Read full letter (PDF)
-          </a>
-          <a class="exp-link" href="https://www.linkedin.com/in/ezzatboukhary" target="_blank" rel="noopener">View on
-            LinkedIn</a>
-        </div>
-      </article>
-
-      <!-- Luna -->
-      <article class="rec-card">
-        <header class="rec-header">
-          <img src="https://media.licdn.com/dms/image/C4D03AQH2/profile-displayphoto-shrink_200_200/0?e=placeholder"
-            alt="" class="rec-avatar" loading="lazy" />
-          <div>
-            <h3 class="rec-author">Luna Lu</h3>
-            <p class="rec-meta">Backend Developer @ BudgetWise · May 6, 2025</p>
-          </div>
-        </header>
-
-        <blockquote class="rec-quote">
-          “He was extremely eager to learn and very diligent, always asking thoughtful questions and
-          picking things up quickly… He gained a solid understanding of our workflows and API endpoints
-          in a short time, and was always easy to communicate and collaborate with.”
-        </blockquote>
-
-        <div class="rec-actions">
-          <a class="exp-link" href="https://www.linkedin.com/in/ezzatboukhary/details/recommendations" target="_blank"
-            rel="noopener">
-            See on LinkedIn
-          </a>
-        </div>
-      </article>
-
     </div>
   </section>
 
