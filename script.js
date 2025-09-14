@@ -203,16 +203,16 @@ function triggerAlienEncounter() {
   UFO Hint System
 ****************************************************************************/
 const ufoHints = [
-  "👀 Did you see that? A UFO just flew by! Try clicking on one when you see it... You might learn something interesting about me!",
-  "📱 I fully built the Reel Talk Android app from scratch with Jetpack Compose and Kotlin. It was a fun kind of chaos.",
-  "🎮 I created 'Dragonotchi,' an award-winning virtual pet game that won Best Design at KnightHacks VI!",
-  "🔧 I built and optimized a budgeting platform at BudgetWise, improving load times by 25 percent while refining the user experience.",
-  "🖥️ My full-stack expertise spans React, Node.js, MongoDB, and AWS, powering scalable, high-performance web apps.",
-  "⚙️ I like turning blank repos into full working systems.",
-  "📊 My Discord bot, KillerBot, served over 250,000 users across 600+ servers. It escalated fast.",
-  "🛰️ In my internship at BudgetWise, I helped ship high-impact Vue.js features that improved accessibility and performance!",
-  "🚀 If you're reading this, you probably just clicked a UFO. You're my kind of curious.",
-  "🎯 Every project I build focuses on real-world impact, helping users solve problems efficiently and intuitively!"
+  "👀 Did you see that? A UFO just flew by! Try clicking one…",
+  "📱 I transformed Reel Talk's Android app into something production-ready.",
+  "🎮 I built Dragonotchi—Best Design at KnightHacks VI.",
+  "🔧 At BudgetWise I shipped Vue features and sped up onboarding 50%.",
+  "🖥️ Full-stack chops: React, Node, Mongo, AWS.",
+  "⚙️ I like turning blank repos into working systems.",
+  "📊 My Discord bot served 250,000+ users across 600 servers.",
+  "🛰️ I improved accessibility and performance in production UIs.",
+  "🚀 Curious devs click UFOs. That's you.",
+  "🎯 I build for real-world impact and speed."
 ];
 
 
@@ -286,38 +286,35 @@ function playUFOSound() {
 ****************************************************************************/
 const headingText = "Innovating Experiences That Matter";
 const headingEl = document.getElementById('hero-heading');
+if (headingEl) {
+  headingEl.textContent = "";
+  let index = 0;
+  let cursorVisible = true;
 
-headingEl.textContent = "";
-let index = 0;
-let cursorVisible = true;
-
-function typeWriter() {
-  if (index < headingText.length) {
-    headingEl.textContent = headingText.substring(0, index) + "_";
-    index++;
-    setTimeout(typeWriter, 70);
-  } else {
-    blinkCursor();
-  }
-}
-
-function blinkCursor() {
-  setInterval(() => {
-    if (cursorVisible) {
-      headingEl.textContent = headingText;
+  function typeWriter() {
+    if (index < headingText.length) {
+      headingEl.textContent = headingText.substring(0, index) + "_";
+      index++;
+      setTimeout(typeWriter, 60);
     } else {
-      headingEl.textContent = headingText + "_";
+      blinkCursor();
     }
-    cursorVisible = !cursorVisible;
-  }, 500);
+  }
+  function blinkCursor() {
+    setInterval(() => {
+      headingEl.textContent = cursorVisible ? headingText : headingText + "_";
+      cursorVisible = !cursorVisible;
+    }, 500);
+  }
+  document.addEventListener('DOMContentLoaded', typeWriter);
 }
 
-document.addEventListener('DOMContentLoaded', typeWriter);
-
-
+/****************************************************************************
+  Scroll Progress
+****************************************************************************/
 const scrollProgress = document.getElementById('scroll-progress');
-
 window.addEventListener('scroll', () => {
+  if (!scrollProgress) return;
   const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
   scrollProgress.style.width = scrolled + "%";
 });
