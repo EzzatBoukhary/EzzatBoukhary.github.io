@@ -6,45 +6,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex" />
 
+  <!-- use same fonts + site CSS -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+
   <style>
-    :root { color-scheme: dark; }
-    body {
-      margin: 0; background: #0b0b0f; color: #eaeaf0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      display: grid; grid-template-rows: auto 1fr; min-height: 100dvh;
-    }
-    header {
+    /* Minimal page-specific bits only */
+    body { background: #121212; } /* match site */
+    .resume-bar {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 16px; border-bottom: 1px solid #1a1a22; background: #0f0f15;
-      position: sticky; top: 0; z-index: 1;
+      padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(18,18,18,0.9);
+      position: sticky; top: 0; z-index: 20;
     }
-    header a { color: #9cc2ff; text-decoration: none; }
-    .actions { display: flex; gap: 10px; align-items: center; }
-    .btn {
-      border: 1px solid #2a2a34; padding: 8px 12px; border-radius: 10px;
-      background: #14141b; color: #eaeaf0; text-decoration: none; font-weight: 600;
+    .resume-actions { display: flex; gap: .6rem; align-items: center; }
+    .resume-actions .btn { padding: 0.6rem 1rem; }
+    .viewer { width: 100%; height: calc(100vh - 64px); border: 0; }
+    @media (max-width: 768px) {
+      .viewer { height: calc(100vh - 56px); }
     }
-    .btn:hover { background: #1b1b25; }
-    .viewer { height: calc(100dvh - 58px); width: 100%; border: 0; }
-    .fallback { padding: 24px; }
-    .fallback a { color: #9cc2ff; }
+    /* subtle link style to match site accents */
+    .back-link { color: #9be64e; text-decoration: none; font-weight: 600; }
+    .back-link:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-  <header>
-    <a href="/" aria-label="Back to home">← Back</a>
-    <div class="actions">
-      <!-- Direct download link (always latest version) -->
-      <a class="btn" href="https://drive.google.com/uc?export=download&id=1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14">
-        Download PDF
-      </a>
-      <!-- Open in Drive (viewer UI) -->
-      <a class="btn" href="https://drive.google.com/file/d/1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14/view" target="_blank" rel="noopener">
-        Open in Drive
-      </a>
+
+  <!-- reuse header style so it looks native -->
+  <header class="site-header">
+    <div class="header-top">
+      <h1 class="site-title" onclick="location.href='/'">Ezzat Boukhary</h1>
+      <div class="social-links" aria-label="Quick links">
+        <a href="/" class="back-link">← Home</a>
+      </div>
     </div>
   </header>
 
-  <!-- Embedded Google Drive viewer -->
+  <!-- slim action bar, styled to match -->
+  <div class="resume-bar">
+    <span class="eyebrow">Resume (auto-updates)</span>
+    <div class="resume-actions">
+      <a class="btn" href="https://drive.google.com/uc?export=download&id=1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14">Download PDF</a>
+      <a class="btn" href="https://drive.google.com/file/d/1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14/view" target="_blank" rel="noopener">Open in Drive</a>
+    </div>
+  </div>
+
+  <!-- Embedded Google Drive viewer (stays in sync with Manage Versions) -->
   <iframe
     class="viewer"
     title="Resume PDF"
@@ -53,11 +62,13 @@
   ></iframe>
 
   <noscript>
-    <div class="fallback">
-      JavaScript is off. View the resume
-      <a href="https://drive.google.com/file/d/1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14/view">in Google Drive</a>
-      or use the <a href="https://drive.google.com/uc?export=download&id=1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14">direct download</a>.
-    </div>
+    <section class="section">
+      <p>JavaScript is off. View the resume
+        <a class="exp-link" href="https://drive.google.com/file/d/1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14/view">in Google Drive</a>
+        or use the <a class="exp-link" href="https://drive.google.com/uc?export=download&id=1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14">direct download</a>.
+      </p>
+    </section>
   </noscript>
+
 </body>
 </html>

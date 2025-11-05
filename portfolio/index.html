@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Ezzat Boukhary — Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    body { background: #121212; }
+    .resume-bar { display:flex; align-items:center; justify-content:space-between; padding:.75rem 1rem; border-bottom:1px solid rgba(255,255,255,0.08); background: rgba(18,18,18,0.9); position:sticky; top:0; z-index:20; }
+    .resume-actions { display:flex; gap:.6rem; align-items:center; }
+    .resume-actions .btn { padding: .6rem 1rem; }
+    .viewer { width:100%; height: calc(100vh - 64px); border:0; }
+    .back-link { color:#9be64e; text-decoration:none; font-weight:600; }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-top">
+      <h1 class="site-title" onclick="location.href='/'">Ezzat Boukhary</h1>
+      <div class="social-links"><a href="/" class="back-link">← Home</a></div>
+    </div>
+  </header>
+
+  <div class="resume-bar">
+    <span class="eyebrow">Portfolio (auto-updates)</span>
+    <div class="resume-actions">
+      <a class="btn" href="https://drive.google.com/uc?export=download&id=18yuBqWU9MgUo1e2gfkA4_ZVR9qqsEUg7">Download PDF</a>
+      <a class="btn" href="https://drive.google.com/file/d/18yuBqWU9MgUo1e2gfkA4_ZVR9qqsEUg7/view" target="_blank" rel="noopener">Open in Drive</a>
+    </div>
+  </div>
+
+  <iframe class="viewer" title="Portfolio PDF"
+          src="https://drive.google.com/file/d/18yuBqWU9MgUo1e2gfkA4_ZVR9qqsEUg7/preview"></iframe>
+</body>
+</html>
