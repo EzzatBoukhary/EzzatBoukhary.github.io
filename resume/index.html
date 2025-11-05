@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Ezzat Boukhary — Resume</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      margin: 0; background: #0b0b0f; color: #eaeaf0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      display: grid; grid-template-rows: auto 1fr; min-height: 100dvh;
+    }
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px; border-bottom: 1px solid #1a1a22; background: #0f0f15;
+      position: sticky; top: 0; z-index: 1;
+    }
+    header a { color: #9cc2ff; text-decoration: none; }
+    .actions { display: flex; gap: 10px; align-items: center; }
+    .btn {
+      border: 1px solid #2a2a34; padding: 8px 12px; border-radius: 10px;
+      background: #14141b; color: #eaeaf0; text-decoration: none; font-weight: 600;
+    }
+    .btn:hover { background: #1b1b25; }
+    .viewer { height: calc(100dvh - 58px); width: 100%; border: 0; }
+    .fallback { padding: 24px; }
+    .fallback a { color: #9cc2ff; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/" aria-label="Back to home">← Back</a>
+    <div class="actions">
+      <!-- Direct download link (always latest version) -->
+      <a class="btn" href="https://drive.google.com/uc?export=download&id=1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14">
+        Download PDF
+      </a>
+      <!-- Open in Drive (viewer UI) -->
+      <a class="btn" href="https://drive.google.com/file/d/1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14/view" target="_blank" rel="noopener">
+        Open in Drive
+      </a>
+    </div>
+  </header>
+
+  <!-- Embedded Google Drive viewer -->
+  <iframe
+    class="viewer"
+    title="Resume PDF"
+    src="https://drive.google.com/file/d/1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14/preview"
+    allow="autoplay"
+  ></iframe>
+
+  <noscript>
+    <div class="fallback">
+      JavaScript is off. View the resume
+      <a href="https://drive.google.com/file/d/1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14/view">in Google Drive</a>
+      or use the <a href="https://drive.google.com/uc?export=download&id=1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14">direct download</a>.
+    </div>
+  </noscript>
+</body>
+</html>
