@@ -18,13 +18,35 @@
   <style>
     body {
       background: #121212;
+      color: #e0e0e0;
+      margin: 0;
+    }
+
+    .site-header .header-top {
+      padding: 0.5rem 1.25rem;
+      background: rgba(18, 18, 18, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-header .site-title {
+      font-size: 1.4rem;
+      color: #9be64e;
+      cursor: pointer;
+    }
+
+    .site-header .social-links a {
+      font-size: 0.9rem;
+      margin-left: 0.9rem;
     }
 
     .resume-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.75rem 1rem;
+      padding: 0.75rem 1.25rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       background: rgba(18, 18, 18, 0.9);
       position: sticky;
@@ -32,26 +54,37 @@
       z-index: 20;
     }
 
+    .eyebrow {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      letter-spacing: 0.05em;
+    }
+
     .resume-actions {
       display: flex;
-      gap: 0.6rem;
+      gap: 0.7rem;
       align-items: center;
     }
 
     .resume-actions .btn {
-      padding: 0.6rem 1rem;
+      padding: 0.65rem 1.3rem;
+      font-size: 0.95rem;
+      border-radius: 8px;
     }
 
     .viewer {
       width: 100%;
-      height: calc(100vh - 64px);
+      height: calc(100vh - 100px);
       border: 0;
     }
 
     @media (max-width: 768px) {
-      .viewer {
-        height: calc(100vh - 56px);
-      }
+      .site-header .site-title { font-size: 1.1rem; }
+      .site-header .header-top { padding: 0.4rem 0.8rem; }
+      .resume-bar { flex-wrap: wrap; row-gap: 0.4rem; padding: 0.5rem 0.8rem; }
+      .resume-actions { width: 100%; justify-content: flex-end; }
+      .resume-actions .btn { font-size: 0.85rem; padding: 0.5rem 0.9rem; }
+      .viewer { height: calc(100vh - 85px); }
     }
 
     .back-link {
@@ -59,10 +92,7 @@
       text-decoration: none;
       font-weight: 600;
     }
-
-    .back-link:hover {
-      text-decoration: underline;
-    }
+    .back-link:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -87,7 +117,6 @@
     class="viewer"
     title="Portfolio PDF"
     src="https://drive.google.com/file/d/18yuBqWU9MgUo1e2gfkA4_ZVR9qqsEUg7/preview"
-    allow="autoplay">
-  </iframe>
+    allow="autoplay"></iframe>
 </body>
 </html>

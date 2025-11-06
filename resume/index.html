@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <!-- Favicon -->
   <link rel="icon" href="https://avatars.githubusercontent.com/u/50555851?v=4" type="image/png">
   <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/u/50555851?v=4">
+
   <title>Ezzat Boukhary — Resume</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex" />
 
-  <!-- Fonts + site CSS -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
@@ -23,71 +22,70 @@
     }
 
     .site-header .header-top {
-      padding: 0.4rem 1rem;
+      padding: 0.5rem 1.25rem;
       background: rgba(18, 18, 18, 0.9);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
       align-items: center;
+      justify-content: space-between;
     }
 
     .site-header .site-title {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       color: #9be64e;
       cursor: pointer;
     }
 
     .site-header .social-links a {
-      font-size: 0.85rem;
-      margin-left: 0.75rem;
+      font-size: 0.9rem;
+      margin-left: 0.9rem;
     }
 
     .resume-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.5rem 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      background: rgba(18,18,18,0.9);
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(18, 18, 18, 0.9);
       position: sticky;
       top: 0;
       z-index: 10;
     }
 
+    .eyebrow {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      letter-spacing: 0.05em;
+    }
+
     .resume-actions {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.7rem;
       align-items: center;
     }
 
     .resume-actions .btn {
-      padding: 0.45rem 0.9rem;
-      font-size: 0.85rem;
-      border-radius: 6px;
+      padding: 0.65rem 1.3rem;
+      font-size: 0.95rem;
+      border-radius: 8px;
     }
 
-    .eyebrow {
-      font-size: 0.8rem;
-      opacity: 0.8;
-      letter-spacing: 0.05em;
-    }
-
-    /* PDF viewer area */
     .viewer {
       width: 100%;
-      height: calc(100vh - 94px);
+      height: calc(100vh - 100px);
       border: none;
     }
 
-    /* Adjust for mobile */
     @media (max-width: 768px) {
       .site-header .site-title { font-size: 1.1rem; }
-      .site-header .header-top { padding: 0.3rem 0.8rem; }
-      .resume-bar { flex-wrap: wrap; row-gap: 0.4rem; padding: 0.4rem 0.8rem; }
+      .site-header .header-top { padding: 0.4rem 0.8rem; }
+      .resume-bar { flex-wrap: wrap; row-gap: 0.4rem; padding: 0.5rem 0.8rem; }
       .resume-actions { width: 100%; justify-content: flex-end; }
-      .resume-actions .btn { font-size: 0.8rem; padding: 0.4rem 0.8rem; }
-      .viewer { height: calc(100vh - 80px); }
+      .resume-actions .btn { font-size: 0.85rem; padding: 0.5rem 0.9rem; }
+      .viewer { height: calc(100vh - 85px); }
     }
 
-    /* Accent back link */
     .back-link {
       color: #9be64e;
       text-decoration: none;
@@ -110,7 +108,7 @@
   <div class="resume-bar">
     <span class="eyebrow">Resume (auto-updates)</span>
     <div class="resume-actions">
-      <a class="btn" href="https://drive.google.com/uc?export=download&id=1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14">Download</a>
+      <a class="btn" href="https://drive.google.com/uc?export=download&id=1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14">Download PDF</a>
       <a class="btn" href="https://drive.google.com/file/d/1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14/view" target="_blank" rel="noopener">Open in Drive</a>
     </div>
   </div>
@@ -119,17 +117,8 @@
     class="viewer"
     title="Resume PDF"
     src="https://drive.google.com/file/d/1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14/preview"
-    allow="autoplay"
-  ></iframe>
-
-  <noscript>
-    <section class="section">
-      <p>JavaScript is off. View the resume
-        <a class="exp-link" href="https://drive.google.com/file/d/1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14/view">in Google Drive</a>
-        or use the <a class="exp-link" href="https://drive.google.com/uc?export=download&id=1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14">direct download</a>.
-      </p>
-    </section>
-  </noscript>
+    allow="autoplay">
+  </iframe>
 
 </body>
 </html>
