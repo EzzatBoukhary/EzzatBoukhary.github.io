@@ -2,39 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <!-- Favicon -->
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/50555851?v=4" type="image/png">
+  <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/u/50555851?v=4">
   <title>Ezzat Boukhary — Resume</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex" />
 
-  <!-- use same fonts + site CSS -->
+  <!-- Fonts + site CSS -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../styles.css" />
 
   <style>
-    /* Minimal page-specific bits only */
-    body { background: #121212; } /* match site */
+    body {
+      background: #121212;
+      color: #e0e0e0;
+      margin: 0;
+    }
+
+    .site-header .header-top {
+      padding: 0.4rem 1rem;
+      background: rgba(18, 18, 18, 0.9);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      align-items: center;
+    }
+
+    .site-header .site-title {
+      font-size: 1.3rem;
+      color: #9be64e;
+      cursor: pointer;
+    }
+
+    .site-header .social-links a {
+      font-size: 0.85rem;
+      margin-left: 0.75rem;
+    }
+
     .resume-bar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
       background: rgba(18,18,18,0.9);
-      position: sticky; top: 0; z-index: 20;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
-    .resume-actions { display: flex; gap: .6rem; align-items: center; }
-    .resume-actions .btn { padding: 0.6rem 1rem; }
-    .viewer { width: 100%; height: calc(100vh - 64px); border: 0; }
+
+    .resume-actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .resume-actions .btn {
+      padding: 0.45rem 0.9rem;
+      font-size: 0.85rem;
+      border-radius: 6px;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      letter-spacing: 0.05em;
+    }
+
+    /* PDF viewer area */
+    .viewer {
+      width: 100%;
+      height: calc(100vh - 94px);
+      border: none;
+    }
+
+    /* Adjust for mobile */
     @media (max-width: 768px) {
-      .viewer { height: calc(100vh - 56px); }
+      .site-header .site-title { font-size: 1.1rem; }
+      .site-header .header-top { padding: 0.3rem 0.8rem; }
+      .resume-bar { flex-wrap: wrap; row-gap: 0.4rem; padding: 0.4rem 0.8rem; }
+      .resume-actions { width: 100%; justify-content: flex-end; }
+      .resume-actions .btn { font-size: 0.8rem; padding: 0.4rem 0.8rem; }
+      .viewer { height: calc(100vh - 80px); }
     }
-    /* subtle link style to match site accents */
-    .back-link { color: #9be64e; text-decoration: none; font-weight: 600; }
+
+    /* Accent back link */
+    .back-link {
+      color: #9be64e;
+      text-decoration: none;
+      font-weight: 600;
+    }
     .back-link:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-  <!-- reuse header style so it looks native -->
   <header class="site-header">
     <div class="header-top">
       <h1 class="site-title" onclick="location.href='/'">Ezzat Boukhary</h1>
@@ -44,16 +107,14 @@
     </div>
   </header>
 
-  <!-- slim action bar, styled to match -->
   <div class="resume-bar">
     <span class="eyebrow">Resume (auto-updates)</span>
     <div class="resume-actions">
-      <a class="btn" href="https://drive.google.com/uc?export=download&id=1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14">Download PDF</a>
+      <a class="btn" href="https://drive.google.com/uc?export=download&id=1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14">Download</a>
       <a class="btn" href="https://drive.google.com/file/d/1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14/view" target="_blank" rel="noopener">Open in Drive</a>
     </div>
   </div>
 
-  <!-- Embedded Google Drive viewer (stays in sync with Manage Versions) -->
   <iframe
     class="viewer"
     title="Resume PDF"
