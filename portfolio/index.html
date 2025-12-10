@@ -475,6 +475,57 @@
       white-space: nowrap;
     }
 
+    .exp-links {
+      display: flex;
+      gap: 0.08in;
+      margin-top: 0.06in;
+      flex-wrap: wrap;
+    }
+
+    .exp-link-item {
+      color: #1a7d3d;
+      text-decoration: none;
+      font-size: 0.65rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.03in;
+      padding: 0.02in 0.06in;
+      border: 1px solid #1a7d3d;
+      border-radius: 3px;
+      background: white;
+      transition: background 0.2s;
+    }
+
+    .exp-link-item:hover {
+      background: rgba(26, 125, 61, 0.1);
+    }
+
+    .exp-link-item i {
+      font-size: 0.6rem;
+    }
+
+    /* Print: Show short URLs after links */
+    @media print {
+      .exp-link-item[href="https://jas-ucf.com"]::after {
+        content: " (jas-ucf.com)";
+        font-size: 0.55rem;
+        color: #666;
+      }
+
+      .exp-link-item[href="https://budgetwise.co"]::after {
+        content: " (budgetwise.co)";
+        font-size: 0.55rem;
+        color: #666;
+      }
+
+      .exp-link-item[href^="https://github.com/ucf-photovoltaics"]::after {
+        content: " (github.com/ucf-photovoltaics/darts_multimodal_deeplearning)";
+        font-size: 0.55rem;
+        color: #666;
+      }
+    }
+
     /* Projects page */
     .page-project {
       padding: 0.5in !important;
@@ -1128,10 +1179,14 @@
             <h3>Web Systems Developer</h3>
             <div class="exp-company">Jet and Aeronautics Society at UCF</div>
             <div class="exp-date">May 2025 - Present</div>
-            <p class="exp-description">Leading a full redesign of the club's website using SvelteKit and Prisma,
-              improving structure, performance, and maintainability. Migrating to an AWS-backed open-source model while
-              streamlining the CI/CD pipeline and internal tooling. Also modernizing the Discord server and GitHub
-              workflows to better support the organization's 400+ members.</p>
+            <p class="exp-description">Overhauling a 400+ member club's site with SvelteKit and Prisma, migrating to AWS
+              and an open-source model.
+              Revamping CI/CD, internal tools, and Discord to support smoother collaboration and infrastructure.</p>
+            <div class="exp-links">
+              <a href="https://jas-ucf.com" target="_blank" rel="noopener" class="exp-link-item">
+                <i class="fa-solid fa-link"></i> View Site
+              </a>
+            </div>
             <div class="tech-tags-small">
               <span class="tech-tag-small">SvelteKit</span>
               <span class="tech-tag-small">Prisma</span>
@@ -1147,10 +1202,15 @@
             <h3>Frontend Developer Intern</h3>
             <div class="exp-company">BudgetWise</div>
             <div class="exp-date">Mar 2025 - May 2025</div>
-            <p class="exp-description">Contributed to a responsive budgeting dashboard built with Vue.js, TypeScript,
-              and Firebase. Improved page performance by refactoring core UI components and optimizing image loading,
-              cutting load times by 25%. Mentored a new developer, revamped GitHub workflows, and introduced a CI/CD
-              pipeline to speed up onboarding and delivery.</p>
+            <p class="exp-description">Shipped optimized budgeting features with Vue, TypeScript, and Firebase after
+              rapidly learning the stack.
+              Enabled 50% faster onboarding by mentoring a developer, streamlining GitHub workflows, and adding CI/CD.
+            </p>
+            <div class="exp-links">
+              <a href="https://budgetwise.co" target="_blank" rel="noopener" class="exp-link-item">
+                <i class="fa-solid fa-link"></i> View Site
+              </a>
+            </div>
             <div class="tech-tags-small">
               <span class="tech-tag-small">Vue.js</span>
               <span class="tech-tag-small">TypeScript</span>
@@ -1165,10 +1225,16 @@
             <h3>Android Developer Intern</h3>
             <div class="exp-company">Reel Talk</div>
             <div class="exp-date">Jan 2024 - Aug 2024</div>
-            <p class="exp-description">Owned the complete Android app rebuild as the sole mobile developer.
-              Rearchitected the app using Kotlin, Jetpack Compose, and MVVM, publishing eight internal test builds and
-              implementing crash fixes and profiling-driven performance boosts. Integrated REST APIs, modernized legacy
-              XML views, and cut crash rates by 20% while improving load speed by 15%.</p>
+            <p class="exp-description">Published beta-ready Android app as sole mobile dev, building UI with Kotlin,
+              Jetpack Compose, and MVVM.
+              Integrated REST APIs and cut crashes by 20%, boosting load speed by 15% through targeted profiling and QA.
+            </p>
+            <div class="exp-links">
+              <a href="https://www.linkedin.com/in/ezzatboukhary/details/experience/2322214315/multiple-media-viewer/?profileId=ACoAADcmAWUBybsCNCKrFqlfsLK1J_5cBbnfby0&treasuryMediaId=1747449402520"
+                target="_blank" rel="noopener" class="exp-link-item">
+                <i class="fa-solid fa-image"></i> View Screenshots
+              </a>
+            </div>
             <div class="tech-tags-small">
               <span class="tech-tag-small">Kotlin</span>
               <span class="tech-tag-small">Compose</span>
@@ -1200,14 +1266,23 @@
             <h3>Undergraduate Researcher</h3>
             <div class="exp-company">Florida Solar Energy Center</div>
             <div class="exp-date">May 2025 - Aug 2025 • Orlando, FL</div>
-            <p class="exp-description">Building an image analysis pipeline in Python to detect degradation patterns in
-              over 5,000 solar panel samples. Using OpenCV and Pandas to extract visual defects, streamline labeling,
-              and generate reliability insights. Helping improve long-term diagnostic tools for large-scale photovoltaic
-              systems in Florida's climate.</p>
+            <p class="exp-description">Modeled PV defects using EL/UVF imaging with MLP, LSTM, and clustering on 2K+
+              samples, achieving a 0.79 R².
+              Co-authored research paper and presented findings at DARTS Showcase to academic and industry leaders.</p>
+            <div class="exp-links">
+              <a href="https://www.linkedin.com/in/ezzatboukhary/details/experience/2640514836/multiple-media-viewer/?profileId=ACoAADcmAWUBybsCNCKrFqlfsLK1J_5cBbnfby0&treasuryMediaId=1757184920382&type=DOCUMENT"
+                target="_blank" rel="noopener" class="exp-link-item">
+                <i class="fa-solid fa-file-pdf"></i> Research Paper
+              </a>
+              <a href="https://github.com/ucf-photovoltaics/darts_multimodal_deeplearning" target="_blank"
+                rel="noopener" class="exp-link-item">
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
             <div class="tech-tags-small">
               <span class="tech-tag-small">Python</span>
               <span class="tech-tag-small">OpenCV</span>
-              <span class="tech-tag-small">Pandas</span>
+              <span class="tech-tag-small">TensorFlow</span>
             </div>
           </div>
         </div>
@@ -1218,9 +1293,10 @@
             <h3>Undergraduate Learning Assistant</h3>
             <div class="exp-company">University of Central Florida</div>
             <div class="exp-date">May 2025 - Aug 2025 • Orlando, FL</div>
-            <p class="exp-description">Mentoring over 300 students in Object-Oriented Programming with Java by leading
-              review sessions, answering live Q&A, and helping debug code. Reinforcing key CS concepts like inheritance
-              and generics, and helping students build confidence in programming fundamentals.</p>
+            <p class="exp-description">Mentored 300+ students in Java OOP, reinforcing core concepts like inheritance,
+              generics, and polymorphism.
+              Facilitated weekly review sessions and live Q&A, reducing assignment errors and supporting a 15% grade
+              boost.</p>
             <div class="tech-tags-small">
               <span class="tech-tag-small">Java</span>
               <span class="tech-tag-small">OOP</span>
