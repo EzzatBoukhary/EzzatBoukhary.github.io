@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <title>Ezzat Boukhary — Portfolio</title>
@@ -11,112 +12,1615 @@
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="../styles.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 
   <style>
-    body {
-      background: #121212;
-      color: #e0e0e0;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    .site-header .header-top {
-      padding: 0.5rem 1.25rem;
-      background: rgba(18, 18, 18, 0.9);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #0b0b0f;
+      color: #e0e0e0;
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.5;
+    }
+
+    /* Header */
+    .portfolio-header {
+      padding: 1rem 1.5rem;
+      background: rgba(11, 11, 15, 0.98);
+      border-bottom: 1px solid rgba(155, 230, 78, 0.2);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
     }
 
-    .site-header .site-title {
+    .portfolio-header h1 {
+      font-family: 'Orbitron', sans-serif;
       font-size: 1.4rem;
       color: #9be64e;
+      margin: 0;
       cursor: pointer;
     }
 
-    .site-header .social-links a {
-      font-size: 0.9rem;
-      margin-left: 0.9rem;
-    }
-
-    .resume-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 1.25rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(18, 18, 18, 0.9);
-      position: sticky;
-      top: 0;
-      z-index: 20;
-    }
-
-    .eyebrow {
-      font-size: 0.9rem;
-      opacity: 0.85;
-      letter-spacing: 0.05em;
-    }
-
-    .resume-actions {
+    .portfolio-controls {
       display: flex;
       gap: 0.7rem;
       align-items: center;
     }
 
-    .resume-actions .btn {
-      padding: 0.65rem 1.3rem;
-      font-size: 0.95rem;
-      border-radius: 8px;
+    .btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    .viewer {
-      width: 100%;
-      height: calc(100vh - 100px);
-      border: 0;
+    .btn-download {
+      background: #9be64e;
+      color: #0b0b0f;
     }
 
-    @media (max-width: 768px) {
-      .site-header .site-title { font-size: 1.1rem; }
-      .site-header .header-top { padding: 0.4rem 0.8rem; }
-      .resume-bar { flex-wrap: wrap; row-gap: 0.4rem; padding: 0.5rem 0.8rem; }
-      .resume-actions { width: 100%; justify-content: flex-end; }
-      .resume-actions .btn { font-size: 0.85rem; padding: 0.5rem 0.9rem; }
-      .viewer { height: calc(100vh - 85px); }
+    .btn-download:hover {
+      background: #a8f563;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(155, 230, 78, 0.3);
+    }
+
+    .btn-print {
+      background: rgba(155, 230, 78, 0.2);
+      color: #9be64e;
+      border: 1px solid rgba(155, 230, 78, 0.3);
+    }
+
+    .btn-print:hover {
+      background: rgba(155, 230, 78, 0.3);
+      border-color: rgba(155, 230, 78, 0.5);
     }
 
     .back-link {
+      background: rgba(155, 230, 78, 0.2);
       color: #9be64e;
+      border: 1px solid rgba(155, 230, 78, 0.3);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
       text-decoration: none;
       font-weight: 600;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
     }
-    .back-link:hover { text-decoration: underline; }
+
+    .back-link:hover {
+      background: rgba(155, 230, 78, 0.3);
+      border-color: rgba(155, 230, 78, 0.5);
+    }
+
+    /* Print instructions banner */
+    .print-instructions {
+      display: none;
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      padding: 0.5rem 1rem;
+      margin: 0.5rem auto;
+      max-width: 8.5in;
+      border-radius: 4px;
+      text-align: center;
+      color: #856404;
+      font-size: 0.9rem;
+    }
+
+    /* Page header with name and page number */
+    .page-header-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.15in;
+      padding-bottom: 0.08in;
+      border-bottom: 1px solid #1a7d3d;
+      font-size: 0.7rem;
+      color: #1a7d3d;
+    }
+
+    .page-name {
+      font-weight: 600;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .page-num {
+      font-weight: 500;
+    }
+
+    /* Main wrapper */
+    .portfolio-wrapper {
+      width: 100%;
+    }
+
+    /* Decorative background shapes */
+    .decorative-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .shape {
+      position: absolute;
+      opacity: 0.03;
+    }
+
+    .shape-circle {
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(26, 125, 61, 0.4), rgba(76, 175, 80, 0.2));
+      filter: blur(1px);
+    }
+
+    .shape-square {
+      background: radial-gradient(circle, rgba(155, 230, 78, 0.3), rgba(76, 175, 80, 0.2));
+      transform: rotate(45deg);
+      border-radius: 10%;
+      filter: blur(1px);
+    }
+
+    .shape-triangle {
+      width: 0;
+      height: 0;
+      background: transparent;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      border-bottom: 173px solid rgba(26, 125, 61, 0.15);
+      opacity: 0.03;
+      filter: blur(1px);
+    }
+
+    /* Page styles */
+    .page {
+      width: 8.5in;
+      height: 11in;
+      margin: 1rem auto;
+      padding: 0.5in;
+      background: white;
+      color: #222;
+      page-break-after: always;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      font-size: 12pt;
+      position: relative;
+    }
+
+    /* Page 1: Intro */
+    .page-intro {
+      background: white;
+      border: 2px solid #1a7d3d;
+      display: flex;
+      flex-direction: column;
+      padding: 0.5in !important;
+    }
+
+    .page-intro .intro-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4in;
+      align-items: center;
+      flex: 1;
+    }
+
+    .intro-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .intro-text h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.2rem;
+      color: #1a7d3d;
+      margin-bottom: 0.15in;
+      line-height: 1.0;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    .intro-text .tagline {
+      font-size: 1.3rem;
+      color: #4caf50;
+      margin-bottom: 0.25in;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .intro-text p {
+      color: #555;
+      margin-bottom: 0.12in;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .intro-image {
+      width: 100%;
+      height: auto;
+      max-height: 4in;
+      border-radius: 8px;
+      object-fit: contain;
+      border: 4px solid #1a7d3d;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Custom PDF Download Modal */
+    .pdf-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      animation: fadeIn 0.2s;
+    }
+
+    .pdf-modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 2rem;
+      border: 3px solid #1a7d3d;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      animation: slideDown 0.3s;
+    }
+
+    .pdf-modal h3 {
+      color: #1a7d3d;
+      font-family: 'Orbitron', sans-serif;
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
+
+    .pdf-modal p {
+      color: #333;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .pdf-modal ol {
+      text-align: left;
+      line-height: 1.8;
+      color: #333;
+      padding-left: 1.5rem;
+    }
+
+    .pdf-modal-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+
+    .pdf-modal-btn {
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .pdf-modal-btn-primary {
+      background: #1a7d3d;
+      color: white;
+    }
+
+    .pdf-modal-btn-primary:hover {
+      background: #156530;
+    }
+
+    .pdf-modal-btn-secondary {
+      background: #e0e0e0;
+      color: #333;
+    }
+
+    .pdf-modal-btn-secondary:hover {
+      background: #d0d0d0;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Section header */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.2in;
+      margin-bottom: 0.3in;
+      border-bottom: 4px solid #1a7d3d;
+      padding-bottom: 0.15in;
+    }
+
+    .section-header h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
+      color: #1a7d3d;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0;
+      flex: 1;
+      font-weight: 700;
+    }
+
+    .page-number {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 0.4in;
+      height: 0.4in;
+      background: #1a7d3d;
+      color: white;
+      border-radius: 50%;
+      font-size: 0.8rem;
+      font-weight: bold;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    /* Experience grid */
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15in;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .exp-item {
+      background: rgba(155, 230, 78, 0.06);
+      border-left: 4px solid #1a7d3d;
+      padding: 0.15in 0.15in 0.15in 0.12in;
+      border-radius: 4px;
+      display: grid;
+      grid-template-columns: 0.5in 1fr;
+      gap: 0.12in;
+      align-items: flex-start;
+    }
+
+    .exp-logo {
+      width: 0.5in;
+      height: 0.5in;
+      object-fit: contain;
+      background: white;
+      border-radius: 3px;
+      flex-shrink: 0;
+      padding: 2px;
+    }
+
+    .exp-content h3 {
+      font-size: 0.9rem;
+      color: #222;
+      margin: 0 0 0.03in 0;
+      font-weight: 700;
+    }
+
+    .exp-company {
+      color: #1a7d3d;
+      font-weight: 600;
+      font-size: 0.8rem;
+      margin: 0 0 0.02in 0;
+    }
+
+    .exp-date {
+      color: #888;
+      font-size: 0.7rem;
+      margin-bottom: 0.04in;
+    }
+
+    .exp-description {
+      color: #555;
+      font-size: 0.75rem;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    .tech-tags-small {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.04in;
+      margin-top: 0.04in;
+    }
+
+    .tech-tag-small {
+      background: white;
+      color: #1a7d3d;
+      padding: 0.01in 0.07in;
+      border: 1px solid #1a7d3d;
+      border-radius: 3px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* Projects page */
+    .page-project {
+      padding: 0.5in !important;
+      display: flex;
+      flex-direction: column;
+      background: white;
+    }
+
+    .project-header {
+      display: flex;
+      align-items: center;
+      gap: 0.2in;
+      margin-bottom: 0.25in;
+      border-bottom: 4px solid #1a7d3d;
+      padding-bottom: 0.12in;
+    }
+
+    .project-header h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      color: #1a7d3d;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0;
+      flex: 1;
+      font-weight: 700;
+    }
+
+    .project-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      color: #1a7d3d;
+      margin-bottom: 0.1in;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
+    .project-name-link {
+      color: #1a7d3d;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.08in;
+      transition: color 0.3s;
+    }
+
+    .project-name-link:hover {
+      color: #156530;
+    }
+
+    .project-name-link i {
+      font-size: 1rem;
+    }
+
+    /* Project layout - Column (text left, images right) */
+    .project-content-layout {
+      display: grid;
+      grid-template-columns: 1fr 0.8fr;
+      gap: 0.15in;
+      flex: 1;
+    }
+
+    .project-text-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.08in;
+    }
+
+    .project-images-column {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1in;
+    }
+
+    .project-image-col {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 2px solid #1a7d3d;
+    }
+
+    /* Project layout - Row (text top, images bottom) */
+    .project-content-layout-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.12in;
+      flex: 1;
+    }
+
+    .project-images-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.12in;
+    }
+
+    .project-image-row {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 2px solid #1a7d3d;
+    }
+
+    .project-description {
+      color: #333;
+      font-size: 0.75rem;
+      line-height: 1.4;
+      margin-bottom: 0.05in;
+      text-align: justify;
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: #888;
+      margin-bottom: 0.08in;
+      flex-wrap: wrap;
+      gap: 0.08in;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.1in;
+      margin-bottom: 0.08in;
+    }
+
+    .project-link {
+      background: white;
+      color: #1a7d3d;
+      padding: 0.04in 0.1in;
+      border: 2px solid #1a7d3d;
+      border-radius: 3px;
+      text-decoration: none;
+      font-size: 0.7rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.04in;
+    }
+
+    .project-technologies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.04in;
+    }
+
+    .tech-badge {
+      background: white;
+      color: #1a7d3d;
+      padding: 0.02in 0.08in;
+      border-radius: 3px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      border: 1.5px solid #1a7d3d;
+      white-space: nowrap;
+    }
+
+    /* Contact page */
+    .page-contact {
+      padding: 0.5in !important;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    }
+
+    .page-contact h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      color: #1a7d3d;
+      margin-bottom: 0.2in;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .page-contact h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: #1a7d3d;
+      margin: 0.15in auto 0;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.12in;
+      margin-bottom: 0.35in;
+    }
+
+    .contact-link {
+      background: white;
+      color: #1a7d3d;
+      padding: 0.08in 0.15in;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      border: 2px solid #1a7d3d;
+      display: inline-block;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.08in;
+      text-align: left;
+    }
+
+    .tech-box {
+      background: white;
+      border: 2px solid #1a7d3d;
+      padding: 0.08in;
+      border-radius: 4px;
+    }
+
+    .tech-box h4 {
+      color: #1a7d3d;
+      font-size: 0.65rem;
+      font-weight: 700;
+      margin-bottom: 0.05in;
+      text-transform: uppercase;
+      border-bottom: 1px solid #1a7d3d;
+      padding-bottom: 0.02in;
+    }
+
+    .tech-box-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.04in;
+    }
+
+    .tech-item {
+      background: white;
+      color: #1a7d3d;
+      padding: 0.015in 0.05in;
+      border: 1px solid #1a7d3d;
+      border-radius: 3px;
+      font-size: 0.55rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.03in;
+    }
+
+    .tech-item i {
+      font-size: 0.6rem;
+    }
+
+    /* Print media queries */
+    @media print {
+      .print-instructions {
+        display: none !important;
+      }
+
+      .portfolio-header {
+        display: none;
+      }
+
+      .portfolio-wrapper {
+        margin: 0;
+        padding: 0;
+      }
+
+      .page {
+        margin: 0;
+        padding: 0.5in;
+        box-shadow: none;
+        page-break-after: always;
+        break-inside: avoid;
+      }
+
+      .page-intro {
+        background: white !important;
+        border: none !important;
+      }
+
+      body {
+        background: white;
+        margin: 0;
+        padding: 0;
+      }
+
+      img {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+    }
+
+    /* Screen view */
+    @media screen {
+      .portfolio-wrapper {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+
+      .page {
+        margin: 1.5rem auto;
+        border-radius: 8px;
+      }
+    }
+
+    /* Responsive Design for Mobile and Tablets */
+    @media screen and (max-width: 768px) {
+      .portfolio-header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      .portfolio-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .portfolio-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+      }
+
+      .page {
+        width: 100%;
+        height: auto;
+        min-height: auto;
+        padding: 1rem !important;
+      }
+
+      .page-intro .intro-content {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .intro-text h1 {
+        font-size: 2rem;
+      }
+
+      .intro-text .tagline {
+        font-size: 1rem;
+      }
+
+      .intro-text p {
+        font-size: 0.85rem;
+      }
+
+      .intro-image {
+        max-height: 250px;
+      }
+
+      .section-header h2 {
+        font-size: 1.5rem;
+      }
+
+      .exp-item {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+
+      .exp-logo {
+        width: 60px;
+        height: 60px;
+      }
+
+      .project-content-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .project-content-layout-row {
+        gap: 0.5rem;
+      }
+
+      .project-images-row {
+        grid-template-columns: 1fr;
+      }
+
+      .tech-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+
+      .pdf-modal-content {
+        width: 95%;
+        padding: 1.5rem;
+        margin: 20% auto;
+      }
+
+      .pdf-modal h3 {
+        font-size: 1.2rem;
+      }
+
+      .pdf-modal-buttons {
+        flex-direction: column;
+      }
+
+      .pdf-modal-btn {
+        width: 100%;
+      }
+    }
+
+    /* Recommendations styles */
+    .recommendations-section {
+      margin-top: 0.25in;
+      border-top: 2px solid #1a7d3d;
+      padding-top: 0.15in;
+    }
+
+    .recommendations-section h3 {
+      color: #1a7d3d;
+      font-size: 0.95rem;
+      margin-bottom: 0.12in;
+    }
+
+    .rec-card {
+      margin-bottom: 0.15in;
+      padding: 0.1in;
+      border: 1px solid #d0d0d0;
+      background: #f9f9f9;
+      border-radius: 4px;
+    }
+
+    .rec-header {
+      display: flex;
+      gap: 0.08in;
+      align-items: flex-start;
+      margin-bottom: 0.06in;
+    }
+
+    .rec-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .rec-info {
+      flex: 1;
+    }
+
+    .rec-author {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 0.02in 0;
+      text-align: left;
+      line-height: 1;
+    }
+
+    .rec-meta {
+      font-size: 0.7rem;
+      color: #2d5a2d;
+      margin: 0;
+      text-align: left;
+      line-height: 1.2;
+    }
+
+    .rec-quote {
+      font-size: 0.75rem;
+      line-height: 1.3;
+      color: #2a2a2a;
+      font-style: italic;
+      margin: 0.06in 0 0.05in 0;
+      padding: 0;
+      border: none;
+      text-align: left;
+    }
+
+    .rec-links {
+      display: flex;
+      gap: 0.1in;
+      flex-wrap: wrap;
+    }
+
+    .rec-link {
+      display: inline-block;
+      font-size: 0.7rem;
+      color: #1a7d3d;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .rec-link:hover {
+      text-decoration: underline;
+    }
+
+    @media print {
+      .recommendations-section {
+        page-break-inside: avoid;
+      }
+
+      .rec-card {
+        page-break-inside: avoid;
+      }
+    }
+
+    /* Tablet responsive */
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+      .page {
+        width: 95%;
+      }
+
+      .tech-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .project-content-layout {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="header-top">
-      <h1 class="site-title" onclick="location.href='/'">Ezzat Boukhary</h1>
-      <div class="social-links">
-        <a href="/" class="back-link">← Home</a>
-      </div>
+  <header class="portfolio-header">
+    <h1 onclick="location.href='/'">Ezzat Boukhary</h1>
+    <div class="portfolio-controls">
+      <button class="btn btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
+      <button class="btn btn-download" onclick="downloadPDF()"><i class="fa-solid fa-download"></i> Download
+        PDF</button>
+      <a href="/" class="back-link">← Home</a>
     </div>
   </header>
 
-  <div class="resume-bar">
-    <span class="eyebrow">Portfolio (auto-updates)</span>
-    <div class="resume-actions">
-      <a class="btn" href="https://drive.google.com/uc?export=download&id=18yuBqWU9MgUo1e2gfkA4_ZVR9qqsEUg7">Download PDF</a>
-      <a class="btn" href="https://drive.google.com/file/d/18yuBqWU9MgUo1e2gfkA4_ZVR9qqsEUg7/view" target="_blank" rel="noopener">Open in Drive</a>
+  <div class="portfolio-wrapper">
+    <!-- 
+      ============================================================
+      MAINTENANCE GUIDE:
+      ============================================================
+      
+      This portfolio is organized into 8 pages. Each page uses specific CSS classes:
+      
+      - PAGE HEADERS: Every page has a .page-header-info div showing your name and page count
+      - PAGE BREAKS: Each page has class="page" which ensures proper printing
+      
+      TO UPDATE CONTENT:
+      1. Find the section you want to edit (Intro, Experience, Projects, Skills)
+      2. Edit the text directly in the HTML
+      3. Keep the same HTML structure (don't remove divs or classes)
+      
+      TO ADD NEW EXPERIENCE:
+      1. Copy an existing .exp-item div block
+      2. Update the logo, title, company, dates, and description
+      3. Add tech tags in .tech-tags-small section
+      4. Place it in the appropriate page (Page 2 or 3)
+      
+      TO ADD NEW PROJECT:
+      1. Copy an existing project page block (entire .page.page-project div)
+      2. Update page number in page-header-info ("Page X of 8" becomes "Page X of 9")
+      3. Update all subsequent page numbers
+      4. Update project name, dates, description, images, and tech badges
+      5. For layout: Use .project-content-layout for 3 images (column), .project-content-layout-row for 2 images (row)
+      
+      TO UPDATE SKILLS:
+      1. Find Page 8 (.page-contact)
+      2. Edit items in .tech-box sections
+      3. Keep items in <span class="tech-item"> tags
+      
+      TO UPDATE CONTACT INFO:
+      1. Find .contact-links section on Page 8
+      2. Update email, GitHub, or LinkedIn links
+      
+      STYLING NOTES:
+      - Tech items use white background with green border (looks good with/without background graphics)
+      - All page dimensions are 8.5" x 11" for printing
+      - Colors: Main green is #1a7d3d
+      ============================================================
+    -->
+
+    <!-- Print Instructions (hidden on screen, shown before print) -->
+    <div class="print-instructions">
+      <strong>Before printing/saving as PDF:</strong> Please enable "Background graphics" and disable "Headers and
+      footers" in your print settings for best results.
+    </div>
+
+    <!-- Page 1: Intro -->
+    <div class="page page-intro">
+      <div class="decorative-shapes">
+        <div class="shape shape-circle" style="width: 150px; height: 150px; top: 5%; right: 10%;"></div>
+        <div class="shape shape-square" style="width: 100px; height: 100px; bottom: 10%; left: 5%;"></div>
+        <div class="shape shape-circle" style="width: 80px; height: 80px; top: 60%; right: 5%;"></div>
+      </div>
+      <div class="page-header-info">
+        <span class="page-name">Ezzat Boukhary</span>
+        <span class="page-num">Page 1 of 8</span>
+      </div>
+      <div class="intro-content">
+        <div class="intro-text">
+          <h1>Ezzat<br>Boukhary</h1>
+          <p class="tagline">Software Engineer • Orlando, FL</p>
+          <p>A software developer with a passion for building applications that create a tangible impact. I design
+            user-focused solutions that power everyday experiences, sometimes reaching thousands. I blend creativity
+            with technical excellence to deliver products that are both elegant and effective.</p>
+          <p>Explore my work to see how I turn ideas into reality.</p>
+        </div>
+        <img src="https://avatars.githubusercontent.com/u/50555851?v=4" alt="Ezzat Boukhary" class="intro-image">
+      </div>
+    </div>
+
+    <!-- Page 2: Experience -->
+    <div class="page">
+      <div class="decorative-shapes">
+        <div class="shape shape-circle" style="width: 120px; height: 120px; top: 10%; left: 5%;"></div>
+        <div class="shape shape-square" style="width: 90px; height: 90px; bottom: 15%; right: 10%;"></div>
+      </div>
+      <div class="page-header-info">
+        <span class="page-name">Ezzat Boukhary</span>
+        <span class="page-num">Page 2 of 8</span>
+      </div>
+      <div class="section-header">
+        <div class="page-number">1</div>
+        <h2>Experience</h2>
+      </div>
+      <div class="experience-list">
+        <div class="exp-item">
+          <img src="../assets/logo_yhere.webp" alt="yHere" class="exp-logo">
+          <div class="exp-content">
+            <h3>Lead Mobile App Developer</h3>
+            <div class="exp-company">yHere</div>
+            <div class="exp-date">Aug 2025 - Present</div>
+            <p class="exp-description">Leading development with Kotlin Multiplatform, Compose Multiplatform, Firebase,
+              and SQLDelight, enabling iOS deployment and guiding teammates daily through design reviews, pair
+              programming, and rapid iteration. Achieved major efficiency gains by cutting Firebase reads 95% and
+              streamlining workflow with GitHub PRs.</p>
+            <div class="tech-tags-small">
+              <span class="tech-tag-small">Kotlin</span>
+              <span class="tech-tag-small">KMP</span>
+              <span class="tech-tag-small">Swift</span>
+              <span class="tech-tag-small">Firebase</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <img src="../assets/logo_jas.png" alt="JAS" class="exp-logo">
+          <div class="exp-content">
+            <h3>Web Systems Developer</h3>
+            <div class="exp-company">Jet and Aeronautics Society at UCF</div>
+            <div class="exp-date">May 2025 - Present</div>
+            <p class="exp-description">Leading a full redesign of the club's website using SvelteKit and Prisma,
+              improving structure, performance, and maintainability. Migrating to an AWS-backed open-source model while
+              streamlining the CI/CD pipeline and internal tooling. Also modernizing the Discord server and GitHub
+              workflows to better support the organization's 400+ members.</p>
+            <div class="tech-tags-small">
+              <span class="tech-tag-small">SvelteKit</span>
+              <span class="tech-tag-small">Prisma</span>
+              <span class="tech-tag-small">AWS</span>
+              <span class="tech-tag-small">Docker</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <img src="../assets/logo_budgetwise.jpeg" alt="BudgetWise" class="exp-logo">
+          <div class="exp-content">
+            <h3>Frontend Developer Intern</h3>
+            <div class="exp-company">BudgetWise</div>
+            <div class="exp-date">Mar 2025 - May 2025</div>
+            <p class="exp-description">Contributed to a responsive budgeting dashboard built with Vue.js, TypeScript,
+              and Firebase. Improved page performance by refactoring core UI components and optimizing image loading,
+              cutting load times by 25%. Mentored a new developer, revamped GitHub workflows, and introduced a CI/CD
+              pipeline to speed up onboarding and delivery.</p>
+            <div class="tech-tags-small">
+              <span class="tech-tag-small">Vue.js</span>
+              <span class="tech-tag-small">TypeScript</span>
+              <span class="tech-tag-small">Firebase</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <img src="../assets/logo_reeltalk.jpeg" alt="Reel Talk" class="exp-logo">
+          <div class="exp-content">
+            <h3>Android Developer Intern</h3>
+            <div class="exp-company">Reel Talk</div>
+            <div class="exp-date">Jan 2024 - Aug 2024</div>
+            <p class="exp-description">Owned the complete Android app rebuild as the sole mobile developer.
+              Rearchitected the app using Kotlin, Jetpack Compose, and MVVM, publishing eight internal test builds and
+              implementing crash fixes and profiling-driven performance boosts. Integrated REST APIs, modernized legacy
+              XML views, and cut crash rates by 20% while improving load speed by 15%.</p>
+            <div class="tech-tags-small">
+              <span class="tech-tag-small">Kotlin</span>
+              <span class="tech-tag-small">Compose</span>
+              <span class="tech-tag-small">Firebase</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 3: Experience (continued) -->
+    <div class="page">
+      <div class="decorative-shapes">
+        <div class="shape shape-square" style="width: 110px; height: 110px; top: 20%; right: 5%;"></div>
+        <div class="shape shape-circle" style="width: 95px; height: 95px; bottom: 10%; left: 8%;"></div>
+      </div>
+      <div class="page-header-info">
+        <span class="page-name">Ezzat Boukhary</span>
+        <span class="page-num">Page 3 of 8</span>
+      </div>
+      <div class="section-header">
+        <div class="page-number">2</div>
+        <h2>Experience (cont.)</h2>
+      </div>
+      <div class="experience-list">
+        <div class="exp-item">
+          <img src="../assets/logo_fsec.jpg" alt="FSEC" class="exp-logo">
+          <div class="exp-content">
+            <h3>Undergraduate Researcher</h3>
+            <div class="exp-company">Florida Solar Energy Center</div>
+            <div class="exp-date">May 2025 - Aug 2025 • Orlando, FL</div>
+            <p class="exp-description">Building an image analysis pipeline in Python to detect degradation patterns in
+              over 5,000 solar panel samples. Using OpenCV and Pandas to extract visual defects, streamline labeling,
+              and generate reliability insights. Helping improve long-term diagnostic tools for large-scale photovoltaic
+              systems in Florida's climate.</p>
+            <div class="tech-tags-small">
+              <span class="tech-tag-small">Python</span>
+              <span class="tech-tag-small">OpenCV</span>
+              <span class="tech-tag-small">Pandas</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <img src="../assets/logo_ucfcs.jpeg" alt="UCF" class="exp-logo">
+          <div class="exp-content">
+            <h3>Undergraduate Learning Assistant</h3>
+            <div class="exp-company">University of Central Florida</div>
+            <div class="exp-date">May 2025 - Aug 2025 • Orlando, FL</div>
+            <p class="exp-description">Mentoring over 300 students in Object-Oriented Programming with Java by leading
+              review sessions, answering live Q&A, and helping debug code. Reinforcing key CS concepts like inheritance
+              and generics, and helping students build confidence in programming fundamentals.</p>
+            <div class="tech-tags-small">
+              <span class="tech-tag-small">Java</span>
+              <span class="tech-tag-small">OOP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 4: Puppetry Project -->
+    <div class="page page-project">
+      <div class="decorative-shapes">
+        <div class="shape shape-circle" style="width: 130px; height: 130px; top: 8%; left: 5%;"></div>
+        <div class="shape shape-triangle" style="bottom: 5%; right: 10%;"></div>
+      </div>
+      <div class="page-header-info">
+        <span class="page-name">Ezzat Boukhary</span>
+        <span class="page-num">Page 4 of 8</span>
+      </div>
+      <div class="project-header">
+        <div class="page-number">3</div>
+        <h2>Projects</h2>
+      </div>
+      <h3 class="project-name">Gesture-Based Puppetry</h3>
+      <div class="project-meta">
+        <span><strong>Jan 2025 - Aug 2025</strong></span>
+        <span>Capstone Project</span>
+      </div>
+
+      <div class="project-content-layout">
+        <div class="project-text-section">
+          <p class="project-description">Led real-time 3D rendering and animation for TeachLivE, a gesture-based
+            puppeteering system used to train educators and professionals in immersive virtual environments. Developed
+            lifelike facial expressions, head movements, and procedural blinking using delta time interpolation.
+            Optimized WebGL with IndexedDB caching, reducing load times by 40% and improving scene rendering.</p>
+          <div class="project-links">
+            <a href="https://ezzatboukhary.github.io/projects/puppetry.html" class="project-link" target="_blank"><i
+                class="fa-solid fa-link"></i> ezzatboukhary.github.io/projects/puppetry</a>
+          </div>
+          <div class="project-technologies">
+            <span class="tech-badge">Three.js</span>
+            <span class="tech-badge">WebGL</span>
+            <span class="tech-badge">React</span>
+            <span class="tech-badge">TypeScript</span>
+            <span class="tech-badge">Socket.IO</span>
+          </div>
+        </div>
+        <div class="project-images-column">
+          <img src="../assets/puppetry1.png" alt="Puppetry 1" class="project-image-col">
+          <img src="../assets/puppetry2.png" alt="Puppetry 2" class="project-image-col">
+          <img src="../assets/puppetry3.png" alt="Puppetry 3" class="project-image-col">
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 5: College Event Platform Project -->
+    <div class="page page-project">
+      <div class="decorative-shapes">
+        <div class="shape shape-square" style="width: 120px; height: 120px; top: 12%; right: 8%;"></div>
+        <div class="shape shape-circle" style="width: 85px; height: 85px; bottom: 15%; left: 5%;"></div>
+      </div>
+      <div class="page-header-info">
+        <span class="page-name">Ezzat Boukhary</span>
+        <span class="page-num">Page 5 of 8</span>
+      </div>
+      <div class="project-header">
+        <div class="page-number">4</div>
+      </div>
+      <h3 class="project-name">College Event Website</h3>
+      <div class="project-meta">
+        <span><strong>Jun 2023 - Dec 2023</strong></span>
+        <span>Open Source</span>
+      </div>
+
+      <div class="project-content-layout-row">
+        <div class="project-text-section">
+          <p class="project-description">Engineered a full 3NF MySQL schema for a new event management system, driving
+            architecture for backend, frontend, CI/CD, and deployment. Replaced a broken site by rebuilding 90% of the
+            backend with modern Node.js and Express.js infrastructure.</p>
+          <div class="project-links">
+            <a href="https://ezzatboukhary.github.io/projects/cew.html" class="project-link" target="_blank"><i
+                class="fa-solid fa-link"></i> ezzatboukhary.github.io/projects/cew</a>
+          </div>
+          <div class="project-technologies">
+            <span class="tech-badge">Express.js</span>
+            <span class="tech-badge">MySQL</span>
+            <span class="tech-badge">React</span>
+            <span class="tech-badge">Node.js</span>
+            <span class="tech-badge">CI/CD</span>
+          </div>
+        </div>
+        <div class="project-images-row">
+          <img src="../assets/cew2.png" alt="Event Platform" class="project-image-row">
+          <img src="../assets/cew1.png" alt="Event Platform 2" class="project-image-row">
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 6: Dragonotchi Project -->
+    <div class="page page-project">
+      <div class="decorative-shapes">
+        <div class="shape shape-circle" style="width: 140px; height: 140px; top: 5%; right: 10%;"></div>
+        <div class="shape shape-square" style="width: 100px; height: 100px; bottom: 20%; left: 6%;"></div>
+      </div>
+      <div class="page-header-info">
+        <span class="page-name">Ezzat Boukhary</span>
+        <span class="page-num">Page 6 of 8</span>
+      </div>
+      <div class="project-header">
+        <div class="page-number">5</div>
+      </div>
+      <h3 class="project-name">Dragonotchi</h3>
+      <div class="project-meta">
+        <span><strong>Oct 2023</strong></span>
+        <span>🏆 Best Design Winner</span>
+      </div>
+
+      <div class="project-content-layout-row">
+        <div class="project-text-section">
+          <p class="project-description">Developed Dragonotchi, an award-winning virtual pet featured at KnightHacks VI,
+            built using Kotlin and Jetpack Compose for the mobile interface and an ESP8266-powered LCD display for
+            real-time interactions. Implemented Firebase synchronization to allow seamless state persistence.</p>
+          <div class="project-links">
+            <a href="https://ezzatboukhary.github.io/projects/dragonotchi.html" class="project-link" target="_blank"><i
+                class="fa-solid fa-link"></i> ezzatboukhary.github.io/projects/dragonotchi</a>
+          </div>
+          <div class="project-technologies">
+            <span class="tech-badge">Kotlin</span>
+            <span class="tech-badge">Jetpack Compose</span>
+            <span class="tech-badge">ESP8266</span>
+          </div>
+        </div>
+        <div class="project-images-row">
+          <img src="../assets/dragonotchi1.jpg" alt="Dragonotchi 1" class="project-image-row">
+          <img src="../assets/dragonotchi2.jpg" alt="Dragonotchi 2" class="project-image-row">
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 7: KillerBot Project -->
+    <div class="page page-project">
+      <div class="decorative-shapes">
+        <div class="shape shape-square" style="width: 125px; height: 125px; top: 10%; left: 7%;"></div>
+        <div class="shape shape-circle" style="width: 90px; height: 90px; bottom: 12%; right: 8%;"></div>
+      </div>
+      <div class="page-header-info">
+        <span class="page-name">Ezzat Boukhary</span>
+        <span class="page-num">Page 7 of 8</span>
+      </div>
+      <div class="project-header">
+        <div class="page-number">6</div>
+      </div>
+      <h3 class="project-name">KillerBot</h3>
+      <div class="project-meta">
+        <span><strong>Apr 2019 - Aug 2022</strong></span>
+        <span>250K+ Users</span>
+      </div>
+
+      <div class="project-content-layout">
+        <div class="project-text-section">
+          <p class="project-description">Built a feature-rich Discord bot serving 250,000+ users across 600+ servers,
+            providing real-time commands and automation. Designed a scalable architecture to handle high user traffic,
+            integrated external APIs, and implemented efficient data storage solutions to enhance engagement and
+            usability.</p>
+          <div class="project-links">
+            <a href="https://ezzatboukhary.github.io/projects/killerbot.html" class="project-link" target="_blank"><i
+                class="fa-solid fa-link"></i> ezzatboukhary.github.io/projects/killerbot</a>
+          </div>
+          <div class="project-technologies">
+            <span class="tech-badge">C#</span>
+            <span class="tech-badge">Discord.NET</span>
+            <span class="tech-badge">REST APIs</span>
+            <span class="tech-badge">Webhooks</span>
+            <span class="tech-badge">WebSockets</span>
+            <span class="tech-badge">JSON</span>
+          </div>
+        </div>
+        <div class="project-images-column">
+          <img src="../assets/killerbot1.png" alt="KillerBot 1" class="project-image-col">
+          <img src="../assets/killerbot2.png" alt="KillerBot 2" class="project-image-col">
+          <img src="../assets/killerbot3.png" alt="KillerBot 3" class="project-image-col">
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 8: Contact & Skills -->
+    <div class="page page-contact" style="page-break-after: avoid;">
+      <div class="decorative-shapes">
+        <div class="shape shape-circle" style="width: 200px; height: 200px; top: -50px; right: -50px;"></div>
+        <div class="shape shape-square" style="width: 150px; height: 150px; bottom: -30px; left: -30px;"></div>
+        <div class="shape shape-circle" style="width: 100px; height: 100px; top: 50%; left: 10%;"></div>
+      </div>
+      <div class="page-header-info">
+        <span class="page-name">Ezzat Boukhary</span>
+        <span class="page-num">Page 8 of 8</span>
+      </div>
+
+      <h3
+        style="color: #1a7d3d; font-size: 0.95rem; margin-bottom: 0.15in; font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 0.05em;">
+        <i class="fa-solid fa-code" style="margin-right: 0.08in;"></i>Technical Skills & Expertise
+      </h3>
+      <div class="tech-grid">
+        <div class="tech-box">
+          <h4>Languages</h4>
+          <div class="tech-box-items">
+            <span class="tech-item"><i class="devicon-kotlin-plain"></i> Kotlin</span>
+            <span class="tech-item"><i class="fa-brands fa-js"></i> TypeScript</span>
+            <span class="tech-item"><i class="fa-brands fa-swift"></i> Swift</span>
+            <span class="tech-item"><i class="fa-brands fa-python"></i> Python</span>
+            <span class="tech-item"><i class="fa-brands fa-java"></i> Java</span>
+            <span class="tech-item"><i class="fa-brands fa-js"></i> JavaScript</span>
+            <span class="tech-item"><i class="devicon-dart-plain"></i> Dart</span>
+            <span class="tech-item"><i class="devicon-cplusplus-plain"></i> C++</span>
+            <span class="tech-item"><i class="devicon-c-plain"></i> C</span>
+            <span class="tech-item"><i class="devicon-csharp-plain"></i> C#</span>
+            <span class="tech-item"><i class="fa-solid fa-database"></i> SQL</span>
+            <span class="tech-item"><i class="devicon-php-plain"></i> PHP</span>
+            <span class="tech-item"><i class="devicon-haskell-plain"></i> Haskell</span>
+            <span class="tech-item"><i class="fa-brands fa-html5"></i> HTML/CSS</span>
+            <span class="tech-item"><i class="fa-solid fa-cube"></i> GLSL</span>
+          </div>
+        </div>
+        <div class="tech-box">
+          <h4>Frameworks/Libraries</h4>
+          <div class="tech-box-items">
+            <span class="tech-item"><i class="fa-solid fa-mobile"></i> Kotlin Multiplatform</span>
+            <span class="tech-item"><i class="fa-brands fa-android"></i> Jetpack Compose</span>
+            <span class="tech-item"><i class="fa-brands fa-apple"></i> SwiftUI</span>
+            <span class="tech-item"><i class="fa-brands fa-vuejs"></i> Vue.js</span>
+            <span class="tech-item"><i class="fa-brands fa-react"></i> React.js</span>
+            <span class="tech-item"><i class="fa-brands fa-react"></i> React Native</span>
+            <span class="tech-item"><i class="fa-brands fa-node-js"></i> Node.js</span>
+            <span class="tech-item"><i class="fa-brands fa-node-js"></i> Express.js</span>
+            <span class="tech-item"><i class="devicon-svelte-plain"></i> SvelteKit</span>
+            <span class="tech-item"><i class="devicon-nextjs-plain"></i> Next.js</span>
+            <span class="tech-item"><i class="fa-solid fa-cube"></i> Three.js</span>
+            <span class="tech-item"><i class="devicon-dot-net-plain"></i> .NET</span>
+            <span class="tech-item"><i class="devicon-opencv-plain"></i> OpenCV</span>
+            <span class="tech-item"><i class="devicon-tensorflow-original"></i> TensorFlow</span>
+            <span class="tech-item"><i class="fa-solid fa-cube"></i> OpenGL</span>
+            <span class="tech-item"><i class="fa-solid fa-mobile"></i> Flutter</span>
+            <span class="tech-item"><i class="devicon-flask-original"></i> Flask</span>
+            <span class="tech-item"><i class="devicon-tailwindcss-plain"></i> Tailwind CSS</span>
+          </div>
+        </div>
+        <div class="tech-box">
+          <h4>Tools</h4>
+          <div class="tech-box-items">
+            <span class="tech-item"><i class="fa-solid fa-fire"></i> Firebase</span>
+            <span class="tech-item"><i class="fa-solid fa-leaf"></i> MongoDB</span>
+            <span class="tech-item"><i class="fa-solid fa-database"></i> MySQL</span>
+            <span class="tech-item"><i class="fa-brands fa-aws"></i> AWS</span>
+            <span class="tech-item"><i class="fa-brands fa-docker"></i> Docker</span>
+            <span class="tech-item"><i class="fa-brands fa-git-alt"></i> Git</span>
+            <span class="tech-item"><i class="fa-solid fa-tasks"></i> Jira</span>
+            <span class="tech-item"><i class="fa-solid fa-network-wired"></i> Postman</span>
+            <span class="tech-item"><i class="fa-brands fa-figma"></i> Figma</span>
+            <span class="tech-item"><i class="fa-brands fa-linux"></i> Linux</span>
+            <span class="tech-item"><i class="fa-brands fa-android"></i> Android Studio</span>
+            <span class="tech-item"><i class="fa-brands fa-apple"></i> Xcode</span>
+            <span class="tech-item"><i class="devicon-visualstudio-plain"></i> Visual Studio</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recommendation -->
+      <div style="margin-top: 0.2in; border-top: 1px solid #d0d0d0; padding-top: 0.12in;">
+        <h3 style="color: #1a7d3d; font-size: 0.85rem; margin-bottom: 0.1in;"><i class="fa-solid fa-quote-left"
+            style="margin-right: 0.06in;"></i>Recommendation</h3>
+
+        <div class="rec-card" style="margin-bottom: 0.1in;">
+          <div class="rec-header">
+            <img src="../assets/chuka.jpeg" alt="" class="rec-avatar" />
+            <div class="rec-info">
+              <h3 class="rec-author">Chuka Ikokwu</h3>
+              <p class="rec-meta">CEO @ Reel Talk · Formerly at WB, Riot, Ubisoft, Unity</p>
+            </div>
+          </div>
+          <p class="rec-quote" style="font-size: 0.7rem; margin: 0.04in 0;">
+            "Ezzat consistently demonstrated exceptional technical skills, creativity, and dedication… He truly left no
+            stone unturned."
+          </p>
+          <div class="rec-links">
+            <a href="../assets/recommendation_chuka.pdf" class="rec-link" target="_blank" rel="noopener">Read full
+              letter</a>
+            <a href="https://www.linkedin.com/in/ezzatboukhary/details/recommendations" class="rec-link" target="_blank"
+              rel="noopener">View on LinkedIn</a>
+          </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 0.08in; font-size: 0.7rem; color: #666;">
+          <a href="https://www.linkedin.com/in/ezzatboukhary/details/recommendations" class="rec-link" target="_blank"
+            rel="noopener">View all recommendations on LinkedIn</a>
+        </p>
+      </div>
+
+      <div
+        style="width: 100%; height: 2px; background: linear-gradient(to right, transparent, #1a7d3d, transparent); margin: 0.2in 0;">
+      </div>
+
+      <h2>
+        <a href="https://ezzatboukhary.github.io" style="color: #1a7d3d; text-decoration: none;" target="_blank">
+          Let's Connect
+        </a>
+      </h2>
+      <div class="contact-links">
+        <a href="mailto:ezzatboukhary03@gmail.com" class="contact-link"><i class="fa-solid fa-envelope"></i>
+          ezzatboukhary03@gmail.com</a>
+        <a href="tel:+16892338757" class="contact-link"><i class="fa-solid fa-phone"></i> +1 (689) 233-8757</a>
+        <a href="https://linkedin.com/in/ezzatboukhary" target="_blank" rel="noopener" class="contact-link"><i
+            class="fa-brands fa-linkedin"></i> linkedin.com/in/ezzatboukhary</a>
+        <a href="https://github.com/ezzatBoukhary" target="_blank" rel="noopener" class="contact-link"><i
+            class="fa-brands fa-github"></i> github.com/ezzatBoukhary</a>
+        <a href="https://ezzatboukhary.github.io" target="_blank" rel="noopener" class="contact-link"><i
+            class="fa-solid fa-globe"></i> ezzatboukhary.github.io</a>
+      </div>
     </div>
   </div>
 
-  <iframe
-    class="viewer"
-    title="Portfolio PDF"
-    src="https://drive.google.com/file/d/18yuBqWU9MgUo1e2gfkA4_ZVR9qqsEUg7/preview"
-    allow="autoplay"></iframe>
+  <!-- Custom PDF Download Modal -->
+  <div id="pdfModal" class="pdf-modal">
+    <div class="pdf-modal-content">
+      <h3>📄 Save as PDF</h3>
+      <p>Follow these steps to download your PDF:</p>
+      <ol>
+        <li>A print dialog will open</li>
+        <li>In "Destination", select <strong>"Save as PDF"</strong></li>
+        <li>Make sure <strong>"Background graphics"</strong> is enabled</li>
+        <li>Click <strong>"Save"</strong></li>
+      </ol>
+      <div class="pdf-modal-buttons">
+        <button class="pdf-modal-btn pdf-modal-btn-primary" onclick="proceedToPrint()">Continue</button>
+        <button class="pdf-modal-btn pdf-modal-btn-secondary" onclick="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ============================================================
+    // PDF DOWNLOAD FUNCTIONALITY
+    // ============================================================
+    // Shows a styled modal with instructions before opening print dialog
+    // This helps users understand they need to select "Save as PDF"
+
+    function downloadPDF() {
+      document.getElementById('pdfModal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('pdfModal').style.display = 'none';
+    }
+
+    function proceedToPrint() {
+      closeModal();
+      window.print();
+    }
+
+    // Close modal when clicking outside of it
+    window.onclick = function (event) {
+      const modal = document.getElementById('pdfModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+
+    // ============================================================
+    // AUTO-OPEN PRINT DIALOG
+    // ============================================================
+    // When coming from main site, automatically open print dialog
+    // Check if URL has ?print parameter or if referrer is from main site
+
+    window.addEventListener('load', function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const shouldPrint = urlParams.has('print');
+      const fromMainSite = document.referrer && (
+        document.referrer.includes('ezzatboukhary.github.io') ||
+        document.referrer.includes('localhost')
+      );
+
+      if (shouldPrint || (fromMainSite && !sessionStorage.getItem('printShown'))) {
+        // Show modal with instructions instead of directly printing
+        setTimeout(() => {
+          downloadPDF();
+          sessionStorage.setItem('printShown', 'true');
+        }, 500);
+      }
+    });
+  </script>
 </body>
+
 </html>
