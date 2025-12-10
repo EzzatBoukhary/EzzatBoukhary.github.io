@@ -148,7 +148,7 @@
       width: 100%;
     }
 
-    /* Decorative background shapes */
+    /* Decorative background arcs */
     .decorative-shapes {
       position: absolute;
       width: 100%;
@@ -158,33 +158,35 @@
       z-index: 0;
     }
 
-    .shape {
+    .shape-arc {
       position: absolute;
-      opacity: 0.03;
-    }
-
-    .shape-circle {
+      border: 3px solid rgba(26, 125, 61, 0.2);
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(26, 125, 61, 0.4), rgba(76, 175, 80, 0.2));
-      filter: blur(1px);
+      opacity: 0.6;
     }
 
-    .shape-square {
-      background: radial-gradient(circle, rgba(155, 230, 78, 0.3), rgba(76, 175, 80, 0.2));
+    .shape-arc-thick {
+      position: absolute;
+      border: 5px solid rgba(155, 230, 78, 0.15);
+      border-radius: 50%;
+      opacity: 0.7;
+    }
+
+    .shape-curve {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border: 2px solid rgba(26, 125, 61, 0.15);
+      border-radius: 50%;
+      border-right: transparent;
+      border-bottom: transparent;
       transform: rotate(45deg);
-      border-radius: 10%;
-      filter: blur(1px);
     }
 
-    .shape-triangle {
-      width: 0;
-      height: 0;
-      background: transparent;
-      border-left: 100px solid transparent;
-      border-right: 100px solid transparent;
-      border-bottom: 173px solid rgba(26, 125, 61, 0.15);
-      opacity: 0.03;
-      filter: blur(1px);
+    .shape-line {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(26, 125, 61, 0.2), transparent);
     }
 
     /* Page styles */
@@ -526,6 +528,58 @@
       }
     }
 
+    /* Education section */
+    .education-section {
+      margin-top: 0.2in;
+      border-top: 2px solid #1a7d3d;
+      padding-top: 0.15in;
+    }
+
+    .education-section h3 {
+      color: #1a7d3d;
+      font-size: 0.95rem;
+      margin-bottom: 0.12in;
+      font-weight: 700;
+    }
+
+    .education-item {
+      background: rgba(155, 230, 78, 0.06);
+      border-left: 4px solid #1a7d3d;
+      padding: 0.12in;
+      border-radius: 4px;
+      margin-bottom: 0.1in;
+    }
+
+    .education-item h4 {
+      font-size: 0.85rem;
+      color: #1a7d3d;
+      margin: 0 0 0.03in 0;
+      font-weight: 700;
+    }
+
+    .education-item .degree {
+      font-size: 0.75rem;
+      color: #222;
+      margin: 0 0 0.02in 0;
+      font-weight: 600;
+    }
+
+    .education-item .edu-date {
+      font-size: 0.7rem;
+      color: #888;
+      margin: 0 0 0.04in 0;
+    }
+
+    .education-item .edu-details {
+      font-size: 0.7rem;
+      color: #555;
+      line-height: 1.3;
+    }
+
+    .education-item .edu-details strong {
+      color: #1a7d3d;
+    }
+
     /* Projects page */
     .page-project {
       padding: 0.5in !important;
@@ -584,21 +638,21 @@
     /* Project layout - Column (text left, images right) */
     .project-content-layout {
       display: grid;
-      grid-template-columns: 1fr 0.8fr;
-      gap: 0.15in;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.2in;
       flex: 1;
     }
 
     .project-text-section {
       display: flex;
       flex-direction: column;
-      gap: 0.08in;
+      gap: 0.1in;
     }
 
     .project-images-column {
       display: flex;
       flex-direction: column;
-      gap: 0.1in;
+      gap: 0.12in;
     }
 
     .project-image-col {
@@ -613,19 +667,21 @@
     .project-content-layout-row {
       display: flex;
       flex-direction: column;
-      gap: 0.12in;
+      gap: 0.15in;
       flex: 1;
     }
 
     .project-images-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0.12in;
+      gap: 0.15in;
+      flex: 1;
     }
 
     .project-image-row {
       width: 100%;
       height: auto;
+      max-height: 3.5in;
       object-fit: cover;
       border-radius: 4px;
       border: 2px solid #1a7d3d;
@@ -633,8 +689,8 @@
 
     .project-description {
       color: #333;
-      font-size: 0.75rem;
-      line-height: 1.4;
+      font-size: 0.8rem;
+      line-height: 1.45;
       margin-bottom: 0.05in;
       text-align: justify;
     }
@@ -1118,9 +1174,8 @@
     <!-- Page 1: Intro -->
     <div class="page page-intro">
       <div class="decorative-shapes">
-        <div class="shape shape-circle" style="width: 150px; height: 150px; top: 5%; right: 10%;"></div>
-        <div class="shape shape-square" style="width: 100px; height: 100px; bottom: 10%; left: 5%;"></div>
-        <div class="shape shape-circle" style="width: 80px; height: 80px; top: 60%; right: 5%;"></div>
+        <div class="shape-arc-thick" style="width: 350px; height: 350px; top: -140px; left: -150px;"></div>
+        <div class="shape-arc-thick" style="width: 280px; height: 280px; bottom: -110px; right: -120px;"></div>
       </div>
       <div class="page-header-info">
         <span class="page-name">Ezzat Boukhary</span>
@@ -1137,13 +1192,28 @@
         </div>
         <img src="https://avatars.githubusercontent.com/u/50555851?v=4" alt="Ezzat Boukhary" class="intro-image">
       </div>
+
+      <!-- Education Section -->
+      <div class="education-section">
+        <h3>Education</h3>
+        <div class="education-item">
+          <h4>University of Central Florida</h4>
+          <div class="degree">Bachelor of Science in Computer Science</div>
+          <div class="edu-date">Graduated December 2025 • Summa Cum Laude (GPA: 3.95) • Orlando, FL</div>
+          <div class="edu-details">
+            <strong>Relevant Coursework:</strong> Data Structures & Algorithms, Object-Oriented Programming,
+            Computer Architecture, Operating Systems, Software Engineering, Database Systems, Machine Learning,
+            Computer Vision, Discrete Mathematics
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Page 2: Experience -->
     <div class="page">
       <div class="decorative-shapes">
-        <div class="shape shape-circle" style="width: 120px; height: 120px; top: 10%; left: 5%;"></div>
-        <div class="shape shape-square" style="width: 90px; height: 90px; bottom: 15%; right: 10%;"></div>
+        <div class="shape-arc-thick" style="width: 380px; height: 380px; top: -160px; left: -170px;"></div>
+        <div class="shape-arc-thick" style="width: 320px; height: 320px; bottom: -130px; right: -140px;"></div>
       </div>
       <div class="page-header-info">
         <span class="page-name">Ezzat Boukhary</span>
@@ -1180,8 +1250,8 @@
             <div class="exp-company">Jet and Aeronautics Society at UCF</div>
             <div class="exp-date">May 2025 - Present</div>
             <p class="exp-description">Overhauling a 400+ member club's site with SvelteKit and Prisma, migrating to AWS
-              and an open-source model.
-              Revamping CI/CD, internal tools, and Discord to support smoother collaboration and infrastructure.</p>
+              and an open-source model. Revamping CI/CD, internal tools, and Discord to support smoother collaboration
+              and infrastructure.</p>
             <div class="exp-links">
               <a href="https://jas-ucf.com" target="_blank" rel="noopener" class="exp-link-item">
                 <i class="fa-solid fa-link"></i> View Site
@@ -1248,8 +1318,8 @@
     <!-- Page 3: Experience (continued) -->
     <div class="page">
       <div class="decorative-shapes">
-        <div class="shape shape-square" style="width: 110px; height: 110px; top: 20%; right: 5%;"></div>
-        <div class="shape shape-circle" style="width: 95px; height: 95px; bottom: 10%; left: 8%;"></div>
+        <div class="shape-arc-thick" style="width: 340px; height: 340px; top: -145px; right: -150px;"></div>
+        <div class="shape-arc-thick" style="width: 310px; height: 310px; bottom: -125px; left: -135px;"></div>
       </div>
       <div class="page-header-info">
         <span class="page-name">Ezzat Boukhary</span>
@@ -1267,8 +1337,8 @@
             <div class="exp-company">Florida Solar Energy Center</div>
             <div class="exp-date">May 2025 - Aug 2025 • Orlando, FL</div>
             <p class="exp-description">Modeled PV defects using EL/UVF imaging with MLP, LSTM, and clustering on 2K+
-              samples, achieving a 0.79 R².
-              Co-authored research paper and presented findings at DARTS Showcase to academic and industry leaders.</p>
+              samples, achieving a 0.79 R². Co-authored research paper and presented findings at DARTS Showcase to
+              academic and industry leaders.</p>
             <div class="exp-links">
               <a href="https://www.linkedin.com/in/ezzatboukhary/details/experience/2640514836/multiple-media-viewer/?profileId=ACoAADcmAWUBybsCNCKrFqlfsLK1J_5cBbnfby0&treasuryMediaId=1757184920382&type=DOCUMENT"
                 target="_blank" rel="noopener" class="exp-link-item">
@@ -1309,8 +1379,8 @@
     <!-- Page 4: Puppetry Project -->
     <div class="page page-project">
       <div class="decorative-shapes">
-        <div class="shape shape-circle" style="width: 130px; height: 130px; top: 8%; left: 5%;"></div>
-        <div class="shape shape-triangle" style="bottom: 5%; right: 10%;"></div>
+        <div class="shape-arc-thick" style="width: 400px; height: 400px; top: -180px; left: -180px;"></div>
+        <div class="shape-arc" style="width: 330px; height: 330px; bottom: -140px; right: -150px;"></div>
       </div>
       <div class="page-header-info">
         <span class="page-name">Ezzat Boukhary</span>
@@ -1329,9 +1399,13 @@
       <div class="project-content-layout">
         <div class="project-text-section">
           <p class="project-description">Led real-time 3D rendering and animation for TeachLivE, a gesture-based
-            puppeteering system used to train educators and professionals in immersive virtual environments. Developed
-            lifelike facial expressions, head movements, and procedural blinking using delta time interpolation.
-            Optimized WebGL with IndexedDB caching, reducing load times by 40% and improving scene rendering.</p>
+            puppeteering system used to train educators and professionals in immersive virtual environments. Engineered
+            real-time facial expression blending to replace robotic toggles with natural emotion transitions. Built
+            fully interpolated head tracking for smoother puppet motion and overhauled Three.js animation system to
+            eliminate model glitches. Added IndexedDB caching, cutting scene load times by over 40%. Deep debugged
+            sit/stand transitions via custom animation controllers. Resolved 50% of legacy animation issues left from
+            prior dev teams. Collaborated with 4-person team covering graphics, controls, CV/ML, and configs while
+            owning real-time graphics and animation logic.</p>
           <div class="project-links">
             <a href="https://ezzatboukhary.github.io/projects/puppetry.html" class="project-link" target="_blank"><i
                 class="fa-solid fa-link"></i> ezzatboukhary.github.io/projects/puppetry</a>
@@ -1355,8 +1429,8 @@
     <!-- Page 5: College Event Platform Project -->
     <div class="page page-project">
       <div class="decorative-shapes">
-        <div class="shape shape-square" style="width: 120px; height: 120px; top: 12%; right: 8%;"></div>
-        <div class="shape shape-circle" style="width: 85px; height: 85px; bottom: 15%; left: 5%;"></div>
+        <div class="shape-arc-thick" style="width: 370px; height: 370px; top: -155px; right: -165px;"></div>
+        <div class="shape-arc-thick" style="width: 350px; height: 350px; bottom: -145px; left: -155px;"></div>
       </div>
       <div class="page-header-info">
         <span class="page-name">Ezzat Boukhary</span>
@@ -1367,15 +1441,19 @@
       </div>
       <h3 class="project-name">College Event Website</h3>
       <div class="project-meta">
-        <span><strong>Jun 2023 - Dec 2023</strong></span>
-        <span>Open Source</span>
+        <span><strong>Feb 2025 - Apr 2025</strong></span>
+        <span>Team of 3</span>
       </div>
 
-      <div class="project-content-layout-row">
+      <div class="project-content-layout">
         <div class="project-text-section">
-          <p class="project-description">Engineered a full 3NF MySQL schema for a new event management system, driving
-            architecture for backend, frontend, CI/CD, and deployment. Replaced a broken site by rebuilding 90% of the
-            backend with modern Node.js and Express.js infrastructure.</p>
+          <p class="project-description">Engineered a full 3NF MySQL schema with SQL triggers and constraints for
+            secure, rule-driven event scheduling. Built complete backend API from scratch with Node.js and Express,
+            implementing role-based access control for students, admins, and super-admins. Developed event approval
+            pipelines, time conflict validation, and RSO member count triggers at the database layer. Rebuilt 90% of
+            broken backend and shipped frontend features in React with TypeScript for event creation, search, filtering,
+            and commenting. Led full-stack system architecture from broken initial state into production-ready design
+            with CI/CD.</p>
           <div class="project-links">
             <a href="https://ezzatboukhary.github.io/projects/cew.html" class="project-link" target="_blank"><i
                 class="fa-solid fa-link"></i> ezzatboukhary.github.io/projects/cew</a>
@@ -1388,9 +1466,9 @@
             <span class="tech-badge">CI/CD</span>
           </div>
         </div>
-        <div class="project-images-row">
-          <img src="../assets/cew2.png" alt="Event Platform" class="project-image-row">
-          <img src="../assets/cew1.png" alt="Event Platform 2" class="project-image-row">
+        <div class="project-images-column">
+          <img src="../assets/cew2.png" alt="Event Platform" class="project-image-col">
+          <img src="../assets/cew1.png" alt="Event Platform 2" class="project-image-col">
         </div>
       </div>
     </div>
@@ -1398,8 +1476,8 @@
     <!-- Page 6: Dragonotchi Project -->
     <div class="page page-project">
       <div class="decorative-shapes">
-        <div class="shape shape-circle" style="width: 140px; height: 140px; top: 5%; right: 10%;"></div>
-        <div class="shape shape-square" style="width: 100px; height: 100px; bottom: 20%; left: 6%;"></div>
+        <div class="shape-arc-thick" style="width: 360px; height: 360px; top: -150px; right: -160px;"></div>
+        <div class="shape-arc-thick" style="width: 330px; height: 330px; bottom: -135px; left: -145px;"></div>
       </div>
       <div class="page-header-info">
         <span class="page-name">Ezzat Boukhary</span>
@@ -1416,9 +1494,15 @@
 
       <div class="project-content-layout-row">
         <div class="project-text-section">
-          <p class="project-description">Developed Dragonotchi, an award-winning virtual pet featured at KnightHacks VI,
-            built using Kotlin and Jetpack Compose for the mobile interface and an ESP8266-powered LCD display for
-            real-time interactions. Implemented Firebase synchronization to allow seamless state persistence.</p>
+          <p class="project-description">Developed a fully interactive hardware-connected virtual pet inspired by
+            Tamagotchi that won Best Design at Knight Hacks VI. Built native mobile app using Kotlin and Jetpack Compose
+            with real-time sync between hardware and mobile powered by Firebase. ESP8266 microcontroller driving a 16x16
+            LED grid for live pixel animations with persistent state even offline. Delivered fully functional
+            interactive pet experience in just 36 hours with feeding, cleaning, play and death mechanics. Engineered
+            robust real-time state management across hardware and app. Handled mid-hackathon backend migration from
+            WebSockets to Firebase for better stability. Created original artwork, sprites, and animations entirely
+            in-house. Built as a team of three, leading development for gameplay logic, item interaction system, mobile
+            app interface, and state syncing.</p>
           <div class="project-links">
             <a href="https://ezzatboukhary.github.io/projects/dragonotchi.html" class="project-link" target="_blank"><i
                 class="fa-solid fa-link"></i> ezzatboukhary.github.io/projects/dragonotchi</a>
@@ -1439,8 +1523,8 @@
     <!-- Page 7: KillerBot Project -->
     <div class="page page-project">
       <div class="decorative-shapes">
-        <div class="shape shape-square" style="width: 125px; height: 125px; top: 10%; left: 7%;"></div>
-        <div class="shape shape-circle" style="width: 90px; height: 90px; bottom: 12%; right: 8%;"></div>
+        <div class="shape-arc-thick" style="width: 390px; height: 390px; top: -170px; left: -175px;"></div>
+        <div class="shape-arc-thick" style="width: 340px; height: 340px; bottom: -140px; right: -150px;"></div>
       </div>
       <div class="page-header-info">
         <span class="page-name">Ezzat Boukhary</span>
@@ -1457,10 +1541,15 @@
 
       <div class="project-content-layout">
         <div class="project-text-section">
-          <p class="project-description">Built a feature-rich Discord bot serving 250,000+ users across 600+ servers,
-            providing real-time commands and automation. Designed a scalable architecture to handle high user traffic,
-            integrated external APIs, and implemented efficient data storage solutions to enhance engagement and
-            usability.</p>
+          <p class="project-description">A full-featured Discord bot designed from scratch to handle everything from
+            server management to fun minigames, scaled to over 250,000 users across 600+ servers. Wrote the entire
+            backend in C# using Discord.NET from scratch. Implemented full economy system with currency, shops, balances
+            and transactions. Created advanced moderation suite, auto-moderation filters, and admin tools. Built
+            entertainment features including trivia, games, weather and YouTube APIs. Handled high-volume data storage
+            using JSON-based custom persistence layers. Organically grew to serve over 250,000 Discord users across 600+
+            servers. Maintained 5-star Top.gg rating and highly positive user reviews. Integrated multiple public APIs
+            to extend real-world data interaction. Delivered fully stable 24/7 uptime for years with constant updates
+            and feature additions. Sole developer and maintainer throughout entire lifecycle.</p>
           <div class="project-links">
             <a href="https://ezzatboukhary.github.io/projects/killerbot.html" class="project-link" target="_blank"><i
                 class="fa-solid fa-link"></i> ezzatboukhary.github.io/projects/killerbot</a>
@@ -1485,9 +1574,8 @@
     <!-- Page 8: Contact & Skills -->
     <div class="page page-contact" style="page-break-after: avoid;">
       <div class="decorative-shapes">
-        <div class="shape shape-circle" style="width: 200px; height: 200px; top: -50px; right: -50px;"></div>
-        <div class="shape shape-square" style="width: 150px; height: 150px; bottom: -30px; left: -30px;"></div>
-        <div class="shape shape-circle" style="width: 100px; height: 100px; top: 50%; left: 10%;"></div>
+        <div class="shape-arc-thick" style="width: 410px; height: 410px; top: -185px; right: -185px;"></div>
+        <div class="shape-arc-thick" style="width: 380px; height: 380px; bottom: -160px; left: -170px;"></div>
       </div>
       <div class="page-header-info">
         <span class="page-name">Ezzat Boukhary</span>
