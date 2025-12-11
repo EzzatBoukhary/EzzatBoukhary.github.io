@@ -153,7 +153,6 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      overflow: hidden;
       pointer-events: none;
       z-index: 0;
     }
@@ -231,7 +230,7 @@
     .intro-text h1 {
       font-family: 'Orbitron', sans-serif;
       font-size: 3.2rem;
-      color: #1a7d3d;
+      color: #0d4d25;
       margin-bottom: 0.15in;
       line-height: 1.0;
       text-transform: uppercase;
@@ -241,7 +240,7 @@
 
     .intro-text .tagline {
       font-size: 1.3rem;
-      color: #4caf50;
+      color: #1a7d3d;
       margin-bottom: 0.25in;
       font-weight: 700;
       text-transform: uppercase;
@@ -379,7 +378,7 @@
     .section-header h2 {
       font-family: 'Orbitron', sans-serif;
       font-size: 2.2rem;
-      color: #1a7d3d;
+      color: #0d4d25;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       margin: 0;
@@ -412,7 +411,7 @@
     }
 
     .exp-item {
-      background: rgba(155, 230, 78, 0.06);
+      background: linear-gradient(135deg, rgba(155, 230, 78, 0.08) 0%, rgba(155, 230, 78, 0.04) 100%);
       border-left: 4px solid #1a7d3d;
       padding: 0.15in 0.15in 0.15in 0.12in;
       border-radius: 4px;
@@ -440,23 +439,54 @@
     }
 
     .exp-company {
-      color: #1a7d3d;
-      font-weight: 600;
+      color: #0d4d25;
+      font-weight: 700;
       font-size: 0.8rem;
       margin: 0 0 0.02in 0;
     }
 
     .exp-date {
-      color: #888;
+      color: #555;
       font-size: 0.7rem;
       margin-bottom: 0.04in;
     }
 
     .exp-description {
-      color: #555;
+      color: #333;
       font-size: 0.75rem;
       line-height: 1.35;
       margin: 0;
+    }
+
+    .exp-details {
+      list-style: none;
+      padding: 0;
+      margin: 0.06in 0 0 0;
+    }
+
+    .exp-details li {
+      color: #333;
+      font-size: 0.72rem;
+      line-height: 1.4;
+      margin-bottom: 0.04in;
+      padding-left: 0.12in;
+      position: relative;
+    }
+
+    .exp-details li:before {
+      content: "▸";
+      color: #1a7d3d;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    .exp-highlight {
+      color: #0d4d25;
+      font-weight: 700;
+      background: rgba(155, 230, 78, 0.15);
+      padding: 0 0.03in;
+      border-radius: 2px;
     }
 
     .tech-tags-small {
@@ -468,7 +498,7 @@
 
     .tech-tag-small {
       background: white;
-      color: #1a7d3d;
+      color: #2a2a2a;
       padding: 0.01in 0.07in;
       border: 1px solid #1a7d3d;
       border-radius: 3px;
@@ -536,14 +566,16 @@
     }
 
     .education-section h3 {
-      color: #1a7d3d;
+      color: #0d4d25;
       font-size: 0.95rem;
       margin-bottom: 0.12in;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
     }
 
     .education-item {
-      background: rgba(155, 230, 78, 0.06);
+      background: linear-gradient(135deg, rgba(155, 230, 78, 0.08) 0%, rgba(155, 230, 78, 0.04) 100%);
       border-left: 4px solid #1a7d3d;
       padding: 0.12in;
       border-radius: 4px;
@@ -552,7 +584,7 @@
 
     .education-item h4 {
       font-size: 0.85rem;
-      color: #1a7d3d;
+      color: #0d4d25;
       margin: 0 0 0.03in 0;
       font-weight: 700;
     }
@@ -566,7 +598,7 @@
 
     .education-item .edu-date {
       font-size: 0.7rem;
-      color: #888;
+      color: #555;
       margin: 0 0 0.04in 0;
     }
 
@@ -577,7 +609,8 @@
     }
 
     .education-item .edu-details strong {
-      color: #1a7d3d;
+      color: #0d4d25;
+      font-weight: 700;
     }
 
     /* Projects page */
@@ -600,7 +633,7 @@
     .project-header h2 {
       font-family: 'Orbitron', sans-serif;
       font-size: 2rem;
-      color: #1a7d3d;
+      color: #0d4d25;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       margin: 0;
@@ -611,7 +644,7 @@
     .project-name {
       font-family: 'Orbitron', sans-serif;
       font-size: 1.5rem;
-      color: #1a7d3d;
+      color: #0d4d25;
       margin-bottom: 0.1in;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -619,7 +652,7 @@
     }
 
     .project-name-link {
-      color: #1a7d3d;
+      color: #0d4d25;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
@@ -628,7 +661,7 @@
     }
 
     .project-name-link:hover {
-      color: #156530;
+      color: #1a7d3d;
     }
 
     .project-name-link i {
@@ -700,10 +733,15 @@
       justify-content: space-between;
       align-items: center;
       font-size: 0.75rem;
-      color: #888;
+      color: #444;
       margin-bottom: 0.08in;
       flex-wrap: wrap;
       gap: 0.08in;
+    }
+
+    .project-meta strong {
+      color: #0d4d25;
+      font-weight: 700;
     }
 
     .project-links {
@@ -714,7 +752,7 @@
 
     .project-link {
       background: white;
-      color: #1a7d3d;
+      color: #0d4d25;
       padding: 0.04in 0.1in;
       border: 2px solid #1a7d3d;
       border-radius: 3px;
@@ -724,6 +762,12 @@
       display: inline-flex;
       align-items: center;
       gap: 0.04in;
+      transition: all 0.2s ease;
+    }
+
+    .project-link:hover {
+      background: rgba(26, 125, 61, 0.08);
+      border-color: #0d4d25;
     }
 
     .project-technologies {
@@ -734,7 +778,7 @@
 
     .tech-badge {
       background: white;
-      color: #1a7d3d;
+      color: #2a2a2a;
       padding: 0.02in 0.08in;
       border-radius: 3px;
       font-size: 0.65rem;
@@ -756,7 +800,7 @@
     .page-contact h2 {
       font-family: 'Orbitron', sans-serif;
       font-size: 2rem;
-      color: #1a7d3d;
+      color: #0d4d25;
       margin-bottom: 0.2in;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -782,7 +826,7 @@
 
     .contact-link {
       background: white;
-      color: #1a7d3d;
+      color: #0d4d25;
       padding: 0.08in 0.15in;
       border-radius: 4px;
       text-decoration: none;
@@ -790,6 +834,12 @@
       font-size: 0.85rem;
       border: 2px solid #1a7d3d;
       display: inline-block;
+      transition: all 0.2s ease;
+    }
+
+    .contact-link:hover {
+      background: rgba(26, 125, 61, 0.08);
+      border-color: #0d4d25;
     }
 
     .tech-grid {
@@ -800,20 +850,22 @@
     }
 
     .tech-box {
-      background: white;
+      background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
       border: 2px solid #1a7d3d;
       padding: 0.08in;
       border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(26, 125, 61, 0.1);
     }
 
     .tech-box h4 {
-      color: #1a7d3d;
+      color: #0d4d25;
       font-size: 0.65rem;
       font-weight: 700;
       margin-bottom: 0.05in;
       text-transform: uppercase;
-      border-bottom: 1px solid #1a7d3d;
+      border-bottom: 2px solid #1a7d3d;
       padding-bottom: 0.02in;
+      letter-spacing: 0.03em;
     }
 
     .tech-box-items {
@@ -824,7 +876,7 @@
 
     .tech-item {
       background: white;
-      color: #1a7d3d;
+      color: #2a2a2a;
       padding: 0.015in 0.05in;
       border: 1px solid #1a7d3d;
       border-radius: 3px;
@@ -833,10 +885,125 @@
       display: inline-flex;
       align-items: center;
       gap: 0.03in;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     }
 
     .tech-item i {
       font-size: 0.6rem;
+      color: #1a7d3d;
+    }
+
+    /* Brand-specific icon colors */
+    .fa-python {
+      color: #3776AB !important;
+    }
+
+    .fa-java {
+      color: #007396 !important;
+    }
+
+    .fa-js {
+      color: #F7DF1E !important;
+    }
+
+    .fa-swift {
+      color: #FA7343 !important;
+    }
+
+    .fa-android {
+      color: #3DDC84 !important;
+    }
+
+    .fa-apple {
+      color: #000000 !important;
+    }
+
+    .fa-react {
+      color: #61DAFB !important;
+    }
+
+    .fa-node-js {
+      color: #339933 !important;
+    }
+
+    .fa-vuejs {
+      color: #4FC08D !important;
+    }
+
+    .fa-docker {
+      color: #2496ED !important;
+    }
+
+    .fa-git-alt {
+      color: #F05032 !important;
+    }
+
+    .fa-aws {
+      color: #FF9900 !important;
+    }
+
+    .fa-figma {
+      color: #F24E1E !important;
+    }
+
+    .fa-linux {
+      color: #FCC624 !important;
+    }
+
+    .fa-html5 {
+      color: #E34F26 !important;
+    }
+
+    .devicon-kotlin-plain {
+      color: #7F52FF !important;
+    }
+
+    .devicon-dart-plain {
+      color: #0175C2 !important;
+    }
+
+    .devicon-cplusplus-plain {
+      color: #00599C !important;
+    }
+
+    .devicon-csharp-plain {
+      color: #239120 !important;
+    }
+
+    .devicon-php-plain {
+      color: #777BB4 !important;
+    }
+
+    .devicon-svelte-plain {
+      color: #FF3E00 !important;
+    }
+
+    .devicon-nextjs-plain {
+      color: #000000 !important;
+    }
+
+    .devicon-tensorflow-original {
+      color: #FF6F00 !important;
+    }
+
+    .devicon-opencv-plain {
+      color: #5C3EE8 !important;
+    }
+
+    .devicon-flask-original {
+      color: #000000 !important;
+    }
+
+    .devicon-tailwindcss-plain {
+      color: #06B6D4 !important;
+    }
+
+    .devicon-visualstudio-plain {
+      color: #5C2D91 !important;
+    }
+
+    .devicon-dot-net-plain {
+      color: #512BD4 !important;
     }
 
     /* Print media queries */
@@ -1230,15 +1397,28 @@
             <h3>Lead Mobile App Developer</h3>
             <div class="exp-company">yHere</div>
             <div class="exp-date">Aug 2025 - Present</div>
-            <p class="exp-description">Leading development with Kotlin Multiplatform, Compose Multiplatform, Firebase,
-              and SQLDelight, enabling iOS deployment and guiding teammates daily through design reviews, pair
-              programming, and rapid iteration. Achieved major efficiency gains by cutting Firebase reads 95% and
-              streamlining workflow with GitHub PRs.</p>
+            <p class="exp-description">Leading full-stack development of cross-platform mobile applications, owning
+              architecture from mobile to cloud infrastructure with Flutter, Kotlin Multiplatform, Firebase, and AWS.
+            </p>
+            <ul class="exp-details">
+              <li>Architected and delivered <span class="exp-highlight">iOS deployment</span> for Android-only app,
+                owning
+                cross-platform codebase and mentoring 3-person team on Kotlin Multiplatform and Git best practices</li>
+              <li>Cut Firebase reads by <span class="exp-highlight">90%</span> and de-risked production by redesigning
+                schemas and listeners, tightening Rules/App Check, and introducing Cloud Functions and Remote Config
+                kill
+                switches</li>
+              <li>Built full-stack platform solo with Flutter, AWS Rekognition, and
+                Google Cloud/Firebase backend, delivering responsive web and mobile clients with secure, auditable
+                records
+              </li>
+            </ul>
             <div class="tech-tags-small">
-              <span class="tech-tag-small">Kotlin</span>
-              <span class="tech-tag-small">KMP</span>
-              <span class="tech-tag-small">Swift</span>
+              <span class="tech-tag-small">Flutter</span>
+              <span class="tech-tag-small">Kotlin Multiplatform</span>
+              <span class="tech-tag-small">AWS</span>
               <span class="tech-tag-small">Firebase</span>
+              <span class="tech-tag-small">Cloud Functions</span>
             </div>
           </div>
         </div>
@@ -1249,9 +1429,19 @@
             <h3>Web Systems Developer</h3>
             <div class="exp-company">Jet and Aeronautics Society at UCF</div>
             <div class="exp-date">May 2025 - Present</div>
-            <p class="exp-description">Overhauling a 400+ member club's site with SvelteKit and Prisma, migrating to AWS
-              and an open-source model. Revamping CI/CD, internal tools, and Discord to support smoother collaboration
-              and infrastructure.</p>
+            <p class="exp-description">Serving as technical officer managing the club's web infrastructure and internal
+              systems for 400+ members while collaborating with leadership to support long-term operations and events.
+            </p>
+            <ul class="exp-details">
+              <li>Migrating website serving <span class="exp-highlight">400+ members</span> to dedicated AWS instance
+                for
+                improved scalability and reliability</li>
+              <li>Refactoring SvelteKit codebase using Prisma and SQLite to support <span
+                  class="exp-highlight">maintainability and open-source contribution</span></li>
+              <li>Implementing <span class="exp-highlight">CI/CD workflows</span> and managing internal platforms
+                including
+                Discord, OneDrive, and Outlook for team coordination</li>
+            </ul>
             <div class="exp-links">
               <a href="https://jas-ucf.com" target="_blank" rel="noopener" class="exp-link-item">
                 <i class="fa-solid fa-link"></i> View Site
@@ -1261,7 +1451,7 @@
               <span class="tech-tag-small">SvelteKit</span>
               <span class="tech-tag-small">Prisma</span>
               <span class="tech-tag-small">AWS</span>
-              <span class="tech-tag-small">Docker</span>
+              <span class="tech-tag-small">TypeScript</span>
             </div>
           </div>
         </div>
@@ -1272,10 +1462,16 @@
             <h3>Frontend Developer Intern</h3>
             <div class="exp-company">BudgetWise</div>
             <div class="exp-date">Mar 2025 - May 2025</div>
-            <p class="exp-description">Shipped optimized budgeting features with Vue, TypeScript, and Firebase after
-              rapidly learning the stack.
-              Enabled 50% faster onboarding by mentoring a developer, streamlining GitHub workflows, and adding CI/CD.
-            </p>
+            <p class="exp-description">Contributed to production budgeting platform with Vue.js and TypeScript.</p>
+            <ul class="exp-details">
+              <li>Adapted quickly to Vue.js and TypeScript, shipping performance-optimized features in <span
+                  class="exp-highlight">first sprint</span> and reducing load times by <span
+                  class="exp-highlight">25%</span></li>
+              <li>Built reusable components with backend integration and improved development workflows with <span
+                  class="exp-highlight">GitHub Actions for CI/CD</span></li>
+              <li>Mentored new developer through code reviews, cutting onboarding time by <span
+                  class="exp-highlight">50%</span> with walkthroughs and clearer documentation</li>
+            </ul>
             <div class="exp-links">
               <a href="https://budgetwise.co" target="_blank" rel="noopener" class="exp-link-item">
                 <i class="fa-solid fa-link"></i> View Site
@@ -1289,29 +1485,6 @@
           </div>
         </div>
 
-        <div class="exp-item">
-          <img src="../assets/logo_reeltalk.jpeg" alt="Reel Talk" class="exp-logo">
-          <div class="exp-content">
-            <h3>Android Developer Intern</h3>
-            <div class="exp-company">Reel Talk</div>
-            <div class="exp-date">Jan 2024 - Aug 2024</div>
-            <p class="exp-description">Published beta-ready Android app as sole mobile dev, building UI with Kotlin,
-              Jetpack Compose, and MVVM.
-              Integrated REST APIs and cut crashes by 20%, boosting load speed by 15% through targeted profiling and QA.
-            </p>
-            <div class="exp-links">
-              <a href="https://www.linkedin.com/in/ezzatboukhary/details/experience/2322214315/multiple-media-viewer/?profileId=ACoAADcmAWUBybsCNCKrFqlfsLK1J_5cBbnfby0&treasuryMediaId=1747449402520"
-                target="_blank" rel="noopener" class="exp-link-item">
-                <i class="fa-solid fa-image"></i> View Screenshots
-              </a>
-            </div>
-            <div class="tech-tags-small">
-              <span class="tech-tag-small">Kotlin</span>
-              <span class="tech-tag-small">Compose</span>
-              <span class="tech-tag-small">Firebase</span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -1331,14 +1504,55 @@
       </div>
       <div class="experience-list">
         <div class="exp-item">
+          <img src="../assets/logo_reeltalk.jpeg" alt="Reel Talk" class="exp-logo">
+          <div class="exp-content">
+            <h3>Android Developer Intern</h3>
+            <div class="exp-company">Reel Talk</div>
+            <div class="exp-date">Jan 2024 - Aug 2024</div>
+            <p class="exp-description">Led Android development for movie and TV enthusiasts platform with
+              community-driven
+              discovery, recommendations, and discussions, taking over partially built codebase and bringing it to
+              near-beta state.</p>
+            <ul class="exp-details">
+              <li>Developed entire Android app as <span class="exp-highlight">sole mobile developer</span> using Kotlin,
+                Jetpack Compose, Firebase, and MVVM, refactoring legacy code and improving documentation</li>
+              <li>Optimized performance, reducing crash rates by <span class="exp-highlight">20%</span> and improving
+                load
+                speed by <span class="exp-highlight">15%</span> through API integration and profiling</li>
+              <li>Published internal builds via Google Play for user feedback, iterating with design and backend teams
+                to
+                reach <span class="exp-highlight">near-beta state</span></li>
+            </ul>
+            <div class="exp-links">
+              <a href="https://www.linkedin.com/in/ezzatboukhary/details/experience/2322214315/multiple-media-viewer/?profileId=ACoAADcmAWUBybsCNCKrFqlfsLK1J_5cBbnfby0&treasuryMediaId=1747449402520"
+                target="_blank" rel="noopener" class="exp-link-item">
+                <i class="fa-solid fa-image"></i> View Screenshots
+              </a>
+            </div>
+            <div class="tech-tags-small">
+              <span class="tech-tag-small">Kotlin</span>
+              <span class="tech-tag-small">Jetpack Compose</span>
+              <span class="tech-tag-small">Firebase</span>
+              <span class="tech-tag-small">MVVM</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item">
           <img src="../assets/logo_fsec.jpg" alt="FSEC" class="exp-logo">
           <div class="exp-content">
             <h3>Undergraduate Researcher</h3>
             <div class="exp-company">Florida Solar Energy Center</div>
             <div class="exp-date">May 2025 - Aug 2025 • Orlando, FL</div>
-            <p class="exp-description">Modeled PV defects using EL/UVF imaging with MLP, LSTM, and clustering on 2K+
-              samples, achieving a 0.79 R². Co-authored research paper and presented findings at DARTS Showcase to
-              academic and industry leaders.</p>
+            <p class="exp-description">Contributed to DARTS program on multimodal deep learning for photovoltaic
+              diagnostics.</p>
+            <ul class="exp-details">
+              <li>Modeled PV defects using EL/UVF imaging with MLP and LSTM on <span class="exp-highlight">2,000+
+                  samples</span>, achieving <span class="exp-highlight">R² of 0.79</span></li>
+              <li>Co-authored research paper and presented at <span class="exp-highlight">DARTS Showcase</span> to
+                academic
+                and industry leaders</li>
+            </ul>
             <div class="exp-links">
               <a href="https://www.linkedin.com/in/ezzatboukhary/details/experience/2640514836/multiple-media-viewer/?profileId=ACoAADcmAWUBybsCNCKrFqlfsLK1J_5cBbnfby0&treasuryMediaId=1757184920382&type=DOCUMENT"
                 target="_blank" rel="noopener" class="exp-link-item">
@@ -1351,8 +1565,8 @@
             </div>
             <div class="tech-tags-small">
               <span class="tech-tag-small">Python</span>
-              <span class="tech-tag-small">OpenCV</span>
               <span class="tech-tag-small">TensorFlow</span>
+              <span class="tech-tag-small">OpenCV</span>
             </div>
           </div>
         </div>
@@ -1363,10 +1577,15 @@
             <h3>Undergraduate Learning Assistant</h3>
             <div class="exp-company">University of Central Florida</div>
             <div class="exp-date">May 2025 - Aug 2025 • Orlando, FL</div>
-            <p class="exp-description">Mentored 300+ students in Java OOP, reinforcing core concepts like inheritance,
-              generics, and polymorphism.
-              Facilitated weekly review sessions and live Q&A, reducing assignment errors and supporting a 15% grade
-              boost.</p>
+            <p class="exp-description">Mentored 300+ students in Java OOP through weekly sessions and direct support.
+            </p>
+            <ul class="exp-details">
+              <li>Guided <span class="exp-highlight">300+ students</span> on debugging, problem-solving, and OOP
+                principles
+                like inheritance, polymorphism, and encapsulation</li>
+              <li>Provided one-on-one support, helping students <span class="exp-highlight">boost grades and
+                  confidence</span> in software development</li>
+            </ul>
             <div class="tech-tags-small">
               <span class="tech-tag-small">Java</span>
               <span class="tech-tag-small">OOP</span>
@@ -1402,8 +1621,10 @@
             puppeteering system used to train educators and professionals in immersive virtual environments. Engineered
             real-time facial expression blending to replace robotic toggles with natural emotion transitions. Built
             fully interpolated head tracking for smoother puppet motion and overhauled Three.js animation system to
-            eliminate model glitches. Added IndexedDB caching, cutting scene load times by over 40%. Deep debugged
-            sit/stand transitions via custom animation controllers. Resolved 50% of legacy animation issues left from
+            eliminate model glitches. Added IndexedDB caching, cutting scene load times by <span
+              class="exp-highlight">over 40%</span>. Deep debugged
+            sit/stand transitions via custom animation controllers. Resolved <span class="exp-highlight">50% of legacy
+              animation issues</span> left from
             prior dev teams. Collaborated with 4-person team covering graphics, controls, CV/ML, and configs while
             owning real-time graphics and animation logic.</p>
           <div class="project-links">
@@ -1450,8 +1671,9 @@
           <p class="project-description">Engineered a full 3NF MySQL schema with SQL triggers and constraints for
             secure, rule-driven event scheduling. Built complete backend API from scratch with Node.js and Express,
             implementing role-based access control for students, admins, and super-admins. Developed event approval
-            pipelines, time conflict validation, and RSO member count triggers at the database layer. Rebuilt 90% of
-            broken backend and shipped frontend features in React with TypeScript for event creation, search, filtering,
+            pipelines, time conflict validation, and RSO member count triggers at the database layer. Rebuilt <span
+              class="exp-highlight">90% of broken backend</span> and shipped frontend features in React with TypeScript
+            for event creation, search, filtering,
             and commenting. Led full-stack system architecture from broken initial state into production-ready design
             with CI/CD.</p>
           <div class="project-links">
@@ -1495,10 +1717,12 @@
       <div class="project-content-layout-row">
         <div class="project-text-section">
           <p class="project-description">Developed a fully interactive hardware-connected virtual pet inspired by
-            Tamagotchi that won Best Design at Knight Hacks VI. Built native mobile app using Kotlin and Jetpack Compose
+            Tamagotchi that won <span class="exp-highlight">Best Design at Knight Hacks VI</span>. Built native mobile
+            app using Kotlin and Jetpack Compose
             with real-time sync between hardware and mobile powered by Firebase. ESP8266 microcontroller driving a 16x16
             LED grid for live pixel animations with persistent state even offline. Delivered fully functional
-            interactive pet experience in just 36 hours with feeding, cleaning, play and death mechanics. Engineered
+            interactive pet experience in just <span class="exp-highlight">36 hours</span> with feeding, cleaning, play
+            and death mechanics. Engineered
             robust real-time state management across hardware and app. Handled mid-hackathon backend migration from
             WebSockets to Firebase for better stability. Created original artwork, sprites, and animations entirely
             in-house. Built as a team of three, leading development for gameplay logic, item interaction system, mobile
@@ -1542,13 +1766,16 @@
       <div class="project-content-layout">
         <div class="project-text-section">
           <p class="project-description">A full-featured Discord bot designed from scratch to handle everything from
-            server management to fun minigames, scaled to over 250,000 users across 600+ servers. Wrote the entire
+            server management to fun minigames, scaled to <span class="exp-highlight">over 250,000 users across 600+
+              servers</span>. Wrote the entire
             backend in C# using Discord.NET from scratch. Implemented full economy system with currency, shops, balances
             and transactions. Created advanced moderation suite, auto-moderation filters, and admin tools. Built
             entertainment features including trivia, games, weather and YouTube APIs. Handled high-volume data storage
             using JSON-based custom persistence layers. Organically grew to serve over 250,000 Discord users across 600+
-            servers. Maintained 5-star Top.gg rating and highly positive user reviews. Integrated multiple public APIs
-            to extend real-world data interaction. Delivered fully stable 24/7 uptime for years with constant updates
+            servers. Maintained <span class="exp-highlight">5-star Top.gg rating</span> and highly positive user
+            reviews. Integrated multiple public APIs
+            to extend real-world data interaction. Delivered fully stable <span class="exp-highlight">24/7 uptime for
+              years</span> with constant updates
             and feature additions. Sole developer and maintainer throughout entire lifecycle.</p>
           <div class="project-links">
             <a href="https://ezzatboukhary.github.io/projects/killerbot.html" class="project-link" target="_blank"><i
