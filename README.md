@@ -1,33 +1,34 @@
 # EzzatBoukhary.github.io
 
-This is my personal developer portfolio website, designed and built from scratch using **HTML, CSS, and JavaScript**.
+My personal portfolio website, built from scratch with HTML, CSS, and JavaScript.
 
 🌐 **Live Site**: [ezzatboukhary.github.io](https://ezzatboukhary.github.io/)
 
-## ✨ About
+## What's Inside
 
-This site highlights who I am as a developer — from the work I’ve done to the technologies I use. It reflects my passion for creating software that has a real impact and leaves a lasting impression.
+- **Landing Page** (`/`) – Space-themed homepage showcasing experience, projects, skills, and recommendations
+- **Portfolio** (`/portfolio`) – 8-page PDF-ready document with detailed work history and project breakdowns
+- **Resume** (`/resume`) – Live-updating resume viewer with download option
+- **Project Pages** (`/projects/*`) – Individual case studies for Puppetry, College Event Platform, Dragonotchi, and KillerBot
 
-Key sections include:
-- **About Me** – An overview of my background and passion for impactful software.
-- **Experience** – Highlights of my internships and hands-on development roles.
-- **Projects** – Showcases award-winning and large-scale personal projects.
-- **Skills** – A visual summary of the tools and technologies I’ve worked with.
-- **Contact** – Links to my resume, GitHub, and LinkedIn for easy reach.
+## Tech Stack
 
-## 🛠️ Tech Stack
+- HTML5, CSS3, JavaScript (vanilla, no frameworks)
+- Canvas API for animated backgrounds
+- Intersection Observer for scroll-triggered animations
 
-- HTML5
-- CSS3 (Responsive Design + Custom Styling)
-- JavaScript (DOM manipulation and interactivity)
+## Features
 
-## 🚀 Features
+- Fully responsive across all devices
+- Print-optimized layouts (8.5" × 11" pages)
+- Dark theme with custom particle effects
+- Semantic HTML with accessibility in mind
 
-- Clean, responsive layout for desktop and mobile
-- Custom particle background animation
-- Smooth scrolling and interactive sections
-- Hosted via GitHub Pages
+## Preview
 
-## 📷 Preview
-
+Landing page:
 ![Homepage Screenshot](./screenshot.png)
+![Homepage Screenshot 2](./screenshot2.png)
+
+Portfolio Page:
+![Portfolio Screenshot](./screenshot3.png)
