@@ -1,6 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 
+// Don't render on touch/mobile devices — they have no pointer to track
+const isTouchDevice =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(pointer: coarse)').matches;
+
 export default function CustomCursor() {
+  if (isTouchDevice) return null;
+
   const cursorRef = useRef(null);
   const [state, setState] = useState('default'); // default | hover | click | text
 

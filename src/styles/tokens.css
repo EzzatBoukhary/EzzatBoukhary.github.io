@@ -116,6 +116,11 @@ button { background: none; border: none; cursor: none; font: inherit; color: inh
 }
 .cursor--text { border-color: rgba(255,255,255,0.3); }
 
+/* Hide on touch/mobile — no pointer to track */
+@media (pointer: coarse) {
+  .cursor { display: none; }
+}
+
 /* ── Page enter animation ──────────────────────────────────────────────── */
 @keyframes page-enter {
   from { opacity: 0; transform: translateY(18px); }
