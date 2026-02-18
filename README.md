@@ -1,34 +1,50 @@
 # EzzatBoukhary.github.io
 
-My personal portfolio website, built from scratch with HTML, CSS, and JavaScript.
+My personal portfolio website, rebuilt as a drivable interactive 3D portfolio park.
 
 🌐 **Live Site**: [ezzatboukhary.github.io](https://ezzatboukhary.github.io/)
 
 ## What's Inside
 
-- **Landing Page** (`/`) – Space-themed homepage showcasing experience, projects, skills, and recommendations
-- **Portfolio** (`/portfolio`) – 8-page PDF-ready document with detailed work history and project breakdowns
-- **Resume** (`/resume`) – Live-updating resume viewer with download option
-- **Project Pages** (`/projects/*`) – Individual case studies for Puppetry, College Event Platform, Dragonotchi, and KillerBot
+- **3D Portfolio Park** (`/`) – A full-screen playable world where visitors drive through colorful zones and interact with kiosks.
+- **Interactive Stations** – About, Experience, Projects, Achievements, Skills, Testimonials, and Contact are all represented in-world.
+- **3D Info Panels** – Portfolio details render as in-scene floating panels instead of traditional 2D page sections.
+- **External Link Beacons** – 3D link orbs open GitHub, LinkedIn, and Resume.
 
 ## Tech Stack
 
-- HTML5, CSS3, JavaScript (vanilla, no frameworks)
-- Canvas API for animated backgrounds
-- Intersection Observer for scroll-triggered animations
+- React 18
+- Vite 5
+- Three.js
+- @react-three/fiber
+- @react-three/drei
 
 ## Features
 
-- Fully responsive across all devices
-- Print-optimized layouts (8.5" × 11" pages)
-- Dark theme with custom particle effects
-- Semantic HTML with accessibility in mind
+- Complete 3D-first portfolio experience (no traditional 2D layout pages)
+- Keyboard driving controls with in-world zone interaction
+- Data-driven portfolio content from `src/data/siteData.js`
+- Real-time lighting, sparkles, fog, and animated 3D scene elements
+
+## Local Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Production Build
+
+```bash
+npm run build
+npm run preview
+```
 
 ## Preview
 
-Landing page:
-![Homepage Screenshot](./screenshot.png)
-![Homepage Screenshot 2](./screenshot2.png)
+Controls:
 
-Portfolio Page:
-![Portfolio Screenshot](./screenshot3.png)
+- Drive with `WASD` or arrow keys.
+- Press `E` near a kiosk to open that section panel.
+- Press `Esc` to close the active panel.
+- Use panel links to open projects, recommendations, and contact destinations.
