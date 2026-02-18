@@ -64,9 +64,14 @@
   align-items: center;
   gap: .75rem;
   font-size: .9rem;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.55);
 }
-.about-section__fact-icon { font-size: 1.1rem; flex-shrink: 0; }
+.about-section__fact-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
+  color: rgba(255,255,255,0.4);
+}
 .about-section__fact a { color: var(--yellow); transition: opacity .2s; }
 .about-section__fact a:hover { opacity: .75; }
 
@@ -111,6 +116,8 @@
 /* ── Experience section (timeline) ────────────────────────────────────── */
 .exp-section {
   padding: 8rem 0;
+  background: var(--black);
+  color: var(--white);
 }
 .exp-section__heading {
   font-family: var(--font-display);
@@ -118,6 +125,7 @@
   font-weight: 900;
   letter-spacing: -.04em;
   margin-bottom: 4rem;
+  color: var(--white);
 }
 
 .timeline {
@@ -142,7 +150,7 @@
   font-size: .78rem;
   font-weight: 700;
   letter-spacing: .08em;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.45);
   padding-top: .2rem;
   text-transform: uppercase;
 }
@@ -172,6 +180,8 @@
   color: rgba(255,255,255,0.25);
   font-size: 1rem;
   transition: color .2s;
+  display: inline-flex;
+  align-items: center;
 }
 .tl-item__ext:hover { color: var(--yellow); }
 .tl-item__summary {
@@ -204,6 +214,7 @@
   background: var(--surface);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
+  color: var(--white);
 }
 .skills-section__heading {
   font-family: var(--font-display);
@@ -211,6 +222,7 @@
   font-weight: 900;
   letter-spacing: -.04em;
   margin-bottom: 3.5rem;
+  color: var(--white);
 }
 .skills-grid {
   display: grid;
@@ -266,6 +278,9 @@
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
   padding: .28em .75em;
+  display: inline-flex;
+  align-items: center;
+  gap: .35em;
   transition: background .2s, border-color .2s, color .2s;
 }
 .skills-pill:hover {
@@ -379,6 +394,8 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  background: var(--black);
+  color: var(--white);
 }
 .contact-section::before {
   content: 'HELLO';
@@ -405,6 +422,7 @@
   letter-spacing: -.05em;
   line-height: 1;
   margin-bottom: 2rem;
+  color: var(--white);
 }
 .contact-section__heading em { color: var(--yellow); font-style: normal; }
 .contact-section__sub {

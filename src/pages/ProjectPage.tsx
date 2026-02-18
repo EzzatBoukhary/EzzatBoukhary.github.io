@@ -188,27 +188,6 @@ export default function ProjectPage() {
         </div>
       </div>
 
-      {/* ── Gallery ───────────────────────────────────────────────────── */}
-      {project.gallery.length > 0 && (
-        <div className="pp-gallery" style={{ '--pp-accent': accent }}>
-          <div className="container">
-            <h2 className="pp-gallery__title">Gallery</h2>
-            <div className={`pp-gallery__grid pp-gallery__grid--${project.gallery.length}`}>
-              {project.gallery.map((img, i) => (
-                <div key={i} className="pp-gallery__item">
-                  <img
-                    src={img}
-                    alt={`${project.name} screenshot ${i + 1}`}
-                    className="pp-gallery__img"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* ── Next project ──────────────────────────────────────────────── */}
       <div className="pp-next" style={{ '--pp-accent': nextProject.accentColor ?? '#e8ff38' }}>
         <div className="container">

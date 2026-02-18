@@ -4,7 +4,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Marquee from '../components/Marquee';
 import { useReveal } from '../hooks/useReveal';
-import { IconGitHub, IconLinkedIn, LinkIcon, IconArrowRight } from '../components/Icons';
+import { IconGitHub, IconLinkedIn, LinkIcon, IconArrowRight, IconExternalLink, IconPin, IconGamepad, IconTrophy, IconEmail } from '../components/Icons';
+import { TechIcon } from '../components/TechIcon';
 import {
   profile, links, gameStats, achievements,
   experience, recommendations, projectCases, skillMatrix,
@@ -170,32 +171,9 @@ const GENRE_SHORT = {
   'Web + Mobile Product':                 'Mobile/Web',
 };
 
-// Bento grid – first project spans 2 rows, rest fill in
-function ProjectBento() {
-  return (
-    <div className="project-bento">
-      {projectCases.map((p) => (
-        <Link key={p.slug} to={`/project/${p.slug}`} className="project-bento__item">
-          <img src={p.gallery[0]} alt={p.name} className="project-bento__img" />
-          <div className="project-bento__overlay">
-            <p className="project-bento__title">{p.name}</p>
-            <p className="project-bento__tag">{GENRE_SHORT[p.genre] ?? p.genre}</p>
-          </div>
-        </Link>
-      ))}
-    </div>
-  );
-}
-
 function WorkSection() {
-  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-  const [activeSlug, setActiveSlug]   = useState(null);
-  const sectionRef = useRef(null);
   const listRef    = useRef(null);
   const [ref, revealed] = useReveal(0.05);
-
-  // Update floating image position
-  const onMouseMove = (e) => setCursorPos({ x: e.clientX, y: e.clientY });
 
   // GSAP stagger for work items once revealed
   useEffect(() => {
@@ -212,26 +190,12 @@ function WorkSection() {
     return () => ctx.revert();
   }, [revealed]);
 
-  const activeProject = projectCases.find((p) => p.slug === activeSlug);
-
   return (
     <section
       className="work-section"
       id="projects"
-      ref={(el) => { sectionRef.current = el; ref.current = el; }}
-      onMouseMove={onMouseMove}
+      ref={ref}
     >
-      {/* Floating cursor image */}
-      <div
-        className={`work-cursor-img ${activeSlug ? 'work-cursor-img--visible' : ''}`}
-        style={{ left: cursorPos.x + 28, top: cursorPos.y - 130, position: 'fixed' }}
-        aria-hidden="true"
-      >
-        {activeProject && (
-          <img src={activeProject.gallery[0]} alt={activeProject.name} />
-        )}
-      </div>
-
       <div className={`container reveal ${revealed ? 'revealed' : ''}`}>
         <div className="work-section__top">
           <div>
@@ -239,12 +203,9 @@ function WorkSection() {
             <h2 className="work-section__heading">Featured Quests</h2>
           </div>
           <Link to="/resume" className="btn btn--outline">
-            Full Résumé ↗
+            Full Résumé <IconExternalLink style={{ width: '1em', height: '1em', marginLeft: '.25em' }} />
           </Link>
         </div>
-
-        {/* Screenshot bento grid */}
-        <ProjectBento />
 
         <ol className="work-list" ref={listRef}>
           {projectCases.map((project, i) => (
@@ -252,8 +213,6 @@ function WorkSection() {
               <Link
                 to={`/project/${project.slug}`}
                 className="work-item__inner"
-                onMouseEnter={() => setActiveSlug(project.slug)}
-                onMouseLeave={() => setActiveSlug(null)}
                 style={{ display: 'flex' }}
               >
                 <span className="work-item__num">0{i + 1}</span>
@@ -272,7 +231,9 @@ function WorkSection() {
                     <span>{project.period}</span>
                   </div>
                 </div>
-                <span className="work-item__arrow">→</span>
+                <span className="work-item__arrow" aria-hidden="true">
+                  <IconArrowRight style={{ width: '1em', height: '1em' }} />
+                </span>
               </Link>
             </li>
           ))}
@@ -303,28 +264,28 @@ function AboutSection() {
             <p className="about-section__bio">{profile.mission}</p>
             <div className="about-section__facts">
               <div className="about-section__fact">
-                <span className="about-section__fact-icon">📍</span>
+                <IconPin className="about-section__fact-icon" style={{ width: '1.1rem', height: '1.1rem' }} />
                 <span>Florida · UCF Computer Science</span>
               </div>
               <div className="about-section__fact">
-                <span className="about-section__fact-icon">🎮</span>
+                <IconGamepad className="about-section__fact-icon" style={{ width: '1.1rem', height: '1.1rem' }} />
                 <span>Video games, TV shows, and building things I'd actually use</span>
               </div>
               <div className="about-section__fact">
-                <span className="about-section__fact-icon">🏆</span>
+                <IconTrophy className="about-section__fact-icon" style={{ width: '1.1rem', height: '1.1rem' }} />
                 <span>Best Design Award · KnightHacks VI</span>
               </div>
               <div className="about-section__fact">
-                <span className="about-section__fact-icon">📧</span>
+                <IconEmail className="about-section__fact-icon" style={{ width: '1.1rem', height: '1.1rem' }} />
                 <a href={`mailto:${profile.email}`}>{profile.email}</a>
               </div>
             </div>
             <div style={{ marginTop: '2rem', display: 'flex', gap: '.75rem', flexWrap: 'wrap' }}>
               <a href={links.github} target="_blank" rel="noreferrer" className="btn btn--outline">
-                GitHub ↗
+                <IconGitHub style={{ width: '1em', height: '1em' }} /> GitHub
               </a>
               <a href={links.linkedin} target="_blank" rel="noreferrer" className="btn btn--outline">
-                LinkedIn ↗
+                <IconLinkedIn style={{ width: '1em', height: '1em' }} /> LinkedIn
               </a>
             </div>
           </div>
@@ -374,7 +335,7 @@ function ExperienceSection() {
                   </div>
                   {item.href && (
                     <a href={item.href} target="_blank" rel="noreferrer" className="tl-item__ext" aria-label={`${item.org} site`}>
-                      ↗
+                      <IconExternalLink style={{ width: '1em', height: '1em' }} />
                     </a>
                   )}
                 </div>
@@ -418,7 +379,10 @@ function SkillsSection() {
               </div>
               <ul className="skills-pills">
                 {group.values.map((skill) => (
-                  <li key={skill} className="skills-pill">{skill}</li>
+                  <li key={skill} className="skills-pill">
+                    <TechIcon name={skill} style={{ fontSize: '1.1rem' }} />
+                    {skill}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -519,10 +483,9 @@ export default function Home() {
     <main className="page-enter">
       <HeroSection />
       <Marquee />
+      <ExperienceSection />
       <WorkSection />
       <AboutSection />
-      <StatsSection />
-      <ExperienceSection />
       <SkillsSection />
       <RecSection />
       <ContactSection />

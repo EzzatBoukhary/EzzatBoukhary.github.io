@@ -114,8 +114,45 @@ export function IconDownload(props) {
   );
 }
 
-/**
- * Picks the right icon for a link based on its label or URL.
+export function IconPin(props) {
+  return (
+    <svg {...base} {...props} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+}
+
+export function IconGamepad(props) {
+  return (
+    <svg {...base} {...props} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="6" width="20" height="12" rx="4" />
+      <path d="M6 12h4M8 10v4" />
+      <circle cx="16" cy="11" r=".8" fill="currentColor" stroke="none" />
+      <circle cx="18" cy="13" r=".8" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+export function IconTrophy(props) {
+  return (
+    <svg {...base} {...props} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 2h12v10a6 6 0 0 1-12 0V2z" />
+      <path d="M6 7H2a4 4 0 0 0 4 4M18 7h4a4 4 0 0 1-4 4" />
+      <path d="M12 18v4M8 22h8" />
+    </svg>
+  );
+}
+
+export function IconEmail(props) {
+  return (
+    <svg {...base} {...props} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="m2 7 10 7 10-7" />
+    </svg>
+  );
+}
+
  */
 export function LinkIcon({ label = '', href = '', ...props }) {
   const l = label.toLowerCase();

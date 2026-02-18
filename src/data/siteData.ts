@@ -72,8 +72,11 @@ export const experience = [
   {
     role: 'Lead Mobile App Developer',
     org: 'yHere',
+    type: 'Full-Time',
+    current: true,
     period: 'Aug 2025 — Present',
     logo: yHereLogo,
+    stack: ['Flutter', 'Kotlin', 'Firebase', 'AWS'],
     summary:
       'Leading full-stack development of cross-platform applications with Flutter, Kotlin Multiplatform, Firebase, and AWS.',
     highlights: [
@@ -85,8 +88,11 @@ export const experience = [
   {
     role: 'Web Systems Developer',
     org: 'Jets and Aeronautics Society @ UCF',
+    type: 'Part-Time',
+    current: true,
     period: 'May 2025 — Present',
     logo: jasLogo,
+    stack: ['SvelteKit', 'Prisma', 'TypeScript'],
     summary:
       'Modernizing web architecture and developer workflows for a 400+ member engineering organization.',
     highlights: [
@@ -99,8 +105,11 @@ export const experience = [
   {
     role: 'Frontend Developer Intern',
     org: 'BudgetWise',
+    type: 'Internship',
+    current: false,
     period: 'Mar 2025 — May 2025',
     logo: budgetwiseLogo,
+    stack: ['Vue', 'TypeScript', 'Node.js'],
     summary:
       'Shipped performant Vue + TypeScript features and improved team onboarding quality.',
     highlights: [
@@ -113,8 +122,11 @@ export const experience = [
   {
     role: 'Android Developer Intern',
     org: 'Reel Talk',
+    type: 'Internship',
+    current: false,
     period: 'Jan 2024 — Aug 2024',
     logo: reeltalkLogo,
+    stack: ['Kotlin', 'Jetpack Compose', 'Firebase'],
     summary:
       'Owned Android development as the sole mobile developer using Kotlin, Compose, and Firebase.',
     highlights: [
@@ -126,8 +138,11 @@ export const experience = [
   {
     role: 'Undergraduate Researcher',
     org: 'Florida Solar Energy Center',
+    type: 'Research',
+    current: false,
     period: 'May 2025 — Aug 2025',
     logo: fsecLogo,
+    stack: ['Python', 'TensorFlow', 'MLP', 'LSTM'],
     summary:
       'Contributed to multimodal deep-learning diagnostics for photovoltaic defects in DARTS.',
     highlights: [
@@ -140,8 +155,11 @@ export const experience = [
   {
     role: 'Undergraduate Learning Assistant',
     org: 'University of Central Florida',
+    type: 'Part-Time',
+    current: false,
     period: 'May 2025 — Aug 2025',
     logo: ucfLogo,
+    stack: ['Java', 'OOP'],
     summary:
       'Mentored students at scale in Java OOP with a focus on architecture and debugging habits.',
     highlights: [
