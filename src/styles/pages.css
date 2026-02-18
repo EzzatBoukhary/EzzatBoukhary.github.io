@@ -1,0 +1,104 @@
+/* ── Resume page ───────────────────────────────────────────────────────── */
+.resume-page { padding-top: 80px; }
+.resume-hero {
+  padding: 6rem 0 4rem;
+  border-bottom: 1px solid var(--border);
+}
+.resume-hero__heading {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 900;
+  letter-spacing: -.05em;
+  line-height: .95;
+
+  margin-bottom: 1.5rem;
+}
+.resume-hero__heading em { color: var(--yellow); font-style: normal; }
+.resume-hero__sub {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.4);
+  max-width: 50ch;
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+.resume-hero__actions { display: flex; gap: .75rem; flex-wrap: wrap; }
+
+.resume-frame-wrap {
+  padding: 3rem 0 6rem;
+}
+.resume-frame {
+  width: 100%;
+  height: min(90vh, 1000px);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.resume-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.resume-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 1rem;
+  color: rgba(255,255,255,0.3);
+  font-size: .9rem;
+}
+
+/* ── Portfolio page ────────────────────────────────────────────────────── */
+.portfolio-page { padding-top: 80px; }
+.portfolio-hero {
+  padding: 6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.portfolio-hero__heading {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 900;
+  letter-spacing: -.05em;
+  line-height: .95;
+  margin-bottom: 1.5rem;
+}
+.portfolio-hero__heading em { color: var(--yellow); font-style: normal; }
+.portfolio-hero__sub {
+  color: rgba(255,255,255,0.4);
+  max-width: 50ch;
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero__inner { grid-template-columns: 1fr; }
+  .hero__card { display: none; }
+  .about-section__grid { grid-template-columns: 1fr; }
+  .about-section__img-wrap { max-width: 300px; margin: 0 auto; }
+  .tl-item { grid-template-columns: 1fr; gap: .5rem; }
+  .tl-item__date { font-size: .72rem; }
+  .stats-section__grid { grid-template-columns: repeat(2, 1fr); }
+  .nav__links { display: none; }
+  .nav__cta  { display: none; }
+  .nav__burger { display: flex; }
+  .pp-body__grid { grid-template-columns: 1fr; }
+  .pp-specs { position: static; }
+  .pp-stats__grid { grid-template-columns: repeat(2, 1fr); }
+  .pp-stat { border-right: none; border-bottom: 1px solid var(--border); }
+  .project-bento { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 560px) {
+  .hero__name { font-size: clamp(3.5rem, 14vw, 5.5rem); }
+  .work-cursor-img { display: none; }
+  .stats-section__grid { grid-template-columns: repeat(2, 1fr); }
+  .skills-grid { grid-template-columns: 1fr; }
+  .achievements-grid { grid-template-columns: 1fr; }
+  .project-hero__name { font-size: clamp(2rem, 8vw, 3.5rem); }
+  .project-bento { grid-template-columns: 1fr; }
+  .project-bento__item:first-child { grid-row: span 1; }
+  .work-item__thumb { width: 72px; height: 50px; }
+}

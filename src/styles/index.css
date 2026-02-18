@@ -1,0 +1,17 @@
+/* ── Style modules ─────────────────────────────────────────────────────── */
+/* Design tokens, reset, base utilities, buttons */
+@import './tokens.css';
+/* Navigation */
+@import './nav.css';
+/* Scrolling marquee strip */
+@import './marquee.css';
+/* Hero section */
+@import './hero.css';
+/* Work / Projects list section */
+@import './work.css';
+/* About, Stats, Experience, Skills, Testimonials, Contact, Footer */
+@import './sections.css';
+/* Project detail page (pp-* classes) */
+@import './project.css';
+/* Resume page, Portfolio page, Responsive breakpoints */
+@import './pages.css';

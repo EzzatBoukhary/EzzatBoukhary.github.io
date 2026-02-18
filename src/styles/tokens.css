@@ -1,0 +1,178 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   EZZAT BOUKHARY  ·  Design System  ·  Electric / Bold
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Tokens ────────────────────────────────────────────────────────────── */
+:root {
+  --black:   #060608;
+  --white:   #ffffff;
+  --yellow:  #e8ff38;   /* the signature color — electric yellow    */
+  --pink:    #ff1f6a;   /* hot pink                                  */
+  --teal:    #00f5d0;   /* electric teal                             */
+  --orange:  #ff7b2a;   /* vivid orange                              */
+  --gray:    #55556e;   /* muted text (darker muted for better legibility) */
+  --surface: #0c0c10;   /* card bg                                   */
+  --border:  rgba(255,255,255,0.09);
+
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+
+  --ease:      cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io:   cubic-bezier(0.77, 0, 0.175, 1);
+
+  --r-sm: 6px;
+  --r-md: 12px;
+}
+
+/* ── Reset ─────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html   { font-size: 16px; scroll-behavior: auto; }
+body   {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  cursor: none;          /* custom cursor replaces default */
+  overflow-x: hidden;
+}
+a      { color: inherit; text-decoration: none; }
+img    { display: block; max-width: 100%; }
+ul,ol  { list-style: none; }
+button { background: none; border: none; cursor: none; font: inherit; color: inherit; }
+#root  { min-height: 100vh; }
+
+/* ── Container ─────────────────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 3.5rem);
+}
+
+/* ── Custom Cursor ─────────────────────────────────────────────────────── */
+.cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 36px; height: 36px;
+  border: 2px solid var(--yellow);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+  transition: width .3s var(--ease), height .3s var(--ease),
+              background .3s var(--ease), border-color .3s var(--ease),
+              opacity .3s;
+}
+.cursor--hover {
+  width: 60px;
+  height: 60px;
+  background: rgba(232,255,56,0.12);
+}
+.cursor--click {
+  width: 22px;
+  height: 22px;
+  background: rgba(232,255,56,0.4);
+}
+.cursor--text { border-color: rgba(255,255,255,0.3); }
+
+/* ── Page enter animation ──────────────────────────────────────────────── */
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+.page-enter { animation: page-enter 0.55s var(--ease) both; }
+
+/* Yellow wipe overlay for route transitions */
+.route-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--yellow);
+  z-index: 8000;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.route-overlay--in {
+  animation: wipe-in 0.35s var(--ease-io) both;
+}
+.route-overlay--out {
+  animation: wipe-out 0.35s var(--ease-io) both;
+  transform-origin: right center;
+}
+@keyframes wipe-in  { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+@keyframes wipe-out { from{transform:scaleX(1)} to{transform:scaleX(0)} }
+
+/* ── Scroll reveal ─────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.revealed { opacity: 1; transform: none; }
+
+/* ── Buttons ───────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5em;
+  font-family: var(--font-display);
+  font-size: .9rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: .8em 2em;
+  border-radius: 100px;
+  transition: transform .2s var(--ease), box-shadow .2s;
+  position: relative;
+  overflow: hidden;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.12);
+  opacity: 0;
+  transition: opacity .2s;
+}
+.btn:hover::after { opacity: 1; }
+.btn:hover { transform: translateY(-3px); }
+
+.btn--primary {
+  background: var(--yellow);
+  color: var(--black);
+  border: 2px solid var(--yellow);
+  box-shadow: 0 0 0 0 rgba(232,255,56,0);
+}
+.btn--primary:hover {
+  box-shadow: 0 0 28px rgba(232,255,56,0.35);
+}
+.btn--outline {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid rgba(255,255,255,0.25);
+}
+.btn--outline:hover { border-color: var(--yellow); color: var(--yellow); }
+.btn--lg { font-size: 1rem; padding: 1em 2.5em; }
+
+/* ── Section label ─────────────────────────────────────────────────────── */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: .6em;
+  font-family: var(--font-display);
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin-bottom: 1.5rem;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--yellow);
+}
+
