@@ -153,7 +153,6 @@ export function IconEmail(props) {
   );
 }
 
- */
 export function LinkIcon({ label = '', href = '', ...props }) {
   const l = label.toLowerCase();
   const u = href.toLowerCase();

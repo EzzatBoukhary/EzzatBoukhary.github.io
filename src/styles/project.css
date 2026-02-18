@@ -15,7 +15,7 @@
 .pp-hero__dots {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-image: radial-gradient(var(--pp-dots, rgba(255,255,255,0.07)) 1px, transparent 1px);
   background-size: 36px 36px;
   pointer-events: none;
   z-index: 0;
@@ -24,25 +24,188 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 40%, rgba(6,6,8,0.5) 100%);
+  background: linear-gradient(to bottom, transparent 55%, rgba(6,6,8,0.55) 100%);
 }
 
-/* Ghost watermark */
-.pp-hero__mono {
+/* ── Per-project unique pattern overlay ─────────────────────────────────── */
+/* Shared base */
+.pp-hero__pattern {
   position: absolute;
-  right: -2%;
-  bottom: -10%;
-  font-family: var(--font-display);
-  font-size: clamp(16rem, 30vw, 36rem);
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: -.07em;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255,255,255,0.04);
+  inset: 0;
   pointer-events: none;
-  user-select: none;
   z-index: 0;
+  opacity: 0.55;
 }
+
+/* Puppetry: theatrical spotlight cone radiating from top-center
+   — converging lines like stage lighting rigs */
+.pp-hero__pattern--puppetry {
+  background:
+    repeating-conic-gradient(
+      from 270deg at 72% 0%,
+      rgba(168,85,247,0.09) 0deg,
+      transparent 7deg,
+      transparent 14deg
+    );
+  mask-image: radial-gradient(ellipse 80% 100% at 72% 0%, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 100% at 72% 0%, black 30%, transparent 80%);
+}
+
+/* College Event Platform: circuit-board grid with node intersections */
+.pp-hero__pattern--cew {
+  background-image:
+    /* Horizontal grid lines */
+    linear-gradient(0deg, transparent 0%, rgba(14,165,233,0.12) 50%, transparent 100%),
+    /* Vertical grid lines */
+    linear-gradient(90deg, transparent 0%, rgba(6,182,212,0.08) 50%, transparent 100%);
+  background-size: 1px 80px, 80px 1px;
+  /* Node dots at intersections via an overlay */
+}
+.pp-hero__pattern--cew::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(14,165,233,0.25) 1.5px, transparent 1.5px);
+  background-size: 80px 80px;
+}
+
+/* Dragonotchi: radial burst lines + ember rings like a fire explosion */
+.pp-hero__pattern--dragonotchi {
+  background:
+    repeating-conic-gradient(
+      from 0deg at 62% 60%,
+      rgba(234,88,12,0.10) 0deg,
+      transparent 5deg,
+      transparent 10deg
+    );
+  mask-image: radial-gradient(ellipse 90% 80% at 62% 60%, black 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 62% 60%, black 20%, transparent 75%);
+}
+.pp-hero__pattern--dragonotchi::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle 2px at 62% 60%, rgba(251,191,36,0.6) 0%, transparent 100%),
+    radial-gradient(ellipse 4% 4% at 62% 60%, rgba(251,191,36,0.15) 0%, transparent 100%);
+}
+
+/* KillerBot: CRT horizontal scanlines + vertical phosphor columns */
+.pp-hero__pattern--killerbot {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(132,204,22,0.055) 3px,
+      rgba(132,204,22,0.055) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 24px,
+      rgba(132,204,22,0.04) 24px,
+      rgba(132,204,22,0.04) 25px
+    );
+  animation: crt-scroll 8s linear infinite;
+}
+@keyframes crt-scroll {
+  from { background-position: 0 0, 0 0; }
+  to   { background-position: 0 -80px, 0 0; }
+}
+
+/* Campus Critters: diagonal leaf/organic wave stripes */
+.pp-hero__pattern--campus-critters {
+  background-image:
+    repeating-linear-gradient(
+      -55deg,
+      transparent 0px,
+      transparent 28px,
+      rgba(22,163,74,0.08) 28px,
+      rgba(22,163,74,0.08) 30px
+    ),
+    repeating-linear-gradient(
+      35deg,
+      transparent 0px,
+      transparent 46px,
+      rgba(134,239,172,0.05) 46px,
+      rgba(134,239,172,0.05) 48px
+    );
+}
+
+/* Floating accent orbs */
+.pp-hero__orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(70px);
+}
+.pp-hero__orb--1 {
+  width: clamp(300px, 40vw, 600px);
+  height: clamp(300px, 40vw, 600px);
+  top: -15%;
+  right: -10%;
+  background: color-mix(in srgb, var(--pp-accent, #e8ff38) 28%, transparent);
+  animation: pp-orb-drift 14s ease-in-out infinite;
+}
+.pp-hero__orb--2 {
+  width: clamp(200px, 28vw, 380px);
+  height: clamp(200px, 28vw, 380px);
+  bottom: 0%;
+  left: -6%;
+  background: color-mix(in srgb, var(--pp-accent, #e8ff38) 16%, transparent);
+  animation: pp-orb-drift 18s ease-in-out infinite reverse;
+}
+@keyframes pp-orb-drift {
+  0%,100% { transform: translate(0,0) scale(1); }
+  40%      { transform: translate(25px,-35px) scale(1.07); }
+  70%      { transform: translate(-18px,22px) scale(0.96); }
+}
+
+/* Diagonal accent lines */
+.pp-hero__lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.pp-hero__lines::before,
+.pp-hero__lines::after {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--pp-accent, #e8ff38) 30%, transparent) 30%,
+    color-mix(in srgb, var(--pp-accent, #e8ff38) 30%, transparent) 70%,
+    transparent 100%);
+  left: -50%;
+}
+.pp-hero__lines::before {
+  top: 28%;
+  transform: rotate(-8deg);
+  opacity: 0.35;
+}
+.pp-hero__lines::after {
+  top: 58%;
+  transform: rotate(-8deg);
+  opacity: 0.18;
+}
+
+/* Corner bracket SVG decorations */
+.pp-hero__corner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  color: color-mix(in srgb, var(--pp-accent, #e8ff38) 45%, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+.pp-hero__corner--tl { top: 5.5rem; left: 2rem; }
+.pp-hero__corner--br { bottom: 2rem; right: 2rem; }
 
 .pp-hero__inner {
   position: relative;
@@ -51,8 +214,9 @@
 }
 
 .pp-hero__back {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  width: fit-content;
   gap: .5em;
   font-family: var(--font-display);
   font-size: .78rem;
@@ -66,8 +230,9 @@
 .pp-hero__back:hover { color: var(--white); }
 
 .pp-hero__tag {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  width: fit-content;
   gap: .55em;
   font-family: var(--font-display);
   font-size: .76rem;

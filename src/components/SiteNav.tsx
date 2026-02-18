@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const NAV_LINKS = [
   { to: '/#about',       label: 'About'      },
@@ -13,6 +13,7 @@ export default function SiteNav() {
   const [scrolled, setScrolled]   = useState(false);
   const [menuOpen, setMenuOpen]   = useState(false);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -24,18 +25,23 @@ export default function SiteNav() {
   const handleLink = useCallback((e, to) => {
     if (to.startsWith('/#')) {
       e.preventDefault();
-      // If we're not on home, go home first then scroll after load
+      const id = to.slice(2);
       if (pathname !== '/') {
-        window.location.href = to;
+        // SPA navigation — pass the section id via router state so Home can scroll there
+        navigate('/', { state: { scrollTo: id } });
+        setMenuOpen(false);
         return;
       }
-      const id = to.slice(2);
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      const lenis = (window as any).__lenis;
+      const el = document.getElementById(id);
+      if (el) {
+        lenis ? lenis.scrollTo(el, { offset: -80, duration: 1.2 }) : el.scrollIntoView({ behavior: 'smooth' });
+      }
       setMenuOpen(false);
     } else {
       setMenuOpen(false);
     }
-  }, [pathname]);
+  }, [pathname, navigate]);
 
   // Close menu on ESC
   useEffect(() => {
@@ -74,9 +80,9 @@ export default function SiteNav() {
             ))}
           </ul>
 
-          <a href="mailto:ezzatboukhary03@gmail.com" className="nav__cta">
+          <Link to="/contact" className="nav__cta">
             Let's Talk
-          </a>
+          </Link>
 
           {/* Hamburger */}
           <button
@@ -116,9 +122,9 @@ export default function SiteNav() {
             </Link>
           )
         ))}
-        <a href="mailto:ezzatboukhary03@gmail.com" className="nav__overlay-link" onClick={() => setMenuOpen(false)}>
+        <Link to="/contact" className="nav__overlay-link" onClick={() => setMenuOpen(false)}>
           Contact
-        </a>
+        </Link>
       </div>
     </>
   );

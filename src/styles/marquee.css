@@ -38,7 +38,7 @@
 /* ── Character animation (hero name) ──────────────────────────────────── */
 .char-wrap {
   display: inline-block;
-  overflow: hidden;
+  overflow: visible;
   vertical-align: bottom;
   line-height: 1;
 }

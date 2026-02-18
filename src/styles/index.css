@@ -15,3 +15,5 @@
 @import './project.css';
 /* Resume page, Portfolio page, Responsive breakpoints */
 @import './pages.css';
+/* Music player widget + easter egg overlays */
+@import './widgets.css';

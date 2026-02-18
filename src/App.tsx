@@ -7,13 +7,35 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CustomCursor from './components/CustomCursor.jsx';
 import SiteNav      from './components/SiteNav.jsx';
 import SiteFooter   from './components/SiteFooter.jsx';
+import MusicPlayer  from './components/MusicPlayer';
 
 import Home          from './pages/Home.jsx';
 import ProjectPage   from './pages/ProjectPage.jsx';
 import ResumePage    from './pages/ResumePage.jsx';
-import PortfolioPage from './pages/PortfolioPage.jsx';
+import ContactPage   from './pages/ContactPage';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// ─── Scroll to top on every route change ─────────────────────────────────
+function ScrollToTop() {
+  const location = useLocation();
+  useEffect(() => {
+    // Skip scroll-to-top when navigating to home with a section target
+    const scrollTo = (location.state as any)?.scrollTo;
+    if (location.pathname === '/' && scrollTo) return;
+
+    // Tell Lenis to jump to 0 immediately if it's running
+    const lenis = (window as any).__lenis as Lenis | undefined;
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+  }, [location]);
+  return null;
+}
 
 // ─── Smooth scroll + GSAP integration ────────────────────────────────────
 function SmoothScroll({ children }) {
@@ -23,6 +45,7 @@ function SmoothScroll({ children }) {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
+    (window as any).__lenis = lenis;
 
     // Tell GSAP ScrollTrigger to use Lenis scroll
     lenis.on('scroll', ScrollTrigger.update);
@@ -31,6 +54,7 @@ function SmoothScroll({ children }) {
 
     return () => {
       lenis.destroy();
+      (window as any).__lenis = undefined;
       gsap.ticker.remove((time) => lenis.raf(time * 1000));
     };
   }, []);
@@ -69,16 +93,18 @@ function Layout() {
     <>
       <CustomCursor />
       <SiteNav />
+      <ScrollToTop />
       <TransitionOverlay />
       <Routes>
         <Route path="/"                element={<Home />} />
         <Route path="/project/:slug"   element={<ProjectPage />} />
         <Route path="/resume"          element={<ResumePage />} />
-        <Route path="/portfolio"       element={<PortfolioPage />} />
+        <Route path="/contact"         element={<ContactPage />} />
         {/* Fallback */}
         <Route path="*"               element={<Home />} />
       </Routes>
       <SiteFooter />
+      <MusicPlayer />
     </>
   );
 }

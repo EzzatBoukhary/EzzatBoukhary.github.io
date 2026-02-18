@@ -9,14 +9,76 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ── Per-project hero backgrounds (dark, distinctly themed) ────────────────
-const PROJECT_HERO_BG = {
-  'gesture-based-puppetry': 'radial-gradient(ellipse 80% 60% at 60% 40%, rgba(168,85,247,0.2) 0%, transparent 70%), #07040f',
-  'college-event-platform': 'radial-gradient(ellipse 80% 60% at 60% 40%, rgba(14,165,233,0.18) 0%, transparent 70%), #020c18',
-  'dragonotchi':             'radial-gradient(ellipse 80% 60% at 60% 40%, rgba(249,115,22,0.2) 0%, transparent 70%), #120500',
-  'killerbot':               'radial-gradient(ellipse 80% 60% at 60% 40%, rgba(232,255,56,0.14) 0%, transparent 70%), #0a0a00',
-  'campus-critters':         'radial-gradient(ellipse 80% 60% at 60% 40%, rgba(34,197,94,0.18) 0%, transparent 70%), #021008',
+// ── Per-project hero — each tells a different visual story ───────────────
+const PROJECT_THEME: Record<string, { a: string; b: string; c: string; base: string }> = {
+  // Puppetry: deep theatre — purple spotlight from top-right, dark stage floor
+  'gesture-based-puppetry': {
+    a: 'rgba(168,85,247,0.65)',
+    b: 'rgba(109,40,217,0.30)',
+    c: 'rgba(236,72,153,0.12)',
+    base: '#04010d',
+  },
+  // College Event Platform: clean data-centre blues, grid feel
+  'college-event-platform': {
+    a: 'rgba(14,165,233,0.60)',
+    b: 'rgba(6,182,212,0.25)',
+    c: 'rgba(99,102,241,0.12)',
+    base: '#010a18',
+  },
+  // Dragonotchi: volcanic fire — deep ember base, orange-gold burst
+  'dragonotchi': {
+    a: 'rgba(234,88,12,0.70)',
+    b: 'rgba(251,191,36,0.35)',
+    c: 'rgba(239,68,68,0.14)',
+    base: '#160300',
+  },
+  // KillerBot: CRT phosphor green on pitch black
+  'killerbot': {
+    a: 'rgba(132,204,22,0.50)',
+    b: 'rgba(232,255,56,0.22)',
+    c: 'rgba(74,222,128,0.10)',
+    base: '#010801',
+  },
+  // Campus Critters: lush forest canopy — deep emerald, dappled light
+  'campus-critters': {
+    a: 'rgba(22,163,74,0.55)',
+    b: 'rgba(134,239,172,0.22)',
+    c: 'rgba(20,184,166,0.10)',
+    base: '#010d04',
+  },
 };
+
+// Map slug → pattern CSS modifier class
+const PROJECT_PATTERN: Record<string, string> = {
+  'gesture-based-puppetry': 'puppetry',
+  'college-event-platform': 'cew',
+  'dragonotchi':             'dragonotchi',
+  'killerbot':               'killerbot',
+  'campus-critters':         'campus-critters',
+};
+
+// Per-project dot grid colours for extra distinctiveness
+const PROJECT_DOTS: Record<string, string> = {
+  'gesture-based-puppetry': 'rgba(168,85,247,0.12)',
+  'college-event-platform': 'rgba(14,165,233,0.10)',
+  'dragonotchi':             'rgba(251,191,36,0.10)',
+  'killerbot':               'rgba(132,204,22,0.12)',
+  'campus-critters':         'rgba(34,197,94,0.10)',
+};
+
+function buildHeroBg(slug: string): string {
+  const t = PROJECT_THEME[slug];
+  if (!t) return '#06060a';
+  return [
+    // Dramatic top-right spotlight bloom
+    `radial-gradient(ellipse 90% 70% at 75% 20%, ${t.a} 0%, ${t.b} 45%, transparent 72%)`,
+    // Secondary lower-left atmospheric fill
+    `radial-gradient(ellipse 60% 50% at 10% 90%, ${t.b} 0%, transparent 60%)`,
+    // Subtle colour cast across the whole hero
+    `radial-gradient(ellipse 100% 100% at 50% 50%, ${t.c} 0%, transparent 70%)`,
+    t.base,
+  ].join(', ');
+}
 
 const GENRE_SHORT = {
   'Realtime Graphics / Simulation':       'Graphics',
@@ -35,12 +97,25 @@ export default function ProjectPage() {
   const currentIdx = projectCases.findIndex((p) => p.slug === slug);
   const nextProject = projectCases[(currentIdx + 1) % projectCases.length];
 
-  const accent = project?.accentColor ?? '#e8ff38';
-  const heroBg = PROJECT_HERO_BG[slug] ?? '#06060a';
+  const accent      = project?.accentColor ?? '#e8ff38';
+  const heroBg      = buildHeroBg(slug);
+  const dotColor    = PROJECT_DOTS[slug] ?? 'rgba(255,255,255,0.07)';
+  const patternSlug = PROJECT_PATTERN[slug];
+
+  // Scroll to top FIRST — tell Lenis to jump immediately
+  useEffect(() => {
+    const lenis = (window as any).__lenis;
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      window.scrollTo(0, 0);
+    }
+  }, [slug]);
 
   useEffect(() => {
     if (!project) { navigate('/'); return; }
-    window.scrollTo(0, 0);
   }, [slug, project, navigate]);
 
   useEffect(() => {
@@ -69,9 +144,25 @@ export default function ProjectPage() {
     <div className="project-page page-enter" ref={pageRef}>
 
       {/* ── Hero ──────────────────────────────────────────────────────── */}
-      <header className="pp-hero" style={{ background: heroBg, '--pp-accent': accent }}>
+      <header className="pp-hero" style={{ background: heroBg, '--pp-accent': accent, '--pp-dots': dotColor } as React.CSSProperties}>
+        {/* Dot grid */}
         <div className="pp-hero__dots" aria-hidden="true" />
-        <div className="pp-hero__mono" aria-hidden="true">{project.name.split(' ')[0].toUpperCase()}</div>
+        {/* Per-project unique pattern */}
+        {patternSlug && (
+          <div className={`pp-hero__pattern pp-hero__pattern--${patternSlug}`} aria-hidden="true" />
+        )}
+        {/* Diagonal accent lines */}
+        <div className="pp-hero__lines" aria-hidden="true" />
+        {/* Floating orbs */}
+        <div className="pp-hero__orb pp-hero__orb--1" aria-hidden="true" />
+        <div className="pp-hero__orb pp-hero__orb--2" aria-hidden="true" />
+        {/* Corner bracket decorations */}
+        <svg className="pp-hero__corner pp-hero__corner--tl" viewBox="0 0 60 60" fill="none" aria-hidden="true">
+          <path d="M2 58V2h56" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        </svg>
+        <svg className="pp-hero__corner pp-hero__corner--br" viewBox="0 0 60 60" fill="none" aria-hidden="true">
+          <path d="M58 2v56H2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        </svg>
 
         <div className="container pp-hero__inner">
           <Link to="/#projects" className="pp-hero__back">

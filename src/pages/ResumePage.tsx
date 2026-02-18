@@ -59,35 +59,6 @@ export default function ResumePage() {
           </p>
         </div>
       </div>
-
-      {/* ── Quick highlights ── */}
-      <div style={{ paddingBottom: '6rem' }}>
-        <div className="container">
-          <p className="section-label">Highlights</p>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 900, fontSize: 'clamp(1.75rem, 3.5vw, 3rem)', letterSpacing: '-.04em', marginBottom: '3rem' }}>
-            Experience at a glance
-          </h2>
-          <div className="timeline">
-            {experience.map((item, i) => (
-              <div key={`${item.org}-${i}`} className="tl-item">
-                <div className="tl-item__date">{item.period}</div>
-                <div className="tl-item__body">
-                  <div className="tl-item__header">
-                    <img src={item.logo} alt={item.org} className="tl-item__logo" />
-                    <div>
-                      <div className="tl-item__role">{item.role}</div>
-                      <div className="tl-item__org">{item.org}</div>
-                    </div>
-                    {item.href && (
-                      <a href={item.href} target="_blank" rel="noreferrer" className="tl-item__ext">↗</a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

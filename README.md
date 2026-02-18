@@ -1,50 +1,48 @@
-# EzzatBoukhary.github.io
+# Ezzat Boukhary — Portfolio
 
-My personal portfolio website, rebuilt as a drivable interactive 3D portfolio park.
+Personal portfolio site built with React, TypeScript, and Vite.
 
-🌐 **Live Site**: [ezzatboukhary.github.io](https://ezzatboukhary.github.io/)
+🌐 **Live**: [ezzatboukhary.github.io](https://ezzatboukhary.github.io/)
 
-## What's Inside
+## Screenshots
 
-- **3D Portfolio Park** (`/`) – A full-screen playable world where visitors drive through colorful zones and interact with kiosks.
-- **Interactive Stations** – About, Experience, Projects, Achievements, Skills, Testimonials, and Contact are all represented in-world.
-- **3D Info Panels** – Portfolio details render as in-scene floating panels instead of traditional 2D page sections.
-- **External Link Beacons** – 3D link orbs open GitHub, LinkedIn, and Resume.
+| | |
+|---|---|
+| ![Hero](screenshots/hero.png) | ![Projects](screenshots/projects.png) |
+| ![Project Case Study](screenshots/project.png) | ![Contact](screenshots/contact.png) |
 
 ## Tech Stack
 
-- React 18
+- React 18 + TypeScript
 - Vite 5
-- Three.js
-- @react-three/fiber
-- @react-three/drei
+- GSAP 3 + ScrollTrigger
+- Lenis (smooth scroll)
+- React Router v6
+- CSS custom properties / modular stylesheets
 
-## Features
+## Pages
 
-- Complete 3D-first portfolio experience (no traditional 2D layout pages)
-- Keyboard driving controls with in-world zone interaction
-- Data-driven portfolio content from `src/data/siteData.js`
-- Real-time lighting, sparkles, fog, and animated 3D scene elements
+| Route | Description |
+|---|---|
+| `/` | Home — hero, experience, projects, skills, recommendations, contact |
+| `/project/:slug` | Project case study pages |
+| `/resume` | Embedded résumé |
+| `/contact` | Contact links |
+| `/portfolio.html` | Printable portfolio PDF (use browser Print / Save PDF) |
 
-## Local Development
+## Content
+
+All site content — profile info, experience, projects, stats, and recommendations — is managed in `src/data/siteData.ts`.
+
+## Development
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Production Build
+## Build
 
 ```bash
 npm run build
-npm run preview
 ```
-
-## Preview
-
-Controls:
-
-- Drive with `WASD` or arrow keys.
-- Press `E` near a kiosk to open that section panel.
-- Press `Esc` to close the active panel.
-- Use panel links to open projects, recommendations, and contact destinations.

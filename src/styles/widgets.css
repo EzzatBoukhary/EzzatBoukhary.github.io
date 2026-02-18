@@ -1,0 +1,248 @@
+/* ── Music Player ──────────────────────────────────────────────────────── */
+.music-player {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  background: rgba(12,12,16,0.88);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid rgba(232,255,56,0.18);
+  border-radius: 100px;
+  padding: .35rem .7rem .35rem .4rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 0 0 rgba(232,255,56,0);
+  transition: border-color .3s, box-shadow .3s, transform .25s;
+}
+.music-player:hover {
+  border-color: rgba(232,255,56,0.36);
+  transform: translateY(-2px);
+}
+.music-player--playing {
+  border-color: rgba(232,255,56,0.4);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.5), 0 0 18px rgba(232,255,56,0.12);
+}
+
+.music-player__btn {
+  position: relative;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: rgba(232,255,56,0.14);
+  border: none;
+  color: var(--yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background .2s, transform .15s;
+}
+.music-player__btn:hover:not(:disabled) {
+  background: rgba(232,255,56,0.25);
+  transform: scale(1.08);
+}
+.music-player__btn:disabled { opacity: .45; cursor: default; }
+.music-player__btn svg { width: .85rem; height: .85rem; }
+
+/* EQ bars shown next to track name when playing */
+.music-player__eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 11px;
+  flex-shrink: 0;
+}
+.music-player__eq span {
+  display: block;
+  width: 2.5px;
+  border-radius: 2px;
+  background: var(--yellow);
+  animation: eq-bar 0.9s ease-in-out infinite;
+}
+.music-player__eq span:nth-child(1) { height: 60%; animation-delay: 0s; }
+.music-player__eq span:nth-child(2) { height: 100%; animation-delay: .15s; }
+.music-player__eq span:nth-child(3) { height: 45%; animation-delay: .3s; }
+.music-player__eq span:nth-child(4) { height: 80%; animation-delay: .05s; }
+@keyframes eq-bar {
+  0%,100% { transform: scaleY(1); }
+  50%      { transform: scaleY(0.3); }
+}
+
+.music-player__label {
+  display: flex;
+  align-items: center;
+  gap: .35em;
+  line-height: 1.2;
+  min-width: 70px;
+}
+.music-player__track {
+  font-family: var(--font-display);
+  font-size: .65rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  color: var(--white);
+  text-transform: uppercase;
+}
+.music-player__sub {
+  font-family: var(--font-display);
+  font-size: .58rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: rgba(255,255,255,0.4);
+  text-transform: lowercase;
+}
+
+.music-player__close {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color .2s;
+  flex-shrink: 0;
+  padding: 0;
+}
+.music-player__close:hover { color: var(--white); }
+.music-player__close svg { width: .7rem; height: .7rem; }
+
+/* Mobile: hide the text label, show only play btn + close */
+@media (max-width: 480px) {
+  .music-player {
+    bottom: 1rem;
+    right: 1rem;
+    gap: .4rem;
+    padding: .3rem .4rem;
+  }
+  .music-player__label { display: none; }
+}
+
+/* ── Easter Egg — Terminal takeover ────────────────────────────────────── */
+@keyframes easter-in {
+  from { opacity: 0; transform: scale(.96) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes scanline-scroll {
+  from { transform: translateY(0); }
+  to   { transform: translateY(4px); }
+}
+@keyframes easter-cursor-blink {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+@keyframes easter-flicker {
+  0%,100%  { opacity: 1; }
+  92%      { opacity: 1; }
+  93%      { opacity: .85; }
+  94%      { opacity: 1; }
+  96%      { opacity: .9; }
+  97%      { opacity: 1; }
+}
+
+.easter-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.9);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  animation: easter-flicker 6s ease-in-out infinite;
+}
+
+/* CRT scanlines */
+.easter-scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0,0,0,0.15) 3px,
+    rgba(0,0,0,0.15) 4px
+  );
+  animation: scanline-scroll .12s linear infinite;
+}
+
+.easter-box {
+  position: relative;
+  z-index: 2;
+  width: min(640px, 90vw);
+  background: rgba(4, 8, 4, 0.97);
+  border: 1px solid rgba(232,255,56,0.5);
+  border-radius: 6px;
+  padding: 2.5rem;
+  box-shadow:
+    0 0 0 1px rgba(232,255,56,0.08),
+    0 0 40px rgba(232,255,56,0.15),
+    0 0 80px rgba(232,255,56,0.06),
+    inset 0 0 60px rgba(0,0,0,0.5);
+  animation: easter-in .4s cubic-bezier(0.22,1,0.36,1);
+  cursor: default;
+}
+/* Terminal top bar */
+.easter-box::before {
+  content: '● ● ●  dev_profile.sh';
+  display: block;
+  font-family: monospace;
+  font-size: .7rem;
+  color: rgba(232,255,56,0.4);
+  border-bottom: 1px solid rgba(232,255,56,0.15);
+  padding-bottom: .75rem;
+  margin-bottom: 1.25rem;
+  letter-spacing: .05em;
+}
+
+.easter-terminal {
+  font-family: monospace;
+  font-size: clamp(.7rem, 1.5vw, .85rem);
+  line-height: 1.9;
+  color: rgba(232,255,56,0.85);
+  text-shadow: 0 0 6px rgba(232,255,56,0.4);
+}
+
+.easter-line {
+  white-space: pre;
+  min-height: 1.9em;
+}
+
+.easter-cursor {
+  display: inline-block;
+  width: .55em;
+  height: 1.1em;
+  background: rgba(232,255,56,0.7);
+  vertical-align: text-bottom;
+  margin-left: 1px;
+  animation: easter-cursor-blink .7s step-end infinite;
+}
+
+.easter-close {
+  display: block;
+  margin-top: 2rem;
+  font-family: monospace;
+  font-size: .75rem;
+  color: rgba(232,255,56,0.4);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  border: 1px solid rgba(232,255,56,0.2);
+  border-radius: 4px;
+  padding: .4em 1.2em;
+  transition: color .2s, border-color .2s, background .2s;
+  cursor: pointer;
+}
+.easter-close:hover {
+  color: var(--black);
+  border-color: var(--yellow);
+  background: var(--yellow);
+}

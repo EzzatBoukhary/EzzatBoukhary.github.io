@@ -30,7 +30,7 @@ export const profile = {
   email: 'ezzatboukhary03@gmail.com',
   heroImage: profileBanner,
   summary:
-    'I build products end-to-end and optimize them until they feel fast, reliable, and genuinely useful. I enjoy turning rough concepts into polished systems that teams and users trust.',
+    'I build products end-to-end and optimize them until they feel fast, reliable, and genuinely useful. Graduated UCF CS — Summa Cum Laude, 3.96 GPA.',
   mission:
     'Create software that feels as intentional as a well-designed game: clear feedback, low friction, and meaningful progression.'
 };
@@ -39,14 +39,14 @@ export const links = {
   github: 'https://github.com/ezzatBoukhary',
   linkedin: 'https://linkedin.com/in/ezzatboukhary',
   resumeDrive: 'https://drive.google.com/file/d/1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14/view',
-  resumeDownload: 'https://drive.google.com/uc?export=download&id=1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14'
+  resumeDownload: 'https://drive.google.com/uc?export=download&id=1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14',
 };
 
 export const gameStats = [
-  { label: 'Career XP', value: '6+ Years Building' },
-  { label: 'Users Reached', value: '250K+' },
-  { label: 'Communities', value: '600+ Servers' },
-  { label: 'Optimization Win', value: '90% Firebase Reduction' }
+  { label: 'Users Reached',      value: '250K+', fill: 100 },
+  { label: 'Graduated GPA',      value: '3.96',  fill: 99  },
+  { label: 'Firebase Reads Cut', value: '90%↓',  fill: 90  },
+  { label: 'Students Mentored',  value: '300+',  fill: 75  },
 ];
 
 export const achievements = [
@@ -89,12 +89,12 @@ export const experience = [
     role: 'Web Systems Developer',
     org: 'Jets and Aeronautics Society @ UCF',
     type: 'Part-Time',
-    current: true,
-    period: 'May 2025 — Present',
+    current: false,
+    period: 'May 2025 — Dec 2025',
     logo: jasLogo,
     stack: ['SvelteKit', 'Prisma', 'TypeScript'],
     summary:
-      'Modernizing web architecture and developer workflows for a 400+ member engineering organization.',
+      'Modernized web architecture and developer workflows for a 400+ member engineering organization.',
     highlights: [
       'Rebuilt systems with SvelteKit + Prisma',
       'Improved CI/CD and internal collaboration tooling',
@@ -157,15 +157,15 @@ export const experience = [
     org: 'University of Central Florida',
     type: 'Part-Time',
     current: false,
-    period: 'May 2025 — Aug 2025',
+    period: 'May 2025 — Dec 2025',
     logo: ucfLogo,
     stack: ['Java', 'OOP'],
     summary:
-      'Mentored students at scale in Java OOP with a focus on architecture and debugging habits.',
+      'Mentored students at scale in Java OOP while completing a B.S. in Computer Science, graduating Summa Cum Laude with a 3.96 GPA.',
     highlights: [
-      'Supported 300+ students',
+      'Supported 300+ students across multiple sections',
       'Led OOP and debugging sessions',
-      'Coached practical software problem-solving'
+      'Graduated Dec 2025 — Summa Cum Laude, 3.96 GPA'
     ]
   }
 ];

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Marquee from '../components/Marquee';
@@ -91,14 +91,15 @@ function HeroSection() {
   return (
     <section className="hero" id="home" ref={heroRef}>
       <div className="hero__bg" aria-hidden="true" />
-      <div className="hero__mono" aria-hidden="true">EB</div>
+      <div className="hero__orb hero__orb--1" aria-hidden="true" />
+      <div className="hero__orb hero__orb--2" aria-hidden="true" />
 
       <div className="container hero__inner">
         {/* Left — text */}
         <div>
           <div className="hero__pill">
             <span className="hero__pill-dot" aria-hidden="true" />
-            Builder-Class Engineer · UCF CS
+            UCF CS Graduate · Summa Cum Laude · 3.96 GPA
           </div>
 
           <h1 className="hero__name" aria-label="Ezzat Boukhary">
@@ -132,10 +133,18 @@ function HeroSection() {
         <div className="hero__card">
           <div className="hero__card-label">Character Stats</div>
           <div className="hero__stat-grid">
-            {gameStats.map((s) => (
+            {gameStats.map((s, i) => (
               <div key={s.label} className="hero__stat">
-                <span className="hero__stat-val">{s.value}</span>
-                <span className="hero__stat-lbl">{s.label}</span>
+                <div className="hero__stat-header">
+                  <span className="hero__stat-lbl">{s.label}</span>
+                  <span className="hero__stat-val">{s.value}</span>
+                </div>
+                <div className="hero__stat-track">
+                  <div
+                    className="hero__stat-fill"
+                    style={{ width: `${s.fill}%`, '--sd': `${0.3 + i * 0.12}s` } as React.CSSProperties}
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -162,7 +171,6 @@ function HeroSection() {
 }
 
 // ─── Work / Projects ───────────────────────────────────────────────────────
-// Genre type abbreviations — no emoji (emoji rendering differs per platform)
 const GENRE_SHORT = {
   'Realtime Graphics / Simulation':       'Graphics',
   'Full-Stack Product System':            'Full-Stack',
@@ -171,31 +179,76 @@ const GENRE_SHORT = {
   'Web + Mobile Product':                 'Mobile/Web',
 };
 
+function WorkCard({ project, index }: { project: typeof projectCases[0]; index: number }) {
+  const [hovered, setHovered] = useState(false);
+  const accent = project.accentColor ?? '#e8ff38';
+  return (
+    <li
+      className={`work-card${hovered ? ' work-card--hovered' : ''}`}
+      style={{ '--wc-accent': accent } as React.CSSProperties}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <Link to={`/project/${project.slug}`} className="work-card__link">
+        {/* Image fill */}
+        <div className="work-card__img-wrap">
+          <img src={project.gallery[0]} alt={project.name} className="work-card__img" />
+          <div className="work-card__img-overlay" />
+        </div>
+
+        {/* Index badge */}
+        <span className="work-card__num" aria-hidden="true">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+
+        {/* Accent glow behind card on hover */}
+        <div className="work-card__glow" aria-hidden="true" />
+
+        {/* Bottom content */}
+        <div className="work-card__body">
+          <div className="work-card__tags">
+            <span className="work-card__tag">{GENRE_SHORT[project.genre] ?? project.genre}</span>
+            <span className="work-card__difficulty">{project.difficulty}</span>
+          </div>
+          <h3 className="work-card__name">{project.name}</h3>
+          <p className="work-card__tagline">{project.tagline}</p>
+
+          {/* Stack pills — shown on hover */}
+          <div className="work-card__stack">
+            {project.stack.slice(0, 4).map((t) => (
+              <span key={t} className="work-card__stack-pill">{t}</span>
+            ))}
+          </div>
+
+          <div className="work-card__footer">
+            <span className="work-card__period">{project.period}</span>
+            <span className="work-card__cta">
+              View Project <IconArrowRight style={{ width: '1em', height: '1em' }} />
+            </span>
+          </div>
+        </div>
+      </Link>
+    </li>
+  );
+}
+
 function WorkSection() {
-  const listRef    = useRef(null);
+  const gridRef = useRef(null);
   const [ref, revealed] = useReveal(0.05);
 
-  // GSAP stagger for work items once revealed
   useEffect(() => {
     if (!revealed) return;
     const ctx = gsap.context(() => {
-      gsap.from('.work-item', {
-        opacity: 0,
-        y: 30,
-        stagger: 0.08,
-        duration: 0.7,
-        ease: 'power3.out',
+      gsap.from('.work-card', {
+        opacity: 0, y: 40, scale: 0.97,
+        stagger: 0.1, duration: 0.75, ease: 'power3.out',
       });
-    }, listRef);
+    }, gridRef);
     return () => ctx.revert();
   }, [revealed]);
 
   return (
-    <section
-      className="work-section"
-      id="projects"
-      ref={ref}
-    >
+    <section className="work-section" id="projects" ref={ref}>
       <div className={`container reveal ${revealed ? 'revealed' : ''}`}>
         <div className="work-section__top">
           <div>
@@ -206,36 +259,9 @@ function WorkSection() {
             Full Résumé <IconExternalLink style={{ width: '1em', height: '1em', marginLeft: '.25em' }} />
           </Link>
         </div>
-
-        <ol className="work-list" ref={listRef}>
+        <ol className="work-grid" ref={gridRef}>
           {projectCases.map((project, i) => (
-            <li key={project.slug} className="work-item">
-              <Link
-                to={`/project/${project.slug}`}
-                className="work-item__inner"
-                style={{ display: 'flex' }}
-              >
-                <span className="work-item__num">0{i + 1}</span>
-                <img
-                  src={project.gallery[0]}
-                  alt=""
-                  className="work-item__thumb"
-                  aria-hidden="true"
-                />
-                <div className="work-item__text">
-                  <h3 className="work-item__name">{project.name}</h3>
-                  <div className="work-item__meta">
-                    <span className="work-item__tag">
-                      {GENRE_SHORT[project.genre] ?? project.genre}
-                    </span>
-                    <span>{project.period}</span>
-                  </div>
-                </div>
-                <span className="work-item__arrow" aria-hidden="true">
-                  <IconArrowRight style={{ width: '1em', height: '1em' }} />
-                </span>
-              </Link>
-            </li>
+            <WorkCard key={project.slug} project={project} index={i} />
           ))}
         </ol>
       </div>
@@ -265,7 +291,7 @@ function AboutSection() {
             <div className="about-section__facts">
               <div className="about-section__fact">
                 <IconPin className="about-section__fact-icon" style={{ width: '1.1rem', height: '1.1rem' }} />
-                <span>Florida · UCF Computer Science</span>
+                <span>Florida · UCF CS · B.S. Dec 2025 · Summa Cum Laude · 3.96 GPA</span>
               </div>
               <div className="about-section__fact">
                 <IconGamepad className="about-section__fact-icon" style={{ width: '1.1rem', height: '1.1rem' }} />
@@ -315,37 +341,89 @@ function StatsSection() {
 }
 
 // ─── Experience ────────────────────────────────────────────────────────────
+const TYPE_COLOR: Record<string, string> = {
+  'Full-Time':  '#e8ff38',
+  'Part-Time':  '#00f5d0',
+  'Internship': '#a78bfa',
+  'Research':   '#fb923c',
+  'Teaching':   '#38bdf8',
+};
+
 function ExperienceSection() {
   const [ref, revealed] = useReveal(0.05);
   return (
     <section className="exp-section" id="experience" ref={ref}>
       <div className={`container reveal ${revealed ? 'revealed' : ''}`}>
-        <p className="section-label">Career</p>
-        <h2 className="exp-section__heading">Campaign Log</h2>
-        <div className="timeline">
-          {experience.map((item, i) => (
-            <div key={`${item.org}-${i}`} className="tl-item">
-              <div className="tl-item__date">{item.period}</div>
-              <div className="tl-item__body">
-                <div className="tl-item__header">
-                  <img src={item.logo} alt={item.org} className="tl-item__logo" />
-                  <div>
-                    <div className="tl-item__role">{item.role}</div>
-                    <div className="tl-item__org">{item.org}</div>
+        <div className="exp-section__top">
+          <div>
+            <p className="section-label">Career</p>
+            <h2 className="exp-section__heading">Work Experience</h2>
+          </div>
+        </div>
+        <div className="exp-grid">
+          {experience.map((item, i) => {
+            const typeColor = TYPE_COLOR[item.type] ?? '#e8ff38';
+            return (
+              <div
+                key={`${item.org}-${i}`}
+                className={`exp-card${item.current ? ' exp-card--featured' : ''}`}
+                style={{ '--exp-accent': typeColor } as React.CSSProperties}
+              >
+                {/* Top accent strip */}
+                <div className="exp-card__strip" />
+
+                <div className="exp-card__content">
+                  {/* Top row: logo + title + link */}
+                  <div className="exp-card__top">
+                    <img src={item.logo} alt={item.org} className="exp-card__logo" />
+                    <div className="exp-card__title-block">
+                      <div className="exp-card__role-row">
+                        <span className="exp-card__role">{item.role}</span>
+                        {item.current && (
+                          <span className="exp-card__now">● Now</span>
+                        )}
+                      </div>
+                      <div className="exp-card__org-row">
+                        <span className="exp-card__org">{item.org}</span>
+                        <span className="exp-card__sep">·</span>
+                        <span className="exp-card__type" style={{ color: typeColor }}>{item.type}</span>
+                        <span className="exp-card__sep">·</span>
+                        <span className="exp-card__period">{item.period}</span>
+                      </div>
+                    </div>
+                    {item.href && (
+                      <a href={item.href} target="_blank" rel="noreferrer"
+                         className="exp-card__ext" aria-label={`${item.org} website`}>
+                        <IconExternalLink style={{ width: '1em', height: '1em' }} />
+                      </a>
+                    )}
                   </div>
-                  {item.href && (
-                    <a href={item.href} target="_blank" rel="noreferrer" className="tl-item__ext" aria-label={`${item.org} site`}>
-                      <IconExternalLink style={{ width: '1em', height: '1em' }} />
-                    </a>
+
+                  {/* Summary */}
+                  <p className="exp-card__summary">{item.summary}</p>
+
+                  {/* Highlights */}
+                  <ul className="exp-card__bullets">
+                    {item.highlights.map((pt) => (
+                      <li key={pt} className="exp-card__bullet">
+                        <span className="exp-card__bullet-dot" aria-hidden="true" />
+                        <span dangerouslySetInnerHTML={{ __html: pt.replace(/(~?\d+[\d,+%x²]*([\+%\-]?\w*)?)/g, '<strong>$1</strong>') }} />
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Stack chips */}
+                  {item.stack && item.stack.length > 0 && (
+                    <div className="exp-card__stack">
+                      {item.stack.map((t) => (
+                        <span key={t} className="exp-card__chip">{t}</span>
+                      ))}
+                    </div>
                   )}
                 </div>
-                <p className="tl-item__summary">{item.summary}</p>
-                <ul className="tl-item__bullets">
-                  {item.highlights.map((pt) => <li key={pt}>{pt}</li>)}
-                </ul>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -455,9 +533,9 @@ function ContactSection() {
         <p className="contact-section__sub">
           Open to full-time roles, interesting collaborations, and products that reach real people.
         </p>
-        <a href={`mailto:${profile.email}`} className="btn btn--primary btn--lg">
-          {profile.email}
-        </a>
+        <Link to="/contact" className="btn btn--primary btn--lg">
+          Let's Talk →
+        </Link>
         <div className="contact-section__links">
           <a href={links.github}      target="_blank" rel="noreferrer" className="contact-section__link">
             <IconGitHub style={{ width: '1.15em', height: '1.15em' }} />
@@ -471,6 +549,10 @@ function ContactSection() {
             <IconArrowRight style={{ width: '1.15em', height: '1.15em' }} />
             Resume
           </Link>
+          <a href="/portfolio.html" target="_blank" rel="noreferrer" className="contact-section__link">
+            <IconArrowRight style={{ width: '1.15em', height: '1.15em' }} />
+            Portfolio PDF
+          </a>
         </div>
       </div>
     </section>
@@ -479,6 +561,40 @@ function ContactSection() {
 
 // ─── Home page ────────────────────────────────────────────────────────────
 export default function Home() {
+  const location = useLocation();
+
+  // Handle SPA deep-link navigation (e.g. from nav when on another page)
+  useEffect(() => {
+    const scrollTo = (location.state as any)?.scrollTo;
+    if (scrollTo) {
+      // Wait for page to render, then scroll
+      const timer = setTimeout(() => {
+        const el = document.getElementById(scrollTo);
+        if (el) {
+          const lenis = (window as any).__lenis;
+          lenis
+            ? lenis.scrollTo(el, { offset: -80, duration: 1.2 })
+            : el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 120);
+      return () => clearTimeout(timer);
+    }
+    // Also handle direct URL hash (e.g. ezzatboukhary.github.io/#projects)
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      const timer = setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) {
+          const lenis = (window as any).__lenis;
+          lenis
+            ? lenis.scrollTo(el, { offset: -80, duration: 1.2 })
+            : el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 120);
+      return () => clearTimeout(timer);
+    }
+  }, [location]);
+
   return (
     <main className="page-enter">
       <HeroSection />
