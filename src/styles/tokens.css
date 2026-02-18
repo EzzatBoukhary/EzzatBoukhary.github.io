@@ -128,25 +128,33 @@ button { background: none; border: none; cursor: none; font: inherit; color: inh
 }
 .page-enter { animation: page-enter 0.55s var(--ease) both; }
 
-/* Yellow wipe overlay for route transitions */
-.route-overlay {
+/* Single-panel curtain for route transitions */
+.route-curtain {
   position: fixed;
   inset: 0;
-  background: var(--yellow);
   z-index: 8000;
   pointer-events: none;
-  transform: scaleX(0);
-  transform-origin: left center;
+  background: var(--curtain-color, color-mix(in srgb, #e8ff38 35%, #090b16));
+  transform: translateY(102%);
 }
-.route-overlay--in {
-  animation: wipe-in 0.35s var(--ease-io) both;
+/* Cover: panel sweeps up from bottom, leading edge starts rounded then flattens */
+.route-curtain--in {
+  animation: curtain-cover 0.46s cubic-bezier(0.76, 0, 0.24, 1) both;
 }
-.route-overlay--out {
-  animation: wipe-out 0.35s var(--ease-io) both;
-  transform-origin: right center;
+/* Reveal: panel continues upward off the top, trailing edge rounds as it leaves */
+.route-curtain--out {
+  animation: curtain-reveal 0.46s cubic-bezier(0.76, 0, 0.24, 1) both;
 }
-@keyframes wipe-in  { from{transform:scaleX(0)} to{transform:scaleX(1)} }
-@keyframes wipe-out { from{transform:scaleX(1)} to{transform:scaleX(0)} }
+@keyframes curtain-cover {
+  0%   { transform: translateY(102%); border-radius: 50% 50% 0 0 / 6% 6% 0 0; }
+  50%  { border-radius: 0; }
+  100% { transform: translateY(0%);   border-radius: 0; }
+}
+@keyframes curtain-reveal {
+  0%   { transform: translateY(0%);    border-radius: 0; }
+  50%  { border-radius: 0 0 50% 50% / 0 0 6% 6%; }
+  100% { transform: translateY(-102%); border-radius: 0 0 50% 50% / 0 0 6% 6%; }
+}
 
 /* ── Scroll reveal ─────────────────────────────────────────────────────── */
 .reveal {

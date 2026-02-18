@@ -14,27 +14,23 @@ import ProjectPage   from './pages/ProjectPage.jsx';
 import ResumePage    from './pages/ResumePage.jsx';
 import ContactPage   from './pages/ContactPage';
 
+import { projectCases } from './data/siteData';
+
 gsap.registerPlugin(ScrollTrigger);
 
-// ─── Scroll to top on every route change ─────────────────────────────────
-function ScrollToTop() {
-  const location = useLocation();
-  useEffect(() => {
-    // Skip scroll-to-top when navigating to home with a section target
-    const scrollTo = (location.state as any)?.scrollTo;
-    if (location.pathname === '/' && scrollTo) return;
+// Default curtain color: yellow dimmed heavily into the dark background
+const DEFAULT_CURTAIN = 'color-mix(in srgb, #e8ff38 35%, #090b16)';
 
-    // Tell Lenis to jump to 0 immediately if it's running
-    const lenis = (window as any).__lenis as Lenis | undefined;
-    if (lenis) {
-      lenis.scrollTo(0, { immediate: true });
-    } else {
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
+function getTransitionColor(pathname: string): string {
+  const match = pathname.match(/^\/project\/(.+)$/);
+  if (match) {
+    const project = projectCases.find(p => p.slug === match[1]);
+    if (project?.accentColor) {
+      // Mix accent at 35% into dark bg — vivid enough to read, not blinding
+      return `color-mix(in srgb, ${project.accentColor} 35%, #090b16)`;
     }
-  }, [location]);
-  return null;
+  }
+  return DEFAULT_CURTAIN;
 }
 
 // ─── Smooth scroll + GSAP integration ────────────────────────────────────
@@ -62,28 +58,67 @@ function SmoothScroll({ children }) {
   return children;
 }
 
-// ─── Route-level page transition overlay ─────────────────────────────────
-function TransitionOverlay() {
+// ─── Animated routes: holds the old page while curtain covers, then swaps ─
+const COVER_MS  = 480;
+const REVEAL_MS = 480;
+
+function AnimatedRoutes() {
   const location = useLocation();
-  const [phase, setPhase]     = useState(null); // 'in' | 'out' | null
-  const prevPath = useRef(location.pathname);
+  const [displayLocation, setDisplayLocation] = useState(location);
+  const [phase, setPhase] = useState<'in' | 'out' | null>(null);
+  const [curtainColor, setCurtainColor] = useState(DEFAULT_CURTAIN);
+  const busy = useRef(false);
+
+  // Scroll to top tied to the display location swap, not the real location
+  useEffect(() => {
+    const scrollTo = (displayLocation.state as any)?.scrollTo;
+    if (displayLocation.pathname === '/' && scrollTo) return;
+    const lenis = (window as any).__lenis as Lenis | undefined;
+    if (lenis) lenis.scrollTo(0, { immediate: true });
+    else { window.scrollTo(0, 0); }
+  }, [displayLocation]);
 
   useEffect(() => {
-    if (prevPath.current === location.pathname) return;
-    prevPath.current = location.pathname;
+    if (location.key === displayLocation.key) return;
+    if (busy.current) return;
+    busy.current = true;
 
+    // Pick color for the destination before animating
+    setCurtainColor(getTransitionColor(location.pathname));
     setPhase('in');
-    const t1 = setTimeout(() => setPhase('out'), 380);
-    const t2 = setTimeout(() => setPhase(null),  750);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, [location.pathname]);
 
-  if (!phase) return null;
+    const t1 = setTimeout(() => {
+      setDisplayLocation(location);
+      setPhase('out');
+    }, COVER_MS);
+
+    const t2 = setTimeout(() => {
+      setPhase(null);
+      busy.current = false;
+    }, COVER_MS + REVEAL_MS);
+
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [location]);
+
   return (
-    <div
-      className={`route-overlay route-overlay--${phase}`}
-      aria-hidden="true"
-    />
+    <>
+      {phase && (
+        <div
+          className={`route-curtain route-curtain--${phase}`}
+          style={{ '--curtain-color': curtainColor } as React.CSSProperties}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Routes rendered with displayLocation so old page persists during cover */}
+      <Routes location={displayLocation}>
+        <Route path="/"              element={<Home />} />
+        <Route path="/project/:slug" element={<ProjectPage />} />
+        <Route path="/resume"        element={<ResumePage />} />
+        <Route path="/contact"       element={<ContactPage />} />
+        <Route path="*"              element={<Home />} />
+      </Routes>
+    </>
   );
 }
 
@@ -93,16 +128,7 @@ function Layout() {
     <>
       <CustomCursor />
       <SiteNav />
-      <ScrollToTop />
-      <TransitionOverlay />
-      <Routes>
-        <Route path="/"                element={<Home />} />
-        <Route path="/project/:slug"   element={<ProjectPage />} />
-        <Route path="/resume"          element={<ResumePage />} />
-        <Route path="/contact"         element={<ContactPage />} />
-        {/* Fallback */}
-        <Route path="*"               element={<Home />} />
-      </Routes>
+      <AnimatedRoutes />
       <SiteFooter />
       <MusicPlayer />
     </>
