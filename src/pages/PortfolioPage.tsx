@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { projectCases, links } from '../data/siteData.js';
+import { projectCases, links } from '../data/siteData';
 
 export default function PortfolioPage() {
   useEffect(() => { window.scrollTo(0, 0); }, []);

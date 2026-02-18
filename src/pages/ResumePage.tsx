@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { links, profile, experience, skillMatrix } from '../data/siteData.js';
+import { links, profile, experience, skillMatrix } from '../data/siteData';
 
 export default function ResumePage() {
   useEffect(() => { window.scrollTo(0, 0); }, []);

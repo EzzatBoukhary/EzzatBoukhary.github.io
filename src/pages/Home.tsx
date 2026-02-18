@@ -2,13 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Marquee from '../components/Marquee.jsx';
-import { useReveal } from '../hooks/useReveal.js';
-import { IconGitHub, IconLinkedIn, LinkIcon, IconArrowRight } from '../components/Icons.jsx';
+import Marquee from '../components/Marquee';
+import { useReveal } from '../hooks/useReveal';
+import { IconGitHub, IconLinkedIn, LinkIcon, IconArrowRight } from '../components/Icons';
 import {
   profile, links, gameStats, achievements,
   experience, recommendations, projectCases, skillMatrix,
-} from '../data/siteData.js';
+} from '../data/siteData';
 
 gsap.registerPlugin(ScrollTrigger);
 

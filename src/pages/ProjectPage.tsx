@@ -2,10 +2,10 @@ import { useEffect, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { projectCases } from '../data/siteData.js';
+import { projectCases } from '../data/siteData';
 import {
   LinkIcon, IconArrowLeft, IconArrowRight,
-} from '../components/Icons.jsx';
+} from '../components/Icons';
 
 gsap.registerPlugin(ScrollTrigger);
 

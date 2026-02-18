@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { profile, links } from '../data/siteData.js';
+import { profile, links } from '../data/siteData';
 
 export default function SiteFooter() {
   return (
