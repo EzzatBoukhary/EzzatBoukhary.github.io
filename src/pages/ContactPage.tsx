@@ -1,12 +1,20 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { profile, links } from '../data/siteData';
+import SEOHead, { SITE_URL } from '../components/SEOHead';
 
 export default function ContactPage() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
     <div className="contact-page page-enter">
+      <SEOHead
+        title="Contact — Ezzat Boukhary"
+        description="Get in touch with Ezzat Boukhary — open to full-time roles, interesting collaborations, and products that reach real people."
+        url={`${SITE_URL}/contact/`}
+        ogImage={`${SITE_URL}/og/preview-banner.jpg`}
+        ogImageAlt="Contact Ezzat Boukhary"
+      />
       {/* ── Hero ─────────────────────────────────────────────────────── */}
       <header className="contact-page__hero">
         <div className="container">

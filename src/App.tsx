@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -33,7 +34,7 @@ function getTransitionColor(pathname: string): string {
   return DEFAULT_CURTAIN;
 }
 
-// ─── Smooth scroll + GSAP integration ────────────────────────────────────
+// lenis smooth scroll wired into GSAP's ticker
 function SmoothScroll({ children }) {
   useEffect(() => {
     const lenis = new Lenis({
@@ -43,7 +44,7 @@ function SmoothScroll({ children }) {
     });
     (window as any).__lenis = lenis;
 
-    // Tell GSAP ScrollTrigger to use Lenis scroll
+    // wire lenis into GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
@@ -58,7 +59,7 @@ function SmoothScroll({ children }) {
   return children;
 }
 
-// ─── Animated routes: holds the old page while curtain covers, then swaps ─
+// animated page transitions — holds the old page while the curtain covers, then swaps
 const COVER_MS  = 480;
 const REVEAL_MS = 480;
 
@@ -110,7 +111,7 @@ function AnimatedRoutes() {
         />
       )}
 
-      {/* Routes rendered with displayLocation so old page persists during cover */}
+      {/* old page stays mounted during the cover phase */}
       <Routes location={displayLocation}>
         <Route path="/"              element={<Home />} />
         <Route path="/project/:slug" element={<ProjectPage />} />
@@ -122,7 +123,6 @@ function AnimatedRoutes() {
   );
 }
 
-// ─── Layout wrapper ────────────────────────────────────────────────────────
 function Layout() {
   return (
     <>
@@ -137,10 +137,12 @@ function Layout() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <SmoothScroll>
-        <Layout />
-      </SmoothScroll>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <SmoothScroll>
+          <Layout />
+        </SmoothScroll>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }

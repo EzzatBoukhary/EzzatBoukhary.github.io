@@ -3,37 +3,143 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#090b16" />
-    <meta
-      name="description"
-      content="Ezzat Boukhary — software engineer building full-stack platforms, mobile apps, and high-impact tools."
-    />
-    <meta property="og:title" content="Ezzat Boukhary | Software Engineer" />
-    <meta
-      property="og:description"
-      content="Software engineer building full-stack platforms, mobile apps, internal tools, and projects that people actually use."
-    />
-    <meta property="og:image" content="https://ezzatboukhary.github.io/assets/preview-banner.jpg" />
-    <meta property="og:url" content="https://ezzatboukhary.github.io/" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Ezzat Boukhary | Software Engineer" />
-    <meta
-      name="twitter:description"
-      content="Software engineer building full-stack platforms, mobile apps, internal tools, and projects that people actually use."
-    />
-    <meta name="twitter:image" content="https://ezzatboukhary.github.io/assets/preview-banner.jpg" />
+
+    <!-- Crawlability -->
+    <meta name="robots"  content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author"  content="Ezzat Boukhary" />
+    <link  rel="canonical" href="https://ezzatboukhary.github.io/" />
+
+    <!-- Primary description / SEO -->
+    <meta name="description"
+      content="Ezzat Boukhary — software engineer building full-stack platforms, mobile apps, and high-impact tools. Based in Florida." />
+    <meta name="keywords"
+      content="Ezzat Boukhary, software engineer, full-stack developer, mobile developer, Flutter, React, TypeScript, Kotlin, Firebase, portfolio" />
+
+    <!-- Theme colour — Discord sidebar accent + browser chrome              -->
+    <!-- #e8ff38 is the brand yellow: Discord link previews show vivid bar  -->
+    <meta name="theme-color" content="#e8ff38" />
+
+    <!-- Open Graph (Discord, LinkedIn, Facebook, Slack, etc.) -->
+    <meta property="og:site_name"        content="Ezzat Boukhary" />
+    <meta property="og:type"             content="website" />
+    <meta property="og:title"            content="Ezzat Boukhary | Software Engineer" />
+    <meta property="og:description"
+      content="Software engineer building full-stack platforms, mobile apps, internal tools, and projects that people actually use." />
+    <meta property="og:url"              content="https://ezzatboukhary.github.io/" />
+    <meta property="og:locale"           content="en_US" />
+    <meta property="og:image"            content="https://ezzatboukhary.github.io/og/preview-banner.jpg" />
+    <meta property="og:image:secure_url" content="https://ezzatboukhary.github.io/og/preview-banner.jpg" />
+    <meta property="og:image:type"       content="image/jpeg" />
+    <meta property="og:image:width"      content="1200" />
+    <meta property="og:image:height"     content="630" />
+    <meta property="og:image:alt"        content="Ezzat Boukhary — Software Engineer portfolio" />
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content="Ezzat Boukhary | Software Engineer" />
+    <meta name="twitter:description"
+      content="Software engineer building full-stack platforms, mobile apps, internal tools, and projects that people actually use." />
+    <meta name="twitter:image"       content="https://ezzatboukhary.github.io/og/preview-banner.jpg" />
+    <meta name="twitter:image:alt"   content="Ezzat Boukhary — Software Engineer portfolio" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" href="https://avatars.githubusercontent.com/u/50555851?v=4" type="image/png" />
+
+    <!-- Favicons -->
+    <link rel="icon"             href="https://avatars.githubusercontent.com/u/50555851?v=4" type="image/png" />
+    <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/u/50555851?v=4" />
+
     <title>Ezzat Boukhary</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- No-JS fallback: shown only when browser has scripts blocked.     -->
+    <!-- Inline styles because Vite CSS bundle loads via JS and won't be  -->
+    <!-- available in a no-script environment.                            -->
+    <noscript>
+      <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{background:#090b16;color:#e2e8f0;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;padding:2rem 1rem}
+        .ns-wrap{max-width:760px;margin:0 auto}
+        .ns-name{font-size:2.2rem;font-weight:800;color:#fff;letter-spacing:-.03em}
+        .ns-role{font-size:1rem;color:#e8ff38;font-weight:600;margin:.25rem 0 1.25rem}
+        .ns-bio{color:#94a3b8;max-width:580px;margin-bottom:2rem}
+        .ns-section{margin:2.5rem 0}
+        .ns-section h2{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#e8ff38;margin-bottom:1rem}
+        .ns-links{display:flex;flex-wrap:wrap;gap:.75rem}
+        .ns-link{display:inline-block;padding:.5rem 1.1rem;border:1px solid rgba(232,255,56,.35);border-radius:.4rem;color:#e8ff38;text-decoration:none;font-size:.85rem;font-weight:600}
+        .ns-link:hover{background:rgba(232,255,56,.08)}
+        .ns-projects{list-style:none;display:grid;gap:1rem}
+        .ns-project{border:1px solid rgba(255,255,255,.08);border-radius:.6rem;padding:1rem 1.25rem}
+        .ns-project a{color:#fff;text-decoration:none;font-weight:700;font-size:1rem}
+        .ns-project a:hover{color:#e8ff38}
+        .ns-project p{color:#94a3b8;font-size:.875rem;margin-top:.3rem}
+        .ns-project .ns-stack{font-size:.75rem;color:#64748b;margin-top:.5rem}
+        .ns-notice{background:rgba(232,255,56,.07);border:1px solid rgba(232,255,56,.2);border-radius:.5rem;padding:1rem 1.25rem;color:#94a3b8;font-size:.85rem;margin-top:3rem}
+        .ns-notice strong{color:#e8ff38}
+      </style>
+      <div class="ns-wrap">
+        <p class="ns-name">Ezzat Boukhary</p>
+        <p class="ns-role">Software Engineer &middot; Mobile + Full-Stack</p>
+        <p class="ns-bio">
+          I build products end-to-end and optimize them until they feel fast, reliable, and
+          genuinely useful. Based in Florida. Currently Lead Mobile App Developer at yHere.
+        </p>
+
+        <div class="ns-section">
+          <h2>Links</h2>
+          <div class="ns-links">
+            <a class="ns-link" href="https://github.com/ezzatBoukhary">GitHub</a>
+            <a class="ns-link" href="https://linkedin.com/in/ezzatboukhary">LinkedIn</a>
+            <a class="ns-link" href="mailto:ezzatboukhary03@gmail.com">Email</a>
+            <a class="ns-link" href="https://drive.google.com/file/d/1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14/view">Resume (PDF)</a>
+          </div>
+        </div>
+
+        <div class="ns-section">
+          <h2>Projects</h2>
+          <ul class="ns-projects">
+            <li class="ns-project">
+              <a href="https://ezzatboukhary.github.io/project/killerbot/">KillerBot</a>
+              <p>A Discord bot platform serving 250,000+ users across 600+ servers &mdash; built solo at age 14.</p>
+              <p class="ns-stack">C# &middot; Discord.NET &middot; API Integrations &middot; Systems Design</p>
+            </li>
+            <li class="ns-project">
+              <a href="https://ezzatboukhary.github.io/project/gesture-based-puppetry/">Gesture-Based Puppetry</a>
+              <p>Realtime 3D puppeteering for live simulation classrooms at UCF TeachLivE.</p>
+              <p class="ns-stack">Three.js &middot; Animation Blending &middot; IndexedDB &middot; Realtime Rendering</p>
+            </li>
+            <li class="ns-project">
+              <a href="https://ezzatboukhary.github.io/project/college-event-platform/">College Event Platform</a>
+              <p>Constraint-driven full-stack event management for universities with DB-level enforcement.</p>
+              <p class="ns-stack">React &middot; Node.js &middot; Express &middot; MySQL &middot; Stored Procedures</p>
+            </li>
+            <li class="ns-project">
+              <a href="https://ezzatboukhary.github.io/project/dragonotchi/">Dragonotchi</a>
+              <p>Award-winning virtual pet built in 36 hours &mdash; Best Design at KnightHacks VI.</p>
+              <p class="ns-stack">UX Design &middot; Rapid Prototyping &middot; Frontend Engineering</p>
+            </li>
+            <li class="ns-project">
+              <a href="https://ezzatboukhary.github.io/project/campus-critters/">Campus Critters</a>
+              <p>A social wildlife-spotting platform spanning MERN web and Flutter mobile.</p>
+              <p class="ns-stack">MERN &middot; Flutter &middot; Leaflet.js &middot; JWT &middot; MongoDB</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="ns-notice">
+          <strong>JavaScript is required for the full interactive experience.</strong><br />
+          Please enable JavaScript in your browser settings to explore the complete portfolio,
+          including animations, music player, and interactive project pages.
+        </div>
+      </div>
+    </noscript>
   </body>
 </html>

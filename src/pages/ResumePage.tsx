@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { links } from '../data/siteData';
+import SEOHead, { SITE_URL } from '../components/SEOHead';
 
 export default function ResumePage() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
@@ -11,6 +12,14 @@ export default function ResumePage() {
 
   return (
     <div className="resume-page page-enter">
+      <SEOHead
+        title="Resume — Ezzat Boukhary"
+        description="Full overview of Ezzat Boukhary's work experience, education, and technical skills. Available to view inline or download as a PDF."
+        url={`${SITE_URL}/resume/`}
+        ogImage={`${SITE_URL}/og/preview-banner.jpg`}
+        ogImageAlt="Ezzat Boukhary — Resume"
+        ogType="profile"
+      />
       {/* ── Hero ── */}
       <header className="resume-hero">
         <div className="container">

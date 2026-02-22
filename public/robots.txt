@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Block crawling of raw asset URLs — these are duplicated via /og/ paths
+Disallow: /assets/
+
+Sitemap: https://ezzatboukhary.github.io/sitemap.xml
+
+# Plain-text summary for LLM-powered crawlers (Perplexity, ChatGPT, etc.)
+# See https://llmstxt.org
+LLMs: https://ezzatboukhary.github.io/llms.txt

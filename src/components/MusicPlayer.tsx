@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
-// ── Ambient track ────────────────────────────────────────────────────────
-// Drop your MP3 into /public/ambient.mp3 — no imports needed, Vite serves
-// the public/ folder as-is at the root path.
-// The player silently stays disabled if the file cannot be loaded.
+// ambient background track, served from /public/ambient.mp3
+// silently stays disabled if the file can't be loaded
 const TRACK_URL = '/ambient.mp3';
 
 export default function MusicPlayer() {

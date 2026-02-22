@@ -1,0 +1,42 @@
+# Ezzat Boukhary — Software Engineer
+
+> Software engineer building full-stack platforms, mobile apps, internal tools, and projects that people actually use. Based in Florida.
+
+Website: https://ezzatboukhary.github.io
+Email: ezzatboukhary03@gmail.com
+GitHub: https://github.com/ezzatBoukhary
+LinkedIn: https://linkedin.com/in/ezzatboukhary
+Resume: https://drive.google.com/file/d/1p4zQ5j1vAa5xzovAew3WFuxcWn7HHd14/view
+
+## About
+
+I build products end-to-end and optimize them until they feel fast, reliable, and genuinely useful. Currently Lead Mobile App Developer at yHere, working across Flutter, Kotlin Multiplatform, Firebase, and AWS. CS graduate from the University of Central Florida with a 3.96 GPA.
+
+## Experience
+
+- Lead Mobile App Developer at yHere (Aug 2025 – present) — Flutter, Kotlin, Firebase, AWS. Architected iOS rollout for an Android-first product, reduced Firebase reads by ~90%.
+- Web Systems Developer at Jets and Aeronautics Society @ UCF (May 2025 – Dec 2025) — SvelteKit, Prisma, TypeScript.
+- Frontend Developer Intern at BudgetWise (Mar 2025 – May 2025) — Vue, TypeScript, Node.js. Cut load times 25%.
+- Android Developer Intern at Reel Talk (Jan 2024 – Aug 2024) — Kotlin, Jetpack Compose, Firebase. Sole mobile developer.
+- Undergraduate Researcher at Florida Solar Energy Center (May 2025 – Aug 2025) — Python, TensorFlow, MLP, LSTM. R² = 0.79 on PV defect diagnostics.
+- Undergraduate Learning Assistant at UCF (May 2025 – Dec 2025) — Java OOP. Mentored 300+ students.
+
+## Projects
+
+- KillerBot (2019–2022): Discord bot platform, 250,000+ users across 600+ servers, built solo at age 14. C#, Discord.NET. https://ezzatboukhary.github.io/project/killerbot/
+- Gesture-Based Puppetry (Jan–Aug 2025): Realtime 3D puppeteering for UCF TeachLivE simulation classrooms. Three.js, animation blending, IndexedDB. Reduced scene load by 40%+. https://ezzatboukhary.github.io/project/gesture-based-puppetry/
+- College Event Platform (Feb–Apr 2025): Full-stack university event management with role-aware permissions enforced at the DB layer. React, Node.js, MySQL, stored procedures. https://ezzatboukhary.github.io/project/college-event-platform/
+- Dragonotchi (Oct 2023): Won Best Design at KnightHacks VI out of ~50 teams. Virtual pet built in 36 hours. https://ezzatboukhary.github.io/project/dragonotchi/
+- Campus Critters (Nov 2024): MERN web app + Flutter mobile app for campus wildlife sightings with Leaflet map and JWT auth. https://ezzatboukhary.github.io/project/campus-critters/
+
+## Skills
+
+Languages: TypeScript, JavaScript, Kotlin, Java, Python, C#, C++, Swift, Dart, SQL
+Frameworks: React, Vue, SvelteKit, Node.js, Express, Flutter, Three.js, TensorFlow
+Platforms: AWS, Firebase, MySQL, MongoDB, Docker, Linux, Prisma, GitHub Actions
+
+## Pages
+
+- Home: https://ezzatboukhary.github.io/
+- Resume: https://ezzatboukhary.github.io/resume/
+- Contact: https://ezzatboukhary.github.io/contact/

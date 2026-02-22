@@ -1,7 +1,4 @@
-/**
- * Inline SVG icon set – no emoji, no external font dependency.
- * All icons are 1em × 1em by default (controlled by CSS font-size / width/height props).
- */
+// inline SVG icons, 1em x 1em by default
 
 const base = { width: '1em', height: '1em', viewBox: '0 0 24 24', fill: 'none', 'aria-hidden': 'true' };
 

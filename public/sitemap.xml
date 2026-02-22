@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Home -->
+  <url>
+    <loc>https://ezzatboukhary.github.io/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ezzatboukhary.github.io/og/preview-banner.jpg</image:loc>
+      <image:title>Ezzat Boukhary — Software Engineer portfolio</image:title>
+    </image:image>
+  </url>
+
+  <!-- Resume -->
+  <url>
+    <loc>https://ezzatboukhary.github.io/resume/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://ezzatboukhary.github.io/contact/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Project: Gesture-Based Puppetry -->
+  <url>
+    <loc>https://ezzatboukhary.github.io/project/gesture-based-puppetry/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ezzatboukhary.github.io/og/project-gesture-based-puppetry.png</image:loc>
+      <image:title>Gesture-Based Puppetry — Ezzat Boukhary</image:title>
+    </image:image>
+  </url>
+
+  <!-- Project: College Event Platform -->
+  <url>
+    <loc>https://ezzatboukhary.github.io/project/college-event-platform/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ezzatboukhary.github.io/og/project-college-event-platform.png</image:loc>
+      <image:title>College Event Platform — Ezzat Boukhary</image:title>
+    </image:image>
+  </url>
+
+  <!-- Project: Dragonotchi -->
+  <url>
+    <loc>https://ezzatboukhary.github.io/project/dragonotchi/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ezzatboukhary.github.io/og/project-dragonotchi.jpg</image:loc>
+      <image:title>Dragonotchi — Ezzat Boukhary</image:title>
+    </image:image>
+  </url>
+
+  <!-- Project: KillerBot -->
+  <url>
+    <loc>https://ezzatboukhary.github.io/project/killerbot/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ezzatboukhary.github.io/og/project-killerbot.png</image:loc>
+      <image:title>KillerBot — Ezzat Boukhary</image:title>
+    </image:image>
+  </url>
+
+  <!-- Project: Campus Critters -->
+  <url>
+    <loc>https://ezzatboukhary.github.io/project/campus-critters/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ezzatboukhary.github.io/og/project-campus-critters.png</image:loc>
+      <image:title>Campus Critters — Ezzat Boukhary</image:title>
+    </image:image>
+  </url>
+
+</urlset>

@@ -1,7 +1,4 @@
-/**
- * TechIcon — Official brand icons via the Devicon CDN.
- * Falls back to a small text chip for items without a matching icon.
- */
+// tech icon using Devicon CDN, falls back to a text chip if no match
 
 import type { CSSProperties } from 'react';
 

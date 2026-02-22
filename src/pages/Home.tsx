@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import SEOHead, { SITE_URL, PROFILE_IMAGE } from '../components/SEOHead';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Marquee from '../components/Marquee';
@@ -13,7 +14,7 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ─── Typing role animation ─────────────────────────────────────────────────
+// typing animation that cycles through role titles
 const ROLES = ['Software Engineer', 'Mobile Developer', 'Full-Stack Developer', 'Product Engineer'];
 
 function TypingRole() {
@@ -45,7 +46,7 @@ function TypingRole() {
   );
 }
 
-// ─── Split characters for GSAP animation ──────────────────────────────────
+// splits a string into individually animatable spans for GSAP
 function SplitName({ text }) {
   return (
     <>
@@ -60,7 +61,7 @@ function SplitName({ text }) {
   );
 }
 
-// ─── Hero ─────────────────────────────────────────────────────────────────
+// hero section
 function HeroSection() {
   const heroRef = useRef(null);
 
@@ -170,7 +171,7 @@ function HeroSection() {
   );
 }
 
-// ─── Work / Projects ───────────────────────────────────────────────────────
+// projects / work section
 const GENRE_SHORT = {
   'Realtime Graphics / Simulation':       'Graphics',
   'Full-Stack Product System':            'Full-Stack',
@@ -268,7 +269,7 @@ function WorkSection() {
   );
 }
 
-// ─── About ─────────────────────────────────────────────────────────────────
+// about section
 function AboutSection() {
   const [ref, revealed] = useReveal(0.1);
   return (
@@ -320,7 +321,7 @@ function AboutSection() {
   );
 }
 
-// ─── Stats ─────────────────────────────────────────────────────────────────
+// stats section
 function StatsSection() {
   const [ref, revealed] = useReveal(0.2);
   return (
@@ -339,7 +340,7 @@ function StatsSection() {
   );
 }
 
-// ─── Experience ────────────────────────────────────────────────────────────
+// experience section
 const TYPE_COLOR: Record<string, string> = {
   'Full-Time':  '#e8ff38',
   'Part-Time':  '#00f5d0',
@@ -429,7 +430,7 @@ function ExperienceSection() {
   );
 }
 
-// ─── Skills ─────────────────────────────────────────────────────────────────
+// skills section
 
 function SkillsSection() {
   const [ref, revealed] = useReveal(0.05);
@@ -474,7 +475,7 @@ function SkillsSection() {
   );
 }
 
-// ─── Testimonials ──────────────────────────────────────────────────────────
+// recommendations section
 function RecSection() {
   const [ref, revealed] = useReveal(0.1);
   return (
@@ -509,7 +510,7 @@ function RecSection() {
   );
 }
 
-// ─── Contact ──────────────────────────────────────────────────────────────
+// contact section
 function ContactSection() {
   const [ref, revealed] = useReveal(0.1);
   return (
@@ -549,7 +550,6 @@ function ContactSection() {
   );
 }
 
-// ─── Home page ────────────────────────────────────────────────────────────
 export default function Home() {
   const location = useLocation();
 
@@ -585,8 +585,34 @@ export default function Home() {
     }
   }, [location]);
 
+  const personLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Ezzat Boukhary',
+    url: SITE_URL,
+    image: PROFILE_IMAGE,
+    jobTitle: 'Software Engineer',
+    description: 'Software engineer building full-stack platforms, mobile apps, internal tools, and projects that people actually use.',
+    worksFor: { '@type': 'Organization', name: 'yHere' },
+    alumniOf: { '@type': 'CollegeOrUniversity', name: 'University of Central Florida' },
+    knowsAbout: ['TypeScript', 'React', 'Flutter', 'Full-Stack Development', 'Mobile Development', 'Kotlin', 'Firebase', 'AWS'],
+    sameAs: [
+      'https://github.com/ezzatBoukhary',
+      'https://linkedin.com/in/ezzatboukhary',
+    ],
+    email: 'ezzatboukhary03@gmail.com',
+  };
+
   return (
     <main className="page-enter">
+      <SEOHead
+        title="Ezzat Boukhary | Software Engineer"
+        description="Software engineer building full-stack platforms, mobile apps, internal tools, and projects that people actually use. Based in Florida."
+        url={`${SITE_URL}/`}
+        ogImage={`${SITE_URL}/og/preview-banner.jpg`}
+        ogImageAlt="Ezzat Boukhary — Software Engineer portfolio"
+        jsonLd={personLd}
+      />
       <HeroSection />
       <Marquee />
       <ExperienceSection />

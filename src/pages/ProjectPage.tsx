@@ -6,10 +6,19 @@ import { projectCases } from '../data/siteData';
 import {
   LinkIcon, IconArrowLeft, IconArrowRight,
 } from '../components/Icons';
+import SEOHead, { SITE_URL } from '../components/SEOHead';
+
+const PROJECT_OG_IMAGE: Record<string, string> = {
+  'gesture-based-puppetry':  `${SITE_URL}/og/project-gesture-based-puppetry.png`,
+  'college-event-platform':  `${SITE_URL}/og/project-college-event-platform.png`,
+  'dragonotchi':             `${SITE_URL}/og/project-dragonotchi.jpg`,
+  'killerbot':               `${SITE_URL}/og/project-killerbot.png`,
+  'campus-critters':         `${SITE_URL}/og/project-campus-critters.png`,
+};
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ── Per-project hero — each tells a different visual story ───────────────
+// gradient backgrounds per project
 const PROJECT_THEME: Record<string, { a: string; b: string; c: string; base: string }> = {
   // Puppetry: deep theatre — purple spotlight from top-right, dark stage floor
   'gesture-based-puppetry': {
@@ -139,9 +148,35 @@ export default function ProjectPage() {
   if (!project) return null;
 
   const genreLabel = GENRE_SHORT[project.genre] ?? project.genre;
+  const projectOgImage = PROJECT_OG_IMAGE[slug] ?? `${SITE_URL}/og/preview-banner.jpg`;
+  const projectLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: project.name,
+    description: project.summary,
+    url: `${SITE_URL}/project/${project.slug}/`,
+    image: projectOgImage,
+    keywords: project.stack.join(', '),
+    genre: project.genre,
+    author: {
+      '@type': 'Person',
+      name: 'Ezzat Boukhary',
+      url: SITE_URL,
+    },
+  };
 
   return (
     <div className="project-page page-enter" ref={pageRef}>
+
+      <SEOHead
+        title={`${project.name} — Ezzat Boukhary`}
+        description={`${project.tagline} ${project.summary}`}
+        url={`${SITE_URL}/project/${project.slug}/`}
+        ogImage={projectOgImage}
+        ogImageAlt={`${project.name} — project by Ezzat Boukhary`}
+        themeColor={project.accentColor}
+        jsonLd={projectLd}
+      />
 
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <header className="pp-hero" style={{ background: heroBg, '--pp-accent': accent, '--pp-dots': dotColor } as React.CSSProperties}>
