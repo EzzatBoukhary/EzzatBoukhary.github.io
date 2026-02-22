@@ -1,12 +1,12 @@
 const ITEMS = [
   '250K+ Users Reached',
-  '600+ Discord Servers',
   'Best Design · KnightHacks VI',
-  'Flutter · React Native · Kotlin',
-  'React · Three.js · Node.js',
-  'Firebase · AWS · Supabase',
+  'Flutter · Kotlin · React',
+  'Firebase · AWS · Node.js',
+  'B.S. Computer Science · UCF',
   '6+ Years Building',
-  'Open Source Author',
+  'Mobile + Full-Stack',
+  'Open to Full-Time Roles',
 ];
 
 export default function Marquee({ reversed = false }) {

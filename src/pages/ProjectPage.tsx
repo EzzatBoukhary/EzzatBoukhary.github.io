@@ -172,7 +172,7 @@ export default function ProjectPage() {
 
           <div className="pp-hero__tag">
             <span className="pp-hero__tag-dot" aria-hidden="true" />
-            {genreLabel} · {project.difficulty}
+            {genreLabel}
           </div>
 
           <h1 className="pp-hero__name">{project.name}</h1>
@@ -258,8 +258,8 @@ export default function ProjectPage() {
               <span className="pp-specs__val">{project.difficulty}</span>
             </div>
             <div className="pp-specs__row">
-              <span className="pp-specs__key">Genre</span>
-              <span className="pp-specs__val">{genreLabel}</span>
+              <span className="pp-specs__key">Category</span>
+              <span className="pp-specs__val">{project.genre}</span>
             </div>
             <div className="pp-specs__row pp-specs__row--stack">
               <span className="pp-specs__key">Stack</span>

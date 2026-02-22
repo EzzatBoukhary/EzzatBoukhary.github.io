@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { links, profile, experience, skillMatrix } from '../data/siteData';
+import { links } from '../data/siteData';
 
 export default function ResumePage() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
@@ -22,7 +22,7 @@ export default function ResumePage() {
           </Link>
           <p className="section-label">Document</p>
           <h1 className="resume-hero__heading">
-            My <em>Résumé</em>
+            My <em>Resume</em>
           </h1>
           <p className="resume-hero__sub">
             Full overview of my experience, education, and skills — available to view inline or download as a PDF.
@@ -30,9 +30,6 @@ export default function ResumePage() {
           <div className="resume-hero__actions">
             <a href={links.resumeDownload} download className="btn btn--primary btn--lg">
               Download PDF ↓
-            </a>
-            <a href={links.resumeDrive} target="_blank" rel="noreferrer" className="btn btn--outline">
-              Open in Drive ↗
             </a>
           </div>
         </div>
@@ -44,19 +41,11 @@ export default function ResumePage() {
           <div className="resume-frame">
             <iframe
               src={embedUrl}
-              title="Ezzat Boukhary — Résumé"
+              title="Ezzat Boukhary — Resume"
               allow="autoplay"
               loading="lazy"
             />
           </div>
-
-          {/* Fallback text if iframe blocked */}
-          <p style={{ marginTop: '1rem', fontSize: '.82rem', color: 'rgba(255,255,255,0.25)', textAlign: 'center' }}>
-            If the preview doesn't load,{' '}
-            <a href={links.resumeDrive} target="_blank" rel="noreferrer" style={{ color: 'var(--yellow)' }}>
-              view it on Google Drive ↗
-            </a>
-          </p>
         </div>
       </div>
     </div>

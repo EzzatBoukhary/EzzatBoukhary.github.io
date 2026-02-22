@@ -137,6 +137,20 @@ button { background: none; border: none; cursor: none; font: inherit; color: inh
   background: var(--curtain-color, color-mix(in srgb, #e8ff38 35%, #090b16));
   transform: translateY(102%);
 }
+/* Subtle diagonal stripe texture overlay */
+.route-curtain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -55deg,
+    transparent,
+    transparent 12px,
+    rgba(0,0,0,0.06) 12px,
+    rgba(0,0,0,0.06) 13px
+  );
+  pointer-events: none;
+}
 /* Cover: panel sweeps up from bottom, leading edge starts rounded then flattens */
 .route-curtain--in {
   animation: curtain-cover 0.46s cubic-bezier(0.76, 0, 0.24, 1) both;

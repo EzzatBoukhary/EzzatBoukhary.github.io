@@ -30,7 +30,7 @@ export const profile = {
   email: 'ezzatboukhary03@gmail.com',
   heroImage: profileBanner,
   summary:
-    'I build products end-to-end and optimize them until they feel fast, reliable, and genuinely useful. Graduated UCF CS — Summa Cum Laude, 3.96 GPA.',
+    'I build products end-to-end and optimize them until they feel fast, reliable, and genuinely useful.',
   mission:
     'Create software that feels as intentional as a well-designed game: clear feedback, low friction, and meaningful progression.'
 };
@@ -74,7 +74,7 @@ export const experience = [
     org: 'yHere',
     type: 'Full-Time',
     current: true,
-    period: 'Aug 2025 — Present',
+    period: 'Aug 2025 - Present',
     logo: yHereLogo,
     stack: ['Flutter', 'Kotlin', 'Firebase', 'AWS'],
     summary:
@@ -90,7 +90,7 @@ export const experience = [
     org: 'Jets and Aeronautics Society @ UCF',
     type: 'Part-Time',
     current: false,
-    period: 'May 2025 — Dec 2025',
+    period: 'May 2025 - Dec 2025',
     logo: jasLogo,
     stack: ['SvelteKit', 'Prisma', 'TypeScript'],
     summary:
@@ -107,7 +107,7 @@ export const experience = [
     org: 'BudgetWise',
     type: 'Internship',
     current: false,
-    period: 'Mar 2025 — May 2025',
+    period: 'Mar 2025 - May 2025',
     logo: budgetwiseLogo,
     stack: ['Vue', 'TypeScript', 'Node.js'],
     summary:
@@ -124,7 +124,7 @@ export const experience = [
     org: 'Reel Talk',
     type: 'Internship',
     current: false,
-    period: 'Jan 2024 — Aug 2024',
+    period: 'Jan 2024 - Aug 2024',
     logo: reeltalkLogo,
     stack: ['Kotlin', 'Jetpack Compose', 'Firebase'],
     summary:
@@ -140,7 +140,7 @@ export const experience = [
     org: 'Florida Solar Energy Center',
     type: 'Research',
     current: false,
-    period: 'May 2025 — Aug 2025',
+    period: 'May 2025 - Aug 2025',
     logo: fsecLogo,
     stack: ['Python', 'TensorFlow', 'MLP', 'LSTM'],
     summary:
@@ -157,15 +157,14 @@ export const experience = [
     org: 'University of Central Florida',
     type: 'Part-Time',
     current: false,
-    period: 'May 2025 — Dec 2025',
+    period: 'May 2025 - Dec 2025',
     logo: ucfLogo,
     stack: ['Java', 'OOP'],
     summary:
-      'Mentored students at scale in Java OOP while completing a B.S. in Computer Science, graduating Summa Cum Laude with a 3.96 GPA.',
+      'Mentored students at scale in Java OOP and data structures, supporting hundreds of students across multiple course sections.',
     highlights: [
       'Supported 300+ students across multiple sections',
-      'Led OOP and debugging sessions',
-      'Graduated Dec 2025 — Summa Cum Laude, 3.96 GPA'
+      'Led OOP and debugging sessions'
     ]
   }
 ];
@@ -232,7 +231,7 @@ export const projectCases = [
     slug: 'gesture-based-puppetry',
     name: 'Gesture-Based Puppetry',
     period: 'Jan 2025 — Aug 2025',
-    difficulty: 'Expert Quest',
+    difficulty: 'Advanced',
     genre: 'Realtime Graphics / Simulation',
     accentColor: '#a855f7',
     tagline: 'Realtime 3D puppeteering for live simulation classrooms.',
@@ -264,7 +263,7 @@ export const projectCases = [
     slug: 'college-event-platform',
     name: 'College Event Platform',
     period: 'Feb 2025 — Apr 2025',
-    difficulty: 'Advanced Quest',
+    difficulty: 'Full-Stack',
     genre: 'Full-Stack Product System',
     accentColor: '#0ea5e9',
     tagline: 'Constraint-driven event management for universities.',
@@ -300,7 +299,7 @@ export const projectCases = [
     slug: 'dragonotchi',
     name: 'Dragonotchi',
     period: 'Oct 2023',
-    difficulty: 'Speedrun Quest',
+    difficulty: 'Hackathon',
     genre: 'Hackathon / Game UX',
     accentColor: '#f97316',
     tagline: 'Award-winning virtual pet built in 36 hours.',
@@ -335,7 +334,7 @@ export const projectCases = [
     slug: 'killerbot',
     name: 'KillerBot',
     period: '2019 — 2022',
-    difficulty: 'Endgame Quest',
+    difficulty: 'Solo · 3 Years',
     genre: 'Platform / Community Infrastructure',
     accentColor: '#e8ff38',
     tagline: 'A Discord bot platform serving 250,000+ users across 600+ servers.',
@@ -371,7 +370,7 @@ export const projectCases = [
     slug: 'campus-critters',
     name: 'Campus Critters',
     period: 'Nov 2024',
-    difficulty: 'Co-op Quest',
+    difficulty: 'Team Project',
     genre: 'Web + Mobile Product',
     accentColor: '#22c55e',
     tagline: 'A social wildlife-spotting platform spanning web and mobile.',

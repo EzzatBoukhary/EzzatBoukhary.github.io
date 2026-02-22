@@ -14,7 +14,7 @@ import {
 gsap.registerPlugin(ScrollTrigger);
 
 // ─── Typing role animation ─────────────────────────────────────────────────
-const ROLES = ['Software Engineer', 'Mobile Developer', 'Full-Stack Builder', 'Open Source Author'];
+const ROLES = ['Software Engineer', 'Mobile Developer', 'Full-Stack Developer', 'Product Engineer'];
 
 function TypingRole() {
   const [roleIdx, setRoleIdx] = useState(0);
@@ -99,7 +99,7 @@ function HeroSection() {
         <div>
           <div className="hero__pill">
             <span className="hero__pill-dot" aria-hidden="true" />
-            UCF CS Graduate · Summa Cum Laude · 3.96 GPA
+            UCF Computer Science · Class of 2025
           </div>
 
           <h1 className="hero__name" aria-label="Ezzat Boukhary">
@@ -123,9 +123,9 @@ function HeroSection() {
             >
               View My Work
             </button>
-            <a href={`mailto:${profile.email}`} className="btn btn--outline">
+            <Link to="/contact" className="btn btn--outline">
               Get In Touch
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -208,7 +208,6 @@ function WorkCard({ project, index }: { project: typeof projectCases[0]; index: 
         <div className="work-card__body">
           <div className="work-card__tags">
             <span className="work-card__tag">{GENRE_SHORT[project.genre] ?? project.genre}</span>
-            <span className="work-card__difficulty">{project.difficulty}</span>
           </div>
           <h3 className="work-card__name">{project.name}</h3>
           <p className="work-card__tagline">{project.tagline}</p>
@@ -252,11 +251,11 @@ function WorkSection() {
       <div className={`container reveal ${revealed ? 'revealed' : ''}`}>
         <div className="work-section__top">
           <div>
-            <p className="section-label">Selected Work</p>
-            <h2 className="work-section__heading">Featured Quests</h2>
+            <p className="section-label">Selected Projects</p>
+            <h2 className="work-section__heading">Featured Projects</h2>
           </div>
           <Link to="/resume" className="btn btn--outline">
-            Full Résumé <IconExternalLink style={{ width: '1em', height: '1em', marginLeft: '.25em' }} />
+            Full Resume <IconExternalLink style={{ width: '1em', height: '1em', marginLeft: '.25em' }} />
           </Link>
         </div>
         <ol className="work-grid" ref={gridRef}>
@@ -291,7 +290,7 @@ function AboutSection() {
             <div className="about-section__facts">
               <div className="about-section__fact">
                 <IconPin className="about-section__fact-icon" style={{ width: '1.1rem', height: '1.1rem' }} />
-                <span>Florida · UCF CS · B.S. Dec 2025 · Summa Cum Laude · 3.96 GPA</span>
+                <span>Florida · UCF Computer Science · Graduated Dec 2025, Summa Cum Laude</span>
               </div>
               <div className="about-section__fact">
                 <IconGamepad className="about-section__fact-icon" style={{ width: '1.1rem', height: '1.1rem' }} />
@@ -431,28 +430,19 @@ function ExperienceSection() {
 }
 
 // ─── Skills ─────────────────────────────────────────────────────────────────
-const SKILL_CAT_TAG = {
-  'Languages':        'Lang',
-  'Frameworks':       'UI/API',
-  'Platforms':        'Infra',
-  'Engineering Style':'Process',
-};
 
 function SkillsSection() {
   const [ref, revealed] = useReveal(0.05);
   return (
     <section className="skills-section" id="skills" ref={ref}>
       <div className={`container reveal ${revealed ? 'revealed' : ''}`}>
-        <p className="section-label">Loadout</p>
+        <p className="section-label">Skills</p>
         <h2 className="skills-section__heading">Tech Stack</h2>
 
         <div className="skills-grid">
           {skillMatrix.map((group) => (
             <div key={group.category} className="skills-group">
               <div className="skills-group__cat">
-                {SKILL_CAT_TAG[group.category] ? (
-                  <span className="skills-group__tag-badge">{SKILL_CAT_TAG[group.category]}</span>
-                ) : null}
                 {group.category}
               </div>
               <ul className="skills-pills">
@@ -467,7 +457,7 @@ function SkillsSection() {
           ))}
         </div>
 
-        <p className="section-label" style={{ marginTop: '4rem' }}>Unlocked</p>
+        <p className="section-label" style={{ marginTop: '4rem' }}>Achievements</p>
         <h3 className="skills-section__heading" style={{ fontSize: 'clamp(1.5rem,3vw,2.5rem)', marginBottom: '2rem' }}>
           Achievements
         </h3>
@@ -490,8 +480,8 @@ function RecSection() {
   return (
     <section className="rec-section" id="recommendations" ref={ref}>
       <div className={`container reveal ${revealed ? 'revealed' : ''}`}>
-        <p className="section-label">Allies</p>
-        <h2 className="rec-section__heading">Party Approved</h2>
+        <p className="section-label">Recommendations</p>
+        <h2 className="rec-section__heading">Recommendations</h2>
         <div className="rec-grid">
           {recommendations.map((rec) => (
             <blockquote key={rec.name} className="rec-card">
@@ -531,7 +521,7 @@ function ContactSection() {
           <em>that matters.</em>
         </h2>
         <p className="contact-section__sub">
-          Open to full-time roles, interesting collaborations, and products that reach real people.
+          Primarily looking for full-time roles. Open to side projects or contracts if they're a good fit.
         </p>
         <Link to="/contact" className="btn btn--primary btn--lg">
           Let's Talk →
