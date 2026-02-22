@@ -100,6 +100,7 @@ button { background: none; border: none; cursor: none; font: inherit; color: inh
   pointer-events: none;
   z-index: 9999;
   will-change: transform;
+  mix-blend-mode: difference;
   transition: width .3s var(--ease), height .3s var(--ease),
               background .3s var(--ease), border-color .3s var(--ease),
               opacity .3s;

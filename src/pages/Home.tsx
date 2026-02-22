@@ -457,7 +457,7 @@ function SkillsSection() {
           ))}
         </div>
 
-        <p className="section-label" style={{ marginTop: '4rem' }}>Achievements</p>
+        <p className="section-label" style={{ marginTop: '4rem' }}>Honors</p>
         <h3 className="skills-section__heading" style={{ fontSize: 'clamp(1.5rem,3vw,2.5rem)', marginBottom: '2rem' }}>
           Achievements
         </h3>
@@ -480,7 +480,7 @@ function RecSection() {
   return (
     <section className="rec-section" id="recommendations" ref={ref}>
       <div className={`container reveal ${revealed ? 'revealed' : ''}`}>
-        <p className="section-label">Recommendations</p>
+        <p className="section-label">From Colleagues</p>
         <h2 className="rec-section__heading">Recommendations</h2>
         <div className="rec-grid">
           {recommendations.map((rec) => (
