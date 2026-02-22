@@ -128,6 +128,14 @@ function HeroSection() {
               Get In Touch
             </Link>
           </div>
+          <p className="hero__source">
+            <span aria-hidden="true">// </span>built with React + Vite · <a
+              href="https://github.com/EzzatBoukhary/EzzatBoukhary.github.io"
+              target="_blank"
+              rel="noreferrer"
+              className="hero__source-link"
+            >view source</a>
+          </p>
         </div>
 
         {/* Right — stat card */}

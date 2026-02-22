@@ -660,6 +660,15 @@
   transition: color .2s;
 }
 .footer__link:hover { color: var(--yellow); }
+.footer__sep {
+  display: block;
+  width: 1px;
+  height: .85em;
+  background: rgba(255,255,255,0.15);
+  align-self: center;
+}
+.footer__link--source { color: rgba(255,255,255,0.35); }
+.footer__link--source:hover { color: var(--yellow); }
 
 /* ── Contact page (standalone /contact route) ──────────────────────────── */
 .contact-page__hero {

@@ -152,7 +152,19 @@
   gap: .75rem;
 }
 
-/* Right column – stat card */
+.hero__source {
+  margin-top: 1.25rem;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: .72rem;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: .02em;
+}
+.hero__source-link {
+  color: rgba(232,255,56,0.55);
+  text-decoration: none;
+  transition: color .2s;
+}
+.hero__source-link:hover { color: var(--yellow); }
 .hero__card {
   background: var(--surface);
   border: 1px solid var(--border);
