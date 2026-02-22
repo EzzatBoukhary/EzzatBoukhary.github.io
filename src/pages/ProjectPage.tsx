@@ -16,6 +16,14 @@ const PROJECT_OG_IMAGE: Record<string, string> = {
   'campus-critters':         `${SITE_URL}/og/project-campus-critters.png`,
 };
 
+const PROJECT_OG_DIMS: Record<string, { w: number; h: number }> = {
+  'gesture-based-puppetry':  { w: 1603, h: 901  },
+  'college-event-platform':  { w: 1390, h: 758  },
+  'dragonotchi':             { w: 1079, h: 1195 },
+  'killerbot':               { w: 744,  h: 506  },
+  'campus-critters':         { w: 1919, h: 888  },
+};
+
 gsap.registerPlugin(ScrollTrigger);
 
 // gradient backgrounds per project
@@ -149,6 +157,7 @@ export default function ProjectPage() {
 
   const genreLabel = GENRE_SHORT[project.genre] ?? project.genre;
   const projectOgImage = PROJECT_OG_IMAGE[slug] ?? `${SITE_URL}/og/preview-banner.jpg`;
+  const projectOgDims  = PROJECT_OG_DIMS[slug] ?? { w: 2846, h: 2846 };
   const projectLd = {
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
@@ -174,6 +183,8 @@ export default function ProjectPage() {
         url={`${SITE_URL}/project/${project.slug}/`}
         ogImage={projectOgImage}
         ogImageAlt={`${project.name} — project by Ezzat Boukhary`}
+        ogImageWidth={projectOgDims.w}
+        ogImageHeight={projectOgDims.h}
         themeColor={project.accentColor}
         jsonLd={projectLd}
       />

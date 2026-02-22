@@ -25,6 +25,9 @@ interface SEOHeadProps {
   ogType?: 'website' | 'article' | 'profile';
   // Discord sidebar / browser chrome accent color — use project accent on project pages
   themeColor?: string;
+  // actual pixel dimensions of the OG image — must match the real file to avoid stretching
+  ogImageWidth?: number;
+  ogImageHeight?: number;
   // one or more JSON-LD objects (Schema.org)
   jsonLd?: JsonLdNode | JsonLdNode[];
 }
@@ -37,6 +40,8 @@ export default function SEOHead({
   url         = `${SITE_URL}/`,
   ogType      = 'website',
   themeColor  = DEFAULT_COLOR,
+  ogImageWidth  = 2846,
+  ogImageHeight = 2846,
   jsonLd,
 }: SEOHeadProps) {
   const ldArray = jsonLd
@@ -64,8 +69,8 @@ export default function SEOHead({
       <meta property="og:image"        content={ogImage} />
       <meta property="og:image:secure_url" content={ogImage} />
       <meta property="og:image:alt"    content={ogImageAlt} />
-      <meta property="og:image:width"  content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:image:width"  content={String(ogImageWidth)} />
+      <meta property="og:image:height" content={String(ogImageHeight)} />
       <meta property="og:image:type"   content={ogImage.endsWith('.jpg') || ogImage.endsWith('.jpeg') ? 'image/jpeg' : 'image/png'} />
 
       {/* twitter / x card */}
