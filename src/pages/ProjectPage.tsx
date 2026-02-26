@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -149,13 +150,53 @@ export default function ProjectPage() {
         opacity: 0, x: -16, stagger: 0.06, duration: 0.5, ease: 'power3.out',
         scrollTrigger: { trigger: '.pp-main', start: 'top 80%' },
       });
+      gsap.from('.pp-skill-pill, .pp-gallery__item', {
+        opacity: 0, y: 18, stagger: 0.05, duration: 0.5, ease: 'power3.out',
+        scrollTrigger: { trigger: '.pp-skills, .pp-gallery', start: 'top 86%' },
+      });
     }, pageRef);
     return () => ctx.revert();
   }, [project, slug]);
 
+  // ── Lightbox ─────────────────────────────────────────────────────────
+  const [lightbox, setLightbox] = useState<{ open: boolean; idx: number }>({ open: false, idx: 0 });
+  const galleryLen    = project?.gallery.length ?? 0;
+  const openLightbox  = useCallback((idx: number) => setLightbox({ open: true, idx }), []);
+  const closeLightbox = useCallback(() => setLightbox(l => ({ ...l, open: false })), []);
+  const lightboxPrev  = useCallback(() =>
+    setLightbox(l => ({ open: true, idx: (l.idx - 1 + galleryLen) % Math.max(galleryLen, 1) })),
+  [galleryLen]);
+  const lightboxNext  = useCallback(() =>
+    setLightbox(l => ({ open: true, idx: (l.idx + 1) % Math.max(galleryLen, 1) })),
+  [galleryLen]);
+
+  useEffect(() => {
+    if (!lightbox.open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape')     closeLightbox();
+      if (e.key === 'ArrowLeft')  lightboxPrev();
+      if (e.key === 'ArrowRight') lightboxNext();
+    };
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [lightbox.open, closeLightbox, lightboxPrev, lightboxNext]);
+
   if (!project) return null;
 
   const genreLabel = GENRE_SHORT[project.genre] ?? project.genre;
+  const galleryClass = `pp-gallery__grid ${
+    project.gallery.length === 1
+      ? 'pp-gallery__grid--1'
+      : project.gallery.length === 2
+        ? 'pp-gallery__grid--2'
+        : project.gallery.length === 3
+          ? 'pp-gallery__grid--3'
+          : 'pp-gallery__grid--mosaic'
+  }`;
   const projectOgImage = PROJECT_OG_IMAGE[slug] ?? `${SITE_URL}/og/preview-banner.jpg`;
   const projectOgDims  = PROJECT_OG_DIMS[slug] ?? { w: 2846, h: 2846 };
   const projectLd = {
@@ -266,10 +307,24 @@ export default function ProjectPage() {
 
           {/* Left — narrative */}
           <div className="pp-main">
-            <h2 className="pp-section-title">Overview</h2>
+            <h2 className="pp-section-title">Why this mattered</h2>
             <p className="pp-text">{project.summary}</p>
 
-            <h2 className="pp-section-title">Objectives</h2>
+            {project.challenge && (
+              <div className="pp-signal">
+                <div className="pp-signal__label">Core challenge</div>
+                <p className="pp-signal__text">{project.challenge}</p>
+              </div>
+            )}
+
+            {project.signatureWin && (
+              <div className="pp-signal pp-signal--win">
+                <div className="pp-signal__label">Signature win</div>
+                <p className="pp-signal__text">{project.signatureWin}</p>
+              </div>
+            )}
+
+            <h2 className="pp-section-title">What I owned</h2>
             <ul className="pp-objectives">
               {project.objectives.map((o, i) => (
                 <li key={i} className="pp-objectives__item">
@@ -281,7 +336,7 @@ export default function ProjectPage() {
               ))}
             </ul>
 
-            <h2 className="pp-section-title">Outcomes</h2>
+            <h2 className="pp-section-title">Impact delivered</h2>
             <ul className="pp-outcomes">
               {project.outcomes.map((o, i) => (
                 <li key={i} className="pp-outcome">
@@ -290,6 +345,26 @@ export default function ProjectPage() {
                 </li>
               ))}
             </ul>
+
+            <h2 className="pp-section-title">Skills demonstrated</h2>
+            <div className="pp-skills">
+              <div className="pp-skills__group">
+                <div className="pp-skills__title">Technical</div>
+                <div className="pp-skills__pills">
+                  {(project.technicalSkills ?? project.stack).map((s) => (
+                    <span key={s} className="pp-skill-pill">{s}</span>
+                  ))}
+                </div>
+              </div>
+              <div className="pp-skills__group">
+                <div className="pp-skills__title">Leadership & collaboration</div>
+                <div className="pp-skills__pills">
+                  {(project.softSkills ?? []).map((s) => (
+                    <span key={s} className="pp-skill-pill pp-skill-pill--soft">{s}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Right — specs sidebar */}
@@ -303,6 +378,18 @@ export default function ProjectPage() {
               <span className="pp-specs__key">Type</span>
               <span className="pp-specs__val">{project.difficulty}</span>
             </div>
+            {project.role && (
+              <div className="pp-specs__row">
+                <span className="pp-specs__key">Role</span>
+                <span className="pp-specs__val">{project.role}</span>
+              </div>
+            )}
+            {project.team && (
+              <div className="pp-specs__row">
+                <span className="pp-specs__key">Team</span>
+                <span className="pp-specs__val">{project.team}</span>
+              </div>
+            )}
             <div className="pp-specs__row">
               <span className="pp-specs__key">Category</span>
               <span className="pp-specs__val">{project.genre}</span>
@@ -325,6 +412,34 @@ export default function ProjectPage() {
         </div>
       </div>
 
+      {/* ── Gallery ───────────────────────────────────────────────────── */}
+      {project.gallery.length > 0 && (
+        <section className="pp-gallery" style={{ '--pp-accent': accent } as React.CSSProperties}>
+          <div className="container">
+            <h2 className="pp-gallery__title">Project visuals</h2>
+            <div className={galleryClass}>
+              {project.gallery.map((img, i) => {
+                const caption = project.galleryCaptions?.[i] ?? `${project.name} screenshot ${i + 1}`;
+                return (
+                  <figure
+                    key={img + i}
+                    className="pp-gallery__item"
+                    onClick={() => openLightbox(i)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={e => e.key === 'Enter' && openLightbox(i)}
+                    aria-label={`View fullscreen: ${caption}`}
+                  >
+                    <img src={img} alt={caption} className="pp-gallery__img" loading="lazy" />
+                    <figcaption className="pp-gallery__cap">{caption}</figcaption>
+                  </figure>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── Next project ──────────────────────────────────────────────── */}
       <div className="pp-next" style={{ '--pp-accent': nextProject.accentColor ?? '#e8ff38' }}>
         <div className="container">
@@ -339,6 +454,39 @@ export default function ProjectPage() {
           </Link>
         </div>
       </div>
+
+      {/* ── Lightbox (portal → document.body) ───────────────────────── */}
+      {lightbox.open && createPortal(
+        <div className="pp-lb" onClick={closeLightbox} role="dialog" aria-modal="true" aria-label="Image lightbox">
+          <button className="pp-lb__close" onClick={closeLightbox} aria-label="Close">✕</button>
+          {galleryLen > 1 && (
+            <>
+              <button
+                className="pp-lb__nav pp-lb__nav--prev"
+                onClick={e => { e.stopPropagation(); lightboxPrev(); }}
+                aria-label="Previous image"
+              >‹</button>
+              <button
+                className="pp-lb__nav pp-lb__nav--next"
+                onClick={e => { e.stopPropagation(); lightboxNext(); }}
+                aria-label="Next image"
+              >›</button>
+            </>
+          )}
+          <div className="pp-lb__inner" onClick={e => e.stopPropagation()}>
+            <img
+              className="pp-lb__img"
+              src={project.gallery[lightbox.idx]}
+              alt={project.galleryCaptions?.[lightbox.idx] ?? `${project.name} screenshot ${lightbox.idx + 1}`}
+            />
+            <p className="pp-lb__cap">{project.galleryCaptions?.[lightbox.idx] ?? ''}</p>
+            {galleryLen > 1 && (
+              <p className="pp-lb__counter">{lightbox.idx + 1} / {galleryLen}</p>
+            )}
+          </div>
+        </div>,
+        document.body
+      )}
 
     </div>
   );
