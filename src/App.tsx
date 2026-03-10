@@ -14,6 +14,7 @@ import Home          from './pages/Home.jsx';
 import ProjectPage   from './pages/ProjectPage.jsx';
 import ResumePage    from './pages/ResumePage.jsx';
 import ContactPage   from './pages/ContactPage';
+import BusinessCardPage from './pages/BusinessCardPage';
 
 import { projectCases } from './data/siteData';
 
@@ -117,6 +118,7 @@ function AnimatedRoutes() {
         <Route path="/project/:slug" element={<ProjectPage />} />
         <Route path="/resume"        element={<ResumePage />} />
         <Route path="/contact"       element={<ContactPage />} />
+        <Route path="/business-card" element={<BusinessCardPage />} />
         <Route path="*"              element={<Home />} />
       </Routes>
     </>
@@ -124,13 +126,16 @@ function AnimatedRoutes() {
 }
 
 function Layout() {
+  const { pathname } = useLocation();
+  const isBusinessCard = pathname === '/business-card' || pathname === '/business-card/';
+
   return (
     <>
-      <CustomCursor />
-      <SiteNav />
+      {!isBusinessCard && <CustomCursor />}
+      {!isBusinessCard && <SiteNav />}
       <AnimatedRoutes />
-      <SiteFooter />
-      <MusicPlayer />
+      {!isBusinessCard && <SiteFooter />}
+      {!isBusinessCard && <MusicPlayer />}
     </>
   );
 }

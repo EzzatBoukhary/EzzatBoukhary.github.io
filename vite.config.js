@@ -36,6 +36,17 @@ const ROUTES = [
     themeColor: '#e8ff38',
   },
   {
+    path: 'business-card',
+    title: 'Business Card \u2014 Ezzat Boukhary',
+    description:
+      'Full-screen static business card for quick in-person sharing of Ezzat Boukhary contact details and QR links.',
+    image:      BANNER_IMG,
+    imageType:  'image/jpeg',
+    imageAlt:   'Ezzat Boukhary business card',
+    url:        `${SITE_URL}/business-card/`,
+    themeColor: '#8fd9ff',
+  },
+  {
     path: 'project/gesture-based-puppetry',
     title: 'Gesture-Based Puppetry \u2014 Ezzat Boukhary',
     description:

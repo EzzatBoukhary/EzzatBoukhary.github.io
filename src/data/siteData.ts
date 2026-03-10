@@ -36,6 +36,7 @@ export const profile = {
   role: 'Software Engineer · Mobile + Full-Stack',
   playerTag: 'Builder-Class Engineer',
   location: 'Florida',
+  phone: '+1 689-233-8757',
   email: 'ezzatboukhary03@gmail.com',
   heroImage: profileBanner,
   summary:

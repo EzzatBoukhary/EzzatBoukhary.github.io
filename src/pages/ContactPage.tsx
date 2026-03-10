@@ -9,8 +9,8 @@ export default function ContactPage() {
   return (
     <div className="contact-page page-enter">
       <SEOHead
-        title="Contact — Ezzat Boukhary"
-        description="Get in touch with Ezzat Boukhary — open to full-time roles, interesting collaborations, and products that reach real people."
+        title="Contact - Ezzat Boukhary"
+        description="Get in touch with Ezzat Boukhary - open to full-time roles, interesting collaborations, and products that reach real people."
         url={`${SITE_URL}/contact/`}
         ogImage={`${SITE_URL}/og/preview-banner.jpg`}
         ogImageAlt="Contact Ezzat Boukhary"
@@ -96,7 +96,7 @@ export default function ContactPage() {
           {/* ── Availability note ── */}
           <div className="contact-page__note">
             <span className="contact-page__note-dot" aria-hidden="true" />
-            Currently open to new opportunities — full-time, contract, and interesting side projects.
+            Currently open to new opportunities - full-time, contract, and interesting side projects.
           </div>
         </div>
       </div>
