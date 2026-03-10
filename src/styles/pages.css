@@ -90,7 +90,8 @@ body.business-card-mode button {
   display: grid;
   place-items: center;
   padding: .55rem;
-  overflow: hidden;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
   background:
     radial-gradient(1200px 500px at 0% 0%, rgba(232,255,56,0.12), transparent 60%),
     radial-gradient(900px 460px at 100% 100%, rgba(0,245,208,0.1), transparent 60%),
@@ -107,7 +108,8 @@ body.business-card-mode button {
     #0a0d16;
   box-shadow: 0 26px 70px rgba(0,0,0,0.5);
   padding: .9rem;
-  overflow: hidden;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .business-card__header {
@@ -271,17 +273,12 @@ body.business-card-mode button {
   }
 
   .business-card__qr-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: .72rem;
-  }
-
-  .business-card__qr-item:last-child {
-    grid-column: 2;
-    justify-self: center;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .55rem;
   }
 
   .business-card__qr-item img {
-    width: min(100%, 102px);
+    width: min(100%, 84px);
   }
 }
 
