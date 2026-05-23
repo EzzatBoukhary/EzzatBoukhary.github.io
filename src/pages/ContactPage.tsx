@@ -96,7 +96,7 @@ export default function ContactPage() {
           {/* ── Availability note ── */}
           <div className="contact-page__note">
             <span className="contact-page__note-dot" aria-hidden="true" />
-            Currently open to new opportunities - full-time, contract, and interesting side projects.
+            {profile.availability}
           </div>
         </div>
       </div>

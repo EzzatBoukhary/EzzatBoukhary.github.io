@@ -100,7 +100,7 @@ function HeroSection() {
         <div>
           <div className="hero__pill">
             <span className="hero__pill-dot" aria-hidden="true" />
-            UCF Computer Science · Class of 2025
+            {profile.educationBadge}
           </div>
 
           <h1 className="hero__name" aria-label="Ezzat Boukhary">
@@ -299,7 +299,7 @@ function AboutSection() {
             <div className="about-section__facts">
               <div className="about-section__fact">
                 <IconPin className="about-section__fact-icon" style={{ width: '1.1rem', height: '1.1rem' }} />
-                <span>Florida · UCF Computer Science · Graduated Dec 2025, Summa Cum Laude</span>
+                <span>{profile.educationFact}</span>
               </div>
               <div className="about-section__fact">
                 <IconGamepad className="about-section__fact-icon" style={{ width: '1.1rem', height: '1.1rem' }} />
@@ -530,7 +530,7 @@ function ContactSection() {
           <em>that matters.</em>
         </h2>
         <p className="contact-section__sub">
-          Primarily looking for full-time roles. Open to side projects or contracts if they're a good fit.
+          {profile.availability}
         </p>
         <Link to="/contact" className="btn btn--primary btn--lg">
           Let's Talk →

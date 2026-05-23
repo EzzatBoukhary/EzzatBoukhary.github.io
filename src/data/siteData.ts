@@ -42,7 +42,10 @@ export const profile = {
   summary:
     'I build products end-to-end and optimize them until they feel fast, reliable, and genuinely useful.',
   mission:
-    'Create software that feels as intentional as a well-designed game: clear feedback, low friction, and meaningful progression.'
+    'Create software that feels as intentional as a well-designed game: clear feedback, low friction, and meaningful progression.',
+  educationBadge: 'UCF Computer Science · Class of 2025',
+  educationFact: 'University of Central Florida · B.S. Computer Science · Dec 2025 · 3.96 GPA',
+  availability: 'Primarily looking for full-time roles. Open to side projects or contracts if they are a good fit.'
 };
 
 export const links = {
@@ -88,11 +91,10 @@ export const experience = [
     logo: yHereLogo,
     stack: ['Flutter', 'Kotlin', 'Firebase', 'AWS'],
     summary:
-      'Leading full-stack development of cross-platform applications with Flutter, Kotlin Multiplatform, Firebase, and AWS.',
+      'Launched 3 full-stack Flutter products from scratch into a live integrated suite supporting 279 users.',
     highlights: [
-      'Architected iOS rollout for an Android-first product',
-      'Reduced Firebase reads by ~90%',
-      'Built and shipped core platform systems solo'
+      'Translated ambiguous product direction into scalable UX, configurable systems, CI/CD, and API/webhooks.',
+      'Cut Firebase reads/writes 90%+ in a Kotlin Multiplatform sports app while improving gameplay, matchmaking, stability, and release readiness.'
     ]
   },
   {
@@ -104,11 +106,10 @@ export const experience = [
     logo: jasLogo,
     stack: ['SvelteKit', 'Prisma', 'TypeScript'],
     summary:
-      'Modernized web architecture and developer workflows for a 400+ member engineering organization.',
+      'Rebuilt a 400+ member club\'s SvelteKit/Prisma/AWS site with modern, responsive UI/UX.',
     highlights: [
-      'Rebuilt systems with SvelteKit + Prisma',
-      'Improved CI/CD and internal collaboration tooling',
-      'Migrated infrastructure toward maintainable open-source patterns'
+      'Automated dues access, events, rosters, project tools, and Discord ops via SharePoint APIs and Calendar sync.',
+      'Modernized workflows for a 400+ member engineering organization.'
     ],
     href: 'https://jas-ucf.com'
   },
@@ -121,11 +122,10 @@ export const experience = [
     logo: budgetwiseLogo,
     stack: ['Vue', 'TypeScript', 'Node.js'],
     summary:
-      'Shipped performant Vue + TypeScript features and improved team onboarding quality.',
+      'Shipped Vue/TypeScript/Firebase budgeting features with cleaner responsive UX and optimized flows.',
     highlights: [
-      'Cut load times by 25%',
-      'Built reusable components with backend integration',
-      'Helped reduce onboarding time by 50%'
+      'Cut onboarding time 50% by mentoring a developer, standardizing GitHub workflows, and adding CI/CD.',
+      'Improved team handoff and product polish.'
     ],
     href: 'https://budgetwise.co'
   },
@@ -138,11 +138,10 @@ export const experience = [
     logo: reeltalkLogo,
     stack: ['Kotlin', 'Jetpack Compose', 'Firebase'],
     summary:
-      'Owned Android development as the sole mobile developer using Kotlin, Compose, and Firebase.',
+      'Published a beta-ready Android app as sole mobile developer using Kotlin, Jetpack Compose, and MVVM.',
     highlights: [
-      'Reduced crash rates by ~20%',
-      'Improved load speed by ~15%',
-      'Published internal near-beta builds to Google Play'
+      'Integrated REST APIs and cut crashes by 20%.',
+      'Boosted load speed by 15% through targeted profiling and QA.'
     ]
   },
   {
@@ -154,11 +153,10 @@ export const experience = [
     logo: fsecLogo,
     stack: ['Python', 'TensorFlow', 'MLP', 'LSTM'],
     summary:
-      'Contributed to multimodal deep-learning diagnostics for photovoltaic defects in DARTS.',
+      'Co-authored a PV research report and presented findings to academic, partner, and industry leaders.',
     highlights: [
-      'Modeled 2,000+ samples with MLP + LSTM',
-      'Achieved R² = 0.79',
-      'Co-authored and presented research outputs'
+      'Developed a reusable ML pipeline aligning 2,075 EL/UVF/IV samples.',
+      'Reached 0.79 R2 with MLPs and 0.77 with LSTMs.'
     ],
     href: 'https://www.linkedin.com/posts/ezzatboukhary_final-report-activity-7367396011469717504-XK1v'
   },
@@ -171,10 +169,10 @@ export const experience = [
     logo: ucfLogo,
     stack: ['Java', 'OOP'],
     summary:
-      'Mentored students at scale in Java OOP and data structures, supporting hundreds of students across multiple course sections.',
+      'Mentored 300+ students in Java OOP, reinforcing core concepts and debugging skills.',
     highlights: [
-      'Supported 300+ students across multiple sections',
-      'Led OOP and debugging sessions'
+      'Facilitated weekly review sessions and live Q&A.',
+      'Supported students across multiple sections.'
     ]
   }
 ];
