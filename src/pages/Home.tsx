@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SEOHead, { SITE_URL, PROFILE_IMAGE } from '../components/SEOHead';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -188,90 +188,245 @@ const GENRE_SHORT = {
   'Web + Mobile Product':                 'Mobile/Web',
 };
 
-function WorkCard({ project, index }: { project: typeof projectCases[0]; index: number }) {
-  const [hovered, setHovered] = useState(false);
-  const accent = project.accentColor ?? '#e8ff38';
+function resolveVisibleStackIndex(root: HTMLElement | null, selector: string) {
+  if (!root) return 0;
+
+  const cards = Array.from(root.querySelectorAll(selector)) as HTMLElement[];
+  if (cards.length === 0) return 0;
+
+  const focusY = Math.min(Math.max(window.innerHeight * 0.42, 1), window.innerHeight - 1);
+
+  const spanningCards = cards
+    .map((card, index) => ({ card, index, rect: card.getBoundingClientRect() }))
+    .filter(({ rect }) => rect.top <= focusY && rect.bottom >= focusY);
+
+  if (spanningCards.length > 0) {
+    return spanningCards[spanningCards.length - 1].index;
+  }
+
+  let bestIndex = 0;
+  let bestDistance = Number.POSITIVE_INFINITY;
+
+  cards.forEach((card, index) => {
+    const rect = card.getBoundingClientRect();
+    const distance = Math.min(Math.abs(rect.top - focusY), Math.abs(rect.bottom - focusY), Math.abs(rect.top + rect.height / 2 - focusY));
+
+    if (distance < bestDistance) {
+      bestDistance = distance;
+      bestIndex = index;
+    }
+  });
+
+  return bestIndex;
+}
+
+function buildProjectCarouselTexts(project: typeof projectCases[number]) {
+  const frames = [
+    { label: 'Challenge', copy: project.challenge },
+    { label: 'Result', copy: project.signatureWin },
+    ...(project.objectives ?? []).map((copy, index) => ({ label: `Objective ${index + 1}`, copy })),
+    ...(project.outcomes ?? []).map((copy, index) => ({ label: `Outcome ${index + 1}`, copy })),
+    { label: 'Role', copy: `${project.role} · ${project.team}` },
+    { label: 'Stack', copy: project.stack.join(' · ') },
+  ].filter((frame) => Boolean(frame.copy));
+
+  return project.gallery.map((_, index) => frames[index] ?? frames[index % frames.length] ?? { label: 'About', copy: project.tagline });
+}
+
+function ProjectStackCard({
+  project,
+  index,
+  isActive,
+  frameIndex,
+  onSelectFrame,
+}: {
+  project: typeof projectCases[number];
+  index: number;
+  isActive: boolean;
+  frameIndex: number;
+  onSelectFrame: (frameIndex: number) => void;
+}) {
+  const navigate = useNavigate();
+  const imageCount = project.gallery.length;
+  const focusFrames = buildProjectCarouselTexts(project);
+
+  const mediaIndex = isActive ? frameIndex % imageCount : 0;
+  const storyIndex = isActive ? frameIndex % focusFrames.length : 0;
+  const activeStory = focusFrames[storyIndex];
+
   return (
-    <li
-      className={`work-card${hovered ? ' work-card--hovered' : ''}`}
-      style={{ '--wc-accent': accent } as React.CSSProperties}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+    <article
+      className={`project-card project-card--stack${isActive ? ' project-card--active' : ''}`}
+      style={{ '--project-accent': project.accentColor ?? '#e8ff38', '--story-index': index } as React.CSSProperties}
+      onClick={() => navigate(`/project/${project.slug}`)}
     >
-      <Link to={`/project/${project.slug}`} className="work-card__link">
-        {/* Image fill */}
-        <div className="work-card__img-wrap">
-          <img src={project.gallery[0]} alt={project.name} className="work-card__img" />
-          <div className="work-card__img-overlay" />
+      <div className="project-card__visual">
+        <div className="project-card__media">
+          <img src={project.gallery[mediaIndex]} alt={project.name} className="project-card__img" />
+          <span className="project-card__num" aria-hidden="true">
+            {String(index + 1).padStart(2, '0')}
+          </span>
         </div>
 
-        {/* Index badge */}
-        <span className="work-card__num" aria-hidden="true">
-          {String(index + 1).padStart(2, '0')}
-        </span>
-
-        {/* Accent glow behind card on hover */}
-        <div className="work-card__glow" aria-hidden="true" />
-
-        {/* Bottom content */}
-        <div className="work-card__body">
-          <div className="work-card__tags">
-            <span className="work-card__tag">{GENRE_SHORT[project.genre] ?? project.genre}</span>
-          </div>
-          <h3 className="work-card__name">{project.name}</h3>
-          <p className="work-card__tagline">{project.tagline}</p>
-
-          {/* Stack pills — shown on hover */}
-          <div className="work-card__stack">
-            {project.stack.slice(0, 4).map((t) => (
-              <span key={t} className="work-card__stack-pill">{t}</span>
-            ))}
-          </div>
-
-          <div className="work-card__footer">
-            <span className="work-card__period">{project.period}</span>
-            <span className="work-card__cta">
-              View Project <IconArrowRight style={{ width: '1em', height: '1em' }} />
-            </span>
-          </div>
+        <div className="project-card__carousel" aria-label={`${project.name} carousel items`}>
+          {project.gallery.map((_, dotIndex) => (
+            <button
+              key={dotIndex}
+              type="button"
+              className={`project-card__carousel-dot${dotIndex === mediaIndex ? ' project-card__carousel-dot--active' : ''}`}
+              onClick={(e) => { e.stopPropagation(); onSelectFrame(dotIndex); }}
+              aria-label={`Show slide ${dotIndex + 1}: ${project.galleryCaptions[dotIndex] ?? project.name}`}
+              aria-pressed={dotIndex === mediaIndex}
+            >
+              <span className="project-card__carousel-dot-inner" aria-hidden="true" />
+            </button>
+          ))}
         </div>
-      </Link>
-    </li>
+      </div>
+
+      <div className="project-card__body">
+        <div className="project-card__meta-row">
+          <span className="project-card__pill">{GENRE_SHORT[project.genre] ?? project.genre}</span>
+          <span className="project-card__difficulty">{project.difficulty}</span>
+        </div>
+        <h3 className="project-card__name">{project.name}</h3>
+        <p className="project-card__tagline">{project.tagline}</p>
+
+        <div className="project-card__focus">
+          <span className="project-card__focus-label">{activeStory.label}</span>
+          <p className="project-card__focus-copy">{activeStory.copy}</p>
+        </div>
+
+        <div className="project-card__stack">
+          {project.stack.slice(0, 4).map((t) => (
+            <span key={t} className="project-card__chip">{t}</span>
+          ))}
+        </div>
+
+        <div className="project-card__footer">
+          <span className="project-card__period">{project.period}</span>
+          <Link
+            to={`/project/${project.slug}`}
+            className="project-card__link"
+            onClick={(e) => e.stopPropagation()}
+          >
+            Open case study <IconArrowRight style={{ width: '1em', height: '1em' }} />
+          </Link>
+        </div>
+      </div>
+    </article>
   );
 }
 
 function WorkSection() {
-  const gridRef = useRef(null);
   const [ref, revealed] = useReveal(0.05);
+  const stackRef = useRef(null);
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+  const [projectFrames, setProjectFrames] = useState<number[]>(() => projectCases.map(() => 0));
+  const [projectAutoplayPaused, setProjectAutoplayPaused] = useState<boolean[]>(() => projectCases.map(() => false));
+
+  const setProjectFrame = (projectIndex: number, frameIndex: number) => {
+    setProjectFrames((current) => {
+      const next = [...current];
+      const project = projectCases[projectIndex];
+      next[projectIndex] = frameIndex % project.gallery.length;
+      return next;
+    });
+
+    setProjectAutoplayPaused((current) => {
+      const next = [...current];
+      next[projectIndex] = true;
+      return next;
+    });
+  };
 
   useEffect(() => {
     if (!revealed) return;
-    const ctx = gsap.context(() => {
-      gsap.from('.work-card', {
-        opacity: 0, y: 40, scale: 0.97,
-        stagger: 0.1, duration: 0.75, ease: 'power3.out',
+    const project = projectCases[activeProjectIndex];
+    if (!project || projectAutoplayPaused[activeProjectIndex] || project.gallery.length <= 1) return;
+
+    const timer = window.setInterval(() => {
+      setProjectFrames((current) => {
+        const next = [...current];
+        next[activeProjectIndex] = (next[activeProjectIndex] + 1) % project.gallery.length;
+        return next;
       });
-    }, gridRef);
+    }, 2600);
+
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, [revealed, activeProjectIndex, projectAutoplayPaused]);
+
+  useEffect(() => {
+    if (!revealed) return;
+    const cards = stackRef.current?.querySelectorAll('.project-card--stack');
+    if (!cards || cards.length === 0) return;
+
+    const ctx = gsap.context(() => {
+      Array.from(cards).forEach((card, index) => {
+        gsap.fromTo(card as Element,
+          { y: 64, scale: 0.98, rotate: index % 2 === 0 ? -0.8 : 0.8 },
+          {
+            y: 0,
+            scale: 1,
+            rotate: 0,
+            duration: 0.75,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: card as Element,
+              start: 'top 82%',
+              once: true,
+            },
+          }
+        );
+      });
+
+      let rafId = 0;
+      const syncActiveProject = () => {
+        window.cancelAnimationFrame(rafId);
+        rafId = window.requestAnimationFrame(() => {
+          const nextIndex = resolveVisibleStackIndex(stackRef.current as HTMLElement, '.project-card--stack');
+          setActiveProjectIndex(nextIndex);
+        });
+      };
+
+      syncActiveProject();
+      ScrollTrigger.addEventListener('refresh', syncActiveProject);
+      window.addEventListener('scroll', syncActiveProject, { passive: true });
+      window.addEventListener('resize', syncActiveProject);
+
+      return () => {
+        ScrollTrigger.removeEventListener('refresh', syncActiveProject);
+        window.removeEventListener('scroll', syncActiveProject);
+        window.removeEventListener('resize', syncActiveProject);
+        window.cancelAnimationFrame(rafId);
+      };
+    }, stackRef);
+
     return () => ctx.revert();
   }, [revealed]);
 
   return (
-    <section className="work-section" id="projects" ref={ref}>
+    <section className="work-section work-section--stacked" id="projects" ref={ref}>
       <div className={`container reveal ${revealed ? 'revealed' : ''}`}>
-        <div className="work-section__top">
-          <div>
-            <p className="section-label">Selected Projects</p>
-            <h2 className="work-section__heading">Featured Projects</h2>
-          </div>
-          <Link to="/resume" className="btn btn--outline">
-            Full Resume <IconExternalLink style={{ width: '1em', height: '1em', marginLeft: '.25em' }} />
-          </Link>
+        <p className="section-label">Selected Projects</p>
+        <h2 className="work-section__heading">Featured Projects</h2>
+
+        <div className="project-stack" ref={stackRef}>
+          {projectCases.map((project, index) => {
+            return (
+              <ProjectStackCard
+                key={project.slug}
+                project={project}
+                index={index}
+                isActive={index === activeProjectIndex}
+                frameIndex={projectFrames[index] ?? 0}
+                onSelectFrame={(frameIndex) => setProjectFrame(index, frameIndex)}
+              />
+            );
+          })}
         </div>
-        <ol className="work-grid" ref={gridRef}>
-          {projectCases.map((project, i) => (
-            <WorkCard key={project.slug} project={project} index={i} />
-          ))}
-        </ol>
       </div>
     </section>
   );
@@ -329,25 +484,6 @@ function AboutSection() {
   );
 }
 
-// stats section
-function StatsSection() {
-  const [ref, revealed] = useReveal(0.2);
-  return (
-    <section className="stats-section" ref={ref}>
-      <div className={`container reveal ${revealed ? 'revealed' : ''}`}>
-        <div className="stats-section__grid">
-          {gameStats.map((s) => (
-            <div key={s.label} className="stats-section__item">
-              <div className="stats-section__val">{s.value}</div>
-              <div className="stats-section__lbl">{s.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // experience section
 const TYPE_COLOR: Record<string, string> = {
   'Full-Time':  '#e8ff38',
@@ -359,77 +495,114 @@ const TYPE_COLOR: Record<string, string> = {
 
 function ExperienceSection() {
   const [ref, revealed] = useReveal(0.05);
+  const stackRef = useRef(null);
+  const [activeExperienceIndex, setActiveExperienceIndex] = useState(0);
+
+  useEffect(() => {
+    if (!revealed) return;
+    const cards = stackRef.current?.querySelectorAll('.story-card--experience');
+    if (!cards || cards.length === 0) return;
+
+    const ctx = gsap.context(() => {
+      Array.from(cards).forEach((card, index) => {
+        gsap.fromTo(card as Element,
+          { y: 64, scale: 0.98, rotate: index % 2 === 0 ? -0.8 : 0.8 },
+          {
+            y: 0,
+            scale: 1,
+            rotate: 0,
+            duration: 0.75,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: card as Element,
+              start: 'top 82%',
+              once: true,
+            },
+          }
+        );
+      });
+
+      let rafId = 0;
+      const syncActiveExperience = () => {
+        window.cancelAnimationFrame(rafId);
+        rafId = window.requestAnimationFrame(() => {
+          setActiveExperienceIndex(resolveVisibleStackIndex(stackRef.current as HTMLElement, '.story-card--experience'));
+        });
+      };
+
+      syncActiveExperience();
+      ScrollTrigger.addEventListener('refresh', syncActiveExperience);
+      window.addEventListener('scroll', syncActiveExperience, { passive: true });
+      window.addEventListener('resize', syncActiveExperience);
+
+      return () => {
+        ScrollTrigger.removeEventListener('refresh', syncActiveExperience);
+        window.removeEventListener('scroll', syncActiveExperience);
+        window.removeEventListener('resize', syncActiveExperience);
+        window.cancelAnimationFrame(rafId);
+      };
+    }, stackRef);
+
+    return () => ctx.revert();
+  }, [revealed]);
+
   return (
-    <section className="exp-section" id="experience" ref={ref}>
+    <section className="exp-section exp-section--stacked" id="experience" ref={ref}>
       <div className={`container reveal ${revealed ? 'revealed' : ''}`}>
-        <div className="exp-section__top">
-          <div>
-            <p className="section-label">Career</p>
-            <h2 className="exp-section__heading">Work Experience</h2>
-          </div>
-        </div>
-        <div className="exp-grid">
+        <p className="section-label">Career</p>
+        <h2 className="exp-section__heading">Work Experience</h2>
+
+        <div className="story-stack story-stack--experience" ref={stackRef}>
           {experience.map((item, i) => {
             const typeColor = TYPE_COLOR[item.type] ?? '#e8ff38';
+            const isActive = i === activeExperienceIndex;
             return (
-              <div
+              <article
                 key={`${item.org}-${i}`}
-                className={`exp-card${item.current ? ' exp-card--featured' : ''}`}
-                style={{ '--exp-accent': typeColor } as React.CSSProperties}
+                className={`story-card story-card--experience${item.current ? ' story-card--current' : ''}${isActive ? ' story-card--active' : ''}`}
+                style={{ '--story-accent': typeColor, '--story-index': i } as React.CSSProperties}
               >
-                {/* Top accent strip */}
-                <div className="exp-card__strip" />
+                <div className="story-card__topline" />
 
-                <div className="exp-card__content">
-                  {/* Top row: logo + title + link */}
-                  <div className="exp-card__top">
-                    <img src={item.logo} alt={item.org} className="exp-card__logo" />
-                    <div className="exp-card__title-block">
-                      <div className="exp-card__role-row">
-                        <span className="exp-card__role">{item.role}</span>
-                        {item.current && (
-                          <span className="exp-card__now">● Now</span>
-                        )}
-                      </div>
-                      <div className="exp-card__org-row">
-                        <span className="exp-card__org">{item.org}</span>
-                        <span className="exp-card__sep">·</span>
-                        <span className="exp-card__type" style={{ color: typeColor }}>{item.type}</span>
-                        <span className="exp-card__sep">·</span>
-                        <span className="exp-card__period">{item.period}</span>
-                      </div>
+                <div className="story-card__header">
+                  <img src={item.logo} alt={item.org} className="story-card__logo" />
+                  <div className="story-card__heading-block">
+                    <div className="story-card__eyebrow">
+                      <span className="story-card__role">{item.role}</span>
+                      {item.current && <span className="story-card__live">Now</span>}
                     </div>
-                    {item.href && (
-                      <a href={item.href} target="_blank" rel="noreferrer"
-                         className="exp-card__ext" aria-label={`${item.org} website`}>
-                        <IconExternalLink style={{ width: '1em', height: '1em' }} />
-                      </a>
-                    )}
+                    <div className="story-card__meta">
+                      <span>{item.org}</span>
+                      <span>·</span>
+                      <span>{item.type}</span>
+                      <span>·</span>
+                      <span>{item.period}</span>
+                    </div>
                   </div>
-
-                  {/* Summary */}
-                  <p className="exp-card__summary">{item.summary}</p>
-
-                  {/* Highlights */}
-                  <ul className="exp-card__bullets">
-                    {item.highlights.map((pt) => (
-                      <li key={pt} className="exp-card__bullet">
-                        <span className="exp-card__bullet-dot" aria-hidden="true" />
-                        <span dangerouslySetInnerHTML={{ __html: pt.replace(/(~?\d+[\d,+%x²]*([\+%\-]?\w*)?)/g, '<strong>$1</strong>') }} />
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Stack chips */}
-                  {item.stack && item.stack.length > 0 && (
-                    <div className="exp-card__stack">
-                      {item.stack.map((t) => (
-                        <span key={t} className="exp-card__chip">{t}</span>
-                      ))}
-                    </div>
+                  {item.href && (
+                    <a href={item.href} target="_blank" rel="noreferrer" className="story-card__ext" aria-label={`${item.org} website`}>
+                      <IconExternalLink style={{ width: '1em', height: '1em' }} />
+                    </a>
                   )}
                 </div>
-              </div>
+
+                <p className="story-card__summary">{item.summary}</p>
+
+                <ul className="story-card__bullets">
+                  {item.highlights.map((pt) => (
+                    <li key={pt} className="story-card__bullet">
+                      <span className="story-card__bullet-dot" aria-hidden="true" />
+                      <span dangerouslySetInnerHTML={{ __html: pt.replace(/(~?\d+[\d,+%x²]*([\+%\-]?\w*)?)/g, '<strong>$1</strong>') }} />
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="story-card__chips">
+                  {item.stack?.map((t) => (
+                    <span key={t} className="story-card__chip">{t}</span>
+                  ))}
+                </div>
+              </article>
             );
           })}
         </div>
