@@ -222,12 +222,11 @@ function resolveVisibleStackIndex(root: HTMLElement | null, selector: string) {
 
 function buildProjectCarouselTexts(project: typeof projectCases[number]) {
   const frames = [
-    { label: 'Challenge', copy: project.challenge },
-    { label: 'Result', copy: project.signatureWin },
-    ...(project.objectives ?? []).map((copy, index) => ({ label: `Objective ${index + 1}`, copy })),
-    ...(project.outcomes ?? []).map((copy, index) => ({ label: `Outcome ${index + 1}`, copy })),
+    { label: 'Impact Delivered', copy: project.signatureWin },
+    ...(project.outcomes ?? []).slice(0, 2).map((copy) => ({ label: 'Outcome', copy })),
+    { label: 'Core Challenge', copy: project.challenge },
+    ...(project.objectives ?? []).slice(0, 2).map((copy) => ({ label: 'What I Owned', copy })),
     { label: 'Role', copy: `${project.role} · ${project.team}` },
-    { label: 'Stack', copy: project.stack.join(' · ') },
   ].filter((frame) => Boolean(frame.copy));
 
   return project.gallery.map((_, index) => frames[index] ?? frames[index % frames.length] ?? { label: 'About', copy: project.tagline });
@@ -262,6 +261,8 @@ function ProjectStackCard({
     >
       <div className="project-card__visual">
         <div className="project-card__media">
+          {/* blurred ambient fill — handles any aspect ratio gracefully */}
+          <img src={project.gallery[mediaIndex]} alt="" aria-hidden="true" className="project-card__img-blur" />
           <img src={project.gallery[mediaIndex]} alt={project.name} className="project-card__img" />
           <span className="project-card__num" aria-hidden="true">
             {String(index + 1).padStart(2, '0')}
@@ -285,33 +286,47 @@ function ProjectStackCard({
       </div>
 
       <div className="project-card__body">
-        <div className="project-card__meta-row">
-          <span className="project-card__pill">{GENRE_SHORT[project.genre] ?? project.genre}</span>
-          <span className="project-card__difficulty">{project.difficulty}</span>
+        <div className="project-card__body-top">
+          <div className="project-card__meta-row">
+            <span className="project-card__pill">{GENRE_SHORT[project.genre] ?? project.genre}</span>
+            <span className="project-card__difficulty">{project.difficulty}</span>
+          </div>
+          <h3 className="project-card__name">{project.name}</h3>
+          <p className="project-card__tagline">{project.tagline}</p>
         </div>
-        <h3 className="project-card__name">{project.name}</h3>
-        <p className="project-card__tagline">{project.tagline}</p>
 
         <div className="project-card__focus">
           <span className="project-card__focus-label">{activeStory.label}</span>
           <p className="project-card__focus-copy">{activeStory.copy}</p>
         </div>
 
-        <div className="project-card__stack">
-          {project.stack.slice(0, 4).map((t) => (
-            <span key={t} className="project-card__chip">{t}</span>
-          ))}
-        </div>
+        {project.stats && project.stats.length > 0 && (
+          <div className="project-card__stats">
+            {project.stats.slice(0, 4).map((s) => (
+              <div key={s.label} className="project-card__stat">
+                <span className="project-card__stat-val">{s.value}</span>
+                <span className="project-card__stat-lbl">{s.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
 
-        <div className="project-card__footer">
-          <span className="project-card__period">{project.period}</span>
-          <Link
-            to={`/project/${project.slug}`}
-            className="project-card__link"
-            onClick={(e) => e.stopPropagation()}
-          >
-            Open case study <IconArrowRight style={{ width: '1em', height: '1em' }} />
-          </Link>
+        <div className="project-card__body-bottom">
+          <div className="project-card__stack">
+            {project.stack.slice(0, 4).map((t) => (
+              <span key={t} className="project-card__chip">{t}</span>
+            ))}
+          </div>
+          <div className="project-card__footer">
+            <span className="project-card__period">{project.period}</span>
+            <Link
+              to={`/project/${project.slug}`}
+              className="project-card__link"
+              onClick={(e) => e.stopPropagation()}
+            >
+              View details <IconArrowRight style={{ width: '1em', height: '1em' }} />
+            </Link>
+          </div>
         </div>
       </div>
     </article>
