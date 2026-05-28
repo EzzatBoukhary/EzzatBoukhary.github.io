@@ -589,6 +589,14 @@ const TYPE_COLOR: Record<string, string> = {
   'Teaching':   '#38bdf8',
 };
 
+function expLinkLabel(href: string): string {
+  if (href.includes('linkedin.com/posts')) return 'LinkedIn Post';
+  if (href.includes('linkedin.com'))       return 'LinkedIn';
+  if (href.includes('github.com'))         return 'GitHub';
+  if (href.includes('devpost.com'))        return 'Devpost';
+  return 'Website';
+}
+
 function ExperienceSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeIdx, setActiveIdx] = useState(0);
@@ -718,16 +726,15 @@ function ExperienceSection() {
                     <h3 className="exp-scene__role">{item.role}</h3>
 
                     <div className="exp-scene__meta">
-                      {item.href ? (
-                        <a href={item.href} target="_blank" rel="noreferrer" className="exp-scene__org-link">
-                          {item.org}
-                          <IconExternalLink style={{ width: '.75em', height: '.75em', marginLeft: '.3em' }} />
-                        </a>
-                      ) : (
-                        <span>{item.org}</span>
-                      )}
+                      <span>{item.org}</span>
                       <span aria-hidden="true" className="exp-scene__meta-dot">·</span>
                       <span>{item.period}</span>
+                      {item.href && (
+                        <a href={item.href} target="_blank" rel="noreferrer" className="exp-scene__org-link">
+                          {expLinkLabel(item.href)}
+                          <IconExternalLink style={{ width: '.7em', height: '.7em', marginLeft: '.25em' }} />
+                        </a>
+                      )}
                     </div>
 
                     <div className="exp-scene__divider" aria-hidden="true" />
