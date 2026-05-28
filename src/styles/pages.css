@@ -102,13 +102,16 @@
   padding-bottom: .25rem; /* align visually with sub text bottom */
 }
 
-/* Frame: fills available vertical space so the PDF is fully visible without scrolling */
+/*
+  Frame sized to actual US Letter paper pixels (816 × 1056 at 96 dpi).
+  Centering at this width makes the Drive viewer fill the frame with minimal dead space.
+  aspect-ratio 8.5/11 = exact paper proportions so the full page shows without inner scroll.
+*/
 .resume-frame {
-  width: 100%;
-  max-width: 100%;
+  width: min(100%, 816px);
+  margin: 0 auto;
   box-sizing: border-box;
-  /* Enough height to show a single-page resume in Google Drive viewer without inner scroll */
-  height: clamp(520px, calc(100dvh - 320px), 960px);
+  aspect-ratio: 8.5 / 11;
   border: 1px solid rgba(255,255,255,0.08);
   border-top: 2px solid rgba(232,255,56,0.35);
   border-radius: 16px;

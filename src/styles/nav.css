@@ -8,13 +8,16 @@
 }
 .nav--scrolled {
   padding: 1rem 0;
-  /* same dark tone as page body, barely-there tint — feels like the page continues */
-  background:
-    linear-gradient(90deg, rgba(40,10,80,0.14) 0%, rgba(0,30,50,0.10) 100%),
-    rgba(6,6,10,0.82);
-  backdrop-filter: blur(28px) saturate(1.8);
+  /*
+    Very transparent so the page gradient bleeds through.
+    backdrop-filter handles the glass — the background just adds a slight dark floor
+    so text stays readable over any bright section.
+  */
+  background: rgba(6,6,10,0.55);
+  backdrop-filter: blur(22px) saturate(2.2) brightness(0.96);
 }
-/* Animated shimmer line at bottom — matches footer accent */
+
+/* Shimmer line + soft glow haze beneath it */
 .nav--scrolled::after {
   content: '';
   position: absolute;
@@ -22,12 +25,14 @@
   height: 1px;
   background: linear-gradient(90deg,
     transparent  0%,
-    rgba(232,255,56,0.5)  35%,
-    rgba(0,245,208,0.5)   65%,
+    rgba(232,255,56,0.75)  35%,
+    rgba(0,245,208,0.75)   65%,
     transparent 100%);
   background-size: 200% 100%;
   animation: nav-shimmer 4s linear infinite;
   pointer-events: none;
+  /* soft glow beneath the line */
+  box-shadow: 0 1px 18px 2px rgba(232,255,56,0.12), 0 1px 8px 0 rgba(0,245,208,0.10);
 }
 @keyframes nav-shimmer {
   0%   { background-position: 100% 0; }
