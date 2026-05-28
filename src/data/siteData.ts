@@ -238,7 +238,7 @@ export const projectCases = [
   {
     slug: 'gesture-based-puppetry',
     name: 'Gesture-Based Puppetry',
-    period: 'Jan 2025 — Aug 2025',
+    period: 'Jan 2025 - Aug 2025',
     difficulty: 'Advanced',
     genre: 'Realtime Graphics / Simulation',
     accentColor: '#a855f7',
@@ -286,7 +286,7 @@ export const projectCases = [
   {
     slug: 'college-event-platform',
     name: 'College Event Platform',
-    period: 'Feb 2025 — Apr 2025',
+    period: 'Feb 2025 - Apr 2025',
     difficulty: 'Full-Stack',
     genre: 'Full-Stack Product System',
     accentColor: '#0ea5e9',
@@ -382,7 +382,7 @@ export const projectCases = [
   {
     slug: 'killerbot',
     name: 'KillerBot',
-    period: '2019 — 2022',
+    period: '2019 - 2022',
     difficulty: 'Solo · 3 Years',
     genre: 'Platform / Community Infrastructure',
     accentColor: '#e8ff38',

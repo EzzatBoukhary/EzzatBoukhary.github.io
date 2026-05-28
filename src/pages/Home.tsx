@@ -62,6 +62,8 @@ function SplitName({ text }) {
 }
 
 // hero section
+const STAT_COLORS = ['#e8ff38', '#00f5d0', '#fb923c', '#a78bfa'];
+
 function HeroSection() {
   const heroRef = useRef(null);
 
@@ -85,6 +87,29 @@ function HeroSection() {
         ease: 'power3.out',
         delay: 0.95,
       });
+
+      // ── Parallax scroll: orbs drift at different rates as you scroll ──
+      gsap.to('.hero__orb--1', {
+        yPercent: 55, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.2 },
+      });
+      gsap.to('.hero__orb--2', {
+        yPercent: 35, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.8 },
+      });
+      gsap.to('.hero__orb--3', {
+        yPercent: 45, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 },
+      });
+      // Text content scrolls slightly slower than the page for depth
+      gsap.to('.hero__inner > div:first-child', {
+        yPercent: 10, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 },
+      });
+      gsap.to('.hero__card', {
+        yPercent: 14, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.3 },
+      });
     }, heroRef);
     return () => ctx.revert();
   }, []);
@@ -94,6 +119,7 @@ function HeroSection() {
       <div className="hero__bg" aria-hidden="true" />
       <div className="hero__orb hero__orb--1" aria-hidden="true" />
       <div className="hero__orb hero__orb--2" aria-hidden="true" />
+      <div className="hero__orb hero__orb--3" aria-hidden="true" />
 
       <div className="container hero__inner">
         {/* Left — text */}
@@ -140,10 +166,10 @@ function HeroSection() {
 
         {/* Right — stat card */}
         <div className="hero__card">
-          <div className="hero__card-label">Character Stats</div>
+          <div className="hero__card-label">Impact Metrics</div>
           <div className="hero__stat-grid">
             {gameStats.map((s, i) => (
-              <div key={s.label} className="hero__stat">
+              <div key={s.label} className="hero__stat" style={{ '--sc': STAT_COLORS[i % STAT_COLORS.length] } as React.CSSProperties}>
                 <div className="hero__stat-header">
                   <span className="hero__stat-lbl">{s.label}</span>
                   <span className="hero__stat-val">{s.value}</span>
@@ -314,7 +340,10 @@ function ProjectStackCard({
         <div className="project-card__body-bottom">
           <div className="project-card__stack">
             {project.stack.slice(0, 4).map((t) => (
-              <span key={t} className="project-card__chip">{t}</span>
+              <span key={t} className="project-card__chip">
+                <TechIcon name={t} style={{ fontSize: '0.8rem', flexShrink: 0 }} />
+                {t}
+              </span>
             ))}
           </div>
           <div className="project-card__footer">
@@ -449,10 +478,55 @@ function WorkSection() {
 
 // about section
 function AboutSection() {
-  const [ref, revealed] = useReveal(0.1);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const ctx = gsap.context(() => {
+      const imgWrap   = section.querySelector('.about-section__img-wrap');
+      const quote     = section.querySelector('.about-section__quote');
+      const bio       = section.querySelector('.about-section__bio');
+      const facts     = section.querySelectorAll('.about-section__fact');
+      const btns      = section.querySelector('.about-section__btns');
+
+      if (imgWrap) {
+        gsap.fromTo(imgWrap,
+          { clipPath: 'inset(0 0 40% 0)', scale: 1.08, opacity: 0 },
+          { clipPath: 'inset(0 0 0% 0)', scale: 1, opacity: 1, duration: 1.4, ease: 'power3.out',
+            scrollTrigger: { trigger: imgWrap, start: 'top 78%', once: true } }
+        );
+        // Parallax: image moves slightly slower than the page
+        gsap.to(imgWrap, {
+          yPercent: -10, ease: 'none',
+          scrollTrigger: { trigger: '.about-section', start: 'top bottom', end: 'bottom top', scrub: 1.2 },
+        });
+      }
+      // Quote: dramatic wipe from left
+      if (quote) gsap.from(quote, {
+        clipPath: 'inset(0 100% 0 0)', duration: 1.05, ease: 'power4.out',
+        scrollTrigger: { trigger: quote, start: 'top 80%', once: true },
+      });
+      // Bio: slide from right
+      if (bio) gsap.from(bio, {
+        x: 40, opacity: 0, duration: 0.8, ease: 'power3.out',
+        scrollTrigger: { trigger: bio, start: 'top 82%', once: true },
+      });
+      if (facts.length) gsap.from(facts, {
+        x: -40, opacity: 0, stagger: 0.12, duration: 0.65, ease: 'power3.out',
+        scrollTrigger: { trigger: facts[0] as Element, start: 'top 84%', once: true },
+      });
+      if (btns) gsap.from(btns, {
+        y: 16, opacity: 0, duration: 0.6, ease: 'power3.out',
+        scrollTrigger: { trigger: btns, start: 'top 85%', once: true },
+      });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="about-section" id="about" ref={ref}>
-      <div className={`container reveal ${revealed ? 'revealed' : ''}`}>
+    <section className="about-section" id="about" ref={sectionRef}>
+      <div className="container">
         <div className="about-section__grid">
           <div>
             <div className="about-section__img-wrap">
@@ -484,7 +558,7 @@ function AboutSection() {
                 <a href={`mailto:${profile.email}`}>{profile.email}</a>
               </div>
             </div>
-            <div style={{ marginTop: '2rem', display: 'flex', gap: '.75rem', flexWrap: 'wrap' }}>
+            <div className="about-section__btns" style={{ marginTop: '2rem', display: 'flex', gap: '.75rem', flexWrap: 'wrap' }}>
               <a href={links.github} target="_blank" rel="noreferrer" className="btn btn--outline">
                 <IconGitHub style={{ width: '1em', height: '1em' }} /> GitHub
               </a>
@@ -509,136 +583,286 @@ const TYPE_COLOR: Record<string, string> = {
 };
 
 function ExperienceSection() {
-  const [ref, revealed] = useReveal(0.05);
-  const stackRef = useRef(null);
-  const [activeExperienceIndex, setActiveExperienceIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [navVisible, setNavVisible] = useState(false);
 
   useEffect(() => {
-    if (!revealed) return;
-    const cards = stackRef.current?.querySelectorAll('.story-card--experience');
-    if (!cards || cards.length === 0) return;
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const scenes = Array.from(section.querySelectorAll('.exp-scene')) as HTMLElement[];
 
     const ctx = gsap.context(() => {
-      Array.from(cards).forEach((card, index) => {
-        gsap.fromTo(card as Element,
-          { y: 64, scale: 0.98, rotate: index % 2 === 0 ? -0.8 : 0.8 },
-          {
-            y: 0,
-            scale: 1,
-            rotate: 0,
-            duration: 0.75,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: card as Element,
-              start: 'top 82%',
-              once: true,
-            },
-          }
-        );
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top 80%',
+        end: 'bottom 20%',
+        onEnter:      () => setNavVisible(true),
+        onLeave:      () => setNavVisible(false),
+        onEnterBack:  () => setNavVisible(true),
+        onLeaveBack:  () => setNavVisible(false),
       });
 
-      let rafId = 0;
-      const syncActiveExperience = () => {
-        window.cancelAnimationFrame(rafId);
-        rafId = window.requestAnimationFrame(() => {
-          setActiveExperienceIndex(resolveVisibleStackIndex(stackRef.current as HTMLElement, '.story-card--experience'));
+      scenes.forEach((scene, i) => {
+        ScrollTrigger.create({
+          trigger: scene,
+          start: 'top 52%',
+          end:   'bottom 52%',
+          onEnter:     () => setActiveIdx(i),
+          onEnterBack: () => setActiveIdx(i),
         });
-      };
 
-      syncActiveExperience();
-      ScrollTrigger.addEventListener('refresh', syncActiveExperience);
-      window.addEventListener('scroll', syncActiveExperience, { passive: true });
-      window.addEventListener('resize', syncActiveExperience);
+        // Parallax watermark
+        const bgText = scene.querySelector('.exp-scene__bg-text');
+        if (bgText) {
+          gsap.fromTo(bgText,
+            { yPercent: 12 },
+            { yPercent: -12, ease: 'none',
+              scrollTrigger: { trigger: scene, start: 'top bottom', end: 'bottom top', scrub: true } }
+          );
+        }
 
-      return () => {
-        ScrollTrigger.removeEventListener('refresh', syncActiveExperience);
-        window.removeEventListener('scroll', syncActiveExperience);
-        window.removeEventListener('resize', syncActiveExperience);
-        window.cancelAnimationFrame(rafId);
-      };
-    }, stackRef);
+        const scan = scene.querySelector('.exp-scene__scan');
+        if (scan) {
+          gsap.fromTo(scan,
+            { top: '0%', opacity: 0.5 },
+            { top: '105%', opacity: 0, duration: 0.5, ease: 'power1.inOut',
+              scrollTrigger: { trigger: scene, start: 'top 83%', once: true } }
+          );
+        }
+
+        const band = scene.querySelector('.exp-scene__band');
+        if (band) {
+          gsap.from(band, {
+            clipPath: 'inset(0 100% 0 0)', duration: 0.45, ease: 'power3.out',
+            scrollTrigger: { trigger: scene, start: 'top 82%', once: true },
+          });
+        }
+
+        const role = scene.querySelector('.exp-scene__role');
+        if (role) {
+          gsap.from(role, {
+            clipPath: 'inset(0 100% 0 0)', duration: 0.65, ease: 'power4.out',
+            scrollTrigger: { trigger: scene, start: 'top 75%', once: true },
+          });
+        }
+
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: scene, start: 'top 72%', once: true },
+        });
+
+        const meta     = scene.querySelector('.exp-scene__meta');
+        const divider  = scene.querySelector('.exp-scene__divider');
+        const summary  = scene.querySelector('.exp-scene__summary');
+        const bullets  = scene.querySelectorAll('.exp-scene__bullet');
+        const chips    = scene.querySelectorAll('.exp-scene__chip');
+        const logoWrap = scene.querySelector('.exp-scene__logo-wrap');
+
+        if (meta)     tl.from(meta,     { y: 10, opacity: 0, duration: 0.32, ease: 'power3.out' });
+        if (divider)  tl.from(divider,  { scaleX: 0, transformOrigin: 'left center', duration: 0.45, ease: 'power3.out' }, '-=0.2');
+        if (summary)  tl.from(summary,  { y: 10, opacity: 0, duration: 0.32, ease: 'power3.out' }, '-=0.28');
+        if (bullets.length) tl.from(bullets, { x: -16, opacity: 0, stagger: 0.06, duration: 0.32, ease: 'power3.out' }, '-=0.22');
+        if (chips.length)   tl.from(chips,   { scale: 0.75, opacity: 0, stagger: 0.04, duration: 0.25, ease: 'back.out(1.5)' }, '-=0.18');
+        if (logoWrap) tl.from(logoWrap, { scale: 0.78, opacity: 0, rotation: -5, duration: 0.6, ease: 'power3.out' }, '<-0.55');
+      });
+    }, sectionRef);
 
     return () => ctx.revert();
-  }, [revealed]);
+  }, []);
 
   return (
-    <section className="exp-section exp-section--stacked" id="experience" ref={ref}>
-      <div className={`container reveal ${revealed ? 'revealed' : ''}`}>
+    <section className="exp-scenes-section" id="experience" ref={sectionRef}>
+
+      <nav
+        className={`exp-scenes-nav${navVisible ? ' exp-scenes-nav--visible' : ''}`}
+        aria-label="Experience navigation"
+      >
+        <div className="exp-scenes-nav__line" aria-hidden="true" />
+        {experience.map((item, i) => (
+          <div
+            key={i}
+            className={`exp-scenes-nav__dot${i === activeIdx ? ' exp-scenes-nav__dot--active' : ''}`}
+            style={{ '--exp-accent': TYPE_COLOR[item.type] ?? '#e8ff38' } as React.CSSProperties}
+            aria-label={item.org}
+          />
+        ))}
+      </nav>
+
+      <div className="exp-scenes-header container">
         <p className="section-label">Career</p>
-        <h2 className="exp-section__heading">Work Experience</h2>
+        <h2 className="exp-scenes-heading">Work Experience</h2>
+      </div>
 
-        <div className="story-stack story-stack--experience" ref={stackRef}>
-          {experience.map((item, i) => {
-            const typeColor = TYPE_COLOR[item.type] ?? '#e8ff38';
-            const isActive = i === activeExperienceIndex;
-            return (
-              <article
-                key={`${item.org}-${i}`}
-                className={`story-card story-card--experience${item.current ? ' story-card--current' : ''}${isActive ? ' story-card--active' : ''}`}
-                style={{ '--story-accent': typeColor, '--story-index': i } as React.CSSProperties}
-              >
-                <div className="story-card__topline" />
+      {experience.map((item, i) => {
+        const typeColor = TYPE_COLOR[item.type] ?? '#e8ff38';
+        const padded    = String(i + 1).padStart(2, '0');
+        const bgWord    = item.org.replace(/[^A-Za-z]/g, '').toUpperCase();
+        return (
+          <article
+            key={`${item.org}-${i}`}
+            className={`exp-scene${i === activeIdx ? ' exp-scene--active' : ''}`}
+            style={{ '--exp-accent': typeColor } as React.CSSProperties}
+          >
+            <div className="container">
+              <div className="exp-scene__card">
+                {/* Scan-line sweep animation */}
+                <span className="exp-scene__scan" aria-hidden="true" />
 
-                <div className="story-card__header">
-                  <img src={item.logo} alt={item.org} className="story-card__logo" />
-                  <div className="story-card__heading-block">
-                    <div className="story-card__eyebrow">
-                      <span className="story-card__role">{item.role}</span>
-                      {item.current && <span className="story-card__live">Now</span>}
-                    </div>
-                    <div className="story-card__meta">
-                      <span>{item.org}</span>
-                      <span>·</span>
-                      <span>{item.type}</span>
-                      <span>·</span>
+                {/* Corner accent brackets */}
+                <span className="exp-scene__corner-tr" aria-hidden="true" />
+                <span className="exp-scene__corner-bl" aria-hidden="true" />
+
+                {/* Accent band */}
+                <div className="exp-scene__band">
+                  <span className="exp-scene__band-type">{item.type}</span>
+                  {item.current && <span className="exp-scene__now-badge">● LIVE</span>}
+                </div>
+
+                <div className="exp-scene__inner">
+                  <div className="exp-scene__left">
+                    <span className="exp-scene__index" aria-hidden="true">{padded}</span>
+                    <h3 className="exp-scene__role">{item.role}</h3>
+
+                    <div className="exp-scene__meta">
+                      {item.href ? (
+                        <a href={item.href} target="_blank" rel="noreferrer" className="exp-scene__org-link">
+                          {item.org}
+                          <IconExternalLink style={{ width: '.75em', height: '.75em', marginLeft: '.3em' }} />
+                        </a>
+                      ) : (
+                        <span>{item.org}</span>
+                      )}
+                      <span aria-hidden="true" className="exp-scene__meta-dot">·</span>
                       <span>{item.period}</span>
                     </div>
+
+                    <div className="exp-scene__divider" aria-hidden="true" />
+
+                    <p className="exp-scene__summary">{item.summary}</p>
+
+                    <ul className="exp-scene__bullets">
+                      {item.highlights.map((pt) => (
+                        <li key={pt} className="exp-scene__bullet">
+                          <span className="exp-scene__bullet-dot" aria-hidden="true" />
+                          <span dangerouslySetInnerHTML={{
+                            __html: pt.replace(/(~?\d+[\d,+%x²]*([\+%\-]?\w*)?)/g, '<strong>$1</strong>'),
+                          }} />
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="exp-scene__chips">
+                      {item.stack?.map((t) => (
+                        <span key={t} className="exp-scene__chip">
+                          <TechIcon name={t} style={{ fontSize: '0.85rem', flexShrink: 0 }} />
+                          {t}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  {item.href && (
-                    <a href={item.href} target="_blank" rel="noreferrer" className="story-card__ext" aria-label={`${item.org} website`}>
-                      <IconExternalLink style={{ width: '1em', height: '1em' }} />
-                    </a>
-                  )}
+
+                  <div className="exp-scene__right">
+                    <div className="exp-scene__logo-wrap">
+                      <img src={item.logo} alt={item.org} className="exp-scene__logo" />
+                    </div>
+                  </div>
                 </div>
+              </div>
+            </div>
+          </article>
+        );
+      })}
 
-                <p className="story-card__summary">{item.summary}</p>
-
-                <ul className="story-card__bullets">
-                  {item.highlights.map((pt) => (
-                    <li key={pt} className="story-card__bullet">
-                      <span className="story-card__bullet-dot" aria-hidden="true" />
-                      <span dangerouslySetInnerHTML={{ __html: pt.replace(/(~?\d+[\d,+%x²]*([\+%\-]?\w*)?)/g, '<strong>$1</strong>') }} />
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="story-card__chips">
-                  {item.stack?.map((t) => (
-                    <span key={t} className="story-card__chip">{t}</span>
-                  ))}
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </div>
     </section>
   );
 }
 
 // skills section
+const GROUP_COLORS: Record<string, string> = {
+  'Languages':         '#e8ff38',
+  'Frameworks':        '#38bdf8',
+  'Platforms':         '#a78bfa',
+  'Engineering Style': '#00f5d0',
+};
 
 function SkillsSection() {
-  const [ref, revealed] = useReveal(0.05);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const ctx = gsap.context(() => {
+      const heading = section.querySelector('.skills-section__heading');
+      if (heading) gsap.from(heading, {
+        clipPath: 'inset(0 100% 0 0)', duration: 0.9, ease: 'power4.out',
+        scrollTrigger: { trigger: heading, start: 'top 82%', once: true },
+      });
+
+      section.querySelectorAll('.skills-group').forEach((group) => {
+        const cat   = group.querySelector('.skills-group__cat');
+        const pills = group.querySelectorAll('.skills-pill');
+        if (cat) gsap.from(cat, {
+          x: -20, opacity: 0, duration: 0.55, ease: 'power3.out',
+          scrollTrigger: { trigger: group, start: 'top 85%', once: true },
+        });
+        if (pills.length) gsap.from(pills, {
+          scale: 0.8, opacity: 0, stagger: 0.04, duration: 0.4, ease: 'back.out(1.4)',
+          scrollTrigger: { trigger: group, start: 'top 82%', once: true },
+        });
+      });
+
+      // Achievement cards: alternate left/right entrance
+      const achCards = Array.from(section.querySelectorAll('.achievement-card'));
+      achCards.forEach((card, i) => {
+        gsap.from(card, {
+          x: i % 2 === 0 ? -50 : 50,
+          opacity: 0,
+          duration: 0.7,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: card, start: 'top 88%', once: true },
+        });
+      });
+
+      // Count-up animation for achievement stat numbers
+      // data-count preserves the original value across React StrictMode double-invocations
+      // (ctx.revert undoes tweens but not textContent changes, so we must not rely on textContent)
+      section.querySelectorAll('.achievement-card__stat').forEach((el) => {
+        const htmlEl = el as HTMLElement;
+        const raw = htmlEl.dataset.count ?? htmlEl.textContent?.trim() ?? '';
+        const m = raw.match(/^(~?)([\d,]+)(.*)$/);
+        if (!m) return;
+        const prefix = m[1];
+        const num    = parseInt(m[2].replace(/,/g, ''), 10);
+        const suffix = m[3];
+        if (isNaN(num) || num === 0) return;
+        htmlEl.textContent = prefix + '0' + suffix;
+        const obj = { val: 0 };
+        gsap.to(obj, {
+          val: num,
+          duration: 1.6,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 86%', once: true },
+          onUpdate() {
+            const v = Math.round(obj.val);
+            htmlEl.textContent = prefix + (v >= 1000 ? v.toLocaleString() : v) + suffix;
+          },
+          onComplete() { htmlEl.textContent = raw; },
+        });
+      });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="skills-section" id="skills" ref={ref}>
-      <div className={`container reveal ${revealed ? 'revealed' : ''}`}>
+    <section className="skills-section" id="skills" ref={sectionRef}>
+      <div className="container">
         <p className="section-label">Skills</p>
         <h2 className="skills-section__heading">Tech Stack</h2>
 
         <div className="skills-grid">
           {skillMatrix.map((group) => (
-            <div key={group.category} className="skills-group">
+            <div key={group.category} className="skills-group" style={{ '--group-color': GROUP_COLORS[group.category] ?? '#e8ff38' } as React.CSSProperties}>
               <div className="skills-group__cat">
                 {group.category}
               </div>
@@ -654,15 +878,26 @@ function SkillsSection() {
           ))}
         </div>
 
-        <p className="section-label" style={{ marginTop: '4rem' }}>Honors</p>
-        <h3 className="skills-section__heading" style={{ fontSize: 'clamp(1.5rem,3vw,2.5rem)', marginBottom: '2rem' }}>
-          Achievements
-        </h3>
+        <div className="achievements-header">
+          <p className="section-label">Honors</p>
+          <h3 className="achievements-heading">Impact Numbers</h3>
+        </div>
         <div className="achievements-grid">
-          {achievements.map((a) => (
-            <div key={a.title} className="achievement-card">
-              <div className="achievement-card__title">{a.title}</div>
-              <div className="achievement-card__detail">{a.detail}</div>
+          {[
+            { stat: '250K+', sub: 'users reached',   color: '#00f5d0', ...achievements[0] },
+            { stat: '90%↓',  sub: 'reads eliminated', color: '#fb923c', ...achievements[1] },
+            { stat: '#1',    sub: 'design award',     color: '#e8ff38', ...achievements[2] },
+            { stat: '300+',  sub: 'students mentored',color: '#a78bfa', ...achievements[3] },
+          ].map((a) => (
+            <div key={a.title} className="achievement-card" style={{ '--ach-color': a.color } as React.CSSProperties}>
+              <div className="achievement-card__stat-block">
+                <span className="achievement-card__stat" data-count={a.stat}>{a.stat}</span>
+                <span className="achievement-card__sub">{a.sub}</span>
+              </div>
+              <div className="achievement-card__body">
+                <div className="achievement-card__title">{a.title}</div>
+                <div className="achievement-card__detail">{a.detail}</div>
+              </div>
             </div>
           ))}
         </div>
@@ -673,10 +908,29 @@ function SkillsSection() {
 
 // recommendations section
 function RecSection() {
-  const [ref, revealed] = useReveal(0.1);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const ctx = gsap.context(() => {
+      const heading = section.querySelector('.rec-section__heading');
+      if (heading) gsap.from(heading, {
+        y: 28, opacity: 0, duration: 0.75, ease: 'power3.out',
+        scrollTrigger: { trigger: heading, start: 'top 82%', once: true },
+      });
+      const cards = section.querySelectorAll('.rec-card');
+      if (cards.length) gsap.from(cards, {
+        y: 40, opacity: 0, stagger: 0.15, duration: 0.7, ease: 'power3.out',
+        scrollTrigger: { trigger: cards[0] as Element, start: 'top 82%', once: true },
+      });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="rec-section" id="recommendations" ref={ref}>
-      <div className={`container reveal ${revealed ? 'revealed' : ''}`}>
+    <section className="rec-section" id="recommendations" ref={sectionRef}>
+      <div className="container">
         <p className="section-label">From Colleagues</p>
         <h2 className="rec-section__heading">Recommendations</h2>
         <div className="rec-grid">

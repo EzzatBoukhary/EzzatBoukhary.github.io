@@ -7,6 +7,7 @@ import { projectCases } from '../data/siteData';
 import {
   LinkIcon, IconArrowLeft, IconArrowRight,
 } from '../components/Icons';
+import { TechIcon } from '../components/TechIcon';
 import SEOHead, { SITE_URL } from '../components/SEOHead';
 
 const PROJECT_OG_IMAGE: Record<string, string> = {
@@ -139,24 +140,106 @@ export default function ProjectPage() {
   useEffect(() => {
     if (!project) return;
     const ctx = gsap.context(() => {
-      gsap.from('.pp-hero__tag, .pp-hero__name, .pp-hero__tagline, .pp-hero__chips, .pp-hero__links', {
-        opacity: 0, y: 28, stagger: 0.09, duration: 0.7, ease: 'power3.out', delay: 0.2,
+      // Hero entrance
+      gsap.from('.pp-hero__back', { x: -18, opacity: 0, duration: 0.5, ease: 'power3.out', delay: 0.08 });
+      gsap.from('.pp-hero__counter', { opacity: 0, duration: 0.6, ease: 'power2.out', delay: 0.12 });
+      gsap.from('.pp-hero__genre', { y: 14, opacity: 0, duration: 0.5, ease: 'power3.out', delay: 0.18 });
+      gsap.from('.pp-hero__name', { clipPath: 'inset(0 100% 0 0)', duration: 1.0, ease: 'power4.out', delay: 0.28 });
+      gsap.from('.pp-hero__tagline', { y: 24, opacity: 0, duration: 0.65, ease: 'power3.out', delay: 0.48 });
+      gsap.from('.pp-hero__links', { y: 16, opacity: 0, duration: 0.55, ease: 'power3.out', delay: 0.6 });
+      gsap.from('.pp-hero__chips', { y: 12, opacity: 0, duration: 0.5, ease: 'power3.out', delay: 0.68 });
+      gsap.from('.pp-hero__info-strip', { opacity: 0, duration: 0.6, ease: 'power2.out', delay: 0.75 });
+
+      // Photo stack: images fan in from right
+      gsap.from('.pp-hero-photos', {
+        x: 60, opacity: 0, duration: 0.9, ease: 'power3.out', delay: 0.35,
       });
+
+      // Hero orbs parallax
+      gsap.to('.pp-hero__orb--1', { yPercent: 45, ease: 'none', scrollTrigger: { trigger: '.pp-hero', start: 'top top', end: 'bottom top', scrub: 1.2 } });
+      gsap.to('.pp-hero__orb--2', { yPercent: 28, ease: 'none', scrollTrigger: { trigger: '.pp-hero', start: 'top top', end: 'bottom top', scrub: 1.8 } });
+      gsap.to('.pp-hero__dots', { yPercent: 18, ease: 'none', scrollTrigger: { trigger: '.pp-hero', start: 'top top', end: 'bottom top', scrub: 1 } });
+
+      // Stats bar
       gsap.from('.pp-stat', {
-        opacity: 0, y: 20, stagger: 0.07, duration: 0.55, ease: 'power3.out',
-        scrollTrigger: { trigger: '.pp-stats', start: 'top 88%' },
+        y: 28, opacity: 0, stagger: 0.08, duration: 0.6, ease: 'power3.out',
+        scrollTrigger: { trigger: '.pp-stats', start: 'top 88%', once: true },
       });
-      gsap.from('.pp-objectives__item, .pp-outcome', {
-        opacity: 0, x: -16, stagger: 0.06, duration: 0.5, ease: 'power3.out',
-        scrollTrigger: { trigger: '.pp-main', start: 'top 80%' },
+      document.querySelectorAll('.pp-stat__val').forEach((el) => {
+        const htmlEl = el as HTMLElement;
+        const raw = htmlEl.dataset.count ?? htmlEl.textContent ?? '';
+        const m = raw.match(/^(~?)([\d,.]+)(.*)$/);
+        if (!m) return;
+        const prefix = m[1];
+        const num = parseFloat(m[2].replace(/,/g, ''));
+        const suffix = m[3];
+        if (isNaN(num) || num === 0) return;
+        htmlEl.textContent = prefix + '0' + suffix;
+        const obj = { val: 0 };
+        gsap.to(obj, {
+          val: num, duration: 1.4, ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+          onUpdate() { const v = Math.round(obj.val); htmlEl.textContent = prefix + (v >= 1000 ? v.toLocaleString() : v) + suffix; },
+          onComplete() { htmlEl.textContent = raw; },
+        });
       });
-      gsap.from('.pp-skill-pill, .pp-gallery__item', {
-        opacity: 0, y: 18, stagger: 0.05, duration: 0.5, ease: 'power3.out',
-        scrollTrigger: { trigger: '.pp-skills, .pp-gallery', start: 'top 86%' },
+
+      // Summary — clip-path wipe
+      gsap.from('.pp-summary__text', {
+        clipPath: 'inset(0 100% 0 0)', duration: 1.1, ease: 'power4.out',
+        scrollTrigger: { trigger: '.pp-summary', start: 'top 80%', once: true },
       });
+
+      // Narrative cols — from opposite sides
+      const challengeCol = document.querySelector('.pp-narrative__col--challenge');
+      const winCol = document.querySelector('.pp-narrative__col--win');
+      if (challengeCol) gsap.from(challengeCol, { x: -60, opacity: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '.pp-narrative__grid', start: 'top 82%', once: true } });
+      if (winCol) gsap.from(winCol, { x: 60, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.1, scrollTrigger: { trigger: '.pp-narrative__grid', start: 'top 82%', once: true } });
+
+      // Section titles — clip-path wipes
+      document.querySelectorAll('.pp-section-title').forEach((title) => {
+        gsap.from(title, { clipPath: 'inset(0 100% 0 0)', duration: 0.75, ease: 'power4.out', scrollTrigger: { trigger: title, start: 'top 86%', once: true } });
+      });
+
+      // Objectives from left, outcomes from right
+      gsap.from('.pp-objectives__item', { x: -60, opacity: 0, stagger: 0.1, duration: 0.65, ease: 'power3.out', scrollTrigger: { trigger: '.pp-objectives', start: 'top 84%', once: true } });
+      gsap.from('.pp-outcome', { x: 50, opacity: 0, stagger: 0.08, duration: 0.6, ease: 'power3.out', scrollTrigger: { trigger: '.pp-outcomes', start: 'top 84%', once: true } });
+
+      // Skills pop in
+      gsap.from('.pp-skill-pill', { scale: 0.75, opacity: 0, stagger: 0.04, duration: 0.4, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.pp-all-skills', start: 'top 86%', once: true } });
+
+      // Next project
+      gsap.from('.pp-next__link', { y: 24, opacity: 0, duration: 0.65, ease: 'power3.out', scrollTrigger: { trigger: '.pp-next', start: 'top 88%', once: true } });
     }, pageRef);
     return () => ctx.revert();
   }, [project, slug]);
+
+  // ── Gallery drag-to-scroll ───────────────────────────────────────────
+  const galleryScrollRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragScrollLeft = useRef(0);
+  const onGalleryMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true;
+    dragStartX.current = e.pageX - (galleryScrollRef.current?.offsetLeft ?? 0);
+    dragScrollLeft.current = galleryScrollRef.current?.scrollLeft ?? 0;
+    galleryScrollRef.current?.classList.add('is-grabbing');
+  };
+  const onGalleryMouseLeave = () => {
+    isDragging.current = false;
+    galleryScrollRef.current?.classList.remove('is-grabbing');
+  };
+  const onGalleryMouseUp = () => {
+    isDragging.current = false;
+    galleryScrollRef.current?.classList.remove('is-grabbing');
+  };
+  const onGalleryMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current || !galleryScrollRef.current) return;
+    e.preventDefault();
+    const x    = e.pageX - galleryScrollRef.current.offsetLeft;
+    const walk = (x - dragStartX.current) * 1.6;
+    galleryScrollRef.current.scrollLeft = dragScrollLeft.current - walk;
+  };
 
   // ── Lightbox ─────────────────────────────────────────────────────────
   const [lightbox, setLightbox] = useState<{ open: boolean; idx: number }>({ open: false, idx: 0 });
@@ -215,6 +298,8 @@ export default function ProjectPage() {
     },
   };
 
+  const hasImages = project.gallery.length > 0;
+
   return (
     <div className="project-page page-enter" ref={pageRef}>
 
@@ -230,69 +315,110 @@ export default function ProjectPage() {
         jsonLd={projectLd}
       />
 
-      {/* ── Hero ──────────────────────────────────────────────────────── */}
+      {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <header className="pp-hero" style={{ background: heroBg, '--pp-accent': accent, '--pp-dots': dotColor } as React.CSSProperties}>
-        {/* Dot grid */}
         <div className="pp-hero__dots" aria-hidden="true" />
-        {/* Per-project unique pattern */}
-        {patternSlug && (
-          <div className={`pp-hero__pattern pp-hero__pattern--${patternSlug}`} aria-hidden="true" />
-        )}
-        {/* Diagonal accent lines */}
-        <div className="pp-hero__lines" aria-hidden="true" />
-        {/* Floating orbs */}
+        {patternSlug && <div className={`pp-hero__pattern pp-hero__pattern--${patternSlug}`} aria-hidden="true" />}
         <div className="pp-hero__orb pp-hero__orb--1" aria-hidden="true" />
         <div className="pp-hero__orb pp-hero__orb--2" aria-hidden="true" />
-        {/* Corner bracket decorations */}
-        <svg className="pp-hero__corner pp-hero__corner--tl" viewBox="0 0 60 60" fill="none" aria-hidden="true">
-          <path d="M2 58V2h56" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-        </svg>
-        <svg className="pp-hero__corner pp-hero__corner--br" viewBox="0 0 60 60" fill="none" aria-hidden="true">
-          <path d="M58 2v56H2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-        </svg>
 
         <div className="container pp-hero__inner">
-          <Link to="/#projects" className="pp-hero__back">
-            <IconArrowLeft style={{ width: '1em', height: '1em' }} />
-            All Projects
-          </Link>
-
-          <div className="pp-hero__tag">
-            <span className="pp-hero__tag-dot" aria-hidden="true" />
-            {genreLabel}
+          {/* Top bar */}
+          <div className="pp-hero__topbar">
+            <Link to="/#projects" className="pp-hero__back">
+              <IconArrowLeft style={{ width: '1em', height: '1em' }} />
+              All Projects
+            </Link>
+            <span className="pp-hero__counter">
+              {String(currentIdx + 1).padStart(2, '0')} / {String(projectCases.length).padStart(2, '0')}
+            </span>
           </div>
 
-          <h1 className="pp-hero__name">{project.name}</h1>
-          <p className="pp-hero__tagline">{project.tagline}</p>
+          {/* Two-column body */}
+          <div className={`pp-hero__body${!hasImages ? ' pp-hero__body--solo' : ''}`}>
 
-          <div className="pp-hero__chips">
-            <span className="pp-hero__chip pp-hero__chip--period">{project.period}</span>
-            {project.stack.slice(0, 5).map((t) => (
-              <span key={t} className="pp-hero__chip">{t}</span>
+            {/* Left: identity */}
+            <div className="pp-hero__left">
+              <div className="pp-hero__genre">
+                <span className="pp-hero__genre-dot" aria-hidden="true" />
+                {genreLabel}
+              </div>
+
+              <h1 className="pp-hero__name">{project.name}</h1>
+              <p className="pp-hero__tagline">{project.tagline}</p>
+
+              {/* Links — top priority */}
+              {project.links.length > 0 && (
+                <div className="pp-hero__links">
+                  {project.links.map((l) => (
+                    <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="pp-hero__link">
+                      <LinkIcon label={l.label} href={l.href} style={{ width: '1em', height: '1em', flexShrink: 0 }} />
+                      {l.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              {/* Tech chips */}
+              <div className="pp-hero__chips">
+                {project.stack.slice(0, 6).map((t) => (
+                  <span key={t} className="pp-hero__chip">
+                    <TechIcon name={t} style={{ fontSize: '0.75rem', flexShrink: 0 }} />
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: photo stack */}
+            {hasImages && (
+              <div className="pp-hero__right">
+                <div className="pp-hero-photos" onClick={() => openLightbox(0)} role="button" tabIndex={0} onKeyDown={e => e.key === 'Enter' && openLightbox(0)} aria-label="View project images">
+                  {project.gallery.slice(0, 3).map((img, i) => (
+                    <div key={img + i} className="pp-hero-photos__item">
+                      <img src={img} alt={project.galleryCaptions?.[i] ?? `${project.name} screenshot`} />
+                    </div>
+                  ))}
+                </div>
+                {project.gallery.length > 1 && (
+                  <span className="pp-hero-photos__count">{project.gallery.length} images · click to view</span>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Info strip */}
+          <div className="pp-hero__info-strip">
+            <span className="pp-hero__info-item">{project.period}</span>
+            {project.role && <span className="pp-hero__info-item">{project.role}</span>}
+            {project.team && <span className="pp-hero__info-item">{project.team}</span>}
+            <span className="pp-hero__info-item">{project.difficulty}</span>
+            <span className="pp-hero__info-item">{genreLabel}</span>
+          </div>
+        </div>
+
+        {/* Tech marquee */}
+        <div className="pp-hero__tech-strip" aria-hidden="true">
+          <div className="pp-hero__tech-scroll">
+            {[...project.stack, ...project.stack, ...project.stack].map((t, i) => (
+              <span key={i} className="pp-hero__tech-item">
+                <TechIcon name={t} style={{ fontSize: '0.75rem', flexShrink: 0 }} />
+                {t}
+                <span className="pp-hero__tech-dot" />
+              </span>
             ))}
           </div>
-
-          {project.links.length > 0 && (
-            <div className="pp-hero__links">
-              {project.links.map((l) => (
-                <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="pp-hero__link">
-                  <LinkIcon label={l.label} href={l.href} style={{ width: '1.1em', height: '1.1em', flexShrink: 0 }} />
-                  {l.label}
-                </a>
-              ))}
-            </div>
-          )}
         </div>
       </header>
 
-      {/* ── Stats bar ─────────────────────────────────────────────────── */}
+      {/* ── Stats bar ─────────────────────────────────────────────────────── */}
       {project.stats && (
-        <div className="pp-stats" style={{ '--pp-accent': accent }}>
+        <div className="pp-stats" style={{ '--pp-accent': accent } as React.CSSProperties}>
           <div className="container">
             <div className="pp-stats__grid">
               {project.stats.map((s) => (
                 <div key={s.label} className="pp-stat">
-                  <span className="pp-stat__val">{s.value}</span>
+                  <span className="pp-stat__val" data-count={s.value}>{s.value}</span>
                   <span className="pp-stat__lbl">{s.label}</span>
                 </div>
               ))}
@@ -301,42 +427,51 @@ export default function ProjectPage() {
         </div>
       )}
 
-      {/* ── Body ──────────────────────────────────────────────────────── */}
-      <div className="pp-body" style={{ '--pp-accent': accent }}>
-        <div className="container pp-body__grid">
+      {/* ── Summary ───────────────────────────────────────────────────────── */}
+      <section className="pp-summary" style={{ '--pp-accent': accent } as React.CSSProperties}>
+        <div className="container">
+          <p className="pp-summary__text">{project.summary}</p>
+        </div>
+      </section>
 
-          {/* Left — narrative */}
+      {/* ── Narrative — challenge / win ────────────────────────────────────── */}
+      {(project.challenge || project.signatureWin) && (
+        <section className="pp-narrative" style={{ '--pp-accent': accent } as React.CSSProperties}>
+          <div className="container">
+            <div className="pp-narrative__grid">
+              {project.challenge && (
+                <div className="pp-narrative__col pp-narrative__col--challenge">
+                  <div className="pp-narrative__col-label">Core challenge</div>
+                  <p className="pp-narrative__col-text">{project.challenge}</p>
+                </div>
+              )}
+              {project.signatureWin && (
+                <div className="pp-narrative__col pp-narrative__col--win">
+                  <div className="pp-narrative__col-label">Signature win</div>
+                  <p className="pp-narrative__col-text">{project.signatureWin}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+
+      {/* ── Body ──────────────────────────────────────────────────────────── */}
+      <div className="pp-body" style={{ '--pp-accent': accent } as React.CSSProperties}>
+        <div className="container">
           <div className="pp-main">
-            <h2 className="pp-section-title">Why this mattered</h2>
-            <p className="pp-text">{project.summary}</p>
-
-            {project.challenge && (
-              <div className="pp-signal">
-                <div className="pp-signal__label">Core challenge</div>
-                <p className="pp-signal__text">{project.challenge}</p>
-              </div>
-            )}
-
-            {project.signatureWin && (
-              <div className="pp-signal pp-signal--win">
-                <div className="pp-signal__label">Signature win</div>
-                <p className="pp-signal__text">{project.signatureWin}</p>
-              </div>
-            )}
-
-            <h2 className="pp-section-title">What I owned</h2>
+            <h2 className="pp-section-title">What I built</h2>
             <ul className="pp-objectives">
               {project.objectives.map((o, i) => (
                 <li key={i} className="pp-objectives__item">
-                  <span className="pp-objectives__num" aria-hidden="true">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
+                  <span className="pp-objectives__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
                   <span>{o}</span>
                 </li>
               ))}
             </ul>
 
-            <h2 className="pp-section-title">Impact delivered</h2>
+            <h2 className="pp-section-title">What shipped</h2>
             <ul className="pp-outcomes">
               {project.outcomes.map((o, i) => (
                 <li key={i} className="pp-outcome">
@@ -346,102 +481,26 @@ export default function ProjectPage() {
               ))}
             </ul>
 
-            <h2 className="pp-section-title">Skills demonstrated</h2>
-            <div className="pp-skills">
-              <div className="pp-skills__group">
-                <div className="pp-skills__title">Technical</div>
-                <div className="pp-skills__pills">
-                  {(project.technicalSkills ?? project.stack).map((s) => (
-                    <span key={s} className="pp-skill-pill">{s}</span>
-                  ))}
-                </div>
-              </div>
-              <div className="pp-skills__group">
-                <div className="pp-skills__title">Leadership & collaboration</div>
-                <div className="pp-skills__pills">
-                  {(project.softSkills ?? []).map((s) => (
-                    <span key={s} className="pp-skill-pill pp-skill-pill--soft">{s}</span>
-                  ))}
-                </div>
+            <h2 className="pp-section-title">Stack</h2>
+            <div className="pp-all-skills">
+              <div className="pp-skills__pills">
+                {(project.technicalSkills ?? project.stack).map((s) => (
+                  <span key={s} className="pp-skill-pill">
+                    <TechIcon name={s} style={{ fontSize: '0.9rem', flexShrink: 0 }} />
+                    {s}
+                  </span>
+                ))}
+                {(project.softSkills ?? []).map((s) => (
+                  <span key={s} className="pp-skill-pill pp-skill-pill--soft">{s}</span>
+                ))}
               </div>
             </div>
           </div>
-
-          {/* Right — specs sidebar */}
-          <aside className="pp-specs">
-            <div className="pp-specs__title">Project Details</div>
-            <div className="pp-specs__row">
-              <span className="pp-specs__key">Period</span>
-              <span className="pp-specs__val">{project.period}</span>
-            </div>
-            <div className="pp-specs__row">
-              <span className="pp-specs__key">Type</span>
-              <span className="pp-specs__val">{project.difficulty}</span>
-            </div>
-            {project.role && (
-              <div className="pp-specs__row">
-                <span className="pp-specs__key">Role</span>
-                <span className="pp-specs__val">{project.role}</span>
-              </div>
-            )}
-            {project.team && (
-              <div className="pp-specs__row">
-                <span className="pp-specs__key">Team</span>
-                <span className="pp-specs__val">{project.team}</span>
-              </div>
-            )}
-            <div className="pp-specs__row">
-              <span className="pp-specs__key">Category</span>
-              <span className="pp-specs__val">{project.genre}</span>
-            </div>
-            <div className="pp-specs__row pp-specs__row--stack">
-              <span className="pp-specs__key">Stack</span>
-              <span className="pp-specs__val">{project.stack.join(', ')}</span>
-            </div>
-            {project.links.length > 0 && (
-              <div className="pp-specs__links">
-                {project.links.map((l) => (
-                  <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="pp-specs__link">
-                    <LinkIcon label={l.label} href={l.href} style={{ width: '1em', height: '1em', flexShrink: 0 }} />
-                    {l.label}
-                  </a>
-                ))}
-              </div>
-            )}
-          </aside>
         </div>
       </div>
 
-      {/* ── Gallery ───────────────────────────────────────────────────── */}
-      {project.gallery.length > 0 && (
-        <section className="pp-gallery" style={{ '--pp-accent': accent } as React.CSSProperties}>
-          <div className="container">
-            <h2 className="pp-gallery__title">Project visuals</h2>
-            <div className={galleryClass}>
-              {project.gallery.map((img, i) => {
-                const caption = project.galleryCaptions?.[i] ?? `${project.name} screenshot ${i + 1}`;
-                return (
-                  <figure
-                    key={img + i}
-                    className="pp-gallery__item"
-                    onClick={() => openLightbox(i)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={e => e.key === 'Enter' && openLightbox(i)}
-                    aria-label={`View fullscreen: ${caption}`}
-                  >
-                    <img src={img} alt={caption} className="pp-gallery__img" loading="lazy" />
-                    <figcaption className="pp-gallery__cap">{caption}</figcaption>
-                  </figure>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── Next project ──────────────────────────────────────────────── */}
-      <div className="pp-next" style={{ '--pp-accent': nextProject.accentColor ?? '#e8ff38' }}>
+      {/* ── Next project ──────────────────────────────────────────────────── */}
+      <div className="pp-next" style={{ '--pp-accent': nextProject.accentColor ?? '#e8ff38' } as React.CSSProperties}>
         <div className="container">
           <Link to={`/project/${nextProject.slug}`} className="pp-next__link">
             <div>
@@ -455,34 +514,20 @@ export default function ProjectPage() {
         </div>
       </div>
 
-      {/* ── Lightbox (portal → document.body) ───────────────────────── */}
+      {/* ── Lightbox ──────────────────────────────────────────────────────── */}
       {lightbox.open && createPortal(
         <div className="pp-lb" onClick={closeLightbox} role="dialog" aria-modal="true" aria-label="Image lightbox">
           <button className="pp-lb__close" onClick={closeLightbox} aria-label="Close">✕</button>
           {galleryLen > 1 && (
             <>
-              <button
-                className="pp-lb__nav pp-lb__nav--prev"
-                onClick={e => { e.stopPropagation(); lightboxPrev(); }}
-                aria-label="Previous image"
-              >‹</button>
-              <button
-                className="pp-lb__nav pp-lb__nav--next"
-                onClick={e => { e.stopPropagation(); lightboxNext(); }}
-                aria-label="Next image"
-              >›</button>
+              <button className="pp-lb__nav pp-lb__nav--prev" onClick={e => { e.stopPropagation(); lightboxPrev(); }} aria-label="Previous image">‹</button>
+              <button className="pp-lb__nav pp-lb__nav--next" onClick={e => { e.stopPropagation(); lightboxNext(); }} aria-label="Next image">›</button>
             </>
           )}
           <div className="pp-lb__inner" onClick={e => e.stopPropagation()}>
-            <img
-              className="pp-lb__img"
-              src={project.gallery[lightbox.idx]}
-              alt={project.galleryCaptions?.[lightbox.idx] ?? `${project.name} screenshot ${lightbox.idx + 1}`}
-            />
+            <img className="pp-lb__img" src={project.gallery[lightbox.idx]} alt={project.galleryCaptions?.[lightbox.idx] ?? `${project.name} screenshot ${lightbox.idx + 1}`} />
             <p className="pp-lb__cap">{project.galleryCaptions?.[lightbox.idx] ?? ''}</p>
-            {galleryLen > 1 && (
-              <p className="pp-lb__counter">{lightbox.idx + 1} / {galleryLen}</p>
-            )}
+            {galleryLen > 1 && <p className="pp-lb__counter">{lightbox.idx + 1} / {galleryLen}</p>}
           </div>
         </div>,
         document.body

@@ -7,7 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import CustomCursor from './components/CustomCursor.jsx';
 import SiteNav      from './components/SiteNav.jsx';
-import SiteFooter   from './components/SiteFooter.jsx';
+import SiteFooter   from './components/SiteFooter';
 import MusicPlayer  from './components/MusicPlayer';
 
 import Home          from './pages/Home.jsx';

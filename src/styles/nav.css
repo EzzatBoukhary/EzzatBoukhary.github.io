@@ -8,9 +8,30 @@
 }
 .nav--scrolled {
   padding: 1rem 0;
-  background: rgba(6,6,8,0.85);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
+  /* same dark tone as page body, barely-there tint — feels like the page continues */
+  background:
+    linear-gradient(90deg, rgba(40,10,80,0.14) 0%, rgba(0,30,50,0.10) 100%),
+    rgba(6,6,10,0.82);
+  backdrop-filter: blur(28px) saturate(1.8);
+}
+/* Animated shimmer line at bottom — matches footer accent */
+.nav--scrolled::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent  0%,
+    rgba(232,255,56,0.5)  35%,
+    rgba(0,245,208,0.5)   65%,
+    transparent 100%);
+  background-size: 200% 100%;
+  animation: nav-shimmer 4s linear infinite;
+  pointer-events: none;
+}
+@keyframes nav-shimmer {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
 }
 .nav__inner {
   max-width: 1220px;
@@ -91,7 +112,7 @@
 .nav__overlay {
   position: fixed;
   inset: 0;
-  background: var(--black);
+  background: #08051a;
   z-index: 400;
   display: flex;
   flex-direction: column;
