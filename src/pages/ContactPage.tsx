@@ -44,8 +44,6 @@ export default function ContactPage() {
         <div className="container cp-hero__inner">
           <Link to="/" className="cp-back">← Back</Link>
 
-          <p className="section-label cp-eyebrow">Contact</p>
-
           <h1 className="cp-heading">
             Let's build<br />
             <em>something real.</em>

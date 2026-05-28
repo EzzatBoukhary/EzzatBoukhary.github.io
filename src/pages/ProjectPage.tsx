@@ -115,6 +115,7 @@ export default function ProjectPage() {
   const project    = projectCases.find((p) => p.slug === slug);
   const currentIdx = projectCases.findIndex((p) => p.slug === slug);
   const nextProject = projectCases[(currentIdx + 1) % projectCases.length];
+  const prevProject = projectCases[(currentIdx - 1 + projectCases.length) % projectCases.length];
 
   const accent      = project?.accentColor ?? '#e8ff38';
   const heroBg      = buildHeroBg(slug);
@@ -184,32 +185,35 @@ export default function ProjectPage() {
         });
       });
 
-      // Summary — clip-path wipe
+      // Summary — simple fade, no clip-path delay
       gsap.from('.pp-summary__text', {
-        clipPath: 'inset(0 100% 0 0)', duration: 1.1, ease: 'power4.out',
-        scrollTrigger: { trigger: '.pp-summary', start: 'top 80%', once: true },
+        y: 20, opacity: 0, duration: 0.65, ease: 'power3.out',
+        scrollTrigger: { trigger: '.pp-summary', start: 'top 92%', once: true },
       });
 
-      // Narrative cols — from opposite sides
+      // Narrative cols — subtle fade-in, no big horizontal movement
       const challengeCol = document.querySelector('.pp-narrative__col--challenge');
       const winCol = document.querySelector('.pp-narrative__col--win');
-      if (challengeCol) gsap.from(challengeCol, { x: -60, opacity: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '.pp-narrative__grid', start: 'top 82%', once: true } });
-      if (winCol) gsap.from(winCol, { x: 60, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.1, scrollTrigger: { trigger: '.pp-narrative__grid', start: 'top 82%', once: true } });
+      if (challengeCol) gsap.from(challengeCol, { y: 18, opacity: 0, duration: 0.5, ease: 'power3.out', scrollTrigger: { trigger: '.pp-narrative__grid', start: 'top 92%', once: true } });
+      if (winCol) gsap.from(winCol, { y: 18, opacity: 0, duration: 0.5, ease: 'power3.out', delay: 0.07, scrollTrigger: { trigger: '.pp-narrative__grid', start: 'top 92%', once: true } });
 
-      // Section titles — clip-path wipes
-      document.querySelectorAll('.pp-section-title').forEach((title) => {
-        gsap.from(title, { clipPath: 'inset(0 100% 0 0)', duration: 0.75, ease: 'power4.out', scrollTrigger: { trigger: title, start: 'top 86%', once: true } });
+      // Objectives — scroll-driven horizontal offset (content readable immediately)
+      document.querySelectorAll('.pp-objectives__item').forEach((item, i) => {
+        gsap.fromTo(item,
+          { x: 0 },
+          { x: -8, ease: 'none',
+            scrollTrigger: { trigger: item, start: 'top bottom', end: 'bottom top', scrub: 0.6 } }
+        );
       });
 
-      // Objectives from left, outcomes from right
-      gsap.from('.pp-objectives__item', { x: -60, opacity: 0, stagger: 0.1, duration: 0.65, ease: 'power3.out', scrollTrigger: { trigger: '.pp-objectives', start: 'top 84%', once: true } });
-      gsap.from('.pp-outcome', { x: 50, opacity: 0, stagger: 0.08, duration: 0.6, ease: 'power3.out', scrollTrigger: { trigger: '.pp-outcomes', start: 'top 84%', once: true } });
+      // Outcomes — simple staggered fade, fires early
+      gsap.from('.pp-outcome', { y: 10, opacity: 0, stagger: 0.05, duration: 0.4, ease: 'power2.out', scrollTrigger: { trigger: '.pp-outcomes', start: 'top 94%', once: true } });
 
-      // Skills pop in
-      gsap.from('.pp-skill-pill', { scale: 0.75, opacity: 0, stagger: 0.04, duration: 0.4, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.pp-all-skills', start: 'top 86%', once: true } });
+      // Skills pop in — fires early
+      gsap.from('.pp-skill-pill', { scale: 0.8, opacity: 0, stagger: 0.025, duration: 0.3, ease: 'back.out(1.4)', scrollTrigger: { trigger: '.pp-all-skills', start: 'top 94%', once: true } });
 
-      // Next project
-      gsap.from('.pp-next__link', { y: 24, opacity: 0, duration: 0.65, ease: 'power3.out', scrollTrigger: { trigger: '.pp-next', start: 'top 88%', once: true } });
+      // Project navigation
+      gsap.from('.pp-project-nav__card', { y: 24, opacity: 0, stagger: 0.08, duration: 0.55, ease: 'power3.out', scrollTrigger: { trigger: '.pp-project-nav', start: 'top 90%', once: true } });
     }, pageRef);
     return () => ctx.revert();
   }, [project, slug]);
@@ -397,18 +401,6 @@ export default function ProjectPage() {
           </div>
         </div>
 
-        {/* Tech marquee */}
-        <div className="pp-hero__tech-strip" aria-hidden="true">
-          <div className="pp-hero__tech-scroll">
-            {[...project.stack, ...project.stack, ...project.stack].map((t, i) => (
-              <span key={i} className="pp-hero__tech-item">
-                <TechIcon name={t} style={{ fontSize: '0.75rem', flexShrink: 0 }} />
-                {t}
-                <span className="pp-hero__tech-dot" />
-              </span>
-            ))}
-          </div>
-        </div>
       </header>
 
       {/* ── Stats bar ─────────────────────────────────────────────────────── */}
@@ -499,18 +491,33 @@ export default function ProjectPage() {
         </div>
       </div>
 
-      {/* ── Next project ──────────────────────────────────────────────────── */}
-      <div className="pp-next" style={{ '--pp-accent': nextProject.accentColor ?? '#e8ff38' } as React.CSSProperties}>
+      {/* ── Prev / Next project ───────────────────────────────────────────── */}
+      <div className="pp-project-nav">
         <div className="container">
-          <Link to={`/project/${nextProject.slug}`} className="pp-next__link">
-            <div>
-              <div className="pp-next__label">Next Project</div>
-              <div className="pp-next__name">{nextProject.name}</div>
-            </div>
-            <span className="pp-next__arrow">
-              <IconArrowRight style={{ width: '1.4em', height: '1.4em' }} />
-            </span>
-          </Link>
+          <div className="pp-project-nav__grid">
+            <Link
+              to={`/project/${prevProject.slug}`}
+              className="pp-project-nav__card"
+              style={{ '--nav-accent': prevProject.accentColor ?? '#e8ff38' } as React.CSSProperties}
+            >
+              <div className="pp-project-nav__dir">
+                <IconArrowLeft style={{ width: '1em', height: '1em' }} />
+                Previous
+              </div>
+              <div className="pp-project-nav__name">{prevProject.name}</div>
+            </Link>
+            <Link
+              to={`/project/${nextProject.slug}`}
+              className="pp-project-nav__card pp-project-nav__card--next"
+              style={{ '--nav-accent': nextProject.accentColor ?? '#e8ff38' } as React.CSSProperties}
+            >
+              <div className="pp-project-nav__dir">
+                Next
+                <IconArrowRight style={{ width: '1em', height: '1em' }} />
+              </div>
+              <div className="pp-project-nav__name">{nextProject.name}</div>
+            </Link>
+          </div>
         </div>
       </div>
 

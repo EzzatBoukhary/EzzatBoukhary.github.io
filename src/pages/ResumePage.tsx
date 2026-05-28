@@ -62,10 +62,9 @@ export default function ResumePage() {
             ← Back
           </Link>
 
-          {/* Top row: label + heading left, download right */}
+          {/* Top row: heading left, download right */}
           <div className="resume-hero__top">
             <div>
-              <p className="section-label resume-hero__eyebrow">Document</p>
               <h1 className="resume-hero__heading">
                 My <em>Resume</em>
               </h1>

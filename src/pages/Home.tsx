@@ -454,7 +454,6 @@ function WorkSection() {
   return (
     <section className="work-section work-section--stacked" id="projects" ref={ref}>
       <div className={`container reveal ${revealed ? 'revealed' : ''}`}>
-        <p className="section-label">Selected Projects</p>
         <h2 className="work-section__heading">Featured Projects</h2>
 
         <div className="project-stack" ref={stackRef}>
@@ -623,33 +622,24 @@ function ExperienceSection() {
           );
         }
 
-        const scan = scene.querySelector('.exp-scene__scan');
-        if (scan) {
-          gsap.fromTo(scan,
-            { top: '0%', opacity: 0.5 },
-            { top: '105%', opacity: 0, duration: 0.5, ease: 'power1.inOut',
-              scrollTrigger: { trigger: scene, start: 'top 83%', once: true } }
-          );
-        }
-
         const band = scene.querySelector('.exp-scene__band');
         if (band) {
           gsap.from(band, {
-            clipPath: 'inset(0 100% 0 0)', duration: 0.45, ease: 'power3.out',
-            scrollTrigger: { trigger: scene, start: 'top 82%', once: true },
+            clipPath: 'inset(0 100% 0 0)', duration: 0.35, ease: 'power3.out',
+            scrollTrigger: { trigger: scene, start: 'top 92%', once: true },
           });
         }
 
         const role = scene.querySelector('.exp-scene__role');
         if (role) {
           gsap.from(role, {
-            clipPath: 'inset(0 100% 0 0)', duration: 0.65, ease: 'power4.out',
-            scrollTrigger: { trigger: scene, start: 'top 75%', once: true },
+            clipPath: 'inset(0 100% 0 0)', duration: 0.45, ease: 'power4.out',
+            scrollTrigger: { trigger: scene, start: 'top 90%', once: true },
           });
         }
 
         const tl = gsap.timeline({
-          scrollTrigger: { trigger: scene, start: 'top 72%', once: true },
+          scrollTrigger: { trigger: scene, start: 'top 88%', once: true },
         });
 
         const meta     = scene.querySelector('.exp-scene__meta');
@@ -659,12 +649,12 @@ function ExperienceSection() {
         const chips    = scene.querySelectorAll('.exp-scene__chip');
         const logoWrap = scene.querySelector('.exp-scene__logo-wrap');
 
-        if (meta)     tl.from(meta,     { y: 10, opacity: 0, duration: 0.32, ease: 'power3.out' });
-        if (divider)  tl.from(divider,  { scaleX: 0, transformOrigin: 'left center', duration: 0.45, ease: 'power3.out' }, '-=0.2');
-        if (summary)  tl.from(summary,  { y: 10, opacity: 0, duration: 0.32, ease: 'power3.out' }, '-=0.28');
-        if (bullets.length) tl.from(bullets, { x: -16, opacity: 0, stagger: 0.06, duration: 0.32, ease: 'power3.out' }, '-=0.22');
-        if (chips.length)   tl.from(chips,   { scale: 0.75, opacity: 0, stagger: 0.04, duration: 0.25, ease: 'back.out(1.5)' }, '-=0.18');
-        if (logoWrap) tl.from(logoWrap, { scale: 0.78, opacity: 0, rotation: -5, duration: 0.6, ease: 'power3.out' }, '<-0.55');
+        if (meta)     tl.from(meta,     { y: 8, opacity: 0, duration: 0.22, ease: 'power3.out' });
+        if (divider)  tl.from(divider,  { scaleX: 0, transformOrigin: 'left center', duration: 0.3, ease: 'power3.out' }, '-=0.1');
+        if (summary)  tl.from(summary,  { y: 8, opacity: 0, duration: 0.22, ease: 'power3.out' }, '-=0.18');
+        if (bullets.length) tl.from(bullets, { x: -10, opacity: 0, stagger: 0.04, duration: 0.22, ease: 'power3.out' }, '-=0.15');
+        if (chips.length)   tl.from(chips,   { scale: 0.82, opacity: 0, stagger: 0.03, duration: 0.18, ease: 'back.out(1.4)' }, '-=0.12');
+        if (logoWrap) tl.from(logoWrap, { scale: 0.82, opacity: 0, rotation: -4, duration: 0.4, ease: 'power3.out' }, '<-0.35');
       });
     }, sectionRef);
 
@@ -690,7 +680,6 @@ function ExperienceSection() {
       </nav>
 
       <div className="exp-scenes-header container">
-        <p className="section-label">Career</p>
         <h2 className="exp-scenes-heading">Work Experience</h2>
       </div>
 
@@ -709,19 +698,15 @@ function ExperienceSection() {
                 {/* Scan-line sweep animation */}
                 <span className="exp-scene__scan" aria-hidden="true" />
 
-                {/* Corner accent brackets */}
-                <span className="exp-scene__corner-tr" aria-hidden="true" />
-                <span className="exp-scene__corner-bl" aria-hidden="true" />
-
-                {/* Accent band */}
+                {/* Accent band — now includes the 01/02 counter */}
                 <div className="exp-scene__band">
+                  <span className="exp-scene__band-num" aria-hidden="true">{padded}</span>
                   <span className="exp-scene__band-type">{item.type}</span>
                   {item.current && <span className="exp-scene__now-badge">● LIVE</span>}
                 </div>
 
                 <div className="exp-scene__inner">
                   <div className="exp-scene__left">
-                    <span className="exp-scene__index" aria-hidden="true">{padded}</span>
                     <h3 className="exp-scene__role">{item.role}</h3>
 
                     <div className="exp-scene__meta">
@@ -857,7 +842,6 @@ function SkillsSection() {
   return (
     <section className="skills-section" id="skills" ref={sectionRef}>
       <div className="container">
-        <p className="section-label">Skills</p>
         <h2 className="skills-section__heading">Tech Stack</h2>
 
         <div className="skills-grid">
@@ -879,7 +863,6 @@ function SkillsSection() {
         </div>
 
         <div className="achievements-header">
-          <p className="section-label">Honors</p>
           <h3 className="achievements-heading">Impact Numbers</h3>
         </div>
         <div className="achievements-grid">
@@ -931,7 +914,6 @@ function RecSection() {
   return (
     <section className="rec-section" id="recommendations" ref={sectionRef}>
       <div className="container">
-        <p className="section-label">From Colleagues</p>
         <h2 className="rec-section__heading">Recommendations</h2>
         <div className="rec-grid">
           {recommendations.map((rec) => (
@@ -966,7 +948,6 @@ function ContactSection() {
   return (
     <section className="contact-section" id="contact" ref={ref}>
       <div className={`container reveal ${revealed ? 'revealed' : ''}`}>
-        <p className="section-label contact-section__label">Contact</p>
         <h2 className="contact-section__heading">
           Let's build something<br />
           <em>that matters.</em>
