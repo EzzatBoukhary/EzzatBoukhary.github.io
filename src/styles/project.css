@@ -1,5 +1,20 @@
 /* ── Project page (pp-*) ────────────────────────────────────────────────── */
-.project-page { padding-top: 0; }
+.project-page { padding-top: 0; position: relative; }
+
+/* Global dot grid — same as hero but faint, covers the full page so texture
+   continues from hero into body sections rather than vanishing at the fold */
+.project-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(var(--pp-dots, rgba(255,255,255,0.05)) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 18%, rgba(0,0,0,0.35) 82%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.35) 18%, rgba(0,0,0,0.35) 82%, transparent 100%);
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    HERO
@@ -403,10 +418,24 @@
    STATS BAR
 ═══════════════════════════════════════════════════════════════════════════ */
 .pp-stats {
-  border-top: 1px solid rgba(255,255,255,0.06);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  background: color-mix(in srgb, var(--pp-accent, var(--yellow)) 3%, rgba(6,6,10,0.68));
+  border-top: 1px solid color-mix(in srgb, var(--pp-accent, var(--yellow)) 22%, rgba(255,255,255,0.06));
+  border-bottom: 1px solid color-mix(in srgb, var(--pp-accent, var(--yellow)) 22%, rgba(255,255,255,0.06));
+  background: color-mix(in srgb, var(--pp-accent, var(--yellow)) 12%, rgba(6,6,10,0.85));
   padding: 1.75rem 0;
+  position: relative;
+}
+
+/* Subtle dot grid to echo the hero's texture */
+.pp-stats::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(color-mix(in srgb, var(--pp-accent, var(--yellow)) 20%, transparent) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  opacity: 0.28;
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.5) 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.5) 70%, transparent 100%);
 }
 .pp-stats__grid {
   display: grid;
@@ -473,7 +502,11 @@
 ═══════════════════════════════════════════════════════════════════════════ */
 .pp-narrative {
   padding: 2.5rem 0;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid color-mix(in srgb, var(--pp-accent, var(--yellow)) 18%, rgba(255,255,255,0.05));
+  position: relative;
+  background:
+    radial-gradient(ellipse 70% 120% at 90% 50%, color-mix(in srgb, var(--pp-accent, var(--yellow)) 10%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 80% at 10% 50%, color-mix(in srgb, var(--pp-accent, var(--yellow)) 6%, transparent) 0%, transparent 55%);
 }
 .pp-narrative__grid {
   display: grid;
@@ -578,6 +611,10 @@
 ═══════════════════════════════════════════════════════════════════════════ */
 .pp-body {
   padding: 3.5rem 0 4rem;
+  position: relative;
+  background:
+    radial-gradient(ellipse 100% 60% at 0% 30%, color-mix(in srgb, var(--pp-accent, var(--yellow)) 8%, transparent) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 50% at 100% 70%, color-mix(in srgb, var(--pp-accent, var(--yellow)) 6%, transparent) 0%, transparent 50%);
 }
 .pp-section-title {
   font-family: var(--font-display);
@@ -931,8 +968,10 @@
    PREV / NEXT PROJECT NAV
 ═══════════════════════════════════════════════════════════════════════════ */
 .pp-project-nav {
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid color-mix(in srgb, var(--pp-accent, var(--yellow)) 22%, rgba(255,255,255,0.06));
   padding: 3rem 0 4rem;
+  background:
+    radial-gradient(ellipse 80% 80% at 50% 100%, color-mix(in srgb, var(--pp-accent, var(--yellow)) 10%, transparent) 0%, transparent 60%);
 }
 .pp-project-nav__grid {
   display: grid;

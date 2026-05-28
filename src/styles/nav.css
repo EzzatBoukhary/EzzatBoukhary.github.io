@@ -9,12 +9,13 @@
 .nav--scrolled {
   padding: 1rem 0;
   /*
-    Very transparent so the page gradient bleeds through.
-    backdrop-filter handles the glass — the background just adds a slight dark floor
-    so text stays readable over any bright section.
+    Deep frosted glass — same treatment as the footer.
+    Very low opacity lets the page's ambient colours bleed through richly;
+    high blur + saturation boost creates the thick glass feeling.
   */
-  background: rgba(6,6,10,0.55);
-  backdrop-filter: blur(22px) saturate(2.2) brightness(0.96);
+  background: rgba(6,6,10,0.12);
+  backdrop-filter: blur(32px) saturate(3.5) brightness(0.88);
+  -webkit-backdrop-filter: blur(32px) saturate(3.5) brightness(0.88);
 }
 
 /* Shimmer line + soft glow haze beneath it */

@@ -109,12 +109,14 @@ function buildPageBg(slug: string): string {
   const t = PROJECT_THEME[slug];
   if (!t) return '#06060a';
   return [
-    // Main spotlight — echoes the hero's top-right bloom, but taller
-    `radial-gradient(ellipse 90% 40% at 75% 0%,   ${scaleOpacity(t.a, 0.40)} 0%, transparent 65%)`,
-    // Bottom-left secondary fill
-    `radial-gradient(ellipse 60% 35% at 10% 100%, ${scaleOpacity(t.b, 0.28)} 0%, transparent 60%)`,
+    // Main spotlight — echoes the hero's top-right bloom, continues down the page
+    `radial-gradient(ellipse 95% 50% at 78% 0%,   ${scaleOpacity(t.a, 0.58)} 0%, transparent 65%)`,
+    // Bottom-left secondary fill — stronger so lower sections stay vivid
+    `radial-gradient(ellipse 65% 45% at 8% 100%,  ${scaleOpacity(t.b, 0.42)} 0%, transparent 60%)`,
     // Wide mid-page ambient tint
-    `radial-gradient(ellipse 80% 55% at 50% 55%,  ${scaleOpacity(t.c, 0.22)} 0%, transparent 70%)`,
+    `radial-gradient(ellipse 85% 65% at 50% 50%,  ${scaleOpacity(t.c, 0.32)} 0%, transparent 70%)`,
+    // Extra deep-page bloom so lower sections don't fade out
+    `radial-gradient(ellipse 70% 40% at 60% 85%,  ${scaleOpacity(t.a, 0.24)} 0%, transparent 55%)`,
     t.base,
   ].join(', ');
 }
@@ -335,7 +337,7 @@ export default function ProjectPage() {
   const hasImages = project.gallery.length > 0;
 
   return (
-    <div className="project-page page-enter" ref={pageRef} style={{ background: pageBg }}>
+    <div className="project-page page-enter" ref={pageRef} style={{ background: pageBg, '--pp-dots': dotColor, '--pp-accent': accent } as React.CSSProperties}>
 
       <SEOHead
         title={`${project.name} — Ezzat Boukhary`}

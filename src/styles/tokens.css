@@ -22,6 +22,10 @@
 
   --r-sm: 6px;
   --r-md: 12px;
+
+  /* Footer height — used so content's last section always overlaps the footer
+     enabling backdrop-filter to blur the section's background (same trick as nav) */
+  --footer-h: 3.4rem;
 }
 
 /* ── Reset ─────────────────────────────────────────────────────────────── */

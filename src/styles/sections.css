@@ -116,39 +116,64 @@
 }
 
 /* ── Stats ticker ──────────────────────────────────────────────────────── */
+/*  Bold electric teal — a second vibrant break alongside the yellow contact section */
 .stats-section {
-  padding: 3.5rem 0;
-  border-bottom: 1px solid var(--border);
-  background:
-    radial-gradient(ellipse 70% 80% at 50% 50%, rgba(232, 255, 56, 0.05) 0%, transparent 65%);
+  padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--teal);
+  color: var(--black);
+}
+
+/* Large watermark number behind the content — same trick as .contact-section */
+.stats-section::before {
+  content: 'STATS';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: clamp(8rem, 22vw, 20rem);
+  font-weight: 900;
+  letter-spacing: -.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.07);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.stats-section .container {
+  position: relative;
+  z-index: 1;
 }
 
 .stats-section__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2px;
-  background: var(--border);
-  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.12);
   border-radius: 16px;
   overflow: hidden;
 }
 
 .stats-section__item {
-  background: var(--surface);
+  background: rgba(0,0,0,0.04);
   padding: 3rem 2rem;
   text-align: center;
   transition: background .25s;
 }
 
 .stats-section__item:hover {
-  background: rgba(232, 255, 56, 0.05);
+  background: rgba(0,0,0,0.1);
 }
 
 .stats-section__val {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 900;
-  color: var(--yellow);
+  color: var(--black);
   line-height: 1;
   margin-bottom: .5rem;
   letter-spacing: -.03em;
@@ -159,7 +184,7 @@
   font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.62);
 }
 
 /* ── Experience section (cards) ────────────────────────────────────────── */
@@ -1764,14 +1789,13 @@
 
 /* ── Footer ─────────────────────────────────────────────────────────────── */
 /*
-  Frosted glass — same treatment as the nav.
-  The body's fixed ambient orbs bleed through the semi-transparent background,
-  so the footer feels like the page continues rather than ending abruptly.
+  Frosted glass at the bottom of page flow.
+  The body's fixed ambient orbs (teal bottom-right, yellow top-left) bleed through
+  the semi-transparent background — the footer feels like a continuation of the page.
 */
 .footer {
   position: relative;
-  /* Very low opacity so body::after (teal orb at bottom-right) bleeds through */
-  background: rgba(6,6,10,0.08);
+  background: rgba(6,6,10,0.12);
   backdrop-filter: blur(32px) saturate(3.5) brightness(0.88);
   -webkit-backdrop-filter: blur(32px) saturate(3.5) brightness(0.88);
 }
