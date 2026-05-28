@@ -290,6 +290,10 @@ function ProjectStackCard({
           {/* blurred ambient fill — handles any aspect ratio gracefully */}
           <img src={project.gallery[mediaIndex]} alt="" aria-hidden="true" className="project-card__img-blur" />
           <img src={project.gallery[mediaIndex]} alt={project.name} className="project-card__img" />
+          {/* Per-project texture pattern — same shape used in the project page hero */}
+          {project.patternSlug && (
+            <div className={`pp-hero__pattern pp-hero__pattern--${project.patternSlug} project-card__pattern`} aria-hidden="true" />
+          )}
           <span className="project-card__num" aria-hidden="true">
             {String(index + 1).padStart(2, '0')}
           </span>
@@ -312,6 +316,10 @@ function ProjectStackCard({
       </div>
 
       <div className="project-card__body">
+        {/* Per-project texture echoed in the card body too */}
+        {project.patternSlug && (
+          <div className={`pp-hero__pattern pp-hero__pattern--${project.patternSlug} project-card__body-pattern`} aria-hidden="true" />
+        )}
         <div className="project-card__body-top">
           <div className="project-card__meta-row">
             <span className="project-card__pill">{GENRE_SHORT[project.genre] ?? project.genre}</span>
@@ -810,8 +818,6 @@ function SkillsSection() {
       });
 
       // Count-up animation for achievement stat numbers
-      // data-count preserves the original value across React StrictMode double-invocations
-      // (ctx.revert undoes tweens but not textContent changes, so we must not rely on textContent)
       section.querySelectorAll('.achievement-card__stat').forEach((el) => {
         const htmlEl = el as HTMLElement;
         const raw = htmlEl.dataset.count ?? htmlEl.textContent?.trim() ?? '';
@@ -867,10 +873,10 @@ function SkillsSection() {
         </div>
         <div className="achievements-grid">
           {[
-            { stat: '250K+', sub: 'users reached',   color: '#00f5d0', ...achievements[0] },
-            { stat: '90%↓',  sub: 'reads eliminated', color: '#fb923c', ...achievements[1] },
-            { stat: '#1',    sub: 'design award',     color: '#e8ff38', ...achievements[2] },
-            { stat: '300+',  sub: 'students mentored',color: '#a78bfa', ...achievements[3] },
+            { stat: '250K+', sub: 'users reached',    color: '#00f5d0', ...achievements[0] },
+            { stat: '90%↓',  sub: 'reads eliminated',  color: '#fb923c', ...achievements[1] },
+            { stat: '#1',    sub: 'design award',      color: '#e8ff38', ...achievements[2] },
+            { stat: '300+',  sub: 'students mentored', color: '#a78bfa', ...achievements[3] },
           ].map((a) => (
             <div key={a.title} className="achievement-card" style={{ '--ach-color': a.color } as React.CSSProperties}>
               <div className="achievement-card__stat-block">

@@ -674,6 +674,25 @@
   transform: translateX(0);
 }
 
+/* ── Per-project pattern overlays inside cards ──────────────────────────── */
+/* Pattern inside the left media panel — same shapes as the project hero, slightly subdued */
+.project-card__pattern.pp-hero__pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+/* Pattern inside the right body panel — more subtle, just adds texture behind the text */
+.project-card__body-pattern.pp-hero__pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.25;
+}
+
 /* Keep the old list classes around for possible responsive override */
 .work-list { display: none; }
 

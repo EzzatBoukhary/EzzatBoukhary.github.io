@@ -237,6 +237,7 @@ export const mediaDeck = [
 export const projectCases = [
   {
     slug: 'gesture-based-puppetry',
+    patternSlug: 'puppetry',
     name: 'Gesture-Based Puppetry',
     period: 'Jan 2025 - Aug 2025',
     difficulty: 'Advanced',
@@ -285,6 +286,7 @@ export const projectCases = [
   },
   {
     slug: 'college-event-platform',
+    patternSlug: 'cew',
     name: 'College Event Platform',
     period: 'Feb 2025 - Apr 2025',
     difficulty: 'Full-Stack',
@@ -333,6 +335,7 @@ export const projectCases = [
   },
   {
     slug: 'dragonotchi',
+    patternSlug: 'dragonotchi',
     name: 'Dragonotchi',
     period: 'Oct 2023',
     difficulty: 'Hackathon',
@@ -381,6 +384,7 @@ export const projectCases = [
   },
   {
     slug: 'killerbot',
+    patternSlug: 'killerbot',
     name: 'KillerBot',
     period: '2019 - 2022',
     difficulty: 'Solo · 3 Years',
@@ -433,6 +437,7 @@ export const projectCases = [
   },
   {
     slug: 'campus-critters',
+    patternSlug: 'campus-critters',
     name: 'Campus Critters',
     period: 'Nov 2024',
     difficulty: 'Team Project',
