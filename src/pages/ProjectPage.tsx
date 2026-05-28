@@ -99,6 +99,26 @@ function buildHeroBg(slug: string): string {
   ].join(', ');
 }
 
+/** Scales the opacity component of a rgba() string by a factor */
+function scaleOpacity(rgba: string, factor: number): string {
+  return rgba.replace(/,\s*([\d.]+)\)$/, (_, o) => `, ${(parseFloat(o) * factor).toFixed(3)})`);
+}
+
+/** Full-page ambient gradient — visible continuation of the hero palette */
+function buildPageBg(slug: string): string {
+  const t = PROJECT_THEME[slug];
+  if (!t) return '#06060a';
+  return [
+    // Main spotlight — echoes the hero's top-right bloom, but taller
+    `radial-gradient(ellipse 90% 40% at 75% 0%,   ${scaleOpacity(t.a, 0.40)} 0%, transparent 65%)`,
+    // Bottom-left secondary fill
+    `radial-gradient(ellipse 60% 35% at 10% 100%, ${scaleOpacity(t.b, 0.28)} 0%, transparent 60%)`,
+    // Wide mid-page ambient tint
+    `radial-gradient(ellipse 80% 55% at 50% 55%,  ${scaleOpacity(t.c, 0.22)} 0%, transparent 70%)`,
+    t.base,
+  ].join(', ');
+}
+
 const GENRE_SHORT = {
   'Realtime Graphics / Simulation':       'Graphics',
   'Full-Stack Product System':            'Full-Stack',
@@ -118,9 +138,10 @@ export default function ProjectPage() {
   const prevProject = projectCases[(currentIdx - 1 + projectCases.length) % projectCases.length];
 
   const accent      = project?.accentColor ?? '#e8ff38';
-  const heroBg      = buildHeroBg(slug);
-  const dotColor    = PROJECT_DOTS[slug] ?? 'rgba(255,255,255,0.07)';
-  const patternSlug = PROJECT_PATTERN[slug];
+  const heroBg      = buildHeroBg(slug ?? '');
+  const pageBg      = buildPageBg(slug ?? '');
+  const dotColor    = PROJECT_DOTS[slug ?? ''] ?? 'rgba(255,255,255,0.07)';
+  const patternSlug = PROJECT_PATTERN[slug ?? ''];
 
   // Scroll to top FIRST — tell Lenis to jump immediately
   useEffect(() => {
@@ -246,23 +267,32 @@ export default function ProjectPage() {
   };
 
   // ── Lightbox ─────────────────────────────────────────────────────────
-  const [lightbox, setLightbox] = useState<{ open: boolean; idx: number }>({ open: false, idx: 0 });
+  const [lightbox, setLightbox] = useState<{ open: boolean; view: 'grid' | 'single'; idx: number }>({ open: false, view: 'grid', idx: 0 });
   const galleryLen    = project?.gallery.length ?? 0;
-  const openLightbox  = useCallback((idx: number) => setLightbox({ open: true, idx }), []);
+  const openLightbox  = useCallback(() =>
+    setLightbox({ open: true, view: galleryLen <= 1 ? 'single' : 'grid', idx: 0 }),
+  [galleryLen]);
+  const openSingle    = useCallback((idx: number) => setLightbox({ open: true, view: 'single', idx }), []);
+  const backToGrid    = useCallback(() => setLightbox(l => ({ ...l, view: 'grid' })), []);
   const closeLightbox = useCallback(() => setLightbox(l => ({ ...l, open: false })), []);
   const lightboxPrev  = useCallback(() =>
-    setLightbox(l => ({ open: true, idx: (l.idx - 1 + galleryLen) % Math.max(galleryLen, 1) })),
+    setLightbox(l => ({ open: true, view: 'single', idx: (l.idx - 1 + galleryLen) % Math.max(galleryLen, 1) })),
   [galleryLen]);
   const lightboxNext  = useCallback(() =>
-    setLightbox(l => ({ open: true, idx: (l.idx + 1) % Math.max(galleryLen, 1) })),
+    setLightbox(l => ({ open: true, view: 'single', idx: (l.idx + 1) % Math.max(galleryLen, 1) })),
   [galleryLen]);
 
   useEffect(() => {
     if (!lightbox.open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape')     closeLightbox();
-      if (e.key === 'ArrowLeft')  lightboxPrev();
-      if (e.key === 'ArrowRight') lightboxNext();
+      if (e.key === 'Escape') {
+        if (lightbox.view === 'single' && galleryLen > 1) backToGrid();
+        else closeLightbox();
+      }
+      if (lightbox.view === 'single') {
+        if (e.key === 'ArrowLeft')  lightboxPrev();
+        if (e.key === 'ArrowRight') lightboxNext();
+      }
     };
     document.addEventListener('keydown', onKey);
     document.body.style.overflow = 'hidden';
@@ -270,7 +300,7 @@ export default function ProjectPage() {
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = '';
     };
-  }, [lightbox.open, closeLightbox, lightboxPrev, lightboxNext]);
+  }, [lightbox.open, lightbox.view, closeLightbox, backToGrid, lightboxPrev, lightboxNext, galleryLen]);
 
   if (!project) return null;
 
@@ -305,7 +335,7 @@ export default function ProjectPage() {
   const hasImages = project.gallery.length > 0;
 
   return (
-    <div className="project-page page-enter" ref={pageRef}>
+    <div className="project-page page-enter" ref={pageRef} style={{ background: pageBg }}>
 
       <SEOHead
         title={`${project.name} — Ezzat Boukhary`}
@@ -377,7 +407,7 @@ export default function ProjectPage() {
             {/* Right: photo stack */}
             {hasImages && (
               <div className="pp-hero__right">
-                <div className="pp-hero-photos" onClick={() => openLightbox(0)} role="button" tabIndex={0} onKeyDown={e => e.key === 'Enter' && openLightbox(0)} aria-label="View project images">
+                <div className="pp-hero-photos" onClick={openLightbox} role="button" tabIndex={0} onKeyDown={e => e.key === 'Enter' && openLightbox()} aria-label="View project images">
                   {project.gallery.slice(0, 3).map((img, i) => (
                     <div key={img + i} className="pp-hero-photos__item">
                       <img src={img} alt={project.galleryCaptions?.[i] ?? `${project.name} screenshot`} />
@@ -523,19 +553,65 @@ export default function ProjectPage() {
 
       {/* ── Lightbox ──────────────────────────────────────────────────────── */}
       {lightbox.open && createPortal(
-        <div className="pp-lb" onClick={closeLightbox} role="dialog" aria-modal="true" aria-label="Image lightbox">
+        <div
+          className={`pp-lb${lightbox.view === 'grid' ? ' pp-lb--grid' : ''}`}
+          onClick={closeLightbox}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image lightbox"
+        >
           <button className="pp-lb__close" onClick={closeLightbox} aria-label="Close">✕</button>
-          {galleryLen > 1 && (
+
+          {lightbox.view === 'grid' ? (
+            /* ── Grid view: all images ── */
+            <div className="pp-lb__grid-wrap" onClick={e => e.stopPropagation()}>
+              <div className="pp-lb__grid-header">
+                <span className="pp-lb__grid-title">{project.name}</span>
+                <span className="pp-lb__grid-count">{galleryLen} image{galleryLen !== 1 ? 's' : ''}</span>
+              </div>
+              <div className="pp-lb__grid">
+                {project.gallery.map((img, i) => (
+                  <div
+                    key={img + i}
+                    className="pp-lb__grid-item"
+                    style={{ '--i': i } as React.CSSProperties}
+                    onClick={() => openSingle(i)}
+                  >
+                    <img src={img} alt={project.galleryCaptions?.[i] ?? `${project.name} screenshot ${i + 1}`} />
+                    {project.galleryCaptions?.[i] && (
+                      <p className="pp-lb__grid-cap">{project.galleryCaptions[i]}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            /* ── Single view ── */
             <>
-              <button className="pp-lb__nav pp-lb__nav--prev" onClick={e => { e.stopPropagation(); lightboxPrev(); }} aria-label="Previous image">‹</button>
-              <button className="pp-lb__nav pp-lb__nav--next" onClick={e => { e.stopPropagation(); lightboxNext(); }} aria-label="Next image">›</button>
+              {galleryLen > 1 && (
+                <button className="pp-lb__grid-back" onClick={e => { e.stopPropagation(); backToGrid(); }} aria-label="Back to all images">
+                  ← All images
+                </button>
+              )}
+              {galleryLen > 1 && (
+                <>
+                  <button className="pp-lb__nav pp-lb__nav--prev" onClick={e => { e.stopPropagation(); lightboxPrev(); }} aria-label="Previous image">‹</button>
+                  <button className="pp-lb__nav pp-lb__nav--next" onClick={e => { e.stopPropagation(); lightboxNext(); }} aria-label="Next image">›</button>
+                </>
+              )}
+              <div className="pp-lb__inner" onClick={e => e.stopPropagation()}>
+                <img
+                  className="pp-lb__img"
+                  src={project.gallery[lightbox.idx]}
+                  alt={project.galleryCaptions?.[lightbox.idx] ?? `${project.name} screenshot ${lightbox.idx + 1}`}
+                />
+                {project.galleryCaptions?.[lightbox.idx] && (
+                  <p className="pp-lb__cap">{project.galleryCaptions[lightbox.idx]}</p>
+                )}
+                {galleryLen > 1 && <p className="pp-lb__counter">{lightbox.idx + 1} / {galleryLen}</p>}
+              </div>
             </>
           )}
-          <div className="pp-lb__inner" onClick={e => e.stopPropagation()}>
-            <img className="pp-lb__img" src={project.gallery[lightbox.idx]} alt={project.galleryCaptions?.[lightbox.idx] ?? `${project.name} screenshot ${lightbox.idx + 1}`} />
-            <p className="pp-lb__cap">{project.galleryCaptions?.[lightbox.idx] ?? ''}</p>
-            {galleryLen > 1 && <p className="pp-lb__counter">{lightbox.idx + 1} / {galleryLen}</p>}
-          </div>
         </div>,
         document.body
       )}

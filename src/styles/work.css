@@ -1,6 +1,6 @@
 /* ── Work / Projects section ───────────────────────────────────────────── */
 .work-section {
-  padding: 8rem 0;
+  padding: 5rem 0;
   position: relative;
   background:
     radial-gradient(ellipse 80% 60% at 50% 50%, rgba(232,255,56,0.04) 0%, transparent 60%),
@@ -386,17 +386,22 @@
   .project-card--stack {
     grid-template-columns: 1fr;
     height: auto;
+    /* Kill sticky + all offset transforms — prevents scroll jitter on mobile */
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+    /* Simplify transitions to only what's cheap */
+    transition: box-shadow .3s, border-color .3s;
+  }
+
+  .project-card--active {
+    /* No scale/translate on mobile — causes jitter */
+    transform: none !important;
   }
 
   .project-card__visual {
     border-right: 0;
     border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-
-  .project-card--stack {
-    position: relative;
-    top: auto;
-    transform: none;
   }
 
   .project-card__media {
@@ -406,6 +411,27 @@
   .project-card__carousel {
     padding-inline: .85rem;
   }
+}
+
+/* Compact project card body on small screens */
+@media (max-width: 640px) {
+  .project-card__body {
+    padding: 1rem 1.1rem 1rem;
+    gap: .65rem;
+  }
+
+  /* Hide stat grid — reclaims the most vertical space */
+  .project-card__stats { display: none; }
+
+  /* Tighter focus blurb */
+  .project-card__focus-copy {
+    -webkit-line-clamp: 3;
+  }
+
+  /* Only show 4 stack chips to keep the card short */
+  .project-card__chip:nth-child(n+5) { display: none; }
+
+  .project-stack { padding-bottom: 2rem; }
 }
 .work-section__top {
   display: flex;

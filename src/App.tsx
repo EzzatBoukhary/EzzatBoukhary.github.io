@@ -133,7 +133,10 @@ function Layout() {
     <>
       {!isBusinessCard && <CustomCursor />}
       {!isBusinessCard && <SiteNav />}
-      <AnimatedRoutes />
+      {/* flex: 1 expands the content area so footer is always pushed to the bottom */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <AnimatedRoutes />
+      </div>
       {!isBusinessCard && <SiteFooter />}
       {!isBusinessCard && <MusicPlayer />}
     </>
